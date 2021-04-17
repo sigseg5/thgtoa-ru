@@ -9,8 +9,8 @@ relative_links:
   enabled: true
   collections: true
 theme: jekyll-theme-hacker
-title: The Hitchhiker's Guide to Online Anonymity
-description: How I learned to start worrying and love privacy
+title: [RU] The Hitchhiker's Guide to Online Anonymity
+description: Автостопом по анонимности в Интернете
 show_downloads: true
 github:
   home_url: index.html
