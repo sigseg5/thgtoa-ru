@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="onion-location" content="{{ site.github.tor_mirror_url }}{{ page.url }}" />
+    <link rel="stylesheet" href="{{ 'assets/css/style.css' }}">
+    <link rel="shortcut icon" type="image/x-icon" href="media/favicon.ico">
+	<meta http-equiv="Permissions-Policy" content="interest-cohort=()"/>
+	<meta name="referrer" content="no-referrer">
+{% seo %}
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <a id="a-title" href="{{ '/' | relative_url }}">
+			<h1>{{ site.title | default: site.github.repository_name }}</h1>
+        </a>
+        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+		<h4 class="project-version">Latest Version: v0.9.1. See <a href="{{ site.github.changelog_url }}" style="color:orange">Changelog.</a></h4> 
+        <section id="downloads">
+			{% if page.url != "/" %}
+				<a href="{{ site.github.home_url }}" class="btn">Home</a>
+			{% endif %}
+				<a href="{{ site.github.guide_url }}" class="btn">View Online</a>
+			{% if site.show_downloads %}
+				<a href="{{ site.github.pdf_url }}" class="btn">PDF (Light)</a>
+				<a href="{{ site.github.pdf_dark_url }}" class="btn">PDF (Dark)</a>
+			{% endif %}
+				<a href="{{ site.github.donations_url }}" class="btn">Donate</a>
+				<a href="{{ site.github.repository_url }}" target="_blank" class="btn btn-github"><span class="icon"></span>Repository</a>
+				<a href="{{ site.github.keybase_url }}" target="_blank" class="btn">Keybase</a>
+				<a href="{{ site.github.twitter_url }}" target="_blank" class="btn btn-twitter">Twitter</a>
+				<a rel="me" href="{{ site.github.mastodon_url }}" target="_blank" class="btn">Mastodon</a>
+        </section>
+		<h5>GPG Key Fingerprint: EB16 B6AB 4AB7 BA61 F33E  2DFD 0051 E9A5 89DA B601</h5>
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+        {{ content }}
+      </section>
+    </div>
+  </body>
+</html>
