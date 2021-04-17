@@ -1,0 +1,51 @@
+markdown: kramdown
+kramdown: 
+  hard_wrap: false
+plugins:
+  - jekyll-relative-links
+  - jekyll-sitemap
+  - jekyll-seo-tag
+relative_links:
+  enabled: true
+  collections: true
+theme: jekyll-theme-hacker
+title: [RU] The Hitchhiker's Guide to Online Anonymity
+description: How I learned to start worrying and love privacy
+show_downloads: true
+github:
+  home_url: index.html
+  pdf_url: https://anonymousplanet.org/guide.pdf
+  pdf_dark_url: https://anonymousplanet.org/guide-dark.pdf
+  guide_url: guide.html
+  donations_url: donations.html
+  donations_url_ru: donations_ru.html
+  changelog_url: CHANGELOG.html
+  license_url: LICENSE.html
+  twitter_url: https://twitter.com/AnonyPla
+  keybase_url: https://keybase.io/anonymousplanet
+  mastodon_url: https://mastodon.online/@anonypla
+  tor_mirror_url: http://thgtoa7imksbg7rit4grgijl2ef6kc7b56bp56pmtta4g354lydlzkqd.onion
+  translator_telegram: https://t.me/kirill_nk
+defaults:
+  -
+    scope:
+      path: "" 
+    values:
+      layout: default
+      sitemap: true
+locale: "ru-RU"
+twitter:
+  username: AnonyPla
+  card: summary
+author:
+  name: AnonymousPlanet
+  twitter: AnonyPla
+social:
+  name: AnonymousPlanet
+  links:
+    - https://twitter.com/anonypla
+    - https://keybase.io/anonymousplanet
+    - https://github.com/anonymousplanet
+    - https://mastodon.online/@anonypla
+include:
+    - LICENSE.md

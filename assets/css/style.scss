@@ -1,0 +1,26 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+body {
+  font-family: "Segoe UI", "Bitstream Vera Sans Mono", "Lucida Console", Terminal;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  border: 2px solid orange;
+   background-color: dimgray;
+}
+
+td {
+  border: 1px solid orange;
+}
+
+td:nth-child(1) {  
+  border: 2px solid orange;
+  font-weight: bold
+}
