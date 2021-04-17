@@ -10,7 +10,7 @@ relative_links:
   collections: true
 theme: jekyll-theme-hacker
 title: Автостопом по анонимности в Интернете
-description: How I learned to start worrying and love privacy
+description: Перевод The Hitchhiker's Guide to Online Anonymity
 show_downloads: true
 github:
   home_url: index.html
