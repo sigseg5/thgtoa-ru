@@ -12,7 +12,7 @@
 
 Онлайн версии:
 
--   `RU` HTML версия на русском: [https://sigseg5.github.io/thgtoa-ru/][]
+-   `RU` HTML версия на русском: <https://sigseg5.github.io/thgtoa-ru/>
 
 -   Original: [https://anonymousplanet.org][] <sup>[[Archive.org]][24]</sup> <sup>[[Archive.today]][25]</sup>
 
