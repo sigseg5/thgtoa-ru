@@ -77,9 +77,9 @@ PDF версии на английском:
 
 -   [Подготовления:][Requirements:]
 -   [Введение:][Introduction:]
--   [Understanding some basics of how some information can lead back to you and how to mitigate some:]
-    -   [Your IP address:]
-    -   [Your DNS requests:]
+-   [Основы понимания того, как некоторая информация может привести к вам и как смягчить последствия:][Understanding some basics of how some information can lead back to you and how to mitigate some:]
+    -   [IP адрес:][Your IP address:]
+    -   [DNS запросы:][Your DNS requests:]
     -   [Your IMEI and IMSI (and by extension, your phone number):]
     -   [Your Wi-Fi or Ethernet MAC address:]
     -   [Your Bluetooth MAC address:]
@@ -405,65 +405,63 @@ EFF предоставляет несколько сценариев безоп�
 
 # Understanding some basics of how some information can lead back to you and how to mitigate some:
 
-There are many ways you can be tracked besides browser cookies and ads, your e-mail, and your phone number. And if you think only the Mossad or the NSA/FSB can find you, you would be terribly wrong.
+Существует множество способов отслеживания помимо куки-файлов, рекламы, электронной почты и номера телефона. И если вы думаете, что только Моссад или NSA/FSB могут найти вас, вы очень серьезно заблуждаетесь.
 
-You might consider viewing this good YouTube playlist as an introduction before going further: <https://www.youtube.com/playlist?list=PL3KeV6Ui_4CayDGHw64OFXEPHgXLkrtJO> ^[[Invidious]][46]^ (from the Go Incognito project <https://github.com/techlore-official/go-incognito> <sup>[[Archive.org]][47]</sup>). This guide will cover many of those topics with more details and references as well as some additional topics not covered within that series but I would recommend the series as an introduction and it will just take you 2 or 3 hours to watch it all.
+Вы можете посмотреть этот отличный плейлист на YouTube в качестве введения, прежде чем читать дальше: <https://www.youtube.com/playlist?list=PL3KeV6Ui_4CayDGHw64OFXEPHgXLkrtJO> ^[[Invidious]][46]^ (взято из Go Incognito project <https://github.com/techlore-official/go-incognito> <sup>[[Archive.org]][47]</sup>). В этом руководстве будут рассмотрены многие из этих тем более подробно, будут приведены ссылки, а также некоторые дополнительные темы, не охваченные в видео, но я бы рекомендовал посмотреть этот плейлист в качестве введения, вам понадобится всего 2 или 3 часа.
 
-Now, here is a non-exhaustive list of some of the many ways you could be tracked and de-anonymized:
+Вот далеко неполный список из множества способов, которыми вас можно отследить и деанонимизировать:
 
 ## Your IP address:
 
-**Disclaimer: this whole paragraph is about your public facing Internet IP and not your local network IP**
+**Примечание: этот абзац посвящен вашему публичному IP-адресу, а не IP-адресу вашей локальной сети.**
 
-Your IP address[^25] is the most known and obvious way you can be tracked. That IP is the IP you are using at the source. This is where you connect to the internet. That IP is usually provided by your ISP (Internet Service Provider) (xDSL, Mobile, Cable, Fiber, Cafe, Bar, Friend, Neighbor). Most countries have data retention regulations[^26] which mandates keeping logs of who is using what IP at a certain time/date for up to several years or indefinitely. Your ISP can tell a third party that you were using a specific IP at a specific date and time, years after the fact. If that IP (the origin one) leaks at any point for any reason, it can be used to track down you directly. In many countries, you will not be able to have internet access without providing some form of identification to the provider (address, ID, real name, e-mail ...).
+Ваш IP адрес[^25] это наиболее известный и очевидный способ отслеживания. IP — это "место", где вы подключаетесь к интернету. IP адрес обычно предоставляется вашим Интернет-провайдером (xDSL, мобильный, кабельный, оптоволоконный, кафе, бар, друзья, соседи). В большинстве стран действуют правила хранения данных[^26], которые предписывают вести журналы того, кто использует тот или иной IP в определенный момент времени в течение нескольких лет или бессрочно. Ваш Интернет-провайдер может сообщить третьей стороне, что вы использовали конкретный IP-адрес, через несколько лет после этого. Если ваш оригинальный IP адрес по какой-либо причине станет известен третьей стороне, то он может быть использован для непосредственного отслеживания вас. Во многих странах вы не сможете получить доступ в Интернет, не предоставив провайдеру какую-либо идентификационную информацию (адрес, паспорт, настоящее имя, электронная почта...).
 
-Useless to say that most platforms (such as social networks) will also keep (sometimes indefinitely) the IP addresses you used to sign-up and sign-in to their services.
+Нет смысла говорить о том, что большинство платформ (например социальные сети) также сохранят (иногда бессрочно) IP-адреса, которые вы использовали для регистрации и входа.
 
-Here are some online resources you can use to find some information about your current **public IP** right now:
+Вот несколько интернет-сервисов, которые вы можете использовать, чтобы найти некоторую информацию о вашем текущем **публичном IP адресе** прямо сейчас:
 
--   Find your IP:
+-   Узнать свой IP адрес:
 
     -   <https://resolve.rs/>
 
-    -   <https://www.dnsleaktest.com/> (Bonus, check your IP for DNS leaks)
+    -   <https://www.dnsleaktest.com/> (Дополнительно можно проверить IP на наличие утечек DNS)
 
--   Find your IP location or the location of any IP:
+-   Узнать местоположение своего или любого другого IP адреса:
 
     -   <https://resolve.rs/ip/geolocation.html>
 
--   Find if an IP is "suspicious" or has downloaded "things" on some public resources:
+-   Узнать, является ли IP адрес "подозрительным" или скачивал ли владелец "всякое" на каком-либо общедоступном ресурсе:
 
     -   <https://www.virustotal.com/gui/home/search>
 
     -   <https://iknowwhatyoudownload.com>
 
--   Registration information of an IP (most likely your ISP or the ISP of your connection who most likely know who is using that IP at any time):
+-   Регистрационная информация для IP адреса (скорее всего, ваш ISP или ISP вашего подключения, который, скорее всего, знает, кто использует этот IP в любое время):
 
     -   <https://whois.domaintools.com/>
 
--   Check for open-services or open-devices on an IP (especially if there are leaky Smart Devices on it):
+-   Проверьте наличие открытых портов или устройств на IP адресе (особенно, если на нем есть смарт-устройства, подверженные утечкам данных):
 
-    -   <https://www.shodan.io/host/185.220.101.134> (replace the IP by your IP or any other, or change in the search bow, this example IP is a Tor Exit node)
+    -   <https://www.shodan.io/host/185.220.101.134> (замените текущий IP адрес на ваш или любой другой, или же просто воспользуйтесь поиском. Пример IP адреса по ссылке является выходной нодой сети Tor)
 
--   Various tools to check your IP such as blacklists checkers and more:
+-   Различные инструменты для проверки вашего IP адреса, например проверка на присутствие в чёрных списках и многое другое:
 
     -   <https://www.whatismyip.com>
 
     -   <https://browserleaks.com/>
 
--   Would you like to know if you are connected through Tor?
+-   Хотите знать, подключены ли вы через Tor?
 
     -   <https://check.torproject.org>
 
-For those reasons, we will need to obfuscate that origin IP (the one tied to your identification) or hide it as much as we can through a combination of various means:
+По этим причинам, нам нужно будет запутать происхождение IP-адреса (того, который связан с вашей личностью) или максимально его скрыть с помощью комбинации различных средств:
 
--   Using a public Wi-Fi service (free).
+-   Использование общественных Wi-Fi точек (бесплатно).
 
--   Using the Tor Anonymity Network[^27] (free).
+-   Использование анонимной сети Tor[^27] (бесплатно).
 
--   Using VPN[^28] services anonymously (anonymously paid with cash or Monero).
-
-All those will be explained later in this guide.
+-   Использование VPN[^28] сервисов анонимно (анонимно оплаченых наличными или Monero).
 
 ## Your DNS requests:
 
