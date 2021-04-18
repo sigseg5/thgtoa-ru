@@ -57,7 +57,7 @@ PDF версии на английском:
 
 Есть несколько способов изучения этого материала:
 
--   Вы хотите понять текущее состояние конфиденциальности и анонимности в сети, не слишком беспокоясь о технических аспектах: Взгляните на [Introduction:][Introduction:], [Requirements:][Requirements:], [Understanding some basics of how some information can lead back to you and how to mitigate those:][Understanding some basics of how some information can lead back to you and how to mitigate some:] и [A final editorial note:][A small final editorial note:].
+-   Вы хотите понять текущее состояние конфиденциальности и анонимности в сети, не слишком беспокоясь о технических аспектах: Взгляните на [Введение:][Introduction:], [Подготовления:][Requirements:], [Основы понимания того, как некоторая информация может привести к вам и как смягчить последствия:][Understanding some basics of how some information can lead back to you and how to mitigate some:] и [Заключение автора:][A small final editorial note:].
 
 -   Вы хотите сделать то же самое, но также узнать, как удалить некоторую информацию о вас в Интернете: Прочитайте вышеперечисленное и добавьте [Removing some traces of your identities on search engines and various platforms:]
 
