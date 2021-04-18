@@ -73,10 +73,10 @@ PDF версии на английском:
 
 -   **Если вы читаете это в PDF версии, вы увидите много такаих симовлов \`\`\` вместо двойных кавычек (""). Символы \`\`\` должны быть проигнорированы и существуют только для того, чтобы облегчить преобразование в Markdown/HTML.**
 
-# Table of Contents
+# Оглавление
 
--   [Requirements:]
--   [Introduction:]
+-   [Подготовления:][Requirements:]
+-   [Введение:][Introduction:]
 -   [Understanding some basics of how some information can lead back to you and how to mitigate some:]
     -   [Your IP address:]
     -   [Your DNS requests:]
@@ -295,59 +295,57 @@ PDF версии на английском:
 
 # Requirements:
 
--   **Be a permanent Adult resident in Germany where the courts have upheld up the legality of not using real names on online platforms (§13 VI of the German Telemedia Act of 2007**[^1]**'**[^2]**). Alternatively, be an Adult resident of any other country where you can validate and verify the legality of this guide yourself.**
+-   Предполагается, что у вас есть доступ к компьютеру (Windows/Linux/macOS) или ноутбуку (в идеале он не должен быть рабочим/общественным).
 
--   This guide will assume you already have access to some personal (Windows/Linux/MacOS) laptop computer (ideally not a work/shared device).
+-   Не будьте злым (на этот раз по-настоящему)[^3].
 
--   Don't be evil (for real this time)[^3].
+-   Запаситесь терпением, так как этот процесс может занять несколько недель, если вы хотите пройтись по всему содержимому.
 
--   Have patience as this process could take several weeks to finalize if you want to go through all the content.
+-   Необходим небольшой бюджет (вам понадобится по крайней мере бюджет на USB-носитель).
 
--   Have a little budget to dedicate to this process (you will need at least budget for an USB key).
+-   Нужно немного свободного времени (или много, в зависимости от выбранного вами пути).
 
--   Have some free time on your hands to dedicate to this process (or a lot depending on the route you pick).
-
--   Be prepared to read a lot of references (do read them), guides (do not skip them) and follow a lot of how-to tutorials thoroughly (do not skip them either).
+-   Будьте готовы прочесть много справочных материалов (читайте их), руководств (не пропускайте их) и тщательно следуйте учебным пособиям (не пропускайте и их).
 
 # Introduction:
 
-**TLDR for the whole guide: "A strange game. The only winning move is not to play"** [^4]**.**
+**TLDR для всего руководства: "A strange game. The only winning move is not to play"** [^4]**.**
 
-Making a social media account with a pseudonym or artist/brand name is easy. And it is enough is most use cases to protect your identity as the next George Orwell. There are plenty of people using pseudonyms all over Facebook/Instagram/Twitter/LinkedIn/TikTok/Snapchat/Reddit/... But the vast majority of those are anything but anonymous and can easily be traced to their real identity by your local police officers, random people within the OSINT[^5] (Open-Source Intelligence) community and trolls[^6] on 4chan[^7].
+Создать учетную запись в социальной сети с псевдонимом или именем художника/бренда легко. И этого достаточно для большинства случаев, чтобы защитить свою личность. Множество людей используют псевдонимы в Facebook/Instagram/Twitter/LinkedIn/TikTok/Snapchat/Reddit/... Но подавляющее большинство из них не анонимны, и могут быть легко отслежены до настоящей личности вашими местными полицейскими, случайными людьми из сообщества OSINT[^5] (Open-Source Intelligence) и троллями[^6] на 4chan[^7].
 
-This is a good thing as most criminals/trolls are not really tech savvy and will be identified with ease. But this is also a bad thing as most political dissidents, human rights activists and whistleblowers can also be tracked rather easily.
+С одной стороны это хорошо, так как большинство преступников не очень хорошо разбираются в технике и будут идентифицированы с легкостью. Но с другой стороны это плохо, так как большинство политических диссидентов, правозащитников и осведомителей также можно довольно легко отследить.
 
-This updated guide aims to provide introduction to various de-anonymization techniques, tracking techniques, id verification techniques and optional guidance to creating and maintaining **reasonably** anonymous identities online including social media accounts safely. This includes mainstream platforms and not only privacy friendly ones.
+Данное обновленное руководство направлено на то, чтобы познакомиться с различными методами деанонимизации, методами отслеживания, методами проверки личности и дополнительным руководством по созданию и поддержанию **разумно** анонимных личностей в сети, включая учетные записи в социальных сетях. Всё это включает в себя основные платформы, а не только платформы, дружественные конфиденциальности.
 
-It is important to understand that the purpose of this guide is anonymity and not just privacy but many of the guidance you will find here will also help you improve your privacy and security even if you are not interested in anonymity. There is an important overlap in techniques and tools used for privacy, security, and anonymity but they differ at some point:
+Важно понимать, что целью данного руководства является анонимность, а не только конфиденциальность, но многие из рекомендаций, которые вы найдете здесь, помогут вам улучшить вашу конфиденциальность и безопасность, даже если вы не заинтересованы в анонимности. Существует значительное совпадение методов и инструментов, используемых для обеспечения конфиденциальности, безопасности и анонимности, но они отличаются в некоторых аспектах:
 
--   **Privacy is about people knowing who you are but not knowing what you are doing.**
+-   **Конфиденциальность заключается в том, что люди знают, кто ты, но не знают, что ты делаешь.**
 
--   **Anonymity is about people knowing what you are doing but not knowing who you are** [^8]**.**
+-   **Анонимность — это когда люди знают, что ты делаешь, но не знают, кто ты на самом деле** [^8]**.**
 
 ![][35]
 
 (illustration from[^9])
 
-Will this guide help you protect yourself from the NSA, the FSB, Mark Zuckerberg, or the Mossad if they are out to find you? Probably not ... Mossad will be doing "Mossad things" [^10] and will probably find you no matter how hard you try to hide[^11].
+Поможет ли этот путеводитель защитить вас от АНБ, ФСБ, Марка Цукерберга или Моссада, если они хотят вас найти? Наверное, нет... Моссад просто применит свои "штучки" [^10] и, вероятно, найдет вас, как бы вы ни пытались спрятаться[^11].
 
-You must consider your threat model[^12] before going further.
+Перед тем, как продолжить, вы должны подумать над вашей моделью угроз[^12].
 
 ![][36]
 
 (Illustration by xkcd.com, licensed under CC BY-NC 2.5)
 
-Will this guide help you protect your privacy from OSINT researchers like Bellingcat[^13] , Doxing[^14] trolls on 4chan[^15] and others that have no access to the NSA toolbox? More likely. Tho I would not be so sure about 4chan.
+оможет ли это руководство защитить вашу конфиденциальность от таких OSINT исследователей как Bellingcat[^13], Doxing[^14], троллей на 4chan[^15] и других, у которых нет доступа к инструментам АНБ? Скорее всего. Хотя я не так уверен насчет 4chan.
 
-Here is a basic simplified threat model for this guide:
+Взгляните на упрощенную модель угроз для данного руководства:
 
 ![][37]
 
-(Note that the "magical amulets/submarine/fake your own death" jokes are quoted from [^10])
+(Обратите внимание, что "волшебные амулеты/подлодка/инсценировка смерти" и прочие шутки цитируются из [^10])
 
-The EFF provides a few security scenarios of what you should consider depending on your activity. While some of those tips might not be within the scope of this guide (more about Privacy than Anonymity), they are still worth reading as examples. See <https://ssd.eff.org/en/module-categories/security-scenarios> <sup>[[Archive.org]][38]</sup>.
+FF предоставляет несколько сценариев безопасности о том, что вы должны учитывать в зависимости от вашей деятельности. Хотя некоторые из этих советов могут не входить в рамки данного руководства (они больше о конфиденциальности, чем об анонимности), их все же стоит прочесть в качестве примеров. Подробнее <https://ssd.eff.org/en/module-categories/security-scenarios> <sup>[[Archive.org]][38]</sup>.
 
-There are also quite a few more serious ways of making your threat model such as:
+Есть также несколько более серьезных подходов к модели угрозы:
 
 -   LINDDUN <https://www.linddun.org/> <sup>[[Archive.org]][39]</sup>
 
@@ -357,53 +355,53 @@ There are also quite a few more serious ways of making your threat model such as
 
 -   PASTA <https://versprite.com/tag/pasta-threat-modeling/> <sup>[[Archive.org]][42]</sup>
 
-You can find some introduction on these on these projects:
+Вы можете познакомится с описанием этих проектов ниже:
 
 -   OWASP <https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html> <sup>[[Archive.org]][43]</sup>
 
 -   Online Operations Security <https://github.com/devbret/online-opsec/> <sup>[[Archive.org]][44]</sup>
 
-It is also important to understand this guide is the humble result of years of experience, learning and testing from a single individual (myself) and that many of those systems that aim to prevent anonymity are opaque proprietary closed-source systems. Many of those guidelines are based on experience, on referenced studies and recommendations by other people and projects. These experiences take a lot of time, resources and are sometimes far from being scientific. There might be some wrong or outdated information in this guide too because I am not omniscient (feel free to report any using GitHub Issues). **Your mileage may vary (a lot). Use at your own risk.**
+Важно понимать, что это руководство является скромным результатом многолетнего опыта, обучения и тестирования со стороны одного человека, и что многие из тех систем, которые направлены на предотвращение анонимности, являются "чёрным ящиком" с закрытым исходным кодом, который является собственностью корпораций. Многие из инструкций основаны на опыте, исследованиях и рекомендациях других людей и проектов. Это отнимает много времени, ресурсов и иногда это всё далеко от научного подхода. В этом руководстве может быть и неправильная или устаревшая информация, потому что я не всезнающий (не стесняйтесь сообщать о любых замечаниях и предложениях через GitHub Issues). **Ваш путь может отличаться (значительно). Использовать на свой страх и риск.**
 
-You might think this guide has no legitimate use but there are many[^16]'[^17]'[^18]'[^19]'[^20]'[^21]'[^22] such as:
+Вам может показаться, что этот путеводитель не имеет легитимного использования, но это далеко не так[^16]'[^17]'[^18]'[^19]'[^20]'[^21]'[^22], например:
 
--   Evading Online Censorship
+-   Противодействие онлайн-цензуре
 
--   Evading Online Oppression
+-   Противодействие онлайн-угнетению
 
--   Evading Online Stalking, Doxxing, and Harassment
+-   Противодействие преследованию в интернете, доксингу и домогательствам
 
--   Evading Online Unlawful Government Surveillance
+-   Противодействие незаконной государственной слежке в онлайне
 
--   Anonymous Online Whistle Blowing
+-   Анонимная активность информаторов
 
--   Anonymous Online Activism
+-   Анонимный онлайн-активизм
 
--   Anonymous Online Journalism
+-   Анонимная онлайн-журналистика
 
--   Anonymous Online Legal Practice
+-   Анонимная онлайн юридическая практика
 
--   Anonymous Online Academic Activities (For instance accessing scientific research where such resources are blocked) *.
+-   Анонимная научная деятельность в режиме онлайн (например, доступ к научным исследованиям, когда такие ресурсы заблокированы) *.
 
 -   ...
 
-* **Note that if you are having trouble accessing any of the many academic article referenced in this guide, feel free to use Sci-Hub (<https://en.wikipedia.org/wiki/Sci-Hub>** <sup>[[Archive.org]][45]</sup>**) for reading them. Because science should be free. All of it.**
+* **Обратите внимание, что если у вас возникли проблемы с доступом к любой из многочисленных научных работ, упомянутых в этом руководстве, не стесняйтесь использовать Sci-Hub  (<https://en.wikipedia.org/wiki/Sci-Hub>** <sup>[[Archive.org]][45]</sup>**) для доступа к ним. Наука должна быть свободной. Вся.**
 
-This guide is written with hope for those **good intended individuals** who might not be knowledgeable enough to consider the big picture of online anonymity and privacy.
+Это руководство написано с надеждой на тех **людей с хорошими намерениями**, которые могут быть недостаточно осведомлены, чтобы понять общую картину анонимности и конфиденциальности в Интернете.
 
-This guide is not intended for:
+Данное руководство не предназначено для:
 
--   Creating machine accounts of any kind (bots).
+-   Создания учетных записей ботов любого типа.
 
--   Creating impersonation accounts of existing people (such as identity theft).
+-   Создание учетных записей для подражания существующим людям (кража личности).
 
--   Helping malicious actors conduct unlawful or unethical activities (such as trolling, stalking, disinformation, misinformation, harassment, or any criminal activity).
+-   Помощи ведения злоумышленниками незаконной или неэтичной деятельности (троллинг, преследование, дезинформация, или любая другая преступная деятельность).
 
--   Use by minors.
+-   Использования несовершеннолетними.
 
-Feel free to report issues, recommend improvements or start a discussion on the GitHub repository if you want.
+Не стесняйтесь сообщать о проблемах и рекомендациях, предлагать улучшения или начать обсуждение на GitHub.
 
-**Use at your own risk. Anything in here is not legal advice and you should verify compliance with your local law before use (IANAL**[^23]**). "Trust but verify"**[^24] **all the information yourself (or even better, "Never Trust, always verify"**[^320]**).**
+**Используй на свой страх и риск. Все, что здесь написано, может быть незаконно, и Вы должны проверить соблюдение местного законодательства перед использованием (IANAL**[^23]**). "Доверяй, но проверяй"**[^24] **всю информацию самостоятельно (или ещё лучше, "Никогда не доверяй, всегда проверяй."**[^320]**).**
 
 # Understanding some basics of how some information can lead back to you and how to mitigate some:
 
