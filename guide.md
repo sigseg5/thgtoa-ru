@@ -57,7 +57,7 @@ PDF версии на английском:
 
 Есть несколько способов изучения этого материала:
 
--   Вы хотите понять текущее состояние конфиденциальности и анонимности в сети, не слишком беспокоясь о технических аспектах: Взгляните на [Introduction:][Requirements:], [Requirements:][Understanding some basics of how some information can lead back to you and how to mitigate some:], [Understanding some basics of how some information can lead back to you and how to mitigate those:][Understanding some basics of how some information can lead back to you and how to mitigate some:] и [A final editorial note:][Заключение автора:].
+-   Вы хотите понять текущее состояние конфиденциальности и анонимности в сети, не слишком беспокоясь о технических аспектах: Взгляните на [Introduction:][Requirements:], [Requirements:][Understanding some basics of how some information can lead back to you and how to mitigate some:], [Understanding some basics of how some information can lead back to you and how to mitigate those:][Understanding some basics of how some information can lead back to you and how to mitigate some:] и [A final editorial note::][A small final editorial note:].
 
 -   Вы хотите сделать то же самое, но также узнать, как удалить некоторую информацию о вас в Интернете: Прочитайте вышеперечисленное и добавьте [Removing some traces of your identities on search engines and various platforms:]
 
@@ -233,7 +233,7 @@ PDF версии на английском:
 -   [**If you think you got burned:**]
     -   [If you have some time:]
     -   [If you have no time:]
--   [Заключение автора:]
+-   [A small final editorial note:]
 -   [Donations:]
 -   [Acknowledgements:]
 -   [Appendix A: Windows Installation]
@@ -7523,7 +7523,7 @@ Most likely if someone went through your document to read it and re-placed it ca
 
 Keep in mind that many countries have specific laws to compel you to reveal your passwords that could override your "right to remain silent". See this Wikipedia article: <https://en.wikipedia.org/wiki/Key_disclosure_law> <sup>[[Archive.org]][465]</sup> and this other visual resource with law references <https://www.gp-digital.org/world-map-of-encryption/> <sup>[[Archive.org]][466]</sup>.
 
-# Заключение автора:
+# A small final editorial note:
 
 After reading this whole guide, I hope you will have gained some additional beneficial insight about privacy and anonymity. It is clear now, in my humble opinion, that the world we live in has only few safe harbors remaining where one could have a reasonable expectation of privacy and even less so anonymity. Many will often say that 1984 by George Orwell was not meant to be an instruction book. Yet today this guide and its many references should, I hope, reveal to you how far down we are in the rabbit hole.
 
@@ -10166,7 +10166,7 @@ Meaning you can also build this ISO yourself from their scripts if you do not tr
   [**If you think you got burned:**]: #if-you-think-you-got-burned
   [If you have some time:]: #if-you-have-some-time
   [If you have no time:]: #if-you-have-no-time
-  [Заключение автора:]: #a-small-final-editorial-note
+  [A small final editorial note:]: #a-small-final-editorial-note
   [Donations:]: #donations
   [Acknowledgements:]: #acknowledgements
   [Appendix A: Windows Installation]: #appendix-a-windows-installation
