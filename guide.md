@@ -1,16 +1,18 @@
 # The Hitchhiker's Guide to Online Anonymity
 
-(Or "How I learned to start worrying and love privacy")
+(Или "Как я начал беспокоится и полюбил приватность.")
 
-Version 0.9.1 (draft), April 2021 by AnonymousPlanet.
+Версия руководства и перевода 0.9.1 (draft), April 2021 by AnonymousPlanet. Перевод by sigseg5.
 
-This guide is a draft work in progress. While I am working constantly to improve the content, general structure, and readability, it will never be "done" and some parts might be incomplete as of this release.
+Это черновая версия руководства. Несмотря на постоянные обновления и улучшения, руководство, вероятно, никогда не будет полностью закончено, некоторые части могут быть неполными на данный момент.
 
-**Remember to check frequently for a new version of this guide.**
+**Не забудьте регулярно проверять новые версии руководства и перевода.**
 
-This guide is a non-profit open-source initiative, licensed under Creative Commons Attribution 4.0 International ([cc-by-4.0][] <sup>[[Archive.org]][23]</sup>).
+Данное руководство является окрытой некоммерческой инициативой, лицензировнной под Creative Commons Attribution 4.0 International ([cc-by-4.0][] <sup>[[Archive.org]][23]</sup>).
 
-Find it online at:
+Онлайн версии:
+
+-   `RU` HTML версия на русском: [https://sigseg5.github.io/thgtoa-ru/][]
 
 -   Original: [https://anonymousplanet.org][] <sup>[[Archive.org]][24]</sup> <sup>[[Archive.today]][25]</sup>
 
@@ -20,7 +22,7 @@ Find it online at:
 
 -   Archive.today over Tor: <http://archivecaslytosk.onion/anonymousplanet.org/guide.html>
 
-PDF versions (best format for the best readability) of this guide at:
+PDF версии на английском:
 
 -   Light Theme: <https://anonymousplanet.org/guide.pdf> <sup>[[Mirror]][28]</sup> <sup>[[Archive.org]][29]</sup> <sup>[[Tor Mirror]][30]</sup>
 
@@ -28,9 +30,11 @@ PDF versions (best format for the best readability) of this guide at:
 
 -   Both at CryptPad.fr <https://cryptpad.fr/drive/#/2/drive/view/Ughm9CjQJCwB8BIppdtvj5zy4PyE-8Gxn11x9zaqJLI/>
 
-Feel free to submit issues using GitHub Issues at: <https://github.com/AnonymousPlanet/thgtoa/issues>
+Есть предложение или исправление оригинального руководства? Откройте Issues на GitHub автора: <https://github.com/AnonymousPlanet/thgtoa/issues>
 
-Feel free to discuss ideas at:
+Есть предложение или исправление перевода? Откройте Issues на GitHub переводчика: <https://github.com/sigseg5/thgtoa-ru/issues>
+
+Есть интересные идеи? Добро пожаловать в обсуждения:
 
 -   GitHub Discussions: <https://github.com/AnonymousPlanet/thgtoa/discussions>
 
@@ -40,31 +44,34 @@ Feel free to discuss ideas at:
 
 -   Discord Server: <https://discord.gg/XGFfGtJmXd>
 
-**(Note that none of these are actively moderated or end-to-end encrypted, be careful)**
+**(Внимание, ни один из сервисов не является активно модерируемым или зашифрованным)**
 
-Follow me on:
+Контакты автора:
 
--   Twitter at <https://twitter.com/AnonyPla> (cannot guarantee this account will stay up for long tho)
+-   Twitter at <https://twitter.com/AnonyPla> (Возможно этот аккаунт скоро будет удален)
 
 -   Mastodon at <https://mastodon.online/@anonypla>.
 
-There are several ways you could read this guide:
+Контакты переводчика:
+-   Telegram: <https://t.me/kirill_nk>
 
--   You want to understand the current state of online privacy and anonymity not necessarily get too technical about it: Just read the [Introduction:][Requirements:], [Requirements:][Understanding some basics of how some information can lead back to you and how to mitigate some:], [Understanding some basics of how some information can lead back to you and how to mitigate those:][Understanding some basics of how some information can lead back to you and how to mitigate some:] and [A final editorial note:][A small final editorial note:] sections.
+Есть несколько способов изучения этого материала:
 
--   You want to do the above but also learn how to remove some online information about you: Just read the above and add the [Removing some traces of your identities on search engines and various platforms:]
+-   Вы хотите понять текущее состояние конфиденциальности и анонимности в сети, не слишком беспокоясь о технических аспектах: Взгляните на [Introduction:][Requirements:], [Requirements:][Understanding some basics of how some information can lead back to you and how to mitigate some:], [Understanding some basics of how some information can lead back to you and how to mitigate those:][Understanding some basics of how some information can lead back to you and how to mitigate some:] и [A final editorial note:][A small final editorial note:].
 
--   You want to do the above and create online anonymous identities online safely and securely: Read the whole guide.
+-   Вы хотите сделать то же самое, но также узнать, как удалить некоторую информацию о вас в Интернете: Прочитайте вышеперечисленное и добавьте [Removing some traces of your identities on search engines and various platforms:]
 
-Please note that:
+-   Вы хотите сделать всё вышеперечисленное и создать анонимные идентификационные данные безопасно и надежно: Прочитайте всё руководство.
 
--   This guide does mention and even recommends some commercial services in some sections (such as VPNs, CDNs, and hosting providers) but is not endorsed or sponsored by any of them in any way. There are no referral links and no commercial ties with any of these providers. This project is 100% non-profit.
+Обратите внимание:
 
--   All external links to Documents/Files have an \[Archive.org\] link next to them for accessing content through Archive.org for increased privacy and in case the content goes missing. It is possible some links are not yet archived or outdated on archive.org in which case I encourage you to ask a new save if possible. See the live addresses for up-to-date information.
+-   В руководстве упоминаются и даже рекомендуются некоторые коммерческие услуги (такие как VPN, CDN и хостинг-провайдеры), но ни один из них никоим образом не спонсирует автора. Нет никаких реферальных ссылок и коммерческих связей ни с одним из этих провайдеров. Этот проект на 100% некоммерческий.
 
--   All external links to YouTube Videos have an \[Invidious\] link next to them for accessing content through an Invidious Instance (in this case yewtu.be hosted in the NL) for increased privacy. See <https://github.com/iv-org/invidious> <sup>[[Archive.org]][34]</sup> for more information.
+-   Все внешние ссылки на документы/файлы также имеют ссылку на \[Archive.org\] рядом с ними для доступа к содержимому через Archive.org для повышения конфиденциальности, и в случае, если содержимое утеряно. Возможно, что некоторые ссылки ещё не сохранены в архиве или устарели, в этом случае я рекомендую вам по возможности попросить о новой архивации. Не забывайте проверять оригинальные адреса для получения актуальной информации.
 
--   **If you are reading this in PDF format, you will be seeing plenty of \`\`\` in place of double quotes (""). These \`\`\` should be ignored and are just there to facilitate conversion into Markdown/HTML format for on-line viewing.**
+-   Рядом со всеми ссылками на YouTube есть ссылка \[Invidious\] для доступа к контенту через Invidious Instance (в данном случае yewtu.be хостинг в NL) для повышения уровня конфиденциальности. Подробнее см. на <https://github.com/iv-org/invidious> <sup>[[Archive.org]][34]</sup>.
+
+-   **Если вы читаете это в PDF версии, вы увидите много такаих симовлов \`\`\` вместо двойных кавычек (""). Символы \`\`\` должны быть проигнорированы и существуют только для того, чтобы облегчить преобразование в Markdown/HTML.**
 
 # Table of Contents
 
