@@ -1,3 +1,12 @@
+v0.9.2
+- Added reference to <https://mattw.io/youtube-geofind/location> for Video geolocation (YouTube)
+- Added reference to <https://jakecreps.com/tag/osint-tools/> for various OSINT tools to try on yourself
+- Fixed some bad links between a bunch of cross-references
+- Some font color fixing in the dark themed PDF
+- Added various attribution references for some external illustrations
+- Various spelling/grammar fixes
+- Re-organized some of the de-anonymization methods into grouped sub-sections for readability
+
 v0.9.1
 - Fixed Messaging table inaccuracies regarding metadata leaks and e2e for Element/Matrix and Zoom
 - Added reference/guidance to Windows AME (<https://ameliorated.info/>)for use in guest VMs in place of Standard Windows 10 Pro

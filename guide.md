@@ -1,8 +1,8 @@
-# The Hitchhiker's Guide to Online Anonymity
+'s Guide to Online Anonymity
 
 (Или "Как я начал беспокоится и полюбил приватность.")
 
-Версия руководства и перевода 0.9.1 (draft), April 2021 by AnonymousPlanet. Перевод by sigseg5.
+Версия руководства и перевода 0.9.2 (draft), April 2021 by AnonymousPlanet. Перевод by sigseg5.
 
 Это черновая версия руководства. Несмотря на постоянные обновления и улучшения, руководство, вероятно, никогда не будет полностью закончено, некоторые части могут быть неполными на данный момент.
 
@@ -525,205 +525,9 @@ Therefore, to mitigate all these issues (as much as possible), this guide we wil
 
 As for your normal daily use (non-sensitive), remember that only Firefox based browsers support eSNI (soon ECH) so far and that it is only useful with websites hosted behind Cloudflare CDN at this stage. If you prefer a Chrome based version (which is understandable for some due to some better integrated features like on-the-fly Translation), then I would recommend the use of Brave instead which supports all Chrome extensions and offers much better privacy than Chrome. Alternatively, if you do not trust Brave, you could also use Ungoogled-Chromium (<https://github.com/Eloston/ungoogled-chromium> <sup>[[Archive.org]][54]</sup>).
 
-## Your IMEI and IMSI (and by extension, your phone number):
+### Your RFID enabled devices:
 
-The IMEI (International Mobile Equipment Identity[^49]) and the IMSI (International Mobile Subscriber Identity[^50]) are unique numbers created by mobile phone manufacturers and mobile phone operators.
-
-The IMEI is tied directly to the phone you are using. This number is known and tracked by the mobile phone operators and known by the manufacturers. Every time your phone connects to the mobile network, it will register the IMEI on the network along the IMSI (if a SIM card is inserted but that is not even needed). It is also used by many applications (Banking apps abusing the phone permission on Android for instance[^51]) and smartphone Operating Systems (Android/IOS) for identification of the device[^52]. It is possible but difficult (and not illegal in many jurisdictions[^53]) to change the IMEI on a phone but it is probably easier and cheaper to just find and buy some old (working) Burner phone for a few Euros (this guide is for Germany remember) at a flea market or at some random small shop.
-
-The IMSI is tied directly to the mobile subscription or pre-paid plan you are using and is basically tied to your phone number by your mobile provider. The IMSI is hardcoded directly on the SIM card and cannot be changed. Remember that every time your phone connects to the mobile network, it will also register the IMSI on the network along the IMEI. Like the IMEI, the IMSI is also being used by some applications and smartphone Operating systems for identification and are being tracked. Some countries in the EU for instance maintain a database of IMEI/IMSI associations for easy querying by Law Enforcement.
-
-Today, giving away your (real) phone number is basically the same or better than giving away your Social Security number/Passport ID/National ID.
-
-The IMEI and IMSI can be traced back to you by at least 6 ways:
-
--   The mobile operator subscriber logs which will usually store the IMEI along the IMSI and their subscriber information database. If you use a prepaid anonymous SIM (anonymous IMSI but with a known IMEI), they can see this cell belongs to you if you used that cell phone before with a different SIM card (different anonymous IMSI but same known IMEI).
-
--   The mobile operator antenna logs which will conveniently keep a log of which IMEI and IMSI also keep some connection data. They know and log for instance that a phone with this IMEI/IMSI combination connected to a set of Mobile antennas and how powerful the signal to each of those antennas was allowing easy triangulation/geolocation of the signal. They also know which other phones (your real one for instance) connected at the same time to the same antennas with the same signal which would make it possible to know precisely that this "burner phone" was always connected at the same place/time than this other "known phone" which shows up every time the burner phone is being used. This information can be used by various third parties to geolocate/track you quite precisely[^54]'[^55].
-
--   The manufacturer of the Phone can trace back the sale of the phone using the IMEI if that phone was bought in a non-anonymous way. Indeed, they will have logs of each phone sale (including serial number and IMEI), to which shop/person it was sold to. And if you are using a phone that you bought online (or from someone that knows you). It can be traced to you using that information. Even if they do not find you on CCTV[^56] and you bought the phone cash, they can still find what other phone (your real one in your pocket) was there (in that shop) at that time/date by using the antenna logs.
-
--   The IMSI alone can be used to find you as well because most countries now require customers to provide an ID when buying a SIM card (subscription or pre-paid). The IMSI is then tied to the identity of the buyer of the card. In the countries where the SIM can still be bought with cash (like the UK), they still know where (which shop) it was bought and when. This information can then be used to retrieve information from the shop itself (such as CCTV footage as for the IMEI case). Or again the antenna logs can also be used to figure out which other phone was there at the moment of the sale.
-
--   The smartphone OS makers (Google/Apple for Android/IOs) also keep logs of IMEI/IMSI identifications tied to Google/Apple accounts and which user has been using them. They too can trace back the history of the phone and to which accounts it was tied in the past[^57].
-
--   Government agencies around the world interested in your phone number can and do use[^58] special devices called "IMSI catchers"[^59] like the Stingray[^60] or more recently the Nyxcell[^61]. These devices can impersonate (to spoof) a cell phone Antenna and force a specific IMSI (your phone) to connect to it to access the cell network. Once they do, they will be able to use various MITM[^62] (Man-In-The-Middle Attacks) that will allow them to:
-
-    -   Tap your phone (voice calls and SMS).
-
-    -   Sniff and examine your data traffic.
-
-    -   Impersonate your phone number without controlling your phone.
-
-    -   ...
-
-Here is also a good YouTube video on this topic: DEFCON Safe Mode - Cooper Quintin - Detecting Fake 4G Base Stations in Real Time <https://www.youtube.com/watch?v=siCk4pGGcqA> <sup>[[Invidious]][55]</sup>
-
-For these reasons, it is crucial to get dedicated an anonymous phone number and/or an anonymous burner phone with an anonymous pre-paid sim card that are not tied to you in any way (past or present) for conducting sensitive activities (See more practical guidance in [Get an anonymous Phone number:] section).
-
-While there are some smartphones manufacturers like Purism with their Librem series[^63] who claim to have your privacy in mind, they still do not allow IMEI randomization which I believe is a key anti-tracking feature that should be provided by such manufacturers. While this measure will not prevent IMSI tracking within the SIM card, it would at least allow you to keep the same "burner phone" and only switch SIM cards instead of having to switch both for privacy.
-
-See [Appendix N: Warning about smartphones and smart devices]
-
-## Your Wi-Fi or Ethernet MAC address:
-
-The MAC address[^64] is a unique identifier tied to your physical Network Interface (Wired Ethernet or Wi-Fi) and could of course be used to track you if it is not randomized. As it was the case with the IMEI, manufacturers of computers and network cards usually keep logs of their sales (usually including things like: Serial number, IMEI, Mac Addresses, ...) and it is possible again for them to track where and when the computer with the MAC address in question was sold and to whom. Even if you bought it with cash in a supermarket, the supermarket might still have CCTV (or a CCTV just outside that shop) and again the time/date of sale could be used to find out who was there using the Mobile Provider antenna logs at that time (IMEI/IMSI).
-
-Operating Systems makers (Google/Microsoft/Apple) will also keep logs of devices and their MAC addresses in their logs for device identification (Find my device type services for example). Apple can tell that the MacBook with this specific MAC address was tied to a specific Apple Account before. Maybe yours before you decided to use the MacBook for sensitive activities. Maybe to a different user who sold it to you but remembers your e-mail/number from when the sale happened.
-
-Your home router/Wi-Fi access point keeps logs of devices that registered on the Wi-Fi and these can be accessed too to find out who has been using your Wi-Fi. Sometimes this can be done remotely (and silently) by the ISP depending if that router/Wi-Fi access point is being "managed" remotely by the ISP (which is often the case when they provide the router to their customers).
-
-Some commercial devices will keep record of MAC addresses roaming around for various purposes such as road congestion[^65].
-
-So, it is important again not to bring your phone along when/where you conduct sensitive activities. If you use your own laptop, then it is crucial to hide that MAC address (and Bluetooth address) anywhere you use it and be extra careful not to leak any information. Thankfully many recent OSes now feature or allow the option to randomize MAC addresses (Android, IOS, Linux and Windows 10) with the notable exception of MacOS which does not support this feature even in its latest Big Sur version.
-
-See [Appendix N: Warning about smartphones and smart devices]
-
-## Your Bluetooth MAC address:
-
-Your Bluetooth MAC is like the previous MAC address except it is for Bluetooth. Again, it can be used to track you as manufacturers and operating system makers keep logs of such information. It could be tied to a sale place/time/date or accounts and then could be used to track you with such information, the shop billing information, the CCTV, or the mobile antenna logs in correlation.
-
-Operating systems have protections in place to randomize those addresses but are still subject to vulnerabilities[^66].
-
-For this reason, and unless you really need those, you should just disable Bluetooth completely in the BIOS/UEFI settings if possible or in the Operating System otherwise.
-
-On Windows 10, you will need to disable ad enable the Bluetooth device in the device manager itself to force a randomization of the address for next use and prevent tracking.
-
-See [Appendix N: Warning about smartphones and smart devices]
-
-## Your Operating Systems and Apps telemetry services:
-
-Whether it is Android, iOS, Windows, MacOS or even Ubuntu. Most popular Operating Systems now collect telemetry information by default even if you never opt-in or opted-out[^87] from the start. Some like Windows will not even allow disabling telemetry completely without some technical tweaks. This information collection can be extensive and include a staggering number of details (metadata and data) on your devices and their usage.
-
-Here are good overviews of what is being collected by those 5 popular OSes in their last versions:
-
--   Android/Google:
-
-    -   Just have a read at their privacy policy <https://policies.google.com/privacy> <sup>[[Archive.org]][56]</sup>
-
-    -   School of Computer Science & Statistics, Trinity College Dublin, Ireland Mobile Handset Privacy: Measuring The Data iOS and Android Send to Apple And Google <https://www.scss.tcd.ie/doug.leith/apple_google.pdf> <sup>[[Archive.org]][57]</sup>
-
--   IOS/Apple:
-
-    -   More information at <https://www.apple.com/legal/privacy/en-ww/> <sup>[[Archive.org]][58]</sup> and <https://support.apple.com/en-us/HT202100> <sup>[[Archive.org]][59]</sup>
-
-    -   School of Computer Science & Statistics, Trinity College Dublin, Ireland Mobile Handset Privacy: Measuring The Data iOS and Android Send to Apple And Google <https://www.scss.tcd.ie/doug.leith/apple_google.pdf> <sup>[[Archive.org]][57]</sup>
-
-    -   Apple does claim[^67] that they anonymize this data using differential privacy[^68] but you will have to trust them on that.
-
--   Windows/Microsoft:
-
-    -   Full list of required diagnostic data: <https://docs.microsoft.com/en-us/windows/privacy/required-windows-diagnostic-data-events-and-fields-2004> <sup>[[Archive.org]][60]</sup>
-
-    -   Full list of optional diagnostic data: <https://docs.microsoft.com/en-us/windows/privacy/windows-diagnostic-data> <sup>[[Archive.org]][61]</sup>
-
--   MacOS:
-
-    -   More details on <https://support.apple.com/guide/mac-help/share-analytics-information-mac-apple-mh27990/mac> <sup>[[Archive.org]][62]</sup>
-
--   Ubuntu:
-
-    -   Ubuntu despite being a Linux distribution also collects Telemetry Data nowadays. This data however is quite limited compared to the others. More details on <https://ubuntu.com/desktop/statistics> <sup>[[Archive.org]][63]</sup>
-
-Not only are Operating Systems gathering telemetry services but so are Apps themselves like Browsers, Mail Clients, and Social Networking Apps installed on your system.
-
-It is important to understand that this telemetry data can be tied to your device and help de-anonymizing you and subsequently can be used against you by an adversary that would get access to this data.
-
-This does not mean for example that Apple devices are terrible choices for good Privacy but they certainly not the best choices for (relative) Anonymity. They might protect you from third parties knowing what you are doing but not from themselves. In all likelihood, they certainly know who you are.
-
-Later in this guide, we will use all the means at our disposal to disable and block as much telemetry as possible to mitigate this attack vector in the Operating Systems supported in this guide.
-
-See [Appendix N: Warning about smartphones and smart devices]
-
-## The Wi-Fis and Bluetooth devices around you:
-
-Geolocation is not only done by using mobile antennas triangulation. It is also done using the Wi-Fis and Bluetooth devices around you. Operating systems makers like Google (Android[^69]) and Apple (IOS[^70]) maintain a convenient database of most Wi-Fi access points, Bluetooth devices and their location. When your Android smartphone or iPhone is on (and not in Plane mode), it will scan passively (unless you specifically disable this feature in the settings) Wi-Fi access points and Bluetooth devices around you and will be able to geolocate you with more precision than when using a GPS.
-
-This allows them to provide accurate locations even when GPS is off but it also allows them to keep a convenient record of all Bluetooth devices all over the world. Which can then be accessed by them or third parties for tracking.
-
-Note: If you have an Android smartphone, Google probably knows where it is no matter what you do. You cannot really trust the settings. The whole operating system is built by a company that wants your data. Remember that if it is free then you are the product.
-
-But that is not what all those Wi-Fis access points can do. Recently developed techs could even allow someone to track your movements accurately just based on radio interferences. What this means is that it is possible to track your movement inside a room/building based on the radio signals passing through. This might seem like a tinfoil hat conspiracy theory claim but here are the references[^71] with demonstrations showing this tech in action: <http://rfpose.csail.mit.edu/> <sup>[[Archive.org]][64]</sup> and the video here: <https://www.youtube.com/watch?v=HgDdaMy8KNE> <sup>[[Invidious]][65]</sup>
-
-You could therefore imagine many uses cases for such technologies like recording who enters specific buildings/offices (hotels, hospitals, or embassies for instance) and then discover who meets who and where by tracking them from outside. Even if they have no smartphone on them.
-
-![][66]
-
-Again, such issue could only be mitigated by being in room/building that would act as a faraday cage.
-
-See [Appendix N: Warning about smartphones and smart devices]
-
-## Your Metadata including your Geo-Location:
-
-Your metadata is all the information about your activities without the actual content of those activities. For instance, it is like knowing you had a call from an oncologist before then calling your family and friends successively. You do not know what was said during the conversation but you can guess what it was just from the "metadata"[^72].
-
-This metadata will also often include your location that is being harvested by Smartphones, Operating Systems (Android[^73]/IOS), Browsers, Apps, Websites. Odds are there are several companies knowing exactly where you are at any time[^74] because of your smartphone[^75].
-
-This location data has been used in many judicial cases[^76] already as part of "geofence warrants" [^77] that allows law enforcement to ask companies (such as Google/Apple) a list of all devices present at a certain location at a certain time. In addition, this location data is even sold by private companies to the military who can then use it conveniently[^78].
-
-Now let us say you are using a VPN to hide your IP. The social media platform knows you were active on that account on November 4^th^ from 8am to 1pm with that VPN IP. The VPN allegedly keeps no logs and cannot trace back that VPN IP to your IP. Your ISP however knows (or at least can know) you were connected to that same VPN provider on November 4^th^ from 7:30am to 2pm but does not know what you were doing with it.
-
-The question is: Is there someone somewhere that would possibly have both pieces of information available[^79] for correlation in a convenient database?
-
-Have you heard of Edward Snowden[^80]? Now is the time to google him and read his book[^81]. I recommend reading about XKEYSCORE[^82]'[^83], MUSCULAR[^84] and PRISM[^85].
-
-See "We kill people based on Metadata"[^86] or this famous tweet from the IDF <https://twitter.com/idf/status/1125066395010699264> <sup>[[Archive.org]][67]</sup>.
-
-See [Appendix N: Warning about smartphones and smart devices]
-
-## Your Smart devices in general:
-
-You got it; your smartphone is an advanced spying/tracking device that:
-
--   Records everything you say at any time ("Hey Siri", "Hey Google").
-
--   Records your location everywhere you go.
-
--   Always records other devices around you (Bluetooth devices, Wi-Fi Access points).
-
--   Records your habits and health data (steps, screen time, exposure to diseases, connected devices data)
-
--   Records all your network locations.
-
--   Records all your pictures and videos (and most likely where they were taken).
-
--   Has most likely access to most of your known accounts including Social Media, Messaging and Financial accounts.
-
-Data is being transmitted even if you opt-out[^87], processed, and stored indefinitely (most likely unencrypted[^88]) by various third parties[^89].
-
-But that is not all, this section is not called "Smartphones" but "Smart devices" because it is not only your smartphone spying on you. It is also every other smart device you could have.
-
--   Your Smart Watch? (Apple Watch, Android Smartwatch ...)
-
--   Your Fitness Devices and Apps[^90]? (Strava[^91]'[^92], Fitbit[^93], Garmin, Polar[^94], ...)
-
--   Your Smart Speaker? (Amazon Alexa[^95], Google Echo, Apple Homepod ...)
-
--   Your Smart Transportation? (Car? Scooter?)
-
--   Any other Smart device? There is even a convenient search engine dedicated to finding them online: <https://www.shodan.io/> <sup>[[Archive.org]][68]</sup>
-
-See [Appendix N: Warning about smartphones and smart devices]
-
-## Your Devices can be tracked even when offline:
-
-You have seen this in action/spy/Sci-Fi movies and shows, the protagonists always remove the battery of their phones to make sure it cannot be used. Most people would think that's overkill. Well, unfortunately no, this is now becoming true at least for some devices:
-
--   iPhones and iPads (IOS 13 and above)[^96]'[^97]
-
--   Samsung Phones (Android 10 and above)[^98]
-
--   MacBooks (MacOS 10.15 and above)[^99]
-
-Such devices will continue to broadcast identity information to nearby devices even when offline using Bluetooth Low-Energy[^100]. They do not have access to the devices directly (which are not connected to the internet) but instead use BLE to find them through other nearby devices[^101]. They are basically using peer-to-peer short-range Bluetooth communication to broadcast their status through nearby online devices.
-
-They could now locate such devices and keep the location in some database that could then be used by third parties or themselves for various purposes (including analytics, advertising or evidence/intelligence gathering).
-
-See [Appendix N: Warning about smartphones and smart devices]
-
-## Your RFID enabled devices:
-
-RFID stands for Radio-frequency identification[^102], it is the technology used for instance for contactless payments and various identification systems. Of course, your smartphone is among those devices and has RFID contactless payment capabilities through NFC[^103]. As with everything else, such capabilities can be used for tracking by various actors.
+RFID stands for Radio-frequency identification[^49], it is the technology used for instance for contactless payments and various identification systems. Of course, your smartphone is among those devices and has RFID contactless payment capabilities through NFC[^50]. As with everything else, such capabilities can be used for tracking by various actors.
 
 But unfortunately, this is not limited your smartphone and you also probably carry some amount of RFID enabled device with you all the time such as:
 
@@ -747,143 +551,65 @@ But unfortunately, this is not limited your smartphone and you also probably car
 
 While all these cannot be used to de-anonymize you from a remote online adversary, they can be used to narrow down a search if your approximate location at a certain time is known. For instance, you cannot rule out that some stores will effectively scan (and log) all RFID chips passing through the door. They might be looking for their loyalty cards but are also logging others along the way. Such RFID tags could be traced to your identity and allow for de-anonymization.
 
-More information over at Wikipedia: <https://en.wikipedia.org/wiki/Radio-frequency_identification#Security_concerns> <sup>[[Archive.org]][69]</sup> and <https://en.wikipedia.org/wiki/Radio-frequency_identification#Privacy> <sup>[[Archive.org]][69]</sup>
+More information over at Wikipedia: <https://en.wikipedia.org/wiki/Radio-frequency_identification#Security_concerns> <sup>[[Archive.org]][55]</sup> and <https://en.wikipedia.org/wiki/Radio-frequency_identification#Privacy> <sup>[[Archive.org]][55]</sup>
 
-The only way to mitigate this problem is to have no RFID tags on you or to shield them again using a type of faraday cage. You could also use specialized wallets/pouches that specifically block RFID communications. Many of those are now made by well-known brands such as Samsonite[^104].
+The only way to mitigate this problem is to have no RFID tags on you or to shield them again using a type of faraday cage. You could also use specialized wallets/pouches that specifically block RFID communications. Many of those are now made by well-known brands such as Samsonite[^51].
 
 See [Appendix N: Warning about smartphones and smart devices]
 
-## Your Files Properties/Metadata:
+### The Wi-Fis and Bluetooth devices around you:
 
-This can be obvious to many but not to all. Most files have metadata attached to them. A good example are pictures which store EXIF[^105] information which can contain a lot of information such as GPS coordinates, which camera/phone model took it and when it was taken precisely. While this information might not directly give out who you are, it could tell exactly where you were at a certain moment which could allow others to use different sources to find you (CCTV or other footage taken at the same place at the same time during a protest for instance). It is important that you verify any file you would put on those platforms for any properties that might contain any information that might lead back to you.
+Geolocation is not only done by using mobile antennas triangulation. It is also done using the Wi-Fis and Bluetooth devices around you. Operating systems makers like Google (Android[^52]) and Apple (IOS[^53]) maintain a convenient database of most Wi-Fi access points, Bluetooth devices and their location. When your Android smartphone or iPhone is on (and not in Plane mode), it will scan passively (unless you specifically disable this feature in the settings) Wi-Fi access points and Bluetooth devices around you and will be able to geolocate you with more precision than when using a GPS.
 
-Here is an example of EXIF data that could be on a picture:
+This allows them to provide accurate locations even when GPS is off but it also allows them to keep a convenient record of all Bluetooth devices all over the world. Which can then be accessed by them or third parties for tracking.
 
-![][70]
+Note: If you have an Android smartphone, Google probably knows where it is no matter what you do. You cannot really trust the settings. The whole operating system is built by a company that wants your data. Remember that if it is free then you are the product.
 
-For this reason, you will always have to be very careful when uploading files using your anonymous identities and check the metadata of those files.
+But that is not what all those Wi-Fis access points can do. Recently developed techs could even allow someone to track your movements accurately just based on radio interferences. What this means is that it is possible to track your movement inside a room/building based on the radio signals passing through. This might seem like a tinfoil hat conspiracy theory claim but here are the references[^54] with demonstrations showing this tech in action: <http://rfpose.csail.mit.edu/> <sup>[[Archive.org]][56]</sup> and the video here: <https://www.youtube.com/watch?v=HgDdaMy8KNE> <sup>[[Invidious]][57]</sup>
 
-**Even if you publish a simple text file, you should always double or triple check it for any information leakage before publishing. You will find some guidance about this in the [Some additional measures against forensics:] section at the end of the guide.**
+You could therefore imagine many uses cases for such technologies like recording who enters specific buildings/offices (hotels, hospitals, or embassies for instance) and then discover who meets who and where by tracking them from outside. Even if they have no smartphone on them.
 
-## Malware:
+![][58]
 
-### Malware in your files/documents:
+Again, such issue could only be mitigated by being in room/building that would act as a faraday cage.
 
-Using steganography or other techniques, it is easy to embed malware into common file formats such as Office Documents, Pictures, Videos, PDF documents...
+See [Appendix N: Warning about smartphones and smart devices]
 
-These can be as simple as HTML tracking links or complex targeted malware.
+### Malicious/Rogue Wi-Fi Access Points:
 
-These could be exploiting a vulnerability in an outdated format or outdated reader. Such exploits could then be used to compromise your system.
+These have been used since at least since 2008 using an attack called "Jasager"[^55] and can be done by anyone using self-built tools or using commercially available devices such as Wi-Fi Pineapple[^56].
 
-See these good videos for more explanations on the matter:
+Here are some videos explaining more about the topic:
 
--   What is a File Format? <https://www.youtube.com/watch?v=VVdmmN0su6E> <sup>[[Invidious]][71]</sup>
+-   HOPE 2020, <https://archive.org/details/hopeconf2020/20200725_1800_Advanced_Wi-Fi_Hacking_With_%245_Microcontrollers.mp4>
 
--   Ange Albertini: Funky File Formats: <https://www.youtube.com/watch?v=hdCs6bPM4is> <sup>[[Invidious]][72]</sup>
+-   YouTube, Hak5, Wi-Fi Pineapple Mark VII <https://www.youtube.com/watch?v=7v3JR4Wlw4Q> <sup>[[Invidious]][59]</sup>
 
-You should always use extreme caution. To mitigate these attacks, this guide will later recommend the use of virtualization (See [Appendix W: Virtualization]) to mitigate leaking any information even in case of opening such a malicious file.
+These devices can fit in a small bag and can take over the Wi-Fi environment of any place within their range. For instance, a Bar/Restaurant/Café/Hotel Lobby. These devices can force Wi-Fi clients to disconnect from their current Wi-Fi (using de-authentication, disassociation attacks[^57]) while spoofing the normal Wi-Fi networks at the same location. They will continue to perform this attack until your computer or yourself decides to try to connect to the rogue AP.
 
-If you want to learn how to try detecting such malware, see [Appendix T: Checking files for malware]
+These devices can then mimic a captive portal[^58] with the exact same layout as the Wi-Fi you are trying to access (for instance an Airport Wi-Fi registration portal). Or they could just give you open access internet that they will themselves get from the same place.
 
-### Malware and Exploits in your apps and services:
+Once you are connected through the Rogue AP, this AP will be able to execute various man-in-the-middle attacks to perform analysis on your traffic. These could be malicious redirections or just simple traffic sniffing. These can then easily identify any client that would for instance try to connect to a VPN server or to the Tor Network.
 
-So, you are using Tor Browser or Brave Browser over Tor. You could be using those over a VPN for added security. But you should keep in mind that there are exploits[^106] (hacks) that could be known by an adversary (but unknown to the App/Browser provider). Such exploits could be used to compromise your system and reveal details to de-anonymize you such as your IP address or other details.
+This can be useful when you know someone you want to de-anonymize is in a crowded place but you do not know who. This would allow such an adversary to possibly fingerprint any website you visit despite the use of HTTPS, DoT, DoH, ODoH, VPN or Tor using traffic analysis as pointed above in the DNS section.
 
-A real use case of this technique was the Freedom Hosting[^107] case in 2013 where the FBI inserted malware[^108] using a Firefox browser exploit on a Tor website. This exploit allowed them to reveal details of some users. More recently, there was the notable SolarWinds[^109] hack that breached several US government institutions by inserting malware into an official software update server.
+These can also be used to carefully craft and serve you advanced phishing webpages that would harvest your credentials or try to make you install a malicious certificate allowing them to see your encrypted traffic.
 
-In some countries, Malware is just mandatory and/or distributed by the state itself. This is the case for instance in China with WeChat[^110] which can then be used in combination with other data for state surveillance[^111].
+### Your Anonymized Tor/VPN traffic:
 
-There are countless examples of malicious browser extensions, smartphone apps and various apps that have been infiltrated with malware over the years.
+Tor and VPNs are not silver bullets. Many advanced techniques have been developed and studied to de-anonymize encrypted Tor traffic over the years[^59]. Most of those techniques are Correlation attacks that will correlate your network traffic in one way or another to logs or datasets. Here are some classic examples:
 
-Here are some steps to mitigate this type of attack:
+-   Correlation Fingerprinting Attack: As illustrated (simplified) below, this attack will fingerprint[^60] your encrypted traffic (like the websites you visited) just based on the analysis of your encrypted traffic (without decrypting it). It can do so with a whopping 96% success rate. Such fingerprinting can be used by an adversary that has access to your source network to figure out some of your encrypted activity (such as which websites you visited).
 
--   You should never have 100% trust in the apps you are using.
+![][60]
 
--   You should always check that you are using the updated version of such apps before use and ideally validate each download using their signature if available.
+-   Correlation Timing Attacks: As illustrated (simplified) below, an adversary that has access to network connection logs (IP or DNS for instance, remember that most VPN servers and most Tor nodes are known and publicly listed) at the source and at the destination could correlate the timings to de-anonymize you without requiring any access to the Tor or VPN network in between. A real use case of this technique was done by the FBI in 2013 to de-anonymize[^61] a bomb threat hoax at Harvard University.
 
--   You should not use such apps directly from a hardware system but instead use a Virtual Machine for compartmentalization.
-
-To reflect these recommendations, this guide will therefore later guide you in the use of Virtualization (See [Appendix W: Virtualization]) so that even if your Browser/Apps get compromised by a skilled adversary, that adversary will find himself stuck in a sandbox[^112] without being able to access identifying information, or compromise your system.
-
-## Watermarking:
-
-### Pictures/Videos/Audio:
-
-Pictures/Videos often contain visible watermarks indicating who is the owner/creator but there are also invisible watermarks in various products aiming at identifying the viewer itself.
-
-So, if you are a whistleblower and thinking about leaking some picture/audio/video file. Think twice. There are chances that those might contain invisible watermarking within them that would include information about you as a viewer. Such watermarks can be enabled with a simple switch in like Zoom (Video[^113] or Audio[^114]) or with extensions[^115] for popular apps such as Adobe Premiere Pro. These can be inserted by various content management systems.
-
-For a recent example where someone leaking a Zoom meeting recording was caught because it was watermarked: <https://theintercept.com/2021/01/18/leak-zoom-meeting/> <sup>[[Archive.org]][73]</sup>
-
-Such watermarks can be inserted by various products[^116]'[^117]'[^118]'[^119] using Steganography[^120] and can resist compression[^121] and re-encoding[^122]'[^123].
-
-These watermarks are not easily detectable and could allow identification of the source despite all efforts.
-
-In addition to watermarks, the camera used for filming (and therefore the device used for filming) a video can also be identified using various techniques such as lens identification[^124] which could lead to de-anonymization.
-
-Be extremely careful when publishing videos/pictures/audio files from known commercial platforms as they might contain such invisible watermarks in addition to details in the images themselves.
-
-### Printing Watermarking:
-
-Did you know your printer is most likely spying on you too? Even if it is not connected to any network? This is usually a known fact by many people in the IT community but few outside people.
-
-Yes ... Your printers can be used to de-anonymize you as well as explained by the EFF here <https://www.eff.org/issues/printers> <sup>[[Archive.org]][74]</sup>
-
-With this (old but still relevant) video explaining how from the EFF as well: <https://www.youtube.com/watch?v=izMGMsIZK4U> <sup>[[Invidious]][75]</sup>
-
-Basically, many printers will print an invisible watermark allowing for identification of the printer on every printed page. This is called Printer Steganography[^125].There is no real way to mitigate this but to inform yourself on your printer and make sure it does not print any invisible watermark. This is obviously important if you intend to print anonymously.
-
-Here is an (old but still relevant) list of printers and brands who do not print such tracking dots provided by the EFF <https://www.eff.org/pages/list-printers-which-do-or-do-not-display-tracking-dots> <sup>[[Archive.org]][76]</sup>
-
-Here are also some tips from the Whonix documentation (<https://www.whonix.org/wiki/Printing_and_Scanning> <sup>[[Archive.org]][77]</sup>):
-
-**Do not ever print in Color, usually watermarkings are not present without color toners/cartridges**[^126]**.**
-
-## Your Pixelized/Blurred Information:
-
-Did you ever see a document with blurred text? Did you ever make fun of those movies/series where they "enhance" an image to recover seemingly impossible to read information?
-
-Well, there are techniques for recovering information from such documents, videos, and pictures.
-
-Here is for example an open-source project you could use yourself for recovering text from some blurred images yourself: <https://github.com/beurtschipper/Depix> <sup>[[Archive.org]][78]</sup>
-
-![][79]
-
-This is of course an open-source project available for all to use. But you can probably imagine that such techniques have probably been used before by other adversaries. These could be used to reveal blurred information from published documents that could then be used to de-anonymize you.
-
-There are also tutorials for using such techniques using Photo Editing tools such as GIMP such as: <https://medium.com/@somdevsangwan/unblurring-images-for-osint-and-more-part-1-5ee36db6a70b> <sup>[[Archive.org]][80]</sup> followed by <https://medium.com/@somdevsangwan/deblurring-images-for-osint-part-2-ba564af8eb5d> <sup>[[Archive.org]][81]</sup>
-
-![][82]
-
-Finally, you will find plenty of deblurring resources here: <https://github.com/subeeshvasu/Awesome-Deblurring> <sup>[[Archive.org]][83]</sup>
-
-Some online services could even help you do this automatically to some extent like MyHeritage.com enhance tool:
-
-<https://www.myheritage.com/photo-enhancer> <sup>[[Archive.org]][84]</sup>
-
-Here is the result of the above image:
-
-![][85]
-
-Of course, this tool is more like "guessing" than really deblurring at this point but it could be enough to find you using various reverse image searching services.
-
-For this reason, it is always extremely important that you correctly redact and curate any document you might want to publish. Blurring is not enough and you should always completely blacken/remove any sensitive data to avoid any attempt at recovering data from any adversary.
-
-## Your Anonymized Tor/VPN traffic:
-
-Tor and VPNs are not silver bullets. Many advanced techniques have been developed and studied to de-anonymize encrypted Tor traffic over the years[^127]. Most of those techniques are Correlation attacks that will correlate your network traffic in one way or another to logs or datasets. Here are some classic examples:
-
--   Correlation Fingerprinting Attack: As illustrated (simplified) below, this attack will fingerprint[^128] your encrypted traffic (like the websites you visited) just based on the analysis of your encrypted traffic (without decrypting it). It can do so with a whopping 96% success rate. Such fingerprinting can be used by an adversary that has access to your source network to figure out some of your encrypted activity (such as which websites you visited).
-
-![][86]
-
--   Correlation Timing Attacks: As illustrated (simplified) below, an adversary that has access to network connection logs (IP or DNS for instance, remember that most VPN servers and most Tor nodes are known and publicly listed) at the source and at the destination could correlate the timings to de-anonymize you without requiring any access to the Tor or VPN network in between. A real use case of this technique was done by the FBI in 2013 to de-anonymize[^129] a bomb threat hoax at Harvard University.
-
-![][87]
+![][61]
 
 -   Correlation Counting Attacks: As illustrated (simplified) below, an adversary that has no access to detailed connection logs (cannot see that you used Tor or Netflix) but has access to data counting logs could see that you have downloaded 600MB on a specific time/date that matches the 600MB upload at the destination. This correlation can then be used to de-anonymize you over time.
 
-![][88]
+![][62]
 
 There are ways to mitigate these such as:
 
@@ -893,129 +619,231 @@ There are ways to mitigate these such as:
 
 -   Use multiple layers (such as what will be recommended in this guide later: VPN over Tor) so that an adversary might be able to see that someone connected to the service through Tor but will not be able to see that it was you because you were connected to a VPN and not the Tor Network.
 
-Be aware again that this might not be enough against a motivated global adversary[^130] with wide access to global mass surveillance (remember XKEYSCORE, MUSCULAR and PRISM). Such adversary might have access to logs no matter where you are and could use those to de-anonymize you.
+Be aware again that this might not be enough against a motivated global adversary[^62] with wide access to global mass surveillance (remember XKEYSCORE, MUSCULAR and PRISM). Such adversary might have access to logs no matter where you are and could use those to de-anonymize you.
 
 Be also aware that all the other methods described in this guide such as Behavioral analysis can also be used to deanonymize Tor users indirectly (see further [Your Digital Fingerprint, Footprint, and Online Behavior:]).
 
-I also strongly recommend reading this very good, complete and thorough guide on many Attack Vectors on Tor: <https://github.com/Attacks-on-Tor/Attacks-on-Tor> <sup>[[Archive.org]][89]</sup> as well as this recent research publication <https://www.researchgate.net/publication/323627387_Shedding_Light_on_the_Dark_Corners_of_the_Internet_A_Survey_of_Tor_Research> <sup>[[Archive.org]][90]</sup>
+I also strongly recommend reading this very good, complete and thorough guide on many Attack Vectors on Tor: <https://github.com/Attacks-on-Tor/Attacks-on-Tor> <sup>[[Archive.org]][63]</sup> as well as this recent research publication <https://www.researchgate.net/publication/323627387_Shedding_Light_on_the_Dark_Corners_of_the_Internet_A_Survey_of_Tor_Research> <sup>[[Archive.org]][64]</sup>
 
-(In their defense, it should also be noted that Tor is not designed to protect against a Global adversary. For more information see <https://svn-archive.torproject.org/svn/projects/design-paper/tor-design.pdf> <sup>[[Archive.org]][91]</sup> and specifically, "Part 3. Design goals and assumptions.".)
+(In their defense, it should also be noted that Tor is not designed to protect against a Global adversary. For more information see <https://svn-archive.torproject.org/svn/projects/design-paper/tor-design.pdf> <sup>[[Archive.org]][65]</sup> and specifically, "Part 3. Design goals and assumptions.".)
 
-Lastly, do remember that using Tor can already be considered a suspicious activity[^131] and its use could be considered malicious by some[^132].
+Lastly, do remember that using Tor can already be considered a suspicious activity[^63] and its use could be considered malicious by some[^64].
 
 This guide will later propose some solutions to such attacks by changing your origin from the start (using public wi-fi's for instance).
 
-## Your Crypto currencies transactions:
+### Some Devices can be tracked even when offline:
 
-Contrary to popular belief, Crypto transactions (such as Bitcoin and Ethereum) are not anonymous[^133]. Most crypto currencies can be tracked accurately through various methods[^134].
+You have seen this in action/spy/Sci-Fi movies and shows, the protagonists always remove the battery of their phones to make sure it cannot be used. Most people would think that's overkill. Well, unfortunately no, this is now becoming true at least for some devices:
 
-Remember what they say on their own page: <https://bitcoin.org/en/you-need-to-know> <sup>[[Archive.org]][92]</sup> and <https://bitcoin.org/en/protect-your-privacy> <sup>[[Archive.org]][93]</sup>:
+-   iPhones and iPads (IOS 13 and above)[^65]'[^66]
 
-"Bitcoin is not anonymous "
+-   Samsung Phones (Android 10 and above)[^67]
 
-The main issue is not setting up a random Crypto wallet to receive some currency behind a VPN/Tor address (at this point, the wallet is anonymous). The issue is mainly when you want to convert Fiat money (Euros, Dollars ...) to Crypto and then when you want to cash in your Crypto. You will have few realistic options but to transfer those to an exchange (such as Coinbase/Kraken/Bitstamp/Binance). Those exchanges have known wallet addresses and will keep detailed logs (due to KYC[^135] financial regulations) and can then trace back those crypto transactions to you using the financial system[^136].
+-   MacBooks (MacOS 10.15 and above)[^68]
 
-There are some crypto currencies with privacy/anonymity in mind like Monero but even those have some and warnings to consider[^137]'[^138].
+Such devices will continue to broadcast identity information to nearby devices even when offline using Bluetooth Low-Energy[^69]. They do not have access to the devices directly (which are not connected to the internet) but instead use BLE to find them through other nearby devices[^70]. They are basically using peer-to-peer short-range Bluetooth communication to broadcast their status through nearby online devices.
 
-Even if you use Mixers or Tumblers[^139] (services that specialize in "anonymizing" crypto currencies by "mixing them"), keep in mind this is only obfuscation[^140] and not actual anonymity[^141]. Not only are they only obfuscation but they could also put you in trouble as you might end up exchanging your crypto against "dirty" crypto that was used in various questionable contexts[^142].
+They could now locate such devices and keep the location in some database that could then be used by third parties or themselves for various purposes (including analytics, advertising or evidence/intelligence gathering).
 
-This does not mean you cannot use Bitcoin anonymously at all. You can actually use Bitcoin anonymously as long as you do not convert it to actual currency and use a Bitcoin wallet from a safe anonymous network. Meaning you should avoid KYC/AML regulations by various exchanges and avoid using the Bitcoin network from any known IP address. This also means you will not be able to convert these Bitcoin from/to real currency easily and without involving some risks.
+See [Appendix N: Warning about smartphones and smart devices]
 
-**Overall, IMHO, the best option for using Crypto with reasonable anonymity and privacy is still Monero and you should ideally not use any other for sensitive transactions unless you are aware of the limitations.**
+## Your Hardware Identifiers:
+
+### Your IMEI and IMSI (and by extension, your phone number):
+
+The IMEI (International Mobile Equipment Identity[^71]) and the IMSI (International Mobile Subscriber Identity[^72]) are unique numbers created by mobile phone manufacturers and mobile phone operators.
+
+The IMEI is tied directly to the phone you are using. This number is known and tracked by the mobile phone operators and known by the manufacturers. Every time your phone connects to the mobile network, it will register the IMEI on the network along the IMSI (if a SIM card is inserted but that is not even needed). It is also used by many applications (Banking apps abusing the phone permission on Android for instance[^73]) and smartphone Operating Systems (Android/IOS) for identification of the device[^74]. It is possible but difficult (and not illegal in many jurisdictions[^75]) to change the IMEI on a phone but it is probably easier and cheaper to just find and buy some old (working) Burner phone for a few Euros (this guide is for Germany remember) at a flea market or at some random small shop.
+
+The IMSI is tied directly to the mobile subscription or pre-paid plan you are using and is basically tied to your phone number by your mobile provider. The IMSI is hardcoded directly on the SIM card and cannot be changed. Remember that every time your phone connects to the mobile network, it will also register the IMSI on the network along the IMEI. Like the IMEI, the IMSI is also being used by some applications and smartphone Operating systems for identification and are being tracked. Some countries in the EU for instance maintain a database of IMEI/IMSI associations for easy querying by Law Enforcement.
+
+Today, giving away your (real) phone number is basically the same or better than giving away your Social Security number/Passport ID/National ID.
+
+The IMEI and IMSI can be traced back to you by at least 6 ways:
+
+-   The mobile operator subscriber logs which will usually store the IMEI along the IMSI and their subscriber information database. If you use a prepaid anonymous SIM (anonymous IMSI but with a known IMEI), they can see this cell belongs to you if you used that cell phone before with a different SIM card (different anonymous IMSI but same known IMEI).
+
+-   The mobile operator antenna logs which will conveniently keep a log of which IMEI and IMSI also keep some connection data. They know and log for instance that a phone with this IMEI/IMSI combination connected to a set of Mobile antennas and how powerful the signal to each of those antennas was allowing easy triangulation/geolocation of the signal. They also know which other phones (your real one for instance) connected at the same time to the same antennas with the same signal which would make it possible to know precisely that this "burner phone" was always connected at the same place/time than this other "known phone" which shows up every time the burner phone is being used. This information can be used by various third parties to geolocate/track you quite precisely[^76]'[^77].
+
+-   The manufacturer of the Phone can trace back the sale of the phone using the IMEI if that phone was bought in a non-anonymous way. Indeed, they will have logs of each phone sale (including serial number and IMEI), to which shop/person it was sold to. And if you are using a phone that you bought online (or from someone that knows you). It can be traced to you using that information. Even if they do not find you on CCTV[^78] and you bought the phone cash, they can still find what other phone (your real one in your pocket) was there (in that shop) at that time/date by using the antenna logs.
+
+-   The IMSI alone can be used to find you as well because most countries now require customers to provide an ID when buying a SIM card (subscription or pre-paid). The IMSI is then tied to the identity of the buyer of the card. In the countries where the SIM can still be bought with cash (like the UK), they still know where (which shop) it was bought and when. This information can then be used to retrieve information from the shop itself (such as CCTV footage as for the IMEI case). Or again the antenna logs can also be used to figure out which other phone was there at the moment of the sale.
+
+-   The smartphone OS makers (Google/Apple for Android/IOs) also keep logs of IMEI/IMSI identifications tied to Google/Apple accounts and which user has been using them. They too can trace back the history of the phone and to which accounts it was tied in the past[^79].
+
+-   Government agencies around the world interested in your phone number can and do use[^80] special devices called "IMSI catchers"[^81] like the Stingray[^82] or more recently the Nyxcell[^83]. These devices can impersonate (to spoof) a cell phone Antenna and force a specific IMSI (your phone) to connect to it to access the cell network. Once they do, they will be able to use various MITM[^84] (Man-In-The-Middle Attacks) that will allow them to:
+
+    -   Tap your phone (voice calls and SMS).
+
+    -   Sniff and examine your data traffic.
+
+    -   Impersonate your phone number without controlling your phone.
+
+    -   ...
+
+Here is also a good YouTube video on this topic: DEFCON Safe Mode - Cooper Quintin - Detecting Fake 4G Base Stations in Real Time <https://www.youtube.com/watch?v=siCk4pGGcqA> <sup>[[Invidious]][66]</sup>
+
+For these reasons, it is crucial to get dedicated an anonymous phone number and/or an anonymous burner phone with an anonymous pre-paid sim card that are not tied to you in any way (past or present) for conducting sensitive activities (See more practical guidance in [Get an anonymous Phone number:] section).
+
+While there are some smartphones manufacturers like Purism with their Librem series[^85] who claim to have your privacy in mind, they still do not allow IMEI randomization which I believe is a key anti-tracking feature that should be provided by such manufacturers. While this measure will not prevent IMSI tracking within the SIM card, it would at least allow you to keep the same "burner phone" and only switch SIM cards instead of having to switch both for privacy.
+
+See [Appendix N: Warning about smartphones and smart devices]
+
+### Your Wi-Fi or Ethernet MAC address:
+
+The MAC address[^86] is a unique identifier tied to your physical Network Interface (Wired Ethernet or Wi-Fi) and could of course be used to track you if it is not randomized. As it was the case with the IMEI, manufacturers of computers and network cards usually keep logs of their sales (usually including things like: Serial number, IMEI, Mac Addresses, ...) and it is possible again for them to track where and when the computer with the MAC address in question was sold and to whom. Even if you bought it with cash in a supermarket, the supermarket might still have CCTV (or a CCTV just outside that shop) and again the time/date of sale could be used to find out who was there using the Mobile Provider antenna logs at that time (IMEI/IMSI).
+
+Operating Systems makers (Google/Microsoft/Apple) will also keep logs of devices and their MAC addresses in their logs for device identification (Find my device type services for example). Apple can tell that the MacBook with this specific MAC address was tied to a specific Apple Account before. Maybe yours before you decided to use the MacBook for sensitive activities. Maybe to a different user who sold it to you but remembers your e-mail/number from when the sale happened.
+
+Your home router/Wi-Fi access point keeps logs of devices that registered on the Wi-Fi and these can be accessed too to find out who has been using your Wi-Fi. Sometimes this can be done remotely (and silently) by the ISP depending if that router/Wi-Fi access point is being "managed" remotely by the ISP (which is often the case when they provide the router to their customers).
+
+Some commercial devices will keep record of MAC addresses roaming around for various purposes such as road congestion[^87].
+
+So, it is important again not to bring your phone along when/where you conduct sensitive activities. If you use your own laptop, then it is crucial to hide that MAC address (and Bluetooth address) anywhere you use it and be extra careful not to leak any information. Thankfully many recent OSes now feature or allow the option to randomize MAC addresses (Android, IOS, Linux and Windows 10) with the notable exception of MacOS which does not support this feature even in its latest Big Sur version.
+
+See [Appendix N: Warning about smartphones and smart devices]
+
+### Your Bluetooth MAC address:
+
+Your Bluetooth MAC is like the previous MAC address except it is for Bluetooth. Again, it can be used to track you as manufacturers and operating system makers keep logs of such information. It could be tied to a sale place/time/date or accounts and then could be used to track you with such information, the shop billing information, the CCTV, or the mobile antenna logs in correlation.
+
+Operating systems have protections in place to randomize those addresses but are still subject to vulnerabilities[^88].
+
+For this reason, and unless you really need those, you should just disable Bluetooth completely in the BIOS/UEFI settings if possible or in the Operating System otherwise.
+
+On Windows 10, you will need to disable ad enable the Bluetooth device in the device manager itself to force a randomization of the address for next use and prevent tracking.
+
+See [Appendix N: Warning about smartphones and smart devices]
 
 ## Your CPU:
 
-All modern CPUs[^143] are now integrating hidden management platforms such as the now infamous Intel Management Engine[^144] and the AMD Platform Security Processor[^145].
+All modern CPUs[^89] are now integrating hidden management platforms such as the now infamous Intel Management Engine[^90] and the AMD Platform Security Processor[^91].
 
-Those management platforms are basically small operating systems running directly on your CPU as long as they have power. These systems have full access to your computer's network and could be accessed by an adversary to de-anonymize you in various ways (using direct access or using malware for instance) as shown in this enlightening video: BlackHat, How to Hack a Turned-Off Computer, or Running Unsigned Code in Intel Management Engine <https://www.youtube.com/watch?v=mYsTBPqbya8> <sup>[[Invidious]][94]</sup>.
+Those management platforms are basically small operating systems running directly on your CPU as long as they have power. These systems have full access to your computer's network and could be accessed by an adversary to de-anonymize you in various ways (using direct access or using malware for instance) as shown in this enlightening video: BlackHat, How to Hack a Turned-Off Computer, or Running Unsigned Code in Intel Management Engine <https://www.youtube.com/watch?v=mYsTBPqbya8> <sup>[[Invidious]][67]</sup>.
 
-These have already been affected by several security vulnerabilities in the past[^146] that allowed malware to gain control of target systems. These are also accused by many privacy actors including the EFF and Libreboot of being a backdoor into any system[^147].
+These have already been affected by several security vulnerabilities in the past[^92] that allowed malware to gain control of target systems. These are also accused by many privacy actors including the EFF and Libreboot of being a backdoor into any system[^93].
 
-There are some not so easy ways[^148] to disable the Intel IME on some CPUs and you should do so if you can. For some AMD laptops, you can disable it within the BIOS settings by disabling PSP.
+There are some not so easy ways[^94] to disable the Intel IME on some CPUs and you should do so if you can. For some AMD laptops, you can disable it within the BIOS settings by disabling PSP.
 
-Note that to AMD's defense, so far and AFAIK, there were no security vulnerabilities found for ASP and no backdoors eithers: See <https://www.youtube.com/watch?v=bKH5nGLgi08&t=2834s> <sup>[[Invidious]][95]</sup>.
+Note that to AMD's defense, so far and AFAIK, there were no security vulnerabilities found for ASP and no backdoors eithers: See <https://www.youtube.com/watch?v=bKH5nGLgi08&t=2834s> <sup>[[Invidious]][68]</sup>.
 
-If you are feeling a bit more adventurous, you could install your own BIOS using Libreboot[^149] or Coreboot[^239] if your laptop supports it.
+If you are feeling a bit more adventurous, you could install your own BIOS using Libreboot[^95] or Coreboot[^241] if your laptop supports it.
 
 In addition, some CPUs have unfixable flaws (especially Intel CPUs) that could be exploited by various malware. Here is a good current list of such vulnerabilities affecting recent widespread CPUs:
 
-<https://en.wikipedia.org/wiki/Transient_execution_CPU_vulnerability> <sup>[[Archive.org]][96]</sup>
+<https://en.wikipedia.org/wiki/Transient_execution_CPU_vulnerability> <sup>[[Archive.org]][69]</sup>
 
--   If you are using Linux you can check the vulnerability status of your CPU to Spectre/Meltdown attacks by using <https://github.com/speed47/spectre-meltdown-checker> <sup>[[Archive.org]][97]</sup> which is available as a package for most Linux distros including Whonix.
+-   If you are using Linux you can check the vulnerability status of your CPU to Spectre/Meltdown attacks by using <https://github.com/speed47/spectre-meltdown-checker> <sup>[[Archive.org]][70]</sup> which is available as a package for most Linux distros including Whonix.
 
--   If you are using Windows, you can check the vulnerability status of your CPU using inSpectre <https://www.grc.com/inspectre.htm> <sup>[[Archive.org]][98]</sup>
+-   If you are using Windows, you can check the vulnerability status of your CPU using inSpectre <https://www.grc.com/inspectre.htm> <sup>[[Archive.org]][71]</sup>
 
-Some of these can be avoided using Virtualization Software settings that can mitigate such exploits. See this guide for more information <https://www.whonix.org/wiki/Spectre_Meltdown> <sup>[[Archive.org]][99]</sup> (warning: these can severely impact the performance of your VMs).
+Some of these can be avoided using Virtualization Software settings that can mitigate such exploits. See this guide for more information <https://www.whonix.org/wiki/Spectre_Meltdown> <sup>[[Archive.org]][72]</sup> (warning: these can severely impact the performance of your VMs).
 
 I will therefore mitigate some of these issues in this guide by recommending the use of virtual machines on a dedicated anonymous laptop for your sensitive activities that will only be used from an anonymous public network.
 
-## Malicious/Rogue Wi-Fi Access Points:
+## Your Operating Systems and Apps telemetry services:
 
-These have been used since at least since 2008 using an attack called "Jasager"[^150] and can be done by anyone using self-built tools or using commercially available devices such as Wi-Fi Pineapple[^151].
+Whether it is Android, iOS, Windows, MacOS or even Ubuntu. Most popular Operating Systems now collect telemetry information by default even if you never opt-in or opted-out[^98] from the start. Some like Windows will not even allow disabling telemetry completely without some technical tweaks. This information collection can be extensive and include a staggering number of details (metadata and data) on your devices and their usage.
 
-Here are some videos explaining more about the topic:
+Here are good overviews of what is being collected by those 5 popular OSes in their last versions:
 
--   HOPE 2020, <https://archive.org/details/hopeconf2020/20200725_1800_Advanced_Wi-Fi_Hacking_With_%245_Microcontrollers.mp4>
+-   Android/Google:
 
--   YouTube, Hak5, Wi-Fi Pineapple Mark VII <https://www.youtube.com/watch?v=7v3JR4Wlw4Q> <sup>[[Invidious]][100]</sup>
+    -   Just have a read at their privacy policy <https://policies.google.com/privacy> <sup>[[Archive.org]][73]</sup>
 
-These devices can fit in a small bag and can take over the Wi-Fi environment of any place within their range. For instance, a Bar/Restaurant/Café/Hotel Lobby. These devices can force Wi-Fi clients to disconnect from their current Wi-Fi (using de-authentication, disassociation attacks[^152]) while spoofing the normal Wi-Fi networks at the same location. They will continue to perform this attack until your computer or yourself decides to try to connect to the rogue AP.
+    -   School of Computer Science & Statistics, Trinity College Dublin, Ireland Mobile Handset Privacy: Measuring The Data iOS and Android Send to Apple And Google <https://www.scss.tcd.ie/doug.leith/apple_google.pdf> <sup>[[Archive.org]][74]</sup>
 
-These devices can then mimic a captive portal[^153] with the exact same layout as the Wi-Fi you are trying to access (for instance an Airport Wi-Fi registration portal). Or they could just give you open access internet that they will themselves get from the same place.
+-   IOS/Apple:
 
-Once you are connected through the Rogue AP, this AP will be able to execute various man-in-the-middle attacks to perform analysis on your traffic. These could be malicious redirections or just simple traffic sniffing. These can then easily identify any client that would for instance try to connect to a VPN server or to the Tor Network.
+    -   More information at <https://www.apple.com/legal/privacy/en-ww/> <sup>[[Archive.org]][75]</sup> and <https://support.apple.com/en-us/HT202100> <sup>[[Archive.org]][76]</sup>
 
-This can be useful when you know someone you want to de-anonymize is in a crowded place but you do not know who. This would allow such an adversary to possibly fingerprint any website you visit despite the use of HTTPS, DoT, DoH, ODoH, VPN or Tor using traffic analysis as pointed above in the DNS section.
+    -   School of Computer Science & Statistics, Trinity College Dublin, Ireland Mobile Handset Privacy: Measuring The Data iOS and Android Send to Apple And Google <https://www.scss.tcd.ie/doug.leith/apple_google.pdf> <sup>[[Archive.org]][74]</sup>
 
-These can also be used to carefully craft and serve you advanced phishing webpages that would harvest your credentials or try to make you install a malicious certificate allowing them to see your encrypted traffic.
+    -   Apple does claim[^96] that they anonymize this data using differential privacy[^97] but you will have to trust them on that.
 
-## Malicious USB devices:
+-   Windows/Microsoft:
 
-There are readily available commercial and cheap "badUSB" [^154]devices that can take deploy malware, log your typing, geolocate you, listen to you or gain control of your laptop just by plugging them in. Here are some examples that you can already buy yourself.
+    -   Full list of required diagnostic data: <https://docs.microsoft.com/en-us/windows/privacy/required-windows-diagnostic-data-events-and-fields-2004> <sup>[[Archive.org]][77]</sup>
 
--   Hak5, USB Rubber Ducky <https://shop.hak5.org/products/usb-rubber-ducky-deluxe> <sup>[[Archive.org]][101]</sup>
+    -   Full list of optional diagnostic data: <https://docs.microsoft.com/en-us/windows/privacy/windows-diagnostic-data> <sup>[[Archive.org]][78]</sup>
 
--   Hak5, O.MG Cable <https://www.youtube.com/watch?v=V5mBJHotZv0> <sup>[[Invidious]][102]</sup>
+-   MacOS:
 
--   Keelog <https://www.keelog.com/> <sup>[[Archive.org]][103]</sup>
+    -   More details on <https://support.apple.com/guide/mac-help/share-analytics-information-mac-apple-mh27990/mac> <sup>[[Archive.org]][79]</sup>
 
--   AliExpress <https://www.aliexpress.com/i/4000710369016.html> <sup>[[Archive.org]][104]</sup>
+-   Ubuntu:
 
-Such devices can be implanted anywhere (charging cable, mouse, keyboard, USB key ...) by an adversary and can be used to track you or compromise your computer or smartphone. The most notable example of such attacks is probably Stuxnet[^155] in 2005.
+    -   Ubuntu despite being a Linux distribution also collects Telemetry Data nowadays. This data however is quite limited compared to the others. More details on <https://ubuntu.com/desktop/statistics> <sup>[[Archive.org]][80]</sup>
 
-While you could inspect an USB key physically, scan it with various utilities, check the various components to see if they are genuine, you will most likely never be able to discover complex malware embedded in genuine parts of a genuine USB key by a skilled adversary without advanced forensics equipment[^156].
+Not only are Operating Systems gathering telemetry services but so are Apps themselves like Browsers, Mail Clients, and Social Networking Apps installed on your system.
 
-To mitigate this, you should never trust such devices and plug them into sensitive equipment. If you use a charging device, you should consider the use of an USB data blocking device that will only allow charging but not any data transfer. Such data blocking devices are now readily available in many online shops. You should also consider disabling USB ports completely within the BIOS of your computer unless you need them (if you can).
+It is important to understand that this telemetry data can be tied to your device and help de-anonymizing you and subsequently can be used against you by an adversary that would get access to this data.
 
-## Your Cloud backups/sync services:
+This does not mean for example that Apple devices are terrible choices for good Privacy but they certainly not the best choices for (relative) Anonymity. They might protect you from third parties knowing what you are doing but not from themselves. In all likelihood, they certainly know who you are.
 
-All companies are advertising their use of end-to-end encryption (E2EE). This is true for almost every messaging app and website (HTTPS). Apple and Google are advertising their use of encryption on their Android devices and their iPhones.
+Later in this guide, we will use all the means at our disposal to disable and block as much telemetry as possible to mitigate this attack vector in the Operating Systems supported in this guide.
 
-But what about your backups? Those automated iCloud/google drive backups you have?
+See [Appendix N: Warning about smartphones and smart devices]
 
-Well, you should probably know that most of those backups are not fully end to end encrypted and will contain some of your information readily available for a third party. You will see their claims that data is encrypted at rest and safe from anyone ... Except they usually do keep a key to access some of the data themselves. These keys are used for them indexing your content, recover your account, collecting various analytics.
+## Your Smart devices in general:
 
-There are specialized commercial forensics solutions available (Magnet Axiom[^157], Cellebrite Cloud[^158]) that will help an adversary analyze your cloud data with ease.
+You got it; your smartphone is an advanced spying/tracking device that:
 
-Notable Examples:
+-   Records everything you say at any time ("Hey Siri", "Hey Google").
 
--   Apple iCloud: <https://support.apple.com/en-us/HT202303> <sup>[[Archive.org]][105]</sup> : "Messages in iCloud also uses end-to-end encryption. If you have iCloud Backup turned on**, your backup includes a copy of the key protecting your Messages**. This ensures you can recover your Messages if you lose access to iCloud Keychain and your trusted devices. ".
+-   Records your location everywhere you go.
 
--   Google Drive and WhatsApp: <https://faq.whatsapp.com/android/chats/about-google-drive-backups/> <sup>[[Archive.org]][106]</sup> : "**Media and messages you back up aren't protected by WhatsApp end-to-end encryption while in Google Drive**. ".
+-   Always records other devices around you (Bluetooth devices, Wi-Fi Access points).
 
--   Dropbox: <https://www.dropbox.com/privacy#terms> <sup>[[Archive.org]][107]</sup> "To provide these and other features, **Dropbox accesses, stores, and scans Your Stuff**. You give us permission to do those things, and this permission extends to our affiliates and trusted third parties we work with".
+-   Records your habits and health data (steps, screen time, exposure to diseases, connected devices data)
 
--   Microsoft OneDrive: <https://privacy.microsoft.com/en-us/privacystatement> <sup>[[Archive.org]][108]</sup> : Productivity and communications products, "When you use OneDrive, we collect data about your usage of the service, as well as the content you store, to provide, improve, and protect the services. **Examples include indexing the contents of your OneDrive documents so that you can search for them later and using location information to enable you to search for photos based on where the photo was taken**".
+-   Records all your network locations.
 
-You should not trust cloud providers with your (not previously and locally encrypted) sensitive data and you should be wary of their privacy claims. In most cases they can access your data and provide it to a third party.
+-   Records all your pictures and videos (and most likely where they were taken).
 
-The only way to mitigate this is to encrypt yourself your data on your side and then only upload it to such service.
+-   Has most likely access to most of your known accounts including Social Media, Messaging and Financial accounts.
 
-## Your Digital Fingerprint, Footprint, and Online Behavior:
+Data is being transmitted even if you opt-out[^98], processed, and stored indefinitely (most likely unencrypted[^99]) by various third parties[^100].
 
-This is the part where you should watch the documentary "The Social Dilemma"[^159] on Netflix as they cover this topic much better than anyone else IMHO.
+But that is not all, this section is not called "Smartphones" but "Smart devices" because it is not only your smartphone spying on you. It is also every other smart device you could have.
 
-This includes is the way you write[^160]'[^161], the way you behave[^162]'[^163]. The way you click. The way you browse. The fonts you use on your browser[^164]. Fingerprinting is being used to guess who someone is by the way that user is behaving. You might be using specific pedantic words or making specific spelling mistakes that could give you away using a simple Google search for similar features because you typed in a similar way on some Reddit post 5 years ago using a not so anonymous Reddit account[^165].
+-   Your Smart Watch? (Apple Watch, Android Smartwatch ...)
+
+-   Your Fitness Devices and Apps[^101]? (Strava[^102]'[^103], Fitbit[^104], Garmin, Polar[^105], ...)
+
+-   Your Smart Speaker? (Amazon Alexa[^106], Google Echo, Apple Homepod ...)
+
+-   Your Smart Transportation? (Car? Scooter?)
+
+-   Any other Smart device? There is even a convenient search engine dedicated to finding them online: <https://www.shodan.io/> <sup>[[Archive.org]][81]</sup>
+
+See [Appendix N: Warning about smartphones and smart devices]
+
+## Yourself:
+
+### Your Metadata including your Geo-Location:
+
+Your metadata is all the information about your activities without the actual content of those activities. For instance, it is like knowing you had a call from an oncologist before then calling your family and friends successively. You do not know what was said during the conversation but you can guess what it was just from the "metadata"[^107].
+
+This metadata will also often include your location that is being harvested by Smartphones, Operating Systems (Android[^108]/IOS), Browsers, Apps, Websites. Odds are there are several companies knowing exactly where you are at any time[^109] because of your smartphone[^110].
+
+This location data has been used in many judicial cases[^111] already as part of "geofence warrants" [^112] that allows law enforcement to ask companies (such as Google/Apple) a list of all devices present at a certain location at a certain time. In addition, this location data is even sold by private companies to the military who can then use it conveniently[^113].
+
+Now let us say you are using a VPN to hide your IP. The social media platform knows you were active on that account on November 4th from 8am to 1pm with that VPN IP. The VPN allegedly keeps no logs and cannot trace back that VPN IP to your IP. Your ISP however knows (or at least can know) you were connected to that same VPN provider on November 4th from 7:30am to 2pm but does not know what you were doing with it.
+
+The question is: Is there someone somewhere that would possibly have both pieces of information available[^114] for correlation in a convenient database?
+
+Have you heard of Edward Snowden[^115]? Now is the time to google him and read his book[^116]. I recommend reading about XKEYSCORE[^117]'[^118], MUSCULAR[^119] and PRISM[^120].
+
+See "We kill people based on Metadata"[^121] or this famous tweet from the IDF <https://twitter.com/idf/status/1125066395010699264> <sup>[[Archive.org]][82]</sup>.
+
+See [Appendix N: Warning about smartphones and smart devices]
+
+### Your Digital Fingerprint, Footprint, and Online Behavior:
+
+This is the part where you should watch the documentary "The Social Dilemma"[^122] on Netflix as they cover this topic much better than anyone else IMHO.
+
+This includes is the way you write[^123]'[^124], the way you behave[^125]'[^126]. The way you click. The way you browse. The fonts you use on your browser[^127]. Fingerprinting is being used to guess who someone is by the way that user is behaving. You might be using specific pedantic words or making specific spelling mistakes that could give you away using a simple Google search for similar features because you typed in a similar way on some Reddit post 5 years ago using a not so anonymous Reddit account[^128].
 
 Social Media platforms such as Facebook/Google can go a step further and can register your behavior in the browser itself. For instance, they can register everything you type even if you do not send it / save it. Think of when you write an e-mail in Gmail. It is saved automatically as you type. They can register your clicks and cursor movements as well.
 
@@ -1025,9 +853,9 @@ While these methods are usually used for marketing purposes and advertising, the
 
 Here are some examples:
 
--   For example, as a basis of authentication, a user's typing speed, keystroke depressions, patterns of error (say accidentally hitting an "l" instead of a "k" on three out of every seven transactions) and mouse movements establishes that person's unique pattern of behavior[^166].
+-   For example, as a basis of authentication, a user's typing speed, keystroke depressions, patterns of error (say accidentally hitting an "l" instead of a "k" on three out of every seven transactions) and mouse movements establishes that person's unique pattern of behavior[^129].
 
--   This technology is also widely used in CAPTCHAS[^299] services to verify that you are "human" and can be used to fingerprint a user.
+-   This technology is also widely used in CAPTCHAS[^301] services to verify that you are "human" and can be used to fingerprint a user.
 
 Analysis algorithms could then be used to match these patterns with other users and match you to a different known user. It is unclear if such data is already used or not by Governments and Law Enforcements agencies but it might be in the future. And while this is mostly used for advertising/marketing/captchas purposes now. It could and probably will be used for investigations in the short or mid-term future to deanonymize users.
 
@@ -1037,15 +865,15 @@ Here is also a recent example just showing what Google Chrome collects on you: <
 
 Here are some other resources on topic if you cannot see this documentary:
 
--   2017, Behavior Analysis in Social Networks, <https://link.springer.com/10.1007/978-1-4614-7163-9_110198-1> <sup>[[Archive.org]][109]</sup>
+-   2017, Behavior Analysis in Social Networks, <https://link.springer.com/10.1007/978-1-4614-7163-9_110198-1> <sup>[[Archive.org]][83]</sup>
 
--   2017, Social Networks and Positive and Negative Affect <https://www.sciencedirect.com/science/article/pii/S1877042811013747/pdf?md5=253d8f1bb615d5dee195d353dc077d46&pid=1-s2.0-S1877042811013747-main.pdf> <sup>[[Archive.org]][110]</sup>
+-   2017, Social Networks and Positive and Negative Affect <https://www.sciencedirect.com/science/article/pii/S1877042811013747/pdf?md5=253d8f1bb615d5dee195d353dc077d46&pid=1-s2.0-S1877042811013747-main.pdf> <sup>[[Archive.org]][84]</sup>
 
--   2015, Using Social Networks Data for Behavior and Sentiment Analysis <https://www.researchgate.net/publication/300562034_Using_Social_Networks_Data_for_Behavior_and_Sentiment_Analysis> <sup>[[Archive.org]][111]</sup>
+-   2015, Using Social Networks Data for Behavior and Sentiment Analysis <https://www.researchgate.net/publication/300562034_Using_Social_Networks_Data_for_Behavior_and_Sentiment_Analysis> <sup>[[Archive.org]][85]</sup>
 
--   2016, A Survey on User Behavior Analysis in Social Networks <https://www.academia.edu/30936118/A_Survey_on_User_Behaviour_Analysis_in_Social_Networks> <sup>[[Archive.org]][112]</sup>
+-   2016, A Survey on User Behavior Analysis in Social Networks <https://www.academia.edu/30936118/A_Survey_on_User_Behaviour_Analysis_in_Social_Networks> <sup>[[Archive.org]][86]</sup>
 
--   2019, In­fluence and Behavior Analysis in Social Networks and Social Media <https://sci-hub.do/10.1007/978-3-030-02592-2> <sup>[[Archive.org]][113]</sup>
+-   2019, In­fluence and Behavior Analysis in Social Networks and Social Media <https://sci-hub.do/10.1007/978-3-030-02592-2> <sup>[[Archive.org]][87]</sup>
 
 So, how can you mitigate this these?
 
@@ -1067,53 +895,53 @@ So, how can you mitigate this these?
 
 Ultimately, this is mostly up to you to fool those algorithms by adopting new habits for your anonymous identities.
 
-## Your Clues about your Real Life and OSINT:
+### Your Clues about your Real Life and OSINT:
 
 These are clues you might give over time that could point to your real identity. You might be talking to someone or posting on some board/forum/Reddit. In those posts you might over time leak some information about your real life. These might be memories, experiences or clues you shared that could then allow a motivated adversary to build a profile to narrow their search.
 
-A real use and well-documented case of this was the arrest of the hacker Jeremy Hammond[^167] who shared over time several details about his past and was later discovered.
+A real use and well-documented case of this was the arrest of the hacker Jeremy Hammond[^130] who shared over time several details about his past and was later discovered.
 
-There are also a few cases involving OSINT at Bellingcat[^168].Have a look at their very informative toolkit here: <https://docs.google.com/spreadsheets/d/18rtqh8EG2q1xBo2cLNyhIDuK9jrPGwYr9DI2UncoqJQ/edit#gid=930747607> <sup>[[Archive.org]][114]</sup>
+There are also a few cases involving OSINT at Bellingcat[^131].Have a look at their very informative toolkit here: <https://docs.google.com/spreadsheets/d/18rtqh8EG2q1xBo2cLNyhIDuK9jrPGwYr9DI2UncoqJQ/edit#gid=930747607> <sup>[[Archive.org]][88]</sup>
 
-You can also view a very convenient list of available OSINT tools here <https://github.com/jivoi/awesome-osint> <sup>[[Archive.org]][115]</sup>
+You can also view a very convenient list of available OSINT tools here <https://github.com/jivoi/awesome-osint> <sup>[[Archive.org]][89]</sup> and here <https://jakecreps.com/tag/osint-tools/> <sup>[[Archive.org]][90]</sup> if you feel like trying some on yourself.
 
-As well as this interesting Playlist on YouTube: <https://www.youtube.com/playlist?list=PLrFPX1Vfqk3ehZKSFeb9pVIHqxqrNW8Sy> <sup>[[Invidious]][116]</sup>
+As well as this interesting Playlist on YouTube: <https://www.youtube.com/playlist?list=PLrFPX1Vfqk3ehZKSFeb9pVIHqxqrNW8Sy> <sup>[[Invidious]][91]</sup>
 
 You should never ever share real personal experiences/details that could later lead to you using anonymous identities.
 
-## Your Face, Voice, Biometrics and Pictures:
+### Your Face, Voice, Biometrics and Pictures:
 
 "Hell is other people", even if you evade every method listed above, you are not out of the woods yet thanks to the widespread use of advanced Face recognition by everyone.
 
-Companies like Facebook have used advanced face recognition for years[^169]'[^170] and have been using other means (Satellite imagery) to create maps of "people" around the world[^171]. This evolution has been going on for years to the point we can now say "We lost control of our faces"[^172].
+Companies like Facebook have used advanced face recognition for years[^132]'[^133] and have been using other means (Satellite imagery) to create maps of "people" around the world[^134]. This evolution has been going on for years to the point we can now say "We lost control of our faces"[^135].
 
-If you are walking in a touristy place, you will most likely appear in someone's selfie within minutes without knowing it. That person will then proceed to upload that selfie to various platforms (Twitter, Google Photos, Instagram, Facebook, Snapchat ...). Those platforms will then apply face recognition algorithms to those pictures under the pretext of allowing better/easier tagging or to better organize your photo library. In addition to this, the same picture will provide a precise timestamp and in most cases geolocation of where it was taken. Even if the person does not provide a timestamp and geolocation, it can still be guessed with other means[^173]'[^174].
+If you are walking in a touristy place, you will most likely appear in someone's selfie within minutes without knowing it. That person will then proceed to upload that selfie to various platforms (Twitter, Google Photos, Instagram, Facebook, Snapchat ...). Those platforms will then apply face recognition algorithms to those pictures under the pretext of allowing better/easier tagging or to better organize your photo library. In addition to this, the same picture will provide a precise timestamp and in most cases geolocation of where it was taken. Even if the person does not provide a timestamp and geolocation, it can still be guessed with other means[^136]'[^137].
 
 Here are a few resources for even trying this yourself:
 
--   Bellingcat, Guide To Using Reverse Image Search For Investigations: <https://www.bellingcat.com/resources/how-tos/2019/12/26/guide-to-using-reverse-image-search-for-investigations/> <sup>[[Archive.org]][117]</sup>
+-   Bellingcat, Guide To Using Reverse Image Search For Investigations: <https://www.bellingcat.com/resources/how-tos/2019/12/26/guide-to-using-reverse-image-search-for-investigations/> <sup>[[Archive.org]][92]</sup>
 
--   Bellingcat, Using the New Russian Facial Recognition Site SearchFace <https://www.bellingcat.com/resources/how-tos/2019/02/19/using-the-new-russian-facial-recognition-site-searchface-ru/> <sup>[[Archive.org]][118]</sup>
+-   Bellingcat, Using the New Russian Facial Recognition Site SearchFace <https://www.bellingcat.com/resources/how-tos/2019/02/19/using-the-new-russian-facial-recognition-site-searchface-ru/> <sup>[[Archive.org]][93]</sup>
 
--   Bellingcat, Dali, Warhol, Boshirov: Determining the Time of an Alleged Photograph from Skripal Suspect Chepiga <https://www.bellingcat.com/resources/how-tos/2018/10/24/dali-warhol-boshirov-determining-time-alleged-photograph-skripal-suspect-chepiga/> <sup>[[Archive.org]][119]</sup>
+-   Bellingcat, Dali, Warhol, Boshirov: Determining the Time of an Alleged Photograph from Skripal Suspect Chepiga <https://www.bellingcat.com/resources/how-tos/2018/10/24/dali-warhol-boshirov-determining-time-alleged-photograph-skripal-suspect-chepiga/> <sup>[[Archive.org]][94]</sup>
 
--   Bellingcat, Advanced Guide on Verifying Video Content <https://www.bellingcat.com/resources/how-tos/2017/06/30/advanced-guide-verifying-video-content/> <sup>[[Archive.org]][120]</sup>
+-   Bellingcat, Advanced Guide on Verifying Video Content <https://www.bellingcat.com/resources/how-tos/2017/06/30/advanced-guide-verifying-video-content/> <sup>[[Archive.org]][95]</sup>
 
--   Bellingcat, Using the Sun and the Shadows for Geolocation <https://www.bellingcat.com/resources/2020/12/03/using-the-sun-and-the-shadows-for-geolocation/> <sup>[[Archive.org]][121]</sup>
+-   Bellingcat, Using the Sun and the Shadows for Geolocation <https://www.bellingcat.com/resources/2020/12/03/using-the-sun-and-the-shadows-for-geolocation/> <sup>[[Archive.org]][96]</sup>
 
--   Bellingcat, Navalny Poison Squad Implicated in Murders of Three Russian Activists <https://www.bellingcat.com/news/uk-and-europe/2021/01/27/navalny-poison-squad-implicated-in-murders-of-three-russian-activists/> <sup>[[Archive.org]][122]</sup>
+-   Bellingcat, Navalny Poison Squad Implicated in Murders of Three Russian Activists <https://www.bellingcat.com/news/uk-and-europe/2021/01/27/navalny-poison-squad-implicated-in-murders-of-three-russian-activists/> <sup>[[Archive.org]][97]</sup>
 
--   Bellingcat, Berlin Assassination: New Evidence on Suspected FSB Hitman Passed to German Investigators <https://www.bellingcat.com/news/2021/03/19/berlin-assassination-new-evidence-on-suspected-fsb-hitman-passed-to-german-investigators/> <sup>[[Archive.org]][123]</sup>
+-   Bellingcat, Berlin Assassination: New Evidence on Suspected FSB Hitman Passed to German Investigators <https://www.bellingcat.com/news/2021/03/19/berlin-assassination-new-evidence-on-suspected-fsb-hitman-passed-to-german-investigators/> <sup>[[Archive.org]][98]</sup>
 
-Even if you are not looking at the camera, they can still figure out who you are[^175], make out your emotions[^176], analyze your gait[^177] and probably guess your political affiliation[^178]'[^179].
+Even if you are not looking at the camera, they can still figure out who you are[^138], make out your emotions[^139], analyze your gait[^140] and probably guess your political affiliation[^141]'[^142].
 
-![][124]
+![][99]
 
 Those platforms (Google/Facebook) already know who you are for a few reasons:
 
 -   Because you have or had a profile with them and you identified yourself.
 
--   Even if you never made a profile on those platforms, you still have one without even knowing it[^180]'[^181]'[^182]'[^183]'[^184].
+-   Even if you never made a profile on those platforms, you still have one without even knowing it[^143]'[^144]'[^145]'[^146]'[^147].
 
 -   Because other people have tagged you or identified you in their holidays/party pictures.
 
@@ -1121,67 +949,249 @@ Those platforms (Google/Facebook) already know who you are for a few reasons:
 
 Here is also an insightful demo of Microsoft Azure you can try for yourself at <https://azure.microsoft.com/en-us/services/cognitive-services/face/#demo> where you can detect emotions and compare faces from different pictures.
 
-Governments already know who you are because they have your ID/Passport/Driving License pictures and often added biometrics (Fingerprints) in their database. Those same governments are integrating those technologies (often provided by private companies such as the Israeli AnyVision[^185], Clearview AI[^186], or NEC[^187]) in their CCTV networks to look for "persons of interest"[^188]. And some heavily surveilled states like China have implemented widespread use of Facial Recognition for various purposes[^189] including possibly identifying ethnic minorities[^190]. A simple face recognition error by some algorithm can ruin your life[^191].
+Governments already know who you are because they have your ID/Passport/Driving License pictures and often added biometrics (Fingerprints) in their database. Those same governments are integrating those technologies (often provided by private companies such as the Israeli AnyVision[^148], Clearview AI[^149], or NEC[^150]) in their CCTV networks to look for "persons of interest"[^151]. And some heavily surveilled states like China have implemented widespread use of Facial Recognition for various purposes[^152] including possibly identifying ethnic minorities[^153]. A simple face recognition error by some algorithm can ruin your life[^154].
 
 Here are some resources detailing some techniques used by Law Enforcement today:
 
--   CCC video explaining current Law Enforcement surveillance capabilities: <https://media.ccc.de/v/rc3-11406-spot_the_surveillance#t=761> <sup>[[Archive.org]][125]</sup>
+-   CCC video explaining current Law Enforcement surveillance capabilities: <https://media.ccc.de/v/rc3-11406-spot_the_surveillance#t=761> <sup>[[Archive.org]][100]</sup>
 
--   EFF SLS: <https://www.eff.org/sls> <sup>[[Archive.org]][126]</sup>
+-   EFF SLS: <https://www.eff.org/sls> <sup>[[Archive.org]][101]</sup>
 
 Apple is making FaceID mainstream and pushing its use it to log you in in various services including the Banking systems.
 
-Same goes with fingerprint authentication being mainstreamed by many smartphone makers to authenticate yourself. A simple picture where your fingers appear can be used to de-anonymize you[^192].
+Same goes with fingerprint authentication being mainstreamed by many smartphone makers to authenticate yourself. A simple picture where your fingers appear can be used to de-anonymize you[^155].
 
-Same goes with your voice which can be analyzed by for various purposes as shown in the recent Spotify patent[^193].
+Same goes with your voice which can be analyzed by for various purposes as shown in the recent Spotify patent[^156].
 
-We can safely imagine a near future where you will not be able to create accounts or sign-in anywhere without providing unique biometrics (A good time to re-watch Gattaca[^194], Person of Interest[^195] and Minority Report[^196]). And you can safely imagine how useful these large biometrics databases could be to some interested third parties.
+We can safely imagine a near future where you will not be able to create accounts or sign-in anywhere without providing unique biometrics (A good time to re-watch Gattaca[^157], Person of Interest[^158] and Minority Report[^159]). And you can safely imagine how useful these large biometrics databases could be to some interested third parties.
 
-In addition, all this information can also be used against you (if you are already de-anonymized) using deepfake[^197] by crafting false information (Pictures, Videos, Voice Recordings[^198]...) and have already been used for such purposes[^199]'[^200]. There are even commercial services for this readily available such as <https://www.respeecher.com/> <sup>[[Archive.org]][127]</sup> and <https://www.descript.com/overdub> <sup>[[Archive.org]][128]</sup>.
+In addition, all this information can also be used against you (if you are already de-anonymized) using deepfake[^160] by crafting false information (Pictures, Videos, Voice Recordings[^161]...) and have already been used for such purposes[^162]'[^163]. There are even commercial services for this readily available such as <https://www.respeecher.com/> <sup>[[Archive.org]][102]</sup> and <https://www.descript.com/overdub> <sup>[[Archive.org]][103]</sup>.
 
-See this demo: <https://www.youtube.com/watch?v=t5yw5cR79VA> <sup>[[Invidious]][129]</sup>
+See this demo: <https://www.youtube.com/watch?v=t5yw5cR79VA> <sup>[[Invidious]][104]</sup>
 
-At this time, there are a few steps[^201] you can use to mitigate (and only mitigate) face recognition when conducting sensitive activities where CCTV might be present:
+At this time, there are a few steps[^164] you can use to mitigate (and only mitigate) face recognition when conducting sensitive activities where CCTV might be present:
 
--   Wear a facemask as they have been proven to defeat some face recognition technologies[^202] but not all[^203].
+-   Wear a facemask as they have been proven to defeat some face recognition technologies[^165] but not all[^166].
 
 -   Wear a baseball cap or hat to mitigate identification from high angle CCTVs (filming from above) from recording your face. Remember this will not help against front-facing cameras.
 
 -   Wear sunglasses in addition to the facemask and baseball cap to mitigate identification from your eye's features.
 
--   Consider wearing special sunglasses (expensive unfortunately) called "Reflectacles" <https://www.reflectacles.com/> <sup>[[Archive.org]][130]</sup>. There was a small study showing their efficiency against IBM and Amazon facial recognition[^204].
+-   Consider wearing special sunglasses (expensive unfortunately) called "Reflectacles" <https://www.reflectacles.com/> <sup>[[Archive.org]][105]</sup>. There was a small study showing their efficiency against IBM and Amazon facial recognition[^167].
 
 (Note that if you intend to use these where advanced facial recognition systems have been installed, these measures could also flag as you as suspicious by themselves and trigger a human check)
 
+### Phishing and Social Engineering:
+
+Phishing[^168] is a social engineering[^169] type of attack where an adversary could try to extract information from you by pretending or impersonating something/someone else.
+
+A typical case is an adversary using a man-in-the-middle[^84] attack or a fake e-mail/call to ask your credential for a service. This could for example be through e-mail or through impersonating financial services.
+
+Such attacks can also be used to de-anonymize someone by tricking them into downloading malware or revealing personal information over time.
+
+These have been used countless times since the early days of the internet and the usual one is called the "419 scam" (see <https://en.wikipedia.org/wiki/Advance-fee_scam> <sup>[[Archive.org]][106]</sup>).
+
+Here is a good video if you want to learn a bit more about phishing types: Black Hat, Ichthyology: Phishing as a Science <https://www.youtube.com/watch?v=Z20XNp-luNA> <sup>[[Invidious]][107]</sup>.
+
+## Malware, exploit, and viruses:
+
+### Malware in your files/documents:
+
+Using steganography or other techniques, it is easy to embed malware into common file formats such as Office Documents, Pictures, Videos, PDF documents...
+
+These can be as simple as HTML tracking links or complex targeted malware.
+
+These could be exploiting a vulnerability in an outdated format or outdated reader. Such exploits could then be used to compromise your system.
+
+See these good videos for more explanations on the matter:
+
+-   What is a File Format? <https://www.youtube.com/watch?v=VVdmmN0su6E> <sup>[[Invidious]][108]</sup>
+
+-   Ange Albertini: Funky File Formats: <https://www.youtube.com/watch?v=hdCs6bPM4is> <sup>[[Invidious]][109]</sup>
+
+You should always use extreme caution. To mitigate these attacks, this guide will later recommend the use of virtualization (See [Appendix W: Virtualization]) to mitigate leaking any information even in case of opening such a malicious file.
+
+If you want to learn how to try detecting such malware, see [Appendix T: Checking files for malware]
+
+### Malware and Exploits in your apps and services:
+
+So, you are using Tor Browser or Brave Browser over Tor. You could be using those over a VPN for added security. But you should keep in mind that there are exploits[^170] (hacks) that could be known by an adversary (but unknown to the App/Browser provider). Such exploits could be used to compromise your system and reveal details to de-anonymize you such as your IP address or other details.
+
+A real use case of this technique was the Freedom Hosting[^171] case in 2013 where the FBI inserted malware[^172] using a Firefox browser exploit on a Tor website. This exploit allowed them to reveal details of some users. More recently, there was the notable SolarWinds[^173] hack that breached several US government institutions by inserting malware into an official software update server.
+
+In some countries, Malware is just mandatory and/or distributed by the state itself. This is the case for instance in China with WeChat[^174] which can then be used in combination with other data for state surveillance[^175].
+
+There are countless examples of malicious browser extensions, smartphone apps and various apps that have been infiltrated with malware over the years.
+
+Here are some steps to mitigate this type of attack:
+
+-   You should never have 100% trust in the apps you are using.
+
+-   You should always check that you are using the updated version of such apps before use and ideally validate each download using their signature if available.
+
+-   You should not use such apps directly from a hardware system but instead use a Virtual Machine for compartmentalization.
+
+To reflect these recommendations, this guide will therefore later guide you in the use of Virtualization (See [Appendix W: Virtualization]) so that even if your Browser/Apps get compromised by a skilled adversary, that adversary will find himself stuck in a sandbox[^176] without being able to access identifying information, or compromise your system.
+
+### Malicious USB devices:
+
+There are readily available commercial and cheap "badUSB" [^177]devices that can take deploy malware, log your typing, geolocate you, listen to you or gain control of your laptop just by plugging them in. Here are some examples that you can already buy yourself.
+
+-   Hak5, USB Rubber Ducky <https://shop.hak5.org/products/usb-rubber-ducky-deluxe> <sup>[[Archive.org]][110]</sup>
+
+-   Hak5, O.MG Cable <https://www.youtube.com/watch?v=V5mBJHotZv0> <sup>[[Invidious]][111]</sup>
+
+-   Keelog <https://www.keelog.com/> <sup>[[Archive.org]][112]</sup>
+
+-   AliExpress <https://www.aliexpress.com/i/4000710369016.html> <sup>[[Archive.org]][113]</sup>
+
+Such devices can be implanted anywhere (charging cable, mouse, keyboard, USB key ...) by an adversary and can be used to track you or compromise your computer or smartphone. The most notable example of such attacks is probably Stuxnet[^178] in 2005.
+
+While you could inspect an USB key physically, scan it with various utilities, check the various components to see if they are genuine, you will most likely never be able to discover complex malware embedded in genuine parts of a genuine USB key by a skilled adversary without advanced forensics equipment[^179].
+
+To mitigate this, you should never trust such devices and plug them into sensitive equipment. If you use a charging device, you should consider the use of an USB data blocking device that will only allow charging but not any data transfer. Such data blocking devices are now readily available in many online shops. You should also consider disabling USB ports completely within the BIOS of your computer unless you need them (if you can).
+
+## Your files, documents, pictures, and videos:
+
+### Your Files Properties/Metadata:
+
+This can be obvious to many but not to all. Most files have metadata attached to them. A good example are pictures which store EXIF[^180] information which can contain a lot of information such as GPS coordinates, which camera/phone model took it and when it was taken precisely. While this information might not directly give out who you are, it could tell exactly where you were at a certain moment which could allow others to use different sources to find you (CCTV or other footage taken at the same place at the same time during a protest for instance). It is important that you verify any file you would put on those platforms for any properties that might contain any information that might lead back to you.
+
+Here is an example of EXIF data that could be on a picture:
+
+![][114]
+
+(Illustration from Wikipedia)
+
+By the way, this also works for videos. Yes, videos too have geo-tagging and many are very unaware of this. Here Is for instance a very convenient tool to geo-locate YouTube videos: <https://mattw.io/youtube-geofind/location> <sup>[[Archive.org]][115]</sup>
+
+For this reason, you will always have to be very careful when uploading files using your anonymous identities and check the metadata of those files.
+
+**Even if you publish a simple text file, you should always double or triple check it for any information leakage before publishing. You will find some guidance about this in the [Some additional measures against forensics:] section at the end of the guide.**
+
+### Watermarking:
+
+#### Pictures/Videos/Audio:
+
+Pictures/Videos often contain visible watermarks indicating who is the owner/creator but there are also invisible watermarks in various products aiming at identifying the viewer itself.
+
+So, if you are a whistleblower and thinking about leaking some picture/audio/video file. Think twice. There are chances that those might contain invisible watermarking within them that would include information about you as a viewer. Such watermarks can be enabled with a simple switch in like Zoom (Video[^181] or Audio[^182]) or with extensions[^183] for popular apps such as Adobe Premiere Pro. These can be inserted by various content management systems.
+
+For a recent example where someone leaking a Zoom meeting recording was caught because it was watermarked: <https://theintercept.com/2021/01/18/leak-zoom-meeting/> <sup>[[Archive.org]][116]</sup>
+
+Such watermarks can be inserted by various products[^184]'[^185]'[^186]'[^187] using Steganography[^188] and can resist compression[^189] and re-encoding[^190]'[^191].
+
+These watermarks are not easily detectable and could allow identification of the source despite all efforts.
+
+In addition to watermarks, the camera used for filming (and therefore the device used for filming) a video can also be identified using various techniques such as lens identification[^192] which could lead to de-anonymization.
+
+Be extremely careful when publishing videos/pictures/audio files from known commercial platforms as they might contain such invisible watermarks in addition to details in the images themselves.
+
+#### Printing Watermarking:
+
+Did you know your printer is most likely spying on you too? Even if it is not connected to any network? This is usually a known fact by many people in the IT community but few outside people.
+
+Yes ... Your printers can be used to de-anonymize you as well as explained by the EFF here <https://www.eff.org/issues/printers> <sup>[[Archive.org]][117]</sup>
+
+With this (old but still relevant) video explaining how from the EFF as well: <https://www.youtube.com/watch?v=izMGMsIZK4U> <sup>[[Invidious]][118]</sup>
+
+Basically, many printers will print an invisible watermark allowing for identification of the printer on every printed page. This is called Printer Steganography[^193].There is no real way to mitigate this but to inform yourself on your printer and make sure it does not print any invisible watermark. This is obviously important if you intend to print anonymously.
+
+Here is an (old but still relevant) list of printers and brands who do not print such tracking dots provided by the EFF <https://www.eff.org/pages/list-printers-which-do-or-do-not-display-tracking-dots> <sup>[[Archive.org]][119]</sup>
+
+Here are also some tips from the Whonix documentation (<https://www.whonix.org/wiki/Printing_and_Scanning> <sup>[[Archive.org]][120]</sup>):
+
+**Do not ever print in Color, usually watermarkings are not present without color toners/cartridges**[^194]**.**
+
+### Your Pixelized/Blurred Information:
+
+Did you ever see a document with blurred text? Did you ever make fun of those movies/series where they "enhance" an image to recover seemingly impossible to read information?
+
+Well, there are techniques for recovering information from such documents, videos, and pictures.
+
+Here is for example an open-source project you could use yourself for recovering text from some blurred images yourself: <https://github.com/beurtschipper/Depix> <sup>[[Archive.org]][121]</sup>
+
+![][122]
+
+This is of course an open-source project available for all to use. But you can probably imagine that such techniques have probably been used before by other adversaries. These could be used to reveal blurred information from published documents that could then be used to de-anonymize you.
+
+There are also tutorials for using such techniques using Photo Editing tools such as GIMP such as: <https://medium.com/@somdevsangwan/unblurring-images-for-osint-and-more-part-1-5ee36db6a70b> <sup>[[Archive.org]][123]</sup> followed by <https://medium.com/@somdevsangwan/deblurring-images-for-osint-part-2-ba564af8eb5d> <sup>[[Archive.org]][124]</sup>
+
+![][125]
+
+Finally, you will find plenty of deblurring resources here: <https://github.com/subeeshvasu/Awesome-Deblurring> <sup>[[Archive.org]][126]</sup>
+
+Some online services could even help you do this automatically to some extent like MyHeritage.com enhance tool:
+
+<https://www.myheritage.com/photo-enhancer> <sup>[[Archive.org]][127]</sup>
+
+Here is the result of the above image:
+
+![][128]
+
+Of course, this tool is more like "guessing" than really deblurring at this point but it could be enough to find you using various reverse image searching services.
+
+For this reason, it is always extremely important that you correctly redact and curate any document you might want to publish. Blurring is not enough and you should always completely blacken/remove any sensitive data to avoid any attempt at recovering data from any adversary.
+
+## Your Crypto currencies transactions:
+
+Contrary to popular belief, Crypto transactions (such as Bitcoin and Ethereum) are not anonymous[^195]. Most crypto currencies can be tracked accurately through various methods[^196].
+
+Remember what they say on their own page: <https://bitcoin.org/en/you-need-to-know> <sup>[[Archive.org]][129]</sup> and <https://bitcoin.org/en/protect-your-privacy> <sup>[[Archive.org]][130]</sup>:
+
+"Bitcoin is not anonymous "
+
+The main issue is not setting up a random Crypto wallet to receive some currency behind a VPN/Tor address (at this point, the wallet is anonymous). The issue is mainly when you want to convert Fiat money (Euros, Dollars ...) to Crypto and then when you want to cash in your Crypto. You will have few realistic options but to transfer those to an exchange (such as Coinbase/Kraken/Bitstamp/Binance). Those exchanges have known wallet addresses and will keep detailed logs (due to KYC[^197] financial regulations) and can then trace back those crypto transactions to you using the financial system[^198].
+
+There are some crypto currencies with privacy/anonymity in mind like Monero but even those have some and warnings to consider[^199]'[^200].
+
+Even if you use Mixers or Tumblers[^201] (services that specialize in "anonymizing" crypto currencies by "mixing them"), keep in mind this is only obfuscation[^202] and not actual anonymity[^203]. Not only are they only obfuscation but they could also put you in trouble as you might end up exchanging your crypto against "dirty" crypto that was used in various questionable contexts[^204].
+
+This does not mean you cannot use Bitcoin anonymously at all. You can actually use Bitcoin anonymously as long as you do not convert it to actual currency and use a Bitcoin wallet from a safe anonymous network. Meaning you should avoid KYC/AML regulations by various exchanges and avoid using the Bitcoin network from any known IP address. This also means you will not be able to convert these Bitcoin from/to real currency easily and without involving some risks.
+
+**Overall, IMHO, the best option for using Crypto with reasonable anonymity and privacy is still Monero and you should ideally not use any other for sensitive transactions unless you are aware of the limitations.**
+
+## Your Cloud backups/sync services:
+
+All companies are advertising their use of end-to-end encryption (E2EE). This is true for almost every messaging app and website (HTTPS). Apple and Google are advertising their use of encryption on their Android devices and their iPhones.
+
+But what about your backups? Those automated iCloud/google drive backups you have?
+
+Well, you should probably know that most of those backups are not fully end to end encrypted and will contain some of your information readily available for a third party. You will see their claims that data is encrypted at rest and safe from anyone ... Except they usually do keep a key to access some of the data themselves. These keys are used for them indexing your content, recover your account, collecting various analytics.
+
+There are specialized commercial forensics solutions available (Magnet Axiom[^205], Cellebrite Cloud[^206]) that will help an adversary analyze your cloud data with ease.
+
+Notable Examples:
+
+-   Apple iCloud: <https://support.apple.com/en-us/HT202303> <sup>[[Archive.org]][131]</sup> : "Messages in iCloud also uses end-to-end encryption. If you have iCloud Backup turned on**, your backup includes a copy of the key protecting your Messages**. This ensures you can recover your Messages if you lose access to iCloud Keychain and your trusted devices. ".
+
+-   Google Drive and WhatsApp: <https://faq.whatsapp.com/android/chats/about-google-drive-backups/> <sup>[[Archive.org]][132]</sup> : "**Media and messages you back up aren't protected by WhatsApp end-to-end encryption while in Google Drive**. ".
+
+-   Dropbox: <https://www.dropbox.com/privacy#terms> <sup>[[Archive.org]][133]</sup> "To provide these and other features, **Dropbox accesses, stores, and scans Your Stuff**. You give us permission to do those things, and this permission extends to our affiliates and trusted third parties we work with".
+
+-   Microsoft OneDrive: <https://privacy.microsoft.com/en-us/privacystatement> <sup>[[Archive.org]][134]</sup> : Productivity and communications products, "When you use OneDrive, we collect data about your usage of the service, as well as the content you store, to provide, improve, and protect the services. **Examples include indexing the contents of your OneDrive documents so that you can search for them later and using location information to enable you to search for photos based on where the photo was taken**".
+
+You should not trust cloud providers with your (not previously and locally encrypted) sensitive data and you should be wary of their privacy claims. In most cases they can access your data and provide it to a third party.
+
+The only way to mitigate this is to encrypt yourself your data on your side and then only upload it to such service.
+
 ## Your Browser and Device Fingerprints:
 
-Your Browser and Device Fingerprints[^311] are set of properties/capabilities of your System/Browser. These are used on most websites for invisible user tracking but also to adapt the website user experience depending on their browser. For instance, websites will be able to provide a "mobile experience" if you are using a mobile browser or propose a specific language/geographic version depending on your fingerprint. Most of those techniques work with recent Browsers like Chromium[^205] based browsers (such as Chrome) or Firefox[^206] unless taking special measures.
+Your Browser and Device Fingerprints[^313] are set of properties/capabilities of your System/Browser. These are used on most websites for invisible user tracking but also to adapt the website user experience depending on their browser. For instance, websites will be able to provide a "mobile experience" if you are using a mobile browser or propose a specific language/geographic version depending on your fingerprint. Most of those techniques work with recent Browsers like Chromium[^207] based browsers (such as Chrome) or Firefox[^208] unless taking special measures.
 
 You can find a lot of detailed information and publications about this on these resources:
 
--   <https://amiunique.org/links> <sup>[[Archive.org]][131]</sup>
+-   <https://amiunique.org/links> <sup>[[Archive.org]][135]</sup>
 
--   <https://brave.com/brave-fingerprinting-and-privacy-budgets/> <sup>[[Archive.org]][132]</sup>
+-   <https://brave.com/brave-fingerprinting-and-privacy-budgets/> <sup>[[Archive.org]][136]</sup>
 
 Most of the time, those fingerprints will unfortunately be unique or nearly unique to your Browser/System. This means that even If you log out from a website and then log back in using a different username, your fingerprint might remain the same if you did not take precautionary measures.
 
 An adversary could then use such fingerprints to track you across multiple services even if you have no account on any of them and are using ad blocking. These fingerprints could in turn be used to de-anonymize you if you keep the same fingerprint between services.
 
-It should also be noted that while some browsers and extensions will offer fingerprint resistance, this resistance in itself can also be used to fingerprint you as explained here <https://palant.info/2020/12/10/how-anti-fingerprinting-extensions-tend-to-make-fingerprinting-easier/> <sup>[[Archive.org]][133]</sup>
+It should also be noted that while some browsers and extensions will offer fingerprint resistance, this resistance in itself can also be used to fingerprint you as explained here <https://palant.info/2020/12/10/how-anti-fingerprinting-extensions-tend-to-make-fingerprinting-easier/> <sup>[[Archive.org]][137]</sup>
 
 This guide will mitigate these issues by mitigating, obfuscating, and randomizing many of those fingerprinting identifiers by using Virtualization (See [Appendix W: Virtualization]) and using by fingerprinting resistant Browsers.
-
-## Phishing and Social Engineering:
-
-Phishing[^207] is a social engineering[^208] type of attack where an adversary could try to extract information from you by pretending to be something/someone else.
-
-A typical case is an adversary using a man-in-the-middle[^62] attack or a falsified e-mail/call to ask your credential for a service. This can be your e-mail or your financial services for example.
-
-Such attacks can also be used to de-anonymize someone by tricking them into downloading malware or revealing personal information.
-
-These have been used countless times and the usual one is called the "419 scam" (see <https://en.wikipedia.org/wiki/Advance-fee_scam> <sup>[[Archive.org]][134]</sup>).
-
-Here is a good video if you want to learn a bit more about phishing types: Black Hat, Ichthyology: Phishing as a Science <https://www.youtube.com/watch?v=Z20XNp-luNA> <sup>[[Invidious]][135]</sup>.
 
 ## Local Data Leaks and Forensics:
 
@@ -1193,17 +1203,17 @@ Forensics techniques are now very advanced and can reveal a staggering amount in
 
 Here are some recent resources you should read about your smartphone:
 
--   UpTurn, The Widespread Power of U.S. Law Enforcement to Search Mobile Phones <https://www.upturn.org/reports/2020/mass-extraction/> <sup>[[Archive.org]][136]</sup>
+-   UpTurn, The Widespread Power of U.S. Law Enforcement to Search Mobile Phones <https://www.upturn.org/reports/2020/mass-extraction/> <sup>[[Archive.org]][138]</sup>
 
--   New-York Times, The Police Can Probably Break Into Your Phone <https://www.nytimes.com/2020/10/21/technology/iphone-encryption-police.html> <sup>[[Archive.org]][137]</sup>
+-   New-York Times, The Police Can Probably Break Into Your Phone <https://www.nytimes.com/2020/10/21/technology/iphone-encryption-police.html> <sup>[[Archive.org]][139]</sup>
 
--   Vice, Cops Around the Country Can Now Unlock iPhones, Records Show <https://www.vice.com/en/article/vbxxxd/unlock-iphone-ios11-graykey-grayshift-police> <sup>[[Archive.org]][138]</sup>
+-   Vice, Cops Around the Country Can Now Unlock iPhones, Records Show <https://www.vice.com/en/article/vbxxxd/unlock-iphone-ios11-graykey-grayshift-police> <sup>[[Archive.org]][140]</sup>
 
 I also highly recommend that you read some documents from a forensics examiner perspective such as:
 
--   EnCase Forensic User Guide, <http://encase-docs.opentext.com/documentation/encase/forensic/8.07/Content/Resources/External%20Files/EnCase%20Forensic%20v8.07%20User%20Guide.pdf> <sup>[[Archive.org]][139]</sup>
+-   EnCase Forensic User Guide, <http://encase-docs.opentext.com/documentation/encase/forensic/8.07/Content/Resources/External%20Files/EnCase%20Forensic%20v8.07%20User%20Guide.pdf> <sup>[[Archive.org]][141]</sup>
 
--   FTK Forensic Toolkit, <https://accessdata.com/products-services/forensic-toolkit-ftk> <sup>[[Archive.org]][140]</sup>
+-   FTK Forensic Toolkit, <https://accessdata.com/products-services/forensic-toolkit-ftk> <sup>[[Archive.org]][142]</sup>
 
 -   SANS Digital Forensics and Incident Response Videos, <https://www.youtube.com/c/SANSDigitalForensics/videos>
 
@@ -1241,11 +1251,11 @@ Yet, this is not stopping some from doing it anyway and publishing various produ
 
 -   There is no such thing as "military grade crypto"[^217]'[^218]'[^219]
 
-Cryptography is a complex topic and bad cryptography can easily lead to your de-anonymization.
+Cryptography is a complex topic and bad cryptography could easily lead to your de-anonymization.
 
 In the context of this guide, I recommend sticking to Apps/Services using well established, published, and peer reviewed methods.
 
-So, what to prefer and what to avoid as of 2021? You will have to look up for yourself to get the technical details of each app and see if they are using "bad crypto" or "good crypto". Once you get the technical details, you could check this page for seeing what it is worth: <https://latacora.micro.blog/2018/04/03/cryptographic-right-answers.html> <sup>[[Archive.org]][141]</sup>
+So, what to prefer and what to avoid as of 2021? You will have to look up for yourself to get the technical details of each app and see if they are using "bad crypto" or "good crypto". Once you get the technical details, you could check this page for seeing what it is worth: <https://latacora.micro.blog/2018/04/03/cryptographic-right-answers.html> <sup>[[Archive.org]][143]</sup>
 
 Here are some examples:
 
@@ -1269,17 +1279,17 @@ Here are some examples:
 
 -   Browser Security (HTTPS):
 
-    -   Prefer: TLS 1.2 or higher (ideally TLS 1.3 with eSNI/ECH support)
+    -   Prefer: TLS 1.3 (ideally TLS 1.3 with eSNI/ECH support)
 
     -   Avoid: Anything Else
 
 Here are some real cases of issues bad cryptography:
 
--   Telegram: <https://buttondown.email/cryptography-dispatches/archive/cryptography-dispatches-the-most-backdoor-looking/> <sup>[[Archive.org]][142]</sup>
+-   Telegram: <https://buttondown.email/cryptography-dispatches/archive/cryptography-dispatches-the-most-backdoor-looking/> <sup>[[Archive.org]][144]</sup>
 
 -   Cryptocat: <https://web.archive.org/web/20130705051050/https://blog.crypto.cat/2013/07/new-critical-vulnerability-in-cryptocat-details/>
 
--   Many other examples can be found here: <https://www.cryptofails.com/> <sup>[[Archive.org]][143]</sup>
+-   Some other examples can be found here: <https://www.cryptofails.com/> <sup>[[Archive.org]][145]</sup>
 
 ## No logging but logging anyway policies:
 
@@ -1307,53 +1317,53 @@ To mitigate this, in cases where you want to use a VPN, I will recommend the use
 
 ## Some Advanced targeted techniques:
 
-![][144]
+![][146]
 
 (illustration: excellent movie I highly recommend: Das Leben der Anderen[^230])
 
-There are many advanced techniques that can be used by skilled adversaries[^231] to bypass your security measures provided they already know where your devices are. Many of those techniques are detailed here <https://cyber.bgu.ac.il/advanced-cyber/airgap> <sup>[[Archive.org]][145]</sup> (Air-Gap Research Page, Cyber-Security Research Center, Ben-Gurion University of the Negev, Israel) and include:
+There are many advanced techniques that can be used by skilled adversaries[^231] to bypass your security measures provided they already know where your devices are. Many of those techniques are detailed here <https://cyber.bgu.ac.il/advanced-cyber/airgap> <sup>[[Archive.org]][147]</sup> (Air-Gap Research Page, Cyber-Security Research Center, Ben-Gurion University of the Negev, Israel) and include:
 
 -   Attacks that require a malware implanted in some device:
 
-    -   Exfiltration of Data through a Malware infected Router: <https://www.youtube.com/watch?v=mSNt4h7EDKo> <sup>[[Invidious]][146]</sup>
+    -   Exfiltration of Data through a Malware infected Router: <https://www.youtube.com/watch?v=mSNt4h7EDKo> <sup>[[Invidious]][148]</sup>
 
-    -   Exfiltration of Data through observation of Light variation in a Backlit keyboard with a compromised camera: <https://www.youtube.com/watch?v=1kBGDHVr7x0> <sup>[[Invidious]][147]</sup>
+    -   Exfiltration of Data through observation of Light variation in a Backlit keyboard with a compromised camera: <https://www.youtube.com/watch?v=1kBGDHVr7x0> <sup>[[Invidious]][149]</sup>
 
-        -   Exfiltration of Data through a compromised Security Camera (that could first use the previous attack) <https://www.youtube.com/watch?v=om5fNqKjj2M> <sup>[[Invidious]][148]</sup>
+        -   Exfiltration of Data through a compromised Security Camera (that could first use the previous attack) <https://www.youtube.com/watch?v=om5fNqKjj2M> <sup>[[Invidious]][150]</sup>
 
-        -   Communication from outsider to compromised Security Cameras through IR light signals: <https://www.youtube.com/watch?v=auoYKSzdOj4> <sup>[[Invidious]][149]</sup>
+        -   Communication from outsider to compromised Security Cameras through IR light signals: <https://www.youtube.com/watch?v=auoYKSzdOj4> <sup>[[Invidious]][151]</sup>
 
-    -   Exfiltration of data from a compromised air-gapped computer through acoustic analysis of the FAN noises with a smartphone <https://www.youtube.com/watch?v=v2_sZIfZkDQ> <sup>[[Invidious]][150]</sup>
+    -   Exfiltration of data from a compromised air-gapped computer through acoustic analysis of the FAN noises with a smartphone <https://www.youtube.com/watch?v=v2_sZIfZkDQ> <sup>[[Invidious]][152]</sup>
 
-    -   Exfiltration of data from a malware infected air-gapped computer through HD Leds with a Drone <https://www.youtube.com/watch?v=4vIu8ld68fc> <sup>[[Invidious]][151]</sup>
+    -   Exfiltration of data from a malware infected air-gapped computer through HD Leds with a Drone <https://www.youtube.com/watch?v=4vIu8ld68fc> <sup>[[Invidious]][153]</sup>
 
-    -   Exfiltration of data from a USB malware on an air-gapped computer through electromagnetic interferences <https://www.youtube.com/watch?v=E28V1t-k8Hk> <sup>[[Invidious]][152]</sup>
+    -   Exfiltration of data from a USB malware on an air-gapped computer through electromagnetic interferences <https://www.youtube.com/watch?v=E28V1t-k8Hk> <sup>[[Invidious]][154]</sup>
 
-    -   Exfiltration of data from a malware infected HDD drive through covert acoustic noise <https://www.youtube.com/watch?v=H7lQXmSLiP8> <sup>[[Invidious]][153]</sup>
+    -   Exfiltration of data from a malware infected HDD drive through covert acoustic noise <https://www.youtube.com/watch?v=H7lQXmSLiP8> <sup>[[Invidious]][155]</sup>
 
-    -   Exfiltration of data through GSM frequencies from a compromised (with malware) air-gapped computer <https://www.youtube.com/watch?v=RChj7Mg3rC4> <sup>[[Invidious]][154]</sup>
+    -   Exfiltration of data through GSM frequencies from a compromised (with malware) air-gapped computer <https://www.youtube.com/watch?v=RChj7Mg3rC4> <sup>[[Invidious]][156]</sup>
 
-    -   Exfiltration of data through electromagnetic emissions from a compromised Display device <https://www.youtube.com/watch?v=2OzTWiGl1rM&t=20s> <sup>[[Invidious]][155]</sup>
+    -   Exfiltration of data through electromagnetic emissions from a compromised Display device <https://www.youtube.com/watch?v=2OzTWiGl1rM&t=20s> <sup>[[Invidious]][157]</sup>
 
-    -   Exfiltration of data through magnetic waves from a compromised air-gapped computer to a Smartphone stored inside a Faraday bag <https://www.youtube.com/watch?v=yz8E5n1Tzlo> <sup>[[Invidious]][156]</sup>
+    -   Exfiltration of data through magnetic waves from a compromised air-gapped computer to a Smartphone stored inside a Faraday bag <https://www.youtube.com/watch?v=yz8E5n1Tzlo> <sup>[[Invidious]][158]</sup>
 
-    -   Communication between two compromised air-gapped computers using ultrasonic soundwaves <https://www.youtube.com/watch?v=yz8E5n1Tzlo> <sup>[[Invidious]][156]</sup>
+    -   Communication between two compromised air-gapped computers using ultrasonic soundwaves <https://www.youtube.com/watch?v=yz8E5n1Tzlo> <sup>[[Invidious]][158]</sup>
 
-    -   Exfiltration of Bitcoin Wallet from a compromised air-gapped computer to a smartphone <https://www.youtube.com/watch?v=2WtiHZNeveY> <sup>[[Invidious]][157]</sup>
+    -   Exfiltration of Bitcoin Wallet from a compromised air-gapped computer to a smartphone <https://www.youtube.com/watch?v=2WtiHZNeveY> <sup>[[Invidious]][159]</sup>
 
-    -   Exfiltration of Data from a compromised air-gapped computer using display brightness <https://www.youtube.com/watch?v=ZrkZUO2g4DE> <sup>[[Invidious]][158]</sup>
+    -   Exfiltration of Data from a compromised air-gapped computer using display brightness <https://www.youtube.com/watch?v=ZrkZUO2g4DE> <sup>[[Invidious]][160]</sup>
 
-    -   Exfiltration of Data from a compromised air-gapped computer through vibrations <https://www.youtube.com/watch?v=XGD343nq1dg> <sup>[[Invidious]][159]</sup>
+    -   Exfiltration of Data from a compromised air-gapped computer through vibrations <https://www.youtube.com/watch?v=XGD343nq1dg> <sup>[[Invidious]][161]</sup>
 
-    -   Exfiltration of Data from a compromised air-gapped computer by turning RAM into a Wi-Fi emitter <https://www.youtube.com/watch?v=vhNnc0ln63c> <sup>[[Invidious]][160]</sup>
+    -   Exfiltration of Data from a compromised air-gapped computer by turning RAM into a Wi-Fi emitter <https://www.youtube.com/watch?v=vhNnc0ln63c> <sup>[[Invidious]][162]</sup>
 
-    -   Exfiltration of Data from a compromised air-gapped computer through power lines <https://arxiv.org/abs/1804.04014> <sup>[[Archive.org]][161]</sup>
+    -   Exfiltration of Data from a compromised air-gapped computer through power lines <https://arxiv.org/abs/1804.04014> <sup>[[Archive.org]][163]</sup>
 
 -   **Attacks that require no malware:**
 
-    -   Observing a light bulb from a distance to listen to the sound in the room[^232] **without any malware**: Demonstration: <https://www.youtube.com/watch?v=t32QvpfOHqw> <sup>[[Invidious]][162]</sup>
+    -   Observing a light bulb from a distance to listen to the sound in the room[^232] **without any malware**: Demonstration: <https://www.youtube.com/watch?v=t32QvpfOHqw> <sup>[[Invidious]][164]</sup>
 
-Here is also a good video from the same authors to explain those topics: Black Hat, The Air-Gap Jumpers <https://www.youtube.com/watch?v=YKRtFgunyj4> <sup>[[Invidious]][163]</sup>
+Here is also a good video from the same authors to explain those topics: Black Hat, The Air-Gap Jumpers <https://www.youtube.com/watch?v=YKRtFgunyj4> <sup>[[Invidious]][165]</sup>
 
 Realistically, this guide will be of little help against such adversaries as these malwares could be implanted on the devices by a manufacturer or anyone in the middle or by anyone with physical access to the air-gapped computer but there are still some ways to mitigate such techniques:
 
@@ -1373,69 +1383,69 @@ Realistically, this guide will be of little help against such adversaries as the
 
 ## Some bonus resources:
 
--   Have a look at the Whonix Documentation concerning Data Collection techniques here: <https://www.whonix.org/wiki/Data_Collection_Techniques> <sup>[[Archive.org]][164]</sup>
+-   Have a look at the Whonix Documentation concerning Data Collection techniques here: <https://www.whonix.org/wiki/Data_Collection_Techniques> <sup>[[Archive.org]][166]</sup>
 
--   You might also enjoy looking at this service <https://tosdr.org/> <sup>[[Archive.org]][165]</sup> (Terms of Services, Didn't Read) that will give you a good overview of the various ToS of many services.
+-   You might also enjoy looking at this service <https://tosdr.org/> <sup>[[Archive.org]][167]</sup> (Terms of Services, Didn't Read) that will give you a good overview of the various ToS of many services.
 
--   Have a look at <https://www.eff.org/issues/privacy> <sup>[[Archive.org]][166]</sup> for some more resources.
+-   Have a look at <https://www.eff.org/issues/privacy> <sup>[[Archive.org]][168]</sup> for some more resources.
 
--   Have a look at <https://en.wikipedia.org/wiki/List_of_government_mass_surveillance_projects> <sup>[[Archive.org]][167]</sup> to have an overview of all known mass-surveillance projects, current and past.
+-   Have a look at <https://en.wikipedia.org/wiki/List_of_government_mass_surveillance_projects> <sup>[[Archive.org]][169]</sup> to have an overview of all known mass-surveillance projects, current and past.
 
--   Have a look at <https://www.gwern.net/Death-Note-Anonymity> <sup>[[Archive.org]][168]</sup> (even if you don't know about Death Note).
+-   Have a look at <https://www.gwern.net/Death-Note-Anonymity> <sup>[[Archive.org]][170]</sup> (even if you don't know about Death Note).
 
--   Finally, check <https://www.freehaven.net/anonbib/date.html> <sup>[[Archive.org]][169]</sup> for the latest academic papers related to Online Anonymity.
+-   Finally, check <https://www.freehaven.net/anonbib/date.html> <sup>[[Archive.org]][171]</sup> for the latest academic papers related to Online Anonymity.
 
 ## Notes:
 
 If you still do not think such information can be used by various actors to track you, you can see some statistics for yourself for some platforms and keep in mind those are only accounting for the lawful data requests and will not count things like PRISM, MUSCULAR or XKEYSCORE explained earlier:
 
--   Google Transparency Report <https://transparencyreport.google.com/user-data/overview> <sup>[[Archive.org]][170]</sup>
+-   Google Transparency Report <https://transparencyreport.google.com/user-data/overview> <sup>[[Archive.org]][172]</sup>
 
--   Facebook Transparency Report <https://transparency.facebook.com/> <sup>[[Archive.org]][171]</sup>
+-   Facebook Transparency Report <https://transparency.facebook.com/> <sup>[[Archive.org]][173]</sup>
 
--   Apple Transparency Report <https://www.apple.com/legal/transparency/> <sup>[[Archive.org]][172]</sup>
+-   Apple Transparency Report <https://www.apple.com/legal/transparency/> <sup>[[Archive.org]][174]</sup>
 
--   Cloudflare Transparency Report <https://www.cloudflare.com/transparency/> <sup>[[Archive.org]][173]</sup>
+-   Cloudflare Transparency Report <https://www.cloudflare.com/transparency/> <sup>[[Archive.org]][175]</sup>
 
--   Snapchat Transparency Report <https://www.snap.com/en-US/privacy/transparency> <sup>[[Archive.org]][174]</sup>
+-   Snapchat Transparency Report <https://www.snap.com/en-US/privacy/transparency> <sup>[[Archive.org]][176]</sup>
 
--   Telegram Transparency Report <https://t.me/transparency> <sup>[[Archive.org]][175]</sup> (requires telegram installed)
+-   Telegram Transparency Report <https://t.me/transparency> <sup>[[Archive.org]][177]</sup> (requires telegram installed)
 
--   Microsoft Transparency Report <https://www.microsoft.com/en-us/corporate-responsibility/law-enforcement-requests-report> <sup>[[Archive.org]][176]</sup>
+-   Microsoft Transparency Report <https://www.microsoft.com/en-us/corporate-responsibility/law-enforcement-requests-report> <sup>[[Archive.org]][178]</sup>
 
--   Amazon Transparency Report <https://www.amazon.com/gp/help/customer/display.html?nodeId=GYSDRGWQ2C2CRYEF> <sup>[[Archive.org]][177]</sup>
+-   Amazon Transparency Report <https://www.amazon.com/gp/help/customer/display.html?nodeId=GYSDRGWQ2C2CRYEF> <sup>[[Archive.org]][179]</sup>
 
--   Dropbox Transparency Report <https://www.dropbox.com/transparency> <sup>[[Archive.org]][178]</sup>
+-   Dropbox Transparency Report <https://www.dropbox.com/transparency> <sup>[[Archive.org]][180]</sup>
 
--   Discord Transparency Report <https://blog.discord.com/discord-transparency-report-jan-june-2020-2ef4a3ee346d> <sup>[[Archive.org]][179]</sup>
+-   Discord Transparency Report <https://blog.discord.com/discord-transparency-report-jan-june-2020-2ef4a3ee346d> <sup>[[Archive.org]][181]</sup>
 
--   GitHub Transparency Report <https://github.blog/2021-02-25-2020-transparency-report/> <sup>[[Archive.org]][180]</sup>
+-   GitHub Transparency Report <https://github.blog/2021-02-25-2020-transparency-report/> <sup>[[Archive.org]][182]</sup>
 
--   Snapchat Transparency Report <https://www.snap.com/en-US/privacy/transparency/> <sup>[[Archive.org]][181]</sup>
+-   Snapchat Transparency Report <https://www.snap.com/en-US/privacy/transparency/> <sup>[[Archive.org]][183]</sup>
 
--   TikTok Transparency Report <https://www.tiktok.com/safety/resources/transparency-report?lang=en> <sup>[[Archive.org]][182]</sup>
+-   TikTok Transparency Report <https://www.tiktok.com/safety/resources/transparency-report?lang=en> <sup>[[Archive.org]][184]</sup>
 
--   Reddit Transparency Report <https://www.reddit.com/wiki/transparency> <sup>[[Archive.org]][183]</sup>
+-   Reddit Transparency Report <https://www.reddit.com/wiki/transparency> <sup>[[Archive.org]][185]</sup>
 
--   Twitter Transparency Report <https://transparency.twitter.com/> <sup>[[Archive.org]][184]</sup>
+-   Twitter Transparency Report <https://transparency.twitter.com/> <sup>[[Archive.org]][186]</sup>
 
 # General Preparations:
 
 Personally, in the context of this guide, it is also interesting to have a look at your security model. And in this context, I only have one to recommend:
 
-Zero-Trust Security[^320] ("Never trust, always verify").
+Zero-Trust Security[^322] ("Never trust, always verify").
 
 Here are some various resources about what is Zero-Trust Security:
 
--   DEFCON, Zero Trust a Vision for Securing Cloud, <https://www.youtube.com/watch?v=euSsqXO53GY> <sup>[[Invidious]][185]</sup>
+-   DEFCON, Zero Trust a Vision for Securing Cloud, <https://www.youtube.com/watch?v=euSsqXO53GY> <sup>[[Invidious]][187]</sup>
 
--   From the NSA themselves, Embracing a Zero Trust Security Model, <https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZT_SECURITY_MODEL_UOO115131-21.PDF> <sup>[[Archive.org]][186]</sup>
+-   From the NSA themselves, Embracing a Zero Trust Security Model, <https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZT_SECURITY_MODEL_UOO115131-21.PDF> <sup>[[Archive.org]][188]</sup>
 
 ## Picking your route:
 
 Here is a small basic UML diagram showing your options. See the details below.
 
-![][187]
+![][189]
 
 ### Timing limitations:
 
@@ -1513,7 +1523,7 @@ Here is a small basic UML diagram showing your options. See the details below.
 
     -   **You could also go with TAILS (with optional persistent plausible deniability).**
 
--   If you absolutely want system wide plausible deniability[^248]'[^233] despite the risks[^234]'[^251].
+-   If you absolutely want system wide plausible deniability[^250]'[^233] despite the risks[^234]'[^253].
 
     -   **You could go with the TAILS Route including the persistent plausible deniability section.**
 
@@ -1527,27 +1537,27 @@ Here is a small basic UML diagram showing your options. See the details below.
 
 In all cases, you should read these two pages from the Whonix documentation that will give you in depth insight about your choices:
 
--   <https://www.whonix.org/wiki/Warning> <sup>[[Archive.org]][188]</sup>
+-   <https://www.whonix.org/wiki/Warning> <sup>[[Archive.org]][190]</sup>
 
--   <https://www.whonix.org/wiki/Dev/Threat_Model> <sup>[[Archive.org]][189]</sup>
+-   <https://www.whonix.org/wiki/Dev/Threat_Model> <sup>[[Archive.org]][191]</sup>
 
--   <https://www.whonix.org/wiki/Comparison_with_Others> <sup>[[Archive.org]][190]</sup>
+-   <https://www.whonix.org/wiki/Comparison_with_Others> <sup>[[Archive.org]][192]</sup>
 
 You might be asking yourself: "How do I know if I'm in a hostile online environment where activities are actively monitored and blocked?"
 
--   First read more about it at the EFF here: <https://ssd.eff.org/en/module/understanding-and-circumventing-network-censorship> <sup>[[Archive.org]][191]</sup>
+-   First read more about it at the EFF here: <https://ssd.eff.org/en/module/understanding-and-circumventing-network-censorship> <sup>[[Archive.org]][193]</sup>
 
--   Check some data yourself here on the Tor Project OONI[^235] (Open Observatory of Network Interference) website: <https://explorer.ooni.org/> <sup>[[Archive.org]][192]</sup>
+-   Check some data yourself here on the Tor Project OONI[^235] (Open Observatory of Network Interference) website: <https://explorer.ooni.org/> <sup>[[Archive.org]][194]</sup>
 
--   Have a look at <https://censoredplanet.org/> <sup>[[Archive.org]][193]</sup> and see if they have data about your country.
+-   Have a look at <https://censoredplanet.org/> <sup>[[Archive.org]][195]</sup> and see if they have data about your country.
 
 -   Test for yourself using OONI (this can be risky in a hostile environment).
 
 ## Steps for all routes:
 
-**Always use passphrases instead of passwords and use a different one for each service. Do not make it easy for an adversary to access all your information because you used the same password everywhere**[^242]**.**
+**Always use passphrases instead of passwords and use a different one for each service. Do not make it easy for an adversary to access all your information because you used the same password everywhere**[^244]**.**
 
-![][194]
+![][196]
 
 (Illustration by xkcd.com, licensed under CC BY-NC 2.5)
 
@@ -1575,7 +1585,7 @@ When you are certain the phone is in working order, disable Bluetooth then power
 
 This is the hardest part of the whole guide. It is a SPOF (Single Point of Failure). The places where you can still buy prepaid SIM cards without ID registration are getting increasingly limited due to various KYC type regulations[^236].
 
-So here is a list of places where you can still get them now: <https://prepaid-data-sim-card.fandom.com/wiki/Registration_Policies_Per_Country> <sup>[[Archive.org]][195]</sup>
+So here is a list of places where you can still get them now: <https://prepaid-data-sim-card.fandom.com/wiki/Registration_Policies_Per_Country> <sup>[[Archive.org]][197]</sup>
 
 You should be able to find a place that is "not too far" and just go there physically to buy some pre-paid cards and top-up vouchers with cash. Do verify that no law was passed before going that would make registration mandatory (in case the above wiki was not updated). Try to avoid CCTV and cameras and do not forget to buy a Top Up voucher with the SIM card (if it is not a package) as most pre-paid cards will require a top-up before use.
 
@@ -1599,17 +1609,17 @@ To this date, I do not know any reputable service that would offer this service 
 
 -   **Recommended**: Do not require any identification (even e-mail):
 
-    -   (UK based) <https://dtmf.io/> <sup>[[Archive.org]][196]</sup> **preferred** because they even provide an onion hidden service address for direct access through the Tor Network at <http://dtmfiovjh42uviqez6qn75igbagtiyo724hy3rdxm77dy2m5tt7lbaqd.onion/>
+    -   (UK based) <https://dtmf.io/> <sup>[[Archive.org]][198]</sup> **preferred** because they even provide an onion hidden service address for direct access through the Tor Network at <http://dtmfiovjh42uviqez6qn75igbagtiyo724hy3rdxm77dy2m5tt7lbaqd.onion/>
 
-    -   (Ukraine based) <https://virtualsim.net/> <sup>[[Archive.org]][197]</sup>
+    -   (Ukraine based) <https://virtualsim.net/> <sup>[[Archive.org]][199]</sup>
 
 -   Do require identification (valid e-mail):
 
-    -   (Germany based) <https://www.sms77.io/> <sup>[[Archive.org]][198]</sup>
+    -   (Germany based) <https://www.sms77.io/> <sup>[[Archive.org]][200]</sup>
 
-    -   (Russia based) <https://onlinesim.ru/> <sup>[[Archive.org]][199]</sup>
+    -   (Russia based) <https://onlinesim.ru/> <sup>[[Archive.org]][201]</sup>
 
-There are some other possibilities listed here <https://cryptwerk.com/companies/sms/xmr/> <sup>[[Archive.org]][200]</sup>. **Use at your own risk.**
+There are some other possibilities listed here <https://cryptwerk.com/companies/sms/xmr/> <sup>[[Archive.org]][202]</sup>. **Use at your own risk.**
 
 **DISCLAIMER: I cannot vouch for any of these providers and therefore I will still recommend doing it yourself physically. In this case you will have to rely on the anonymity of Monero and you should not use any service that requires any kind of identification using your real identity.**
 
@@ -1619,7 +1629,7 @@ Therefore IMHO, it is probably just more convenient, cheaper, and less risky to 
 
 Get at least one or two decent size generic USB keys (at least 16GB but I would recommend 32GB).
 
-Please do not buy or use gimmicky self-encrypting devices such as these: <https://syscall.eu/blog/2018/03/12/aigo_part1/> <sup>[[Archive.org]][201]</sup>
+Please do not buy or use gimmicky self-encrypting devices such as these: <https://syscall.eu/blog/2018/03/12/aigo_part1/> <sup>[[Archive.org]][203]</sup>
 
 Some might be very efficient[^237] but many are gimmicky gadgets that offer no real protection[^238].
 
@@ -1677,27 +1687,27 @@ It does however have some drawbacks:
 
 **Important Note: If your laptop is monitored/supervised and some local restrictions are in place, please read** [Appendix U: How to bypass (some) local restrictions on supervised computers]**.**
 
-You should also read Tails Documentation, Warnings, and limitations, before going further <https://tails.boum.org/doc/about/warning/index.en.html> <sup>[[Archive.org]][202]</sup>
+You should also read Tails Documentation, Warnings, and limitations, before going further <https://tails.boum.org/doc/about/warning/index.en.html> <sup>[[Archive.org]][204]</sup>
 
 Taking all this into account and the fact that their documentation is great, I will just redirect you towards their well-made and well-maintained tutorial:
 
-<https://tails.boum.org/install/index.en.html> <sup>[[Archive.org]][203]</sup> , pick your flavor and proceed.
+<https://tails.boum.org/install/index.en.html> <sup>[[Archive.org]][205]</sup> , pick your flavor and proceed.
 
 When you are done and have a working Tails on your laptop, go to the [Creating your anonymous online identities:] step much further in this guide.
 
-If you're having issue accessing Tor due to censorship or other issues, you can try using Tor Bridges by following this TAILS tutorial: <https://tails.boum.org/doc/first_steps/welcome_screen/bridge_mode/index.en.html> <sup>[[Archive.org]][204]</sup> and find more information about these on Tor Documentation <https://2019.www.torproject.org/docs/bridges> <sup>[[Archive.org]][205]</sup>
+If you're having issue accessing Tor due to censorship or other issues, you can try using Tor Bridges by following this TAILS tutorial: <https://tails.boum.org/doc/first_steps/welcome_screen/bridge_mode/index.en.html> <sup>[[Archive.org]][206]</sup> and find more information about these on Tor Documentation <https://2019.www.torproject.org/docs/bridges> <sup>[[Archive.org]][207]</sup>
 
 **If you think using Tor alone is dangerous/suspicious, see [Appendix P: Accessing the internet as safely as possible when Tor/VPN is not an option][Appendix P: Accessing the internet as safely as possible when Tor and VPNs are not an option]**
 
 ### Persistent Plausible Deniability using Whonix within TAILS:
 
-Consider checking the <https://github.com/aforensics/HiddenVM> <sup>[[Archive.org]][206]</sup> project for TAILS.
+Consider checking the <https://github.com/aforensics/HiddenVM> <sup>[[Archive.org]][208]</sup> project for TAILS.
 
-This project is a clever idea of a one click self-contained VM solution that you could store on an encrypted disk using plausible deniability[^248] (see [The Whonix route:] first chapters and also for some explanations about Plausible deniability, as well as the [How to securely delete specific files/folders/data on your HDD/SDD and Thumb drives:] section at the end of this guide for more understanding).
+This project is a clever idea of a one click self-contained VM solution that you could store on an encrypted disk using plausible deniability[^250] (see [The Whonix route:] first chapters and also for some explanations about Plausible deniability, as well as the [How to securely delete specific files/folders/data on your HDD/SDD and Thumb drives:] section at the end of this guide for more understanding).
 
 This would allow the creation of a hybrid system mixing TAILS with the Virtualization options of the Whonix route in this guide.
 
-![][207]
+![][209]
 
 **Note: See [Pick your connectivity method:] in the Whonix Route for more explanations about Stream Isolation**
 
@@ -1707,19 +1717,21 @@ In short:
 
 -   You could store persistent VMs within a secondary contained that could be encrypted normally or using Veracrypt plausible deniability feature (these could be Whonix VMs for instance or any other).
 
-In that case as the project outlines it, there should be no traces of any of your activities on your computer and the sensitive work could be done from VMs stored into a Hidden container that should not be discoverable by an adversary.
+-   You do benefit from the added Tor Stream Isolation feature (see [Tor over VPN:][210] for mor info about stream isolation).
 
-**This option is particularly interesting for "traveling light" and to mitigate forensics attacks while keeping persistence on your work. You only need 2 USB keys (one with TAILS and one with a Veracrypt container containing persistent Whonix).**
+In that case as the project outlines it, there should be no traces of any of your activities on your computer and the sensitive work could be done from VMs stored into a Hidden container that should not be easily discoverable by a soft adversary.
 
-You might also wonder if this will result in a "Tor over Tor" setup but it will not. The Whonix VMs will be accessing the network directly and not through TAILS Onion Routing.
+**This option is particularly interesting for "traveling light" and to mitigate forensics attacks while keeping persistence on your work.** You only need 2 USB keys (one with TAILS and one with a Veracrypt container containing persistent Whonix). The first USB key will appear to contain just TAILS and the second USB will appear to contain just random garbage but will have a decoy volume which you can show for plausible deniability.
 
-In the future, this should also be supported by the Whonix project themselves as explained here: <https://www.whonix.org/wiki/Whonix-Host> <sup>[[Archive.org]][208]</sup>
+You might also wonder if this will result in a "Tor over Tor" setup but it will not. The Whonix VMs will be accessing the network directly through clearnet and not through TAILS Onion Routing.
 
-Remember that encryption with or without plausible deniability is not a silver bullet and will be of little use in case of torture. As a matter a fact, depending on who your adversary would be (your threat model), it might be wise not to use Veracrypt (formerly TrueCrypt) at all as shown in this demonstration: <https://defuse.ca/truecrypt-plausible-deniability-useless-by-game-theory.htm> <sup>[[Archive.org]][209]</sup>
+In the future, this could also be supported by the Whonix project themselves as explained here: <https://www.whonix.org/wiki/Whonix-Host> <sup>[[Archive.org]][211]</sup> but it not yet recommended as of now for end-users.
+
+Remember that encryption with or without plausible deniability is not a silver bullet and will be of little use in case of torture. As a matter a fact, depending on who your adversary would be (your threat model), it might be wise not to use Veracrypt (formerly TrueCrypt) at all as shown in this demonstration: <https://defuse.ca/truecrypt-plausible-deniability-useless-by-game-theory.htm> <sup>[[Archive.org]][212]</sup>
 
 **Plausible deniability is only effective against soft lawful adversaries that will not resort to physical means.**
 
-**See <https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis>** <sup>[[Archive.org]][210]</sup>
+**See <https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis>** <sup>[[Archive.org]][213]</sup>
 
 **CAUTION: Please see [Appendix K: Considerations for using external SSD drives] and [Understanding HDD vs SSD:] sections if you consider storing such hidden VMs on an external SSD drive:**
 
@@ -1733,9 +1745,9 @@ Here is my guide on how to achieve this:
 
 #### First Run:
 
--   Download the latest HiddenVM release from <https://github.com/aforensics/HiddenVM/releases> <sup>[[Archive.org]][211]</sup>
+-   Download the latest HiddenVM release from <https://github.com/aforensics/HiddenVM/releases> <sup>[[Archive.org]][214]</sup>
 
--   Download the latest Whonix XFCE release from <https://www.whonix.org/wiki/VirtualBox/XFCE> <sup>[[Archive.org]][212]</sup>
+-   Download the latest Whonix XFCE release from <https://www.whonix.org/wiki/VirtualBox/XFCE> <sup>[[Archive.org]][215]</sup>
 
 -   Prepare a USB Key/Drive with Veracrypt
 
@@ -1789,39 +1801,39 @@ Note, if during the import you are having issues such as "NS_ERROR_INVALID_ARG (
 
 Ideally, you should get a dedicated laptop that will not be tied to you in any easy way (ideally paid with cash anonymously and using the same precautions as previously mentioned for the phone and the SIM card). It is recommended but not mandatory because this guide will help you harden your laptop as much as possible to prevent data leaks through various means. There will be several lines of defense standing between your online identities and yourself that should prevent most adversaries from de-anonymizing you besides state/global actors with considerable resources.
 
-This laptop should ideally be a clean freshly installed Laptop (Running Windows, Linux or MacOS), clean of your normal day to day activities and offline (never connected to the network yet). In the case of a Windows laptop, and if you used it before such a clean install, it should also not be activated (re-installed without a product key).
+This laptop should ideally be a clean freshly installed Laptop (Running Windows, Linux or MacOS), clean of your normal day to day activities and offline (never connected to the network yet). In the case of a Windows laptop, and if you used it before such a clean install, it should also not be activated (re-installed without a product key). Specifically in the case of MacBooks, it should never have been tied to your identity before in any means. So, buy second-hand with cash from an unknown stranger who does not know your identity
 
 This is to mitigate some future issues in case of online leaks (including telemetry from your OS or Apps) that could compromise any unique identifiers of the laptop while using it (MAC Address, Bluetooth Address, and Product key ...). But also, to avoid being tracked back if you need to dispose of the laptop.
 
 If you used this laptop before for different purposes (like your day-to-day activities), all its hardware identifiers are probably known and registered by Microsoft or Apple. If later any of those identifiers is compromised (by malware, telemetry, exploits, human errors ...) they could lead back to you.
 
-The laptop should have at least 250GB of Disk Space **at least 6GB** of RAM and should be able to run a couple of Virtual Machines at the same time. It should have a working battery that lasts a few hours.
+The laptop should have at least 250GB of Disk Space **at least 6GB (ideally 8GB or 16GB)** of RAM and should be able to run a couple of Virtual Machines at the same time. It should have a working battery that lasts a few hours.
 
-This laptop could have an HDD (7200rpm) or an SSD. Both possibilities have their benefits and issues that will be detailed later.
+This laptop could have an HDD (7200rpm) or an SSD/NVMe drive. Both possibilities have their benefits and issues that will be detailed later.
 
 All future online steps performed with this laptop should ideally be done from a safe network such as a Public Wi-Fi in a safe place (see [Find some safe places with decent public Wi-Fi:]). But several steps will have to be taken offline first.
 
 ### Some laptop recommendations:
 
-If you can afford it, you might consider getting a Purism Librem laptop (<https://puri.sm> <sup>[[Archive.org]][213]</sup>) or System76 laptops (<https://system76.com/> <sup>[[Archive.org]][214]</sup>) while using Coreboot[^241] (where Intel IME is disabled from factory).
+If you can afford it, you might consider getting a Purism Librem laptop (<https://puri.sm> <sup>[[Archive.org]][216]</sup>) or System76 laptops (<https://system76.com/> <sup>[[Archive.org]][217]</sup>) while using Coreboot[^241] (where Intel IME is disabled from factory).
 
-In other cases, I would strongly recommend getting Business Laptops (meaning not consumer/gaming laptops) if you can. For instance, some ThinkPad from Lenovo (my personal favorites). Here are lists of laptops currently supporting Libreboot and others where you can flash Coreboot yourself (that will allow you to disable Intel IME or AMD PSP):
+In other cases, I would strongly recommend getting Business grade laptops (meaning not consumer/gaming grade laptops) if you can. For instance, some ThinkPad from Lenovo (my personal favorite). Here are lists of laptops currently supporting Libreboot and others where you can flash Coreboot yourself (that will allow you to disable Intel IME or AMD PSP):
 
--   <https://freundschafter.com/research/system-alternatives-without-intel-me-iamt-and-amd-psp-secure-technology/> <sup>[[Archive.org]][215]</sup>
+-   <https://freundschafter.com/research/system-alternatives-without-intel-me-iamt-and-amd-psp-secure-technology/> <sup>[[Archive.org]][218]</sup>
 
--   <https://libreboot.org/docs/hardware/> <sup>[[Archive.org]][216]</sup>
+-   <https://libreboot.org/docs/hardware/> <sup>[[Archive.org]][219]</sup>
 
--   <https://coreboot.org/status/board-status.html> <sup>[[Archive.org]][217]</sup>
+-   <https://coreboot.org/status/board-status.html> <sup>[[Archive.org]][220]</sup>
 
-This is because those business laptops usually offer better and more customizable security features with longer support than most consumer laptops (Asus, MSI, Gigabyte, Acer...). The interesting features to look for are IMHO:
+This is because those business laptops usually offer better and more customizable security features (especially in the BIOS/UEFI settings) with longer support than most consumer laptops (Asus, MSI, Gigabyte, Acer...). The interesting features to look for are IMHO:
 
 -   Better custom Secure Boot **settings (where you can selectively manage all the keys and not just use the Standard ones)**
 
 -   HDD/SDD passwords in addition to just BIOS/UEFI passwords.
 
--   AMD laptops could be more interesting as some provide the ability to disable AMD PSP (the AMD equivalent of Intel IME) from the BIOS/UEFI settings by default. And, because AFAIK, AMD PSP was audited and contrary to IME was not found to have any "evil" functionalities[^242]. However, if you are going for the Qubes Route consider Intel as they do not support AMD with their anti-evil-maid system[^243].
+-   AMD laptops could be more interesting as some provide the ability to disable AMD PSP (the AMD equivalent of Intel IME) from the BIOS/UEFI settings by default. And, because AFAIK, AMD PSP was audited and contrary to IME was not found to have any "evil" functionalities[^242]. However, if you are going for the Qubes OS Route consider Intel as they do not support AMD with their anti-evil-maid system[^243].
 
--   Secure Wipe tools from the BIOS (especially useful for SDD drives, see [Appendix M: BIOS/UEFI options to wipe disks in various Brands]).
+-   Secure Wipe tools from the BIOS (especially useful for SDD/NVMe drives, see [Appendix M: BIOS/UEFI options to wipe disks in various Brands]).
 
 -   Better control over the disabling/enabling of select peripherals (USB ports, Wi-Fis, Bluetooth, Camera, Microphone ...).
 
@@ -1829,7 +1841,7 @@ This is because those business laptops usually offer better and more customizabl
 
 -   Native anti-tampering protections.
 
--   Longer support with BIOS/UEFI updates (and security updates).
+-   Longer support with BIOS/UEFI updates (and subsequent BIOS/UEFI security updates).
 
 -   Some are supported by Libreboot
 
@@ -1837,7 +1849,7 @@ This is because those business laptops usually offer better and more customizabl
 
 #### PC:
 
-These settings can be accessed through the boot menu of your laptop. Here is a good tutorial from HP explaining all the ways to access the BIOS on various computers: <https://store.hp.com/us/en/tech-takes/how-to-enter-bios-setup-windows-pcs> <sup>[[Archive.org]][218]</sup>
+These settings can be accessed through the boot menu of your laptop. Here is a good tutorial from HP explaining all the ways to access the BIOS on various computers: <https://store.hp.com/us/en/tech-takes/how-to-enter-bios-setup-windows-pcs> <sup>[[Archive.org]][221]</sup>
 
 Usually how to access it is pressing a specific key (F1, F2 or Del) at boot (before your OS).
 
@@ -1895,27 +1907,25 @@ What is Secure Boot not protecting you from?
 
 -   Secure Boot is not encrypting your disk and an adversary can still just remove the disk from your laptop and extract data from it using a different machine. Secure Boot is therefore useless without full disk encryption.
 
--   Secure Boot is not protecting you from a signed bootloader that would be compromised and signed by the manufacturer itself (Microsoft for example in the case of Windows).
-
--   Secure Boot will probably by default not protect your computer from running any OS that supports it (like Clonezilla) and had their bootloader signed by Microsoft or the Laptop manufacturer.
+-   Secure Boot is not protecting you from a signed bootloader that would be compromised and signed by the manufacturer itself (Microsoft for example in the case of Windows). Most mainstream Linux distributions are signed these days and will boot with Secure Boot enabled.
 
 -   Secure Boot can have flaws and exploits like any other system. If you are running an old laptop that does not benefit from new BIOS/UEFI updates, these can be left unfixed.
 
 Additionally, there are number of attacks that could be possible against Secure Boot as explained (in depth) in these technical videos:
 
--   Defcon 22, <https://www.youtube.com/watch?v=QDSlWa9xQuA> <sup>[[Invidious]][219]</sup>
+-   Defcon 22, <https://www.youtube.com/watch?v=QDSlWa9xQuA> <sup>[[Invidious]][222]</sup>
 
--   BlackHat 2016, <https://www.youtube.com/watch?v=0fZdL3ufVOI> <sup>[[Invidious]][220]</sup>
+-   BlackHat 2016, <https://www.youtube.com/watch?v=0fZdL3ufVOI> <sup>[[Invidious]][223]</sup>
 
 **So, it can be useful as an added measure against some adversaries but not all. Secure Boot in itself is not encrypting your hard drive. It is an added layer but that is it.**
 
-**I recommend you keep it on if you can.**
+**I still recommend you keep it on if you can.**
 
 #### Mac:
 
-Take a moment to set a firmware password according to the tutorial here: <https://support.apple.com/en-au/HT204455> <sup>[[Archive.org]][221]</sup>
+Take a moment to set a firmware password according to the tutorial here: <https://support.apple.com/en-au/HT204455> <sup>[[Archive.org]][224]</sup>
 
-You should also enable firmware password reset protection (available from Catalina) according to the documentation here: <https://support.apple.com/en-gb/guide/security/sec28382c9ca/web> <sup>[[Archive.org]][222]</sup>
+You should also enable firmware password reset protection (available from Catalina) according to the documentation here: <https://support.apple.com/en-gb/guide/security/sec28382c9ca/web> <sup>[[Archive.org]][225]</sup>
 
 This feature will mitigate the possibility for some adversaries to use hardware hacks to disable/bypass your firmware password. Note that this will also prevent Apple themselves from accessing the firmware in case of repair.
 
@@ -1925,11 +1935,11 @@ At some point you will inevitably leave this laptop alone somewhere. You will no
 
 It is important to know that it is trivially easy for some specialists to install a key logger in your laptop, or to just make a clone copy of your hard drive that could later allow them to detect the presence of encrypted data in it using forensic techniques (more on that later).
 
-Here is a good cheap method to make your laptop tamper proof using Nail Polish (with glitter) <https://mullvad.net/en/help/how-tamper-protect-laptop/> <sup>[[Archive.org]][223]</sup> [^248] (with pictures).
+Here is a good cheap method to make your laptop tamper proof using Nail Polish (with glitter) <https://mullvad.net/en/help/how-tamper-protect-laptop/> <sup>[[Archive.org]][226]</sup> [^248] (with pictures).
 
 While this is a good cheap method, it could also raise suspicions as it is quite "noticeable" and might just reveal that you "have something to hide". So, there are more subtle ways of achieving the same result. You could also for instance make a close macro photography of the back screws of your laptop or just use a very small amount of candle wax within one of the screws that could just look like usual dirt. You could then check for tampering by comparing the photographs of the screws with new ones. Their orientation might have changed a bit if your adversary was not careful enough (Tightening them exactly the same way they were before). Or the wax within the bottom of a screw head might have been damaged compared to before.
 
-![][224]![][225]
+![][227]![][228]
 
 Same techniques can be used with USB ports where you could just put a tiny amount of candle wax within the plug that would be damaged by inserting an USB key in it.
 
@@ -1945,7 +1955,7 @@ This route will make extensive use of Virtual Machines[^249], they will require 
 
 -   Windows 10 (preferably Home edition due to the absence of Bitlocker)
 
--   MacOS
+-   MacOS (Catalina or higher)
 
 In addition, changes are high that your Mac is or has been tied to an Apple account (at the time or purchase or after signing-in) and therefore its unique hardware identifiers could lead back to you in case of hardware identifiers leak.
 
@@ -1959,7 +1969,7 @@ You could then reveal a password but that password will only give access to "pla
 
 This feature can be used at the OS level (a plausible OS and a hidden OS) or at the files level where you will have an encrypted file container (similar to a zip file) where different files will be shown depending on the encryption password you use.
 
-This also means you could set-up your own advanced "plausible deniability" setup using any Host OS by storing for instance Virtual Machines on a Veracrypt hidden volume container (be careful for traces in the Host OS tho that would need to be cleaned if the host OS is persistent, see [Some additional measures against forensics:] section later). There is a project for achieving this within TAILS (<https://github.com/aforensics/HiddenVM> <sup>[[Archive.org]][206]</sup>) which would make your Host OS non persistent and use plausible deniability within TAILS.
+This also means you could set-up your own advanced "plausible deniability" setup using any Host OS by storing for instance Virtual Machines on a Veracrypt hidden volume container (be careful for traces in the Host OS tho that would need to be cleaned if the host OS is persistent, see [Some additional measures against forensics:] section later). There is a project for achieving this within TAILS (<https://github.com/aforensics/HiddenVM> <sup>[[Archive.org]][208]</sup>) which would make your Host OS non persistent and use plausible deniability within TAILS.
 
 In the case of Windows, plausible deniability is also the reason you should ideally have Windows 10 Home (and not Pro). This is because Windows 10 Pro natively offers a full-disk encryption system (Bitlocker[^256]) where Windows 10 Home offers no full-disk encryption at all. We will later use a third-party open-source software for encryption that will allow full-disk encryption on Windows 10 Home. This will give you a good (plausible) excuse to use this software. While using this software on Windows 10 Pro would be suspicious.
 
@@ -1971,11 +1981,11 @@ Unfortunately, encryption is not magic and there are some risks involved:
 
 ##### The 5$ Wrench:
 
-Remember that encryption with or without plausible deniability is not a silver bullet and will be of little use in case of torture. As a matter a fact, depending on who your adversary would be (your threat model), it might be wise not to use Veracrypt (formerly TrueCrypt) at all as shown in this demonstration: <https://defuse.ca/truecrypt-plausible-deniability-useless-by-game-theory.htm> <sup>[[Archive.org]][209]</sup>
+Remember that encryption with or without plausible deniability is not a silver bullet and will be of little use in case of torture. As a matter a fact, depending on who your adversary would be (your threat model), it might be wise not to use Veracrypt (formerly TrueCrypt) at all as shown in this demonstration: <https://defuse.ca/truecrypt-plausible-deniability-useless-by-game-theory.htm> <sup>[[Archive.org]][212]</sup>
 
 Plausible deniability is only effective against soft lawful adversaries that will not resort to physical means.
 
-See <https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis> <sup>[[Archive.org]][210]</sup>
+See <https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis> <sup>[[Archive.org]][213]</sup>
 
 ##### Evil-Maid Attack:
 
@@ -2005,19 +2015,19 @@ The same measures used to mitigate Evil Maid attacks should be in place for Cold
 
 -   You should limit the use of Sleep stand-by and instead use Shutdown or Hibernate to prevent the encryption keys from staying in RAM when your computer goes to sleep. This is because sleep will maintain power to your memory for resuming your activity faster. Only hibernation and shutdown will actually clear the key from the memory[^264].
 
-See also <https://www.whonix.org/wiki/Cold_Boot_Attack_Defense> <sup>[[Archive.org]][226]</sup> and <https://www.whonix.org/wiki/Protection_Against_Physical_Attacks> <sup>[[Archive.org]][227]</sup>
+See also <https://www.whonix.org/wiki/Cold_Boot_Attack_Defense> <sup>[[Archive.org]][229]</sup> and <https://www.whonix.org/wiki/Protection_Against_Physical_Attacks> <sup>[[Archive.org]][230]</sup>
 
 Here are also some interesting tools to consider for Linux users to defend against these:
 
--   <https://github.com/0xPoly/Centry> <sup>[[Archive.org]][228]</sup> (unfortunately unmaintained it seems so I made a fork and pull request updating for Veracrypt <https://github.com/AnonymousPlanet/Centry> <sup>[[Archive.org]][229]</sup> which should still work)
+-   <https://github.com/0xPoly/Centry> <sup>[[Archive.org]][231]</sup> (unfortunately unmaintained it seems so I made a fork and pull request updating for Veracrypt <https://github.com/AnonymousPlanet/Centry> <sup>[[Archive.org]][232]</sup> which should still work)
 
--   <https://github.com/hephaest0s/usbkill> <sup>[[Archive.org]][230]</sup> (unfortunately unmaintained as well it seems)
+-   <https://github.com/hephaest0s/usbkill> <sup>[[Archive.org]][233]</sup> (unfortunately unmaintained as well it seems)
 
--   <https://github.com/Lvl4Sword/Killer> <sup>[[Archive.org]][231]</sup>
+-   <https://github.com/Lvl4Sword/Killer> <sup>[[Archive.org]][234]</sup>
 
--   <https://askubuntu.com/questions/153245/how-to-wipe-ram-on-shutdown-prevent-cold-boot-attacks> <sup>[[Archive.org]][232]</sup>
+-   <https://askubuntu.com/questions/153245/how-to-wipe-ram-on-shutdown-prevent-cold-boot-attacks> <sup>[[Archive.org]][235]</sup>
 
--   (Qubes OS, Intel CPU only) <https://github.com/QubesOS/qubes-antievilmaid> <sup>[[Archive.org]][233]</sup>
+-   (Qubes OS, Intel CPU only) <https://github.com/QubesOS/qubes-antievilmaid> <sup>[[Archive.org]][236]</sup>
 
 ##### About Sleep, Hibernation and Shutdown:
 
@@ -2045,7 +2055,7 @@ Here are some examples of such leaks:
 
 -   Recent lists (aka Jump Lists) in Windows and various apps keeping traces of recently accessed documents[^267].
 
--   Many more traces in various logs, please see this convenient interesting poster for more insight: <https://www.sans.org/security-resources/posters/windows-forensic-analysis/170/download> <sup>[[Archive.org]][234]</sup>
+-   Many more traces in various logs, please see this convenient interesting poster for more insight: <https://www.sans.org/security-resources/posters/windows-forensic-analysis/170/download> <sup>[[Archive.org]][237]</sup>
 
 ###### MacOS:
 
@@ -2101,7 +2111,7 @@ If you have no interest for OS wide plausible deniability and want to learn to u
 
 **In all cases, the host OS should never be used to conduct sensitive activities directly. The host OS will only be used to connect to a public Wi-Fi Access Point. It will be left unused while you conduct sensitive activities and should ideally not be used for any of your day-to-day activities.**
 
-Consider also reading **<https://www.whonix.org/wiki/Full_Disk_Encryption#Encrypting_Whonix_VMs>** <sup>[[Archive.org]][235]</sup>
+Consider also reading **<https://www.whonix.org/wiki/Full_Disk_Encryption#Encrypting_Whonix_VMs>** <sup>[[Archive.org]][238]</sup>
 
 ### Linux Host OS:
 
@@ -2109,19 +2119,19 @@ As mentioned earlier, I do not recommend using your daily laptop for very sensit
 
 I also recommend that you do the initial installation completely offline to avoid any data leak.
 
-You should always remember that despite the reputation, Linux mainstream distributions (Ubuntu for instance) are not necessarily better at security than other systems such as MacOS and Windows. See this reference to understand why <https://madaidans-insecurities.github.io/linux.html> <sup>[[Archive.org]][236]</sup>.
+You should always remember that despite the reputation, Linux mainstream distributions (Ubuntu for instance) are not necessarily better at security than other systems such as MacOS and Windows. See this reference to understand why <https://madaidans-insecurities.github.io/linux.html> <sup>[[Archive.org]][239]</sup>.
 
 #### Full disk encryption:
 
 There are two possibilities here with Ubuntu:
 
--   (Recommended and easy) Encrypt as part of the installation process: <https://ubuntu.com/tutorials/install-ubuntu-desktop> <sup>[[Archive.org]][237]</sup>
+-   (Recommended and easy) Encrypt as part of the installation process: <https://ubuntu.com/tutorials/install-ubuntu-desktop> <sup>[[Archive.org]][240]</sup>
 
     -   This process requires the full erasure of your entire drive (clean install).
 
     -   Just check the "Encrypt the new Ubuntu installation for security)
 
--   (Tedious but possible) Encrypt after installation: <https://help.ubuntu.com/community/ManualFullSystemEncryption> <sup>[[Archive.org]][238]</sup>
+-   (Tedious but possible) Encrypt after installation: <https://help.ubuntu.com/community/ManualFullSystemEncryption> <sup>[[Archive.org]][241]</sup>
 
 For other distros, you will have to document yourself but it will likely be similar. Encryption during install is just much easier in the context of this guide.
 
@@ -2129,17 +2139,17 @@ For other distros, you will have to document yourself but it will likely be simi
 
 -   During the install, just make sure you do not allow any data collection if prompted.
 
--   If you are not sure, just make sure you did not enable any telemetry and follow this tutorial if needed <https://vitux.com/how-to-force-ubuntu-to-stop-collecting-your-data-from-your-pc/> <sup>[[Archive.org]][239]</sup>
+-   If you are not sure, just make sure you did not enable any telemetry and follow this tutorial if needed <https://vitux.com/how-to-force-ubuntu-to-stop-collecting-your-data-from-your-pc/> <sup>[[Archive.org]][242]</sup>
 
 -   Any other distro: You will need to document yourself and find out yourself how to disable telemetry if there is any.
 
 #### Disable anything unnecessary:
 
--   Disable Bluetooth if enabled by following this guide <https://www.addictivetips.com/ubuntu-linux-tips/disable-bluetooth-in-ubuntu/> <sup>[[Archive.org]][240]</sup> or issuing the following command:
+-   Disable Bluetooth if enabled by following this guide <https://www.addictivetips.com/ubuntu-linux-tips/disable-bluetooth-in-ubuntu/> <sup>[[Archive.org]][243]</sup> or issuing the following command:
 
     -   ```sudo systemctl disable bluetooth.service --force```
 
--   Disable Indexing if enabled by default (Ubuntu >19.04) by following this guide <https://www.linuxuprising.com/2019/07/how-to-completely-disable-tracker.html> <sup>[[Archive.org]][241]</sup> or issuing the following commands:
+-   Disable Indexing if enabled by default (Ubuntu >19.04) by following this guide <https://www.linuxuprising.com/2019/07/how-to-completely-disable-tracker.html> <sup>[[Archive.org]][244]</sup> or issuing the following commands:
 
     -   ```sudo systemctl --user mask tracker-store.service tracker-miner-fs.service tracker-miner-rss.service tracker-extract.service tracker-miner-apps.service tracker-writeback.service```
 
@@ -2151,25 +2161,25 @@ For other distros, you will have to document yourself but it will likely be simi
 
 As explained previously, you should not use the sleep features but shutdown or hibernate your laptop to mitigate some evil-maid and cold-boot attacks. Unfortunately, this feature is disabled by default on many Linux distros including Ubuntu. It is possible to enable it but it might not work as expected. Follow this information at your own risk. If you do not want to do this, you should never use the sleep function and power off instead (and probably set the lid closing behavior to power off instead of sleep).
 
-Follow this tutorial to enable Hibernate: <https://help.ubuntu.com/16.04/ubuntu-help/power-hibernate.html> <sup>[[Archive.org]][242]</sup>
+Follow this tutorial to enable Hibernate: <https://help.ubuntu.com/16.04/ubuntu-help/power-hibernate.html> <sup>[[Archive.org]][245]</sup>
 
-After Hibernate is enabled, change the behavior so that your laptop will hibernate when you close the lid by following this tutorial for Ubuntu 20.04 <http://ubuntuhandbook.org/index.php/2020/05/lid-close-behavior-ubuntu-20-04/> <sup>[[Archive.org]][243]</sup> and this tutorial for Ubuntu 18.04 <https://tipsonubuntu.com/2018/04/28/change-lid-close-action-ubuntu-18-04-lts/> <sup>[[Archive.org]][244]</sup>
+After Hibernate is enabled, change the behavior so that your laptop will hibernate when you close the lid by following this tutorial for Ubuntu 20.04 <http://ubuntuhandbook.org/index.php/2020/05/lid-close-behavior-ubuntu-20-04/> <sup>[[Archive.org]][246]</sup> and this tutorial for Ubuntu 18.04 <https://tipsonubuntu.com/2018/04/28/change-lid-close-action-ubuntu-18-04-lts/> <sup>[[Archive.org]][247]</sup>
 
-Unfortunately, this will not clean the key from memory directly from memory when hibernating. To avoid this at the cost of some performance, you might consider encrypting the swap file by following this tutorial: <https://help.ubuntu.com/community/EnableHibernateWithEncryptedSwap> <sup>[[Archive.org]][245]</sup>
+Unfortunately, this will not clean the key from memory directly from memory when hibernating. To avoid this at the cost of some performance, you might consider encrypting the swap file by following this tutorial: <https://help.ubuntu.com/community/EnableHibernateWithEncryptedSwap> <sup>[[Archive.org]][248]</sup>
 
 These settings should mitigate cold boot attacks if you can hibernate fast enough.
 
 #### Enable MAC address randomization:
 
--   Ubuntu, follow these steps <https://help.ubuntu.com/community/AnonymizingNetworkMACAddresses> <sup>[[Archive.org]][246]</sup>.
+-   Ubuntu, follow these steps <https://help.ubuntu.com/community/AnonymizingNetworkMACAddresses> <sup>[[Archive.org]][249]</sup>.
 
 -   Any other distro: you will have to find the documentation yourself but it should be quite similar to the Ubuntu tutorial.
 
--   Consider this tutorial which should still work: <https://josh.works/shell-script-basics-change-mac-address> <sup>[[Archive.org]][247]</sup>
+-   Consider this tutorial which should still work: <https://josh.works/shell-script-basics-change-mac-address> <sup>[[Archive.org]][250]</sup>
 
 #### Hardening Linux:
 
-Please refer to this guide <https://madaidans-insecurities.github.io/guides/linux-hardening.html> <sup>[[Archive.org]][248]</sup>
+Please refer to this guide <https://madaidans-insecurities.github.io/guides/linux-hardening.html> <sup>[[Archive.org]][251]</sup>
 
 #### Setting up a safe Browser:
 
@@ -2197,15 +2207,15 @@ I also recommend that you do the initial installation completely offline to avoi
 
 #### Hardening MacOS:
 
-For securing and hardening your MacOS, I recommend reading this GitHub guide which should cover many of the issues: <https://github.com/drduh/macOS-Security-and-Privacy-Guide> <sup>[[Archive.org]][249]</sup>
+For securing and hardening your MacOS, I recommend reading this GitHub guide which should cover many of the issues: <https://github.com/drduh/macOS-Security-and-Privacy-Guide> <sup>[[Archive.org]][252]</sup>
 
 Here are the basic steps you should take after your offline installation:
 
 ##### Enable Firmware password with "disable-reset-capability" option:
 
-First you should set-up a firmware password following this guide from Apple: <https://support.apple.com/en-us/HT204455> <sup>[[Archive.org]][250]</sup>
+First you should set-up a firmware password following this guide from Apple: <https://support.apple.com/en-us/HT204455> <sup>[[Archive.org]][253]</sup>
 
-Unfortunately, some attacks are still possible and an adversary could disable this password so you should also follow this guide to prevent disabling the firmware password from anyone including Apple: <https://support.apple.com/en-gb/guide/security/sec28382c9ca/web> <sup>[[Archive.org]][222]</sup>
+Unfortunately, some attacks are still possible and an adversary could disable this password so you should also follow this guide to prevent disabling the firmware password from anyone including Apple: <https://support.apple.com/en-gb/guide/security/sec28382c9ca/web> <sup>[[Archive.org]][225]</sup>
 
 ##### Enable Hibernation instead of sleep:
 
@@ -2241,19 +2251,19 @@ Disable some unnecessary settings within the settings:
 
 ##### Prevent Apple OCSP calls:
 
-These are the infamous "unblockable telemetry" calls from MacOS Big Sur disclosed here: <https://sneak.berlin/20201112/your-computer-isnt-yours/> <sup>[[Archive.org]][251]</sup>
+These are the infamous "unblockable telemetry" calls from MacOS Big Sur disclosed here: <https://sneak.berlin/20201112/your-computer-isnt-yours/> <sup>[[Archive.org]][254]</sup>
 
 You could block OCSP reporting by issuing the following command in Terminal:
 
 -   ``` sudo sh -c 'echo "127.0.0.1 ocsp.apple.com" >> /etc/hosts'```
 
-But you should probably document yourself on the actual issue before acting. This page is a good place to start: <https://blog.jacopo.io/en/post/apple-ocsp/> <sup>[[Archive.org]][252]</sup>
+But you should probably document yourself on the actual issue before acting. This page is a good place to start: <https://blog.jacopo.io/en/post/apple-ocsp/> <sup>[[Archive.org]][255]</sup>
 
 Up to you really. I would block it because I do not want any telemetry at all from my OS to the mothership without my specific consent. None.
 
 ##### Enable Full Disk encryption (Filevault):
 
-You should enable full disk encryption on your Mac using Filevault according to this part of the guide: <https://github.com/drduh/macOS-Security-and-Privacy-Guide#full-disk-encryption> <sup>[[Archive.org]][249]</sup>
+You should enable full disk encryption on your Mac using Filevault according to this part of the guide: <https://github.com/drduh/macOS-Security-and-Privacy-Guide#full-disk-encryption> <sup>[[Archive.org]][252]</sup>
 
 **Be careful when enabling. Do not store the recovery key at Apple if prompted (should not be an issue since you should be offline at this stage). You do not want a third party to have your recovery key obviously.**
 
@@ -2289,7 +2299,7 @@ You should randomize your MAC address as explained earlier in this guide:
 
 Go into Settings > Network & Internet > Wi-Fi > Enable Random hardware addresses
 
-Alternatively, you could use this free piece of software: <https://technitium.com/tmac/> <sup>[[Archive.org]][253]</sup>
+Alternatively, you could use this free piece of software: <https://technitium.com/tmac/> <sup>[[Archive.org]][256]</sup>
 
 #### Setting up a safe Browser:
 
@@ -2327,7 +2337,7 @@ You might be wondering why not BitLocker? Well, here are a few reasons I prefer 
 
 If you decide to use Bitlocker anyway, feel free to do so.
 
-Go ahead and download and install Veracrypt from: <https://www.veracrypt.fr/en/Downloads.html> <sup>[[Archive.org]][254]</sup>
+Go ahead and download and install Veracrypt from: <https://www.veracrypt.fr/en/Downloads.html> <sup>[[Archive.org]][257]</sup>
 
 After installation, please take a moment to review the following options that will help mitigate some attacks:
 
@@ -2351,7 +2361,7 @@ Again, as explained earlier. You should never use the sleep feature to mitigate 
 
 The reason is that Hibernation will actually shutdown your laptop completely and clean the memory. Sleep on the other hand will leave the memory powered on (including your decryption key) and could leave your laptop vulnerable to cold-boot attacks.
 
-By default, Windows 10 might not offer you this possibility so you should enable it by following this Microsoft tutorial: <https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/disable-and-re-enable-hibernation> <sup>[[Archive.org]][255]</sup>
+By default, Windows 10 might not offer you this possibility so you should enable it by following this Microsoft tutorial: <https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/disable-and-re-enable-hibernation> <sup>[[Archive.org]][258]</sup>
 
 -   Open an administrator command prompt (right click on Command Prompt and "Run as Administrator")
 
@@ -2447,7 +2457,7 @@ Now you will have to pick your next step between two options:
 
         -   No use with an SSD drive due to requirement of disabling Trim[^273] Operations[^274]. This will severely degrade the performance/health of your SSD drive over time.
 
-**As you can see, Route C only offers two privacy advantages over the others and it will only be of use against a soft lawful adversary. Remember <https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis>** <sup>[[Archive.org]][210]</sup>**.**
+**As you can see, Route C only offers two privacy advantages over the others and it will only be of use against a soft lawful adversary. Remember <https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis>** <sup>[[Archive.org]][213]</sup>**.**
 
 Deciding which route you will take is up to you. Route A is a minimum.
 
@@ -2483,7 +2493,7 @@ This route is rather straightforward and will just encrypt your current Operatin
 
 -   Select SHA-512 as hash Algorithm (because why not)
 
--   Enter a strong passphrase (longer the better)[^242]
+-   Enter a strong passphrase (longer the better)[^244]
 
 -   Collect some entropy by randomly moving your cursor around until the bar is full
 
@@ -2517,11 +2527,13 @@ There will be another section on creating encrypted file containers with Plausib
 
 **Your Hidden OS should not be activated (with a MS product key). Therefore, this route will recommend and guide you through a full clean installation that will wipe everything on your laptop.**
 
-Read the Veracrypt Documentation <https://www.veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html> <sup>[[Archive.org]][256]</sup> (Process of Creation of Hidden Operating System part) and <https://www.veracrypt.fr/en/Security%20Requirements%20for%20Hidden%20Volumes.html> <sup>[[Archive.org]][257]</sup> (Security Requirements and Precautions Pertaining to Hidden Volumes).
+Read the Veracrypt Documentation <https://www.veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html> <sup>[[Archive.org]][259]</sup> (Process of Creation of Hidden Operating System part) and <https://www.veracrypt.fr/en/Security%20Requirements%20for%20Hidden%20Volumes.html> <sup>[[Archive.org]][260]</sup> (Security Requirements and Precautions Pertaining to Hidden Volumes).
 
 This is how your system will look after this process is done:
 
-![][258]
+![][261]
+
+(Illustration from Veracrypt Documentation, <https://veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html> <sup>[[Archive.org]][259]</sup>)
 
 As you can see this process requires you to have two partitions on your hard drive from the start.
 
@@ -2551,7 +2563,7 @@ See [Appendix C: Windows Installation Media Creation] and go with the USB key ro
 
 -   Insert the USB key into your laptop
 
--   See [Appendix A: Windows Installation][Donations:] and proceed with installing Windows 10 Home.
+-   See [Appendix A: Windows Installation] and proceed with installing Windows 10 Home.
 
 ###### Step 3: Privacy Settings (Hidden OS)
 
@@ -2559,7 +2571,7 @@ See [Appendix B: Windows Additional Privacy Settings]
 
 ###### Step 4: Veracrypt installation and encryption process start (Hidden OS)
 
-Remember to read <https://www.veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html> <sup>[[Archive.org]][256]</sup>
+Remember to read <https://www.veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html> <sup>[[Archive.org]][259]</sup>
 
 Do not connect this OS to your known Wi-Fi. You should download Veracrypt installer from a different computer and copy the installer here using an USB key.
 
@@ -2585,7 +2597,7 @@ Do not connect this OS to your known Wi-Fi. You should download Veracrypt instal
 
 -   Use all the space available on the second partition for the Outer Volume
 
--   Use a strong passphrase[^242]
+-   Use a strong passphrase[^244]
 
 -   Select yes to Large Files
 
@@ -2599,7 +2611,7 @@ Do not connect this OS to your known Wi-Fi. You should download Veracrypt instal
 
     -   I recommend you do not fill the outer volume too much or too little (about 40%). Remember you must leave enough space for the Hidden OS (which will be same size as the first partition you created during installation).
 
--   Use a strong passphrase[^242] for the Hidden Volume (obviously a different one than the one for the Outer Volume).
+-   Use a strong passphrase[^244] for the Hidden Volume (obviously a different one than the one for the Outer Volume).
 
 -   Now you will create the Hidden Volume, select AES and SHA-512
 
@@ -2625,7 +2637,7 @@ Now that the Hidden OS is fully installed, you will need to install a Decoy OS.
 
 -   Insert the USB key into your laptop
 
--   See [Appendix A: Windows Installation][Donations:] and proceed with installing Windows 10 Home again (do not Install a different version and stick with Home).
+-   See [Appendix A: Windows Installation] and proceed with installing Windows 10 Home again (do not Install a different version and stick with Home).
 
 ###### Step 6: Privacy settings (Decoy OS)
 
@@ -2681,7 +2693,7 @@ Time to test your setup.
 
 ###### Step 9: Changing the decoy data on your Outer Volume safely
 
-Before going to next step, you should learn the way to mount your Outer Volume safely for writing content on it. This is also explained in this official Veracrypt Documentation <https://www.veracrypt.fr/en/Protection%20of%20Hidden%20Volumes.html> <sup>[[Archive.org]][259]</sup>
+Before going to next step, you should learn the way to mount your Outer Volume safely for writing content on it. This is also explained in this official Veracrypt Documentation <https://www.veracrypt.fr/en/Protection%20of%20Hidden%20Volumes.html> <sup>[[Archive.org]][262]</sup>
 
 **You should do this from a safe trusted place.**
 
@@ -2743,7 +2755,7 @@ Do not put anything suspicious on the Decoy OS such as:
 
 **Remember that you will need valid excuses for this plausible deniability scenario to work:**
 
-Take some time to read again the "Possible Explanations for Existence of Two Veracrypt Partitions on Single Drive" of the Veracrypt documentation here <https://www.veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html> <sup>[[Archive.org]][256]</sup>
+Take some time to read again the "Possible Explanations for Existence of Two Veracrypt Partitions on Single Drive" of the Veracrypt documentation here <https://www.veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html> <sup>[[Archive.org]][259]</sup>
 
 -   **You are using Veracrypt because you are using Windows 10 Home which does not feature Bitlocker but still wanted Privacy.**
 
@@ -2775,7 +2787,7 @@ This step and the following steps should be done from within the Host OS. This c
 
 In this route, we will make extensive use of the free Oracle Virtualbox[^282] software. This is a virtualization software in which you can create Virtual Machines that emulate a computer running a specific OS (if you want to use something else like Xen, Qemu, KVM or VMWARE, feel free to do so but this part of the guide covers Virtualbox only for convenience).
 
-You should be aware that Virtualbox is not the virtualization software with the best track record in terms of security and some of the reported issues[^283] have not be completely fixed to this date[^284] and if you are using Linux with a bit more technical skills, you should consider using KVM instead by following the guide available at Whonix here <https://www.whonix.org/wiki/KVM> <sup>[[Archive.org]][260]</sup>
+You should be aware that Virtualbox is not the virtualization software with the best track record in terms of security and some of the reported issues[^283] have not be completely fixed to this date[^284] and if you are using Linux with a bit more technical skills, you should consider using KVM instead by following the guide available at Whonix here <https://www.whonix.org/wiki/KVM> <sup>[[Archive.org]][263]</sup>
 
 Some steps should be taken in all cases:
 
@@ -2817,13 +2829,13 @@ There are 7 possibilities within this route:
 
     -   No VPN and no Tor (User > Internet)
 
-![][261]
+![][264]
 
 #### Tor only:
 
 This is the preferred and most recommended solution.
 
-![][262]
+![][265]
 
 With this solution, all your network goes through Tor and it should be sufficient to guarantee your anonymity in most cases.
 
@@ -2833,11 +2845,11 @@ To mitigate this, you might have to consider the next option: VPN over Tor but c
 
 #### VPN/Proxy over Tor:
 
-This solution can bring some benefits in some specific cases vs using Tor only where accessing the destination service would be impossible from a Tor Exit node. This is because many services will just outright ban, hinder, or block Tor (see <https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor> <sup>[[Archive.org]][263]</sup>).
+This solution can bring some benefits in some specific cases vs using Tor only where accessing the destination service would be impossible from a Tor Exit node. This is because many services will just outright ban, hinder, or block Tor (see <https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor> <sup>[[Archive.org]][266]</sup>).
 
 As you can see in this illustration, if your cash (preferred)/Monero paid VPN/Proxy is compromised by an adversary (despite their privacy statement and no-logging policies), they will only find an anonymous cash/Monero paid VPN/Proxy account connecting to their services from a Tor Exit node.
 
-![][264]
+![][267]
 
 If an adversary somehow manages to compromise the Tor network too, they will only reveal the IP of a random public Wi-Fi that is not tied to your identity.
 
@@ -2847,7 +2859,9 @@ If an adversary somehow compromises your VM OS (with a malware or exploit for in
 
 Stream isolation is a mitigation technique used to prevent some correlation attacks by having different Tor Circuits for each application. Here is an illustration to show what stream isolation is:
 
-![][265]
+![][268]
+
+(Illustration from Marcelo Martins, <https://stakey.club/en/decred-via-tor-network/> <sup>[[Archive.org]][269]</sup>)
 
 VPN/Proxy over Tor falls on the right-side[^286] meaning using a VPN/Proxy over Tor forces Tor to use one circuit for all activities instead of multiple circuits for each. This means that using a VPN/Proxy over Tor can somewhat reduce the effectiveness of Tor in some cases and should therefore be used only for some specific cases:
 
@@ -2855,17 +2869,17 @@ VPN/Proxy over Tor falls on the right-side[^286] meaning using a VPN/Proxy over 
 
 -   When you do not mind using a shared Tor circuit for various services. Like for instance for using various authenticated services.
 
-**You should however consider not using this method when your aim is just to browse random various unauthenticated websites as you will not benefit from Stream Isolation and this could make correlation attacks easier over time for an adversary between each of your sessions (see [Your Anonymized Tor/VPN traffic:][266]). If your goal however is to use the same identity at each session on the same authenticated services, the value of Stream isolation is lessened as you can be correlated through other means.**
+**You should however consider not using this method when your aim is just to browse random various unauthenticated websites as you will not benefit from Stream Isolation and this could make correlation attacks easier over time for an adversary between each of your sessions (see [Your Anonymized Tor/VPN traffic:]). If your goal however is to use the same identity at each session on the same authenticated services, the value of Stream isolation is lessened as you can be correlated through other means.**
 
 You should also know that Stream Isolation is not necessarily configured by default on Whonix Workstation. It is only pre-configured for some applications (including Tor Browser).
 
 More information at:
 
--   <https://www.whonix.org/wiki/Stream_Isolation> <sup>[[Archive.org]][267]</sup>
+-   <https://www.whonix.org/wiki/Stream_Isolation> <sup>[[Archive.org]][270]</sup>
 
--   <https://tails.boum.org/contribute/design/stream_isolation/> <sup>[[Archive.org]][268]</sup>
+-   <https://tails.boum.org/contribute/design/stream_isolation/> <sup>[[Archive.org]][271]</sup>
 
--   <https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table> <sup>[[Archive.org]][269]</sup>
+-   <https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table> <sup>[[Archive.org]][272]</sup>
 
 #### Tor over VPN:
 
@@ -2885,7 +2899,7 @@ You might be wondering: Well, what about using Tor over VPN instead of VPN over 
 
 Note, if you are having issues accessing the Tor Network due to blocking/censorship, you could try using Tor Bridges. See [Appendix X: Using Tor bridges in hostile environments].
 
-It is also possible to consider **VPN over Tor over VPN (User > VPN > Tor > VPN > Internet)** using two cash/Monero paid VPNs instead. This means that you will connect the Host OS to a first VPN from your Public Wi-Fi, then Whonix will connect to Tor and finally your VM will connect to a second VPN over Tor over VPN (see <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][270]</sup>).
+It is also possible to consider **VPN over Tor over VPN (User > VPN > Tor > VPN > Internet)** using two cash/Monero paid VPNs instead. This means that you will connect the Host OS to a first VPN from your Public Wi-Fi, then Whonix will connect to Tor and finally your VM will connect to a second VPN over Tor over VPN (see <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][273]</sup>).
 
 This will of course have a significant performance impact and might be quite slow but I think Tor is necessary somewhere for achieving reasonable anonymity.
 
@@ -2903,15 +2917,15 @@ Just using a VPN or even a VPN over VPN makes no sense as those can be traced ba
 
 For more info, please see the following references:
 
--   <https://www.whonix.org/wiki/Comparison_Of_Tor_with_CGI_Proxies,_Proxy_Chains,_and_VPN_Services#Tor_and_VPN_Services_Comparison> <sup>[[Archive.org]][271]</sup>
+-   <https://www.whonix.org/wiki/Comparison_Of_Tor_with_CGI_Proxies,_Proxy_Chains,_and_VPN_Services#Tor_and_VPN_Services_Comparison> <sup>[[Archive.org]][274]</sup>
 
--   <https://www.whonix.org/wiki/Why_does_Whonix_use_Tor> <sup>[[Archive.org]][272]</sup>
+-   <https://www.whonix.org/wiki/Why_does_Whonix_use_Tor> <sup>[[Archive.org]][275]</sup>
 
--   <https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study> <sup>[[Archive.org]][273]</sup>
+-   <https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study> <sup>[[Archive.org]][276]</sup>
 
--   <https://gist.github.com/joepie91/5a9909939e6ce7d09e29#file-vpn-md> <sup>[[Archive.org]][274]</sup>
+-   <https://gist.github.com/joepie91/5a9909939e6ce7d09e29#file-vpn-md> <sup>[[Archive.org]][277]</sup>
 
--   <https://schub.wtf/blog/2019/04/08/very-precarious-narrative.html> <sup>[[Archive.org]][275]</sup>
+-   <https://schub.wtf/blog/2019/04/08/very-precarious-narrative.html> <sup>[[Archive.org]][278]</sup>
 
 **In the context of this guide, Tor is required somewhere to achieve reasonable and safe anonymity and you should use it if you can.**
 
@@ -2949,25 +2963,25 @@ Unfortunately, using Tor alone will raise the suspicion of many destinations' pl
 
 For more information, you can also see the discussions here that could help decide yourself:
 
--   Tor Project: <https://gitlab.torproject.org/legacy/trac/-/wikis/doc/TorPlusVPN> <sup>[[Archive.org]][276]</sup>
+-   Tor Project: <https://gitlab.torproject.org/legacy/trac/-/wikis/doc/TorPlusVPN> <sup>[[Archive.org]][279]</sup>
 
 -   Tails Documentation:
 
-    -   <https://gitlab.tails.boum.org/tails/blueprints/-/wikis/vpn_support/> <sup>[[Archive.org]][277]</sup>
+    -   <https://gitlab.tails.boum.org/tails/blueprints/-/wikis/vpn_support/> <sup>[[Archive.org]][280]</sup>
 
-    -   <https://tails.boum.org/support/faq/index.en.html#index20h2> <sup>[[Archive.org]][278]</sup>
+    -   <https://tails.boum.org/support/faq/index.en.html#index20h2> <sup>[[Archive.org]][281]</sup>
 
 -   Whonix Documentation (in this order):
 
-    -   <https://www.whonix.org/wiki/Tunnels/Introduction> <sup>[[Archive.org]][279]</sup>
+    -   <https://www.whonix.org/wiki/Tunnels/Introduction> <sup>[[Archive.org]][282]</sup>
 
-    -   <https://www.whonix.org/wiki/Tunnels/Connecting_to_Tor_before_a_VPN> <sup>[[Archive.org]][280]</sup>
+    -   <https://www.whonix.org/wiki/Tunnels/Connecting_to_Tor_before_a_VPN> <sup>[[Archive.org]][283]</sup>
 
-    -   <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][270]</sup>
+    -   <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][273]</sup>
 
 -   Some papers on the matter:
 
-    -   <https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study> <sup>[[Archive.org]][273]</sup>
+    -   <https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study> <sup>[[Archive.org]][276]</sup>
 
 ### Get an anonymous VPN/Proxy:
 
@@ -2989,11 +3003,11 @@ This guide will therefore propose 2 flavors of this route:
 
 -   The Whonix only route where all traffic is routed through the Tor Network (Tor Only or Tor over VPN).
 
-![][281]
+![][284]
 
 -   A Whonix hybrid route where all traffic is routed through a cash (preferred)/Monero paid VPN over the Tor Network (VPN over Tor or VPN over Tor over VPN).
 
-![][282]
+![][285]
 
 You will be able to decide which flavor to use based on my recommendations. I recommend the second one as explained before.
 
@@ -3011,15 +3025,15 @@ This will allow you to turn your VMs into a kind of a disposable "Live Operating
 
 You should download a few things within the host OS.
 
--   The latest version of the Virtualbox installer according to your Host OS <https://www.virtualbox.org/wiki/Downloads> <sup>[[Archive.org]][283]</sup>
+-   The latest version of the Virtualbox installer according to your Host OS <https://www.virtualbox.org/wiki/Downloads> <sup>[[Archive.org]][286]</sup>
 
--   (Skip this if you cannot use Tor natively of through a VPN) The latest Whonix OVA file from <https://www.whonix.org/wiki/Download> <sup>[[Archive.org]][284]</sup> according to your preference (Linux/Windows, with a Desktop interface XFCE for simplicity or only with the text-client for advanced users)
+-   (Skip this if you cannot use Tor natively of through a VPN) The latest Whonix OVA file from <https://www.whonix.org/wiki/Download> <sup>[[Archive.org]][287]</sup> according to your preference (Linux/Windows, with a Desktop interface XFCE for simplicity or only with the text-client for advanced users)
 
 This will conclude the preparations and you should now be ready to start setting up the final environment that will protect your anonymity online.
 
 #### Virtualbox Hardening recommendations:
 
-For ideal security, you should follow the recommendations provided here for each Virtualbox Virtual Machine <https://www.whonix.org/wiki/Virtualization_Platform_Security#VirtualBox_Hardening> <sup>[[Archive.org]][285]</sup> :
+For ideal security, you should follow the recommendations provided here for each Virtualbox Virtual Machine <https://www.whonix.org/wiki/Virtualization_Platform_Security#VirtualBox_Hardening> <sup>[[Archive.org]][288]</sup> :
 
 -   Disable Audio.
 
@@ -3045,7 +3059,7 @@ For ideal security, you should follow the recommendations provided here for each
 
 -   Disable the USB controller which is enabled by default. Set the Pointing Device to "PS/2 Mouse" or changes will revert.
 
-Finally, also follow this recommendation to desync the clock you are your VM compared to your host OS <https://www.whonix.org/wiki/Network_Time_Synchronization#Spoof_the_Initial_Virtual_Hardware_Clock_Offset> <sup>[[Archive.org]][286]</sup>
+Finally, also follow this recommendation to desync the clock you are your VM compared to your host OS <https://www.whonix.org/wiki/Network_Time_Synchronization#Spoof_the_Initial_Virtual_Hardware_Clock_Offset> <sup>[[Archive.org]][289]</sup>
 
 This offset should be within a 60000 milliseconds range and should be different for each VM and here are some examples (which can be later applied to any VM):
 
@@ -3057,9 +3071,9 @@ This offset should be within a 60000 milliseconds range and should be different 
 
 -   ```VBoxManage modifyvm "Whonix-Workstation-XFCE" --biossystemtimeoffset +27931```
 
-Also consider applying these mitigations from VirtualBox to mitigate Spectre[^290]/Meltdown[^291] vulnerabilities by running this command from the VirtualBox Program Directory. All of these are described here: <https://www.whonix.org/wiki/Spectre_Meltdown> <sup>[[Archive.org]][99]</sup> (be aware these can impact severely the performance of your VMs but should be done for best security).
+Also consider applying these mitigations from VirtualBox to mitigate Spectre[^290]/Meltdown[^291] vulnerabilities by running this command from the VirtualBox Program Directory. All of these are described here: <https://www.whonix.org/wiki/Spectre_Meltdown> <sup>[[Archive.org]][72]</sup> (be aware these can impact severely the performance of your VMs but should be done for best security).
 
-Finally consider the security advice from Virtualbox themselves here <https://www.virtualbox.org/manual/ch13.html> <sup>[[Archive.org]][287]</sup>
+Finally consider the security advice from Virtualbox themselves here <https://www.virtualbox.org/manual/ch13.html> <sup>[[Archive.org]][290]</sup>
 
 ## Tor over VPN:
 
@@ -3079,13 +3093,13 @@ See [Appendix R: Installing a VPN on your VM or Host OS.] for instructions.
 
 -   Start Virtualbox on your Host OS.
 
--   Import Whonix file Into Virtualbox following the instructions on <https://www.whonix.org/wiki/VirtualBox/XFCE> <sup>[[Archive.org]][212]</sup>
+-   Import Whonix file Into Virtualbox following the instructions on <https://www.whonix.org/wiki/VirtualBox/XFCE> <sup>[[Archive.org]][215]</sup>
 
 -   Start the Whonix VMs
 
-Remember at this stage that if you are having issues connecting to Tor due to censorship or blocking, you should consider connecting using Bridges as explained in this tutorial <https://www.whonix.org/wiki/Bridges> <sup>[[Archive.org]][288]</sup>.
+Remember at this stage that if you are having issues connecting to Tor due to censorship or blocking, you should consider connecting using Bridges as explained in this tutorial <https://www.whonix.org/wiki/Bridges> <sup>[[Archive.org]][291]</sup>.
 
--   Update the Whonix VMs by following the instructions on <https://www.whonix.org/wiki/Operating_System_Software_and_Updates#Updates> <sup>[[Archive.org]][289]</sup>
+-   Update the Whonix VMs by following the instructions on <https://www.whonix.org/wiki/Operating_System_Software_and_Updates#Updates> <sup>[[Archive.org]][292]</sup>
 
 -   Shutdown the Whonix VMs
 
@@ -3093,7 +3107,7 @@ Remember at this stage that if you are having issues connecting to Tor due to ce
 
 -   Go to next step
 
-**Important Note: You should also read these very good recommendations over there <https://www.whonix.org/wiki/DoNot>** <sup>[[Archive.org]][290]</sup> **as most of those principles will also apply to this guide. You should also read their general documentation here <https://www.whonix.org/wiki/Documentation>** <sup>[[Archive.org]][291]</sup> **which will also provide tons of advice like this guide.**
+**Important Note: You should also read these very good recommendations over there <https://www.whonix.org/wiki/DoNot>** <sup>[[Archive.org]][293]</sup> **as most of those principles will also apply to this guide. You should also read their general documentation here <https://www.whonix.org/wiki/Documentation>** <sup>[[Archive.org]][294]</sup> **which will also provide tons of advice like this guide.**
 
 ## Pick your guest workstation Virtual Machine:
 
@@ -3117,21 +3131,21 @@ Just use the provided Whonix Workstation VM. **It is the safest and most secure 
 
 **It is also the only VM that will provide Stream Isolation pre-configured for most apps by default**[^292]**.**
 
-If you want additional software on the Workstation (such as another Browser), follow their guide here <https://www.whonix.org/wiki/Install_Software> <sup>[[Archive.org]][292]</sup>
+If you want additional software on the Workstation (such as another Browser), follow their guide here <https://www.whonix.org/wiki/Install_Software> <sup>[[Archive.org]][295]</sup>
 
-Consider running Whonix in Live Mode if for extra malware protection, See <https://www.whonix.org/wiki/Anti-Forensics_Precautions> <sup>[[Archive.org]][293]</sup>
+Consider running Whonix in Live Mode if for extra malware protection, See <https://www.whonix.org/wiki/Anti-Forensics_Precautions> <sup>[[Archive.org]][296]</sup>
 
 Do not forget to apply the VM hardening recommendations here: Virtualbox Hardening recommendations:
 
 #### Linux (any distro):
 
-**Be careful, any customization you make to the Non-Whonix guest VMs (keyboard layout, language, time zone, screen resolution or other) could be used to fingerprint your VMs later. See <https://www.whonix.org/wiki/VM_Fingerprinting>** <sup>[[Archive.org]][294]</sup>
+**Be careful, any customization you make to the Non-Whonix guest VMs (keyboard layout, language, time zone, screen resolution or other) could be used to fingerprint your VMs later. See <https://www.whonix.org/wiki/VM_Fingerprinting>** <sup>[[Archive.org]][297]</sup>
 
 ##### If you can use Tor (natively or over a VPN):
 
 Use the Linux Distro of your choice. Personally, I would recommend Ubuntu or Fedora for convenience but any other would work too. Be sure to not enable any telemetry.
 
-Refer to this tutorial <https://www.whonix.org/wiki/Other_Operating_Systems> <sup>[[Archive.org]][295]</sup> for detailed instructions.
+Refer to this tutorial <https://www.whonix.org/wiki/Other_Operating_Systems> <sup>[[Archive.org]][298]</sup> for detailed instructions.
 
 ##### If you cannot use Tor:
 
@@ -3139,7 +3153,7 @@ Use the Linux Distro of your choice. Personally, I would recommend Ubuntu or Fed
 
 ### Windows 10 Virtual Machine:
 
-**Be careful, any customization you make to the Non-Whonix guest VMs (keyboard layout, language, time zone, screen resolution or other) could be used to fingerprint your VMs later. See <https://www.whonix.org/wiki/VM_Fingerprinting>** <sup>[[Archive.org]][294]</sup>
+**Be careful, any customization you make to the Non-Whonix guest VMs (keyboard layout, language, time zone, screen resolution or other) could be used to fingerprint your VMs later. See <https://www.whonix.org/wiki/VM_Fingerprinting>** <sup>[[Archive.org]][297]</sup>
 
 #### Windows 10 ISO download:
 
@@ -3147,11 +3161,11 @@ You have two choices here:
 
 -   Go with the Official Windows 10 Pro VM and harden it yourself: see [Appendix C: Windows Installation Media Creation] and go with the ISO route.
 
--   Go with Windows AME (Ameliorated) from the <https://ameliorated.info/> <sup>[[Archive.org]][296]</sup> project which is a special Windows 10 build stripped from all telemetry/advertising and update components. **Note that you will not be able to update this version with the latest security patched and will have to just re-download a new release. See [Appendix Y: Windows AME installation][Appendix Y: Windows AME download and installation]**
+-   Go with Windows AME (Ameliorated) from the <https://ameliorated.info/> <sup>[[Archive.org]][299]</sup> project which is a special Windows 10 build stripped from all telemetry/advertising and update components. **Note that you will not be able to update this version with the latest security patched and will have to just re-download a new release. See [Appendix Y: Windows AME installation][Appendix Y: Windows AME download and installation]**
 
 #### If you can use Tor (natively or over a VPN):
 
-Refer to this tutorial <https://www.whonix.org/wiki/Other_Operating_Systems> <sup>[[Archive.org]][295]</sup> for detailed instructions.
+Refer to this tutorial <https://www.whonix.org/wiki/Other_Operating_Systems> <sup>[[Archive.org]][298]</sup> for detailed instructions.
 
 ##### Install: 
 
@@ -3181,7 +3195,7 @@ Refer to this tutorial <https://www.whonix.org/wiki/Other_Operating_Systems> <su
 
 -   Follow the Steps according to your choice for Windows:
 
-    -   [Appendix A: Windows Installation][Donations:]
+    -   [Appendix A: Windows Installation]
 
     -   [Appendix Y: Windows AME installation][Appendix Y: Windows AME download and installation]
 
@@ -3219,7 +3233,7 @@ See why here: [Appendix V: What browser to use in your Guest VM/Disposable VM]
 
 If you want to use Brave:
 
--   Download and install Brave browser from <https://brave.com/download/> <sup>[[Archive.org]][297]</sup>
+-   Download and install Brave browser from <https://brave.com/download/> <sup>[[Archive.org]][300]</sup>
 
 -   Open Brave Browser
 
@@ -3265,7 +3279,7 @@ See [Appendix P: Accessing the internet as safely as possible when Tor and VPNs 
 
 -   Virtualbox will prompt you to select a Starting disk (the ISO file), select it and click Start
 
--   Follow the Steps in [Appendix A: Windows Installation][Donations:]
+-   Follow the Steps in [Appendix A: Windows Installation]
 
 ##### Network Settings:
 
@@ -3281,7 +3295,7 @@ See why here: [Appendix V: What browser to use in your Guest VM/Disposable VM]
 
 If you want to use Brave:
 
--   Download and install Brave browser from <https://brave.com/download/> <sup>[[Archive.org]][297]</sup>
+-   Download and install Brave browser from <https://brave.com/download/> <sup>[[Archive.org]][300]</sup>
 
 -   Open Brave Browser
 
@@ -3307,7 +3321,7 @@ Only use Private Windows no matter what Browser you picked.
 
 #### Additional Privacy settings in Windows 10:
 
-Skip these if you used Windows AME from <https://ameliorated.info/> <sup>[[Archive.org]][296]</sup>
+Skip these if you used Windows AME from <https://ameliorated.info/> <sup>[[Archive.org]][299]</sup>
 
 See [Appendix B: Windows Additional Privacy Settings]
 
@@ -3343,7 +3357,7 @@ Just use the tutorials as is and see [Appendix P: Accessing the internet as safe
 
 #### Installation:
 
-Basically, follow the tutorial here: <https://www.android-x86.org/documentation/virtualbox.html> <sup>[[Archive.org]][298]</sup>
+Basically, follow the tutorial here: <https://www.android-x86.org/documentation/virtualbox.html> <sup>[[Archive.org]][301]</sup>
 
 -   Download the appropriate ISO file, personally, I recommend the CM 14.1 (based on old Android 7 "Nougat") as it was the snappier in my tests.
 
@@ -3413,9 +3427,9 @@ Just use the tutorials as is and see [Appendix P: Accessing the internet as safe
 
 -   Windows Host OS:
 
-    -   Virtualbox Catalina Tutorial: <https://www.wikigain.com/install-macos-catalina-on-virtualbox-on-windows/> <sup>[[Archive.org]][299]</sup>
+    -   Virtualbox Catalina Tutorial: <https://www.wikigain.com/install-macos-catalina-on-virtualbox-on-windows/> <sup>[[Archive.org]][302]</sup>
 
-    -   Virtualbox Big Sur Tutorial: <https://www.wikigain.com/how-to-install-macos-big-sur-on-virtualbox-on-windows-pc/> <sup>[[Archive.org]][300]</sup>
+    -   Virtualbox Big Sur Tutorial: <https://www.wikigain.com/how-to-install-macos-big-sur-on-virtualbox-on-windows-pc/> <sup>[[Archive.org]][303]</sup>
 
 -   MacOS Host OS:
 
@@ -3425,7 +3439,7 @@ Just use the tutorials as is and see [Appendix P: Accessing the internet as safe
 
     -   Just use the same tutorials as above but execute the various commands in terminal. It should work without issue.
 
-There are some drawbacks with running MacOS on Virtual Machines. The main one is that they do not actually have a serial number (0 by default) and you will be unable to log-in into any Apple provided service (iCloud, iMessage...) without a genuine ID. You can set such IDs using this script: <https://github.com/myspaghetti/macos-virtualbox> <sup>[[Archive.org]][301]</sup> but keep in mind randomly generated IDs will not work and using the ID of someone else will break their Terms of Services and could count as impersonation (and therefore could be illegal).
+There are some drawbacks with running MacOS on Virtual Machines. The main one is that they do not actually have a serial number (0 by default) and you will be unable to log-in into any Apple provided service (iCloud, iMessage...) without a genuine ID. You can set such IDs using this script: <https://github.com/myspaghetti/macos-virtualbox> <sup>[[Archive.org]][304]</sup> but keep in mind randomly generated IDs will not work and using the ID of someone else will break their Terms of Services and could count as impersonation (and therefore could be illegal).
 
 **Note: I also ran in multiple issues with running these on AMD processors. This can be fixed so here is the configuration I used which worked fine with Catalina and Big Sur which will tell Virtualbox to emulate an Intel Processor instead:**
 
@@ -3455,25 +3469,25 @@ Here are the tutorials:
 
 -   TAILS: KeePassXC is integrated by default
 
--   Whonix: [https://www.whonix.org/wiki/KeePassXC][] <sup>[[Archive.org]][302]</sup>
+-   Whonix: [https://www.whonix.org/wiki/KeePassXC][] <sup>[[Archive.org]][305]</sup>
 
 -   Linux:
 
-    -   Download from <https://keepassxc.org/download/> <sup>[[Archive.org]][303]</sup>
+    -   Download from <https://keepassxc.org/download/> <sup>[[Archive.org]][306]</sup>
 
-    -   Follow the tutorial here <https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_linux> <sup>[[Archive.org]][304]</sup>
+    -   Follow the tutorial here <https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_linux> <sup>[[Archive.org]][307]</sup>
 
 -   Windows:
 
-    -   Download from <https://keepassxc.org/download/> <sup>[[Archive.org]][303]</sup>
+    -   Download from <https://keepassxc.org/download/> <sup>[[Archive.org]][306]</sup>
 
-    -   Follow the tutorial here [https://KeePassXC.org/docs/KeePassXC_GettingStarted.html#_microsoft_windows][] <sup>[[Archive.org]][304]</sup>
+    -   Follow the tutorial here [https://KeePassXC.org/docs/KeePassXC_GettingStarted.html#_microsoft_windows][] <sup>[[Archive.org]][307]</sup>
 
 -   MacOS:
 
-    -   Download from <https://keepassxc.org/download/> <sup>[[Archive.org]][303]</sup>
+    -   Download from <https://keepassxc.org/download/> <sup>[[Archive.org]][306]</sup>
 
-    -   Follow the tutorial here <https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_macos> <sup>[[Archive.org]][304]</sup>
+    -   Follow the tutorial here <https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_macos> <sup>[[Archive.org]][307]</sup>
 
 Test that KeePassXC is working before going to next step.
 
@@ -3499,17 +3513,17 @@ As they say on their own website, Qubes OS is a reasonably secure, free, open-so
 
 Qubes OS is a Xen distribution. It is different from Linux distributions because it will make extensive use of Virtualization and Compartmentalization so that any app will run in a different VM (qube). As a bonus, Qubes OS integrates Whonix by default and allows for increased privacy and anonymity. It is highly recommended that you document yourself over Qubes OS principles prior to going this route. Here are some recommended resources:
 
--   Qube OS Introduction, <https://www.qubes-os.org/intro/> <sup>[[Archive.org]][305]</sup>
+-   Qube OS Introduction, <https://www.qubes-os.org/intro/> <sup>[[Archive.org]][308]</sup>
 
--   Qube OS Video Tours, <https://www.qubes-os.org/video-tours/> <sup>[[Archive.org]][306]</sup>
+-   Qube OS Video Tours, <https://www.qubes-os.org/video-tours/> <sup>[[Archive.org]][309]</sup>
 
--   Qube OS Getting Started, <https://www.qubes-os.org/doc/getting-started/> <sup>[[Archive.org]][307]</sup>
+-   Qube OS Getting Started, <https://www.qubes-os.org/doc/getting-started/> <sup>[[Archive.org]][310]</sup>
 
--   YouTube, Life Behind the Tinfoil: A Look at Qubes and Copperhead - Konstantin Ryabitsev, The Linux Foundation <https://www.youtube.com/watch?v=8cU4hQg6GvU> <sup>[[Invidious]][308]</sup>
+-   YouTube, Life Behind the Tinfoil: A Look at Qubes and Copperhead - Konstantin Ryabitsev, The Linux Foundation <https://www.youtube.com/watch?v=8cU4hQg6GvU> <sup>[[Invidious]][311]</sup>
 
--   YouTube, I used the reasonably-secure Qubes OS for 6 months and survived - Matty McFatty [@themattymcfatty] <https://www.youtube.com/watch?v=sbN5Bz3v-uA> <sup>[[Invidious]][309]</sup>
+-   YouTube, I used the reasonably-secure Qubes OS for 6 months and survived - Matty McFatty [@themattymcfatty] <https://www.youtube.com/watch?v=sbN5Bz3v-uA> <sup>[[Invidious]][312]</sup>
 
--   YouTube, Qubes OS: How it works, and a demo of this VM-centric OS <https://www.youtube.com/watch?v=YPAvoFsvSbg> <sup>[[Invidious]][310]</sup>
+-   YouTube, Qubes OS: How it works, and a demo of this VM-centric OS <https://www.youtube.com/watch?v=YPAvoFsvSbg> <sup>[[Invidious]][313]</sup>
 
 This OS is recommended by prominent figures such as Edward Snowden and Privacytools.io.
 
@@ -3517,9 +3531,9 @@ Qubes is the best option in this guide for people who are more comfortable with 
 
 The reason for this RAM requirement is that each app will run in a different VM and each of those VM will require and allocate a certain amount of memory that will not be available for other apps. If you are running native Windows apps within Qubes OS qubes, the ram overhead will be significant.
 
-You should also check their hardware compatibility here <https://www.qubes-os.org/hcl/> <sup>[[Archive.org]][311]</sup> before proceeding. Your mileage might vary and you might experience several issues with regards to hardware compatibility that you will have to troubleshoot and solve yourself.
+You should also check their hardware compatibility here <https://www.qubes-os.org/hcl/> <sup>[[Archive.org]][314]</sup> before proceeding. Your mileage might vary and you might experience several issues with regards to hardware compatibility that you will have to troubleshoot and solve yourself.
 
-I think that if you can afford it and are comfortable with the idea of using Linux, you should go with this route as it is probably the best one in terms of security and privacy. The only disadvantage of this route is that it does not provide a way to enable OS wide plausible deniability[^248] unlike the Whonix route.
+I think that if you can afford it and are comfortable with the idea of using Linux, you should go with this route as it is probably the best one in terms of security and privacy. The only disadvantage of this route is that it does not provide a way to enable OS wide plausible deniability[^250] unlike the Whonix route.
 
 ### Pick your connectivity method:
 
@@ -3547,13 +3561,13 @@ There are 7 possibilities within this route:
 
     -   No VPN and no Tor (User > Internet)
 
-![][261]
+![][264]
 
 #### Tor only:
 
 This is the preferred and most recommended solution.
 
-![][312]
+![][315]
 
 With this solution, all your network goes through Tor and it should be sufficient to guarantee your anonymity in most cases.
 
@@ -3563,11 +3577,11 @@ To mitigate this, you might have to consider the next option: VPN over Tor but c
 
 #### VPN/Proxy over Tor:
 
-This solution can bring some benefits in some specific cases vs using Tor only where accessing the destination service would be impossible from a Tor Exit node. This is because many services will just outright ban, hinder, or block Tor (see <https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor> <sup>[[Archive.org]][263]</sup>).
+This solution can bring some benefits in some specific cases vs using Tor only where accessing the destination service would be impossible from a Tor Exit node. This is because many services will just outright ban, hinder, or block Tor (see <https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor> <sup>[[Archive.org]][266]</sup>).
 
 As you can see in this illustration, if your cash (preferred)/Monero paid VPN/Proxy is compromised by an adversary (despite their privacy statement and no-logging policies), they will only find an anonymous cash/Monero paid VPN account connecting to their services from a Tor Exit node.
 
-![][313]
+![][316]
 
 If an adversary somehow manages to compromise the Tor network too, they will only reveal the IP of a random public Wi-Fi that is not tied to your identity.
 
@@ -3577,7 +3591,9 @@ If an adversary somehow compromises your VM OS (with a malware or exploit for in
 
 Stream isolation is a mitigation technique used to prevent some correlation attacks by having different Tor Circuits for each application. Here is an illustration to show what stream isolation is:
 
-![][265]
+![][268]
+
+(Illustration from Marcelo Martins, <https://stakey.club/en/decred-via-tor-network/> <sup>[[Archive.org]][269]</sup>)
 
 VPN/Proxy over Tor falls on the right-side[^297] meaning using a VPN/Proxy over Tor forces Tor to use one circuit for all activities instead of multiple circuits for each. This means that using a VPN/Proxy over Tor can somewhat reduce the effectiveness of Tor in some cases and should therefore be used only for some specific cases:
 
@@ -3585,15 +3601,15 @@ VPN/Proxy over Tor falls on the right-side[^297] meaning using a VPN/Proxy over 
 
 -   When you do not mind using a shared Tor circuit for various services. Like for instance for using various authenticated services.
 
-**You should however consider not using this method when your aim is just to browse random various unauthenticated websites as you will not benefit from Stream Isolation and this could make correlation attacks easier for an adversary between each of your sessions (see [Your Anonymized Tor/VPN traffic:][266]).**
+**You should however consider not using this method when your aim is just to browse random various unauthenticated websites as you will not benefit from Stream Isolation and this could make correlation attacks easier for an adversary between each of your sessions (see [Your Anonymized Tor/VPN traffic:]).**
 
 More information at:
 
--   <https://www.whonix.org/wiki/Stream_Isolation> <sup>[[Archive.org]][267]</sup>
+-   <https://www.whonix.org/wiki/Stream_Isolation> <sup>[[Archive.org]][270]</sup>
 
--   <https://tails.boum.org/contribute/design/stream_isolation/> <sup>[[Archive.org]][268]</sup>
+-   <https://tails.boum.org/contribute/design/stream_isolation/> <sup>[[Archive.org]][271]</sup>
 
--   <https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table> <sup>[[Archive.org]][269]</sup>
+-   <https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table> <sup>[[Archive.org]][272]</sup>
 
 #### Tor over VPN:
 
@@ -3611,9 +3627,9 @@ You might be wondering: Well, what about using Tor over VPN instead of VPN over 
 
     -   This method also does not break Tor Stream isolation.
 
-Note, if you're having issues accessing the Tor Network due to blocking/censorship, you could try using Tor Bridges (see Tor Documentation <https://2019.www.torproject.org/docs/bridges> <sup>[[Archive.org]][205]</sup> and Whonix Documentation <https://www.whonix.org/wiki/Bridges> <sup>[[Archive.org]][288]</sup>).
+Note, if you're having issues accessing the Tor Network due to blocking/censorship, you could try using Tor Bridges (see Tor Documentation <https://2019.www.torproject.org/docs/bridges> <sup>[[Archive.org]][207]</sup> and Whonix Documentation <https://www.whonix.org/wiki/Bridges> <sup>[[Archive.org]][291]</sup>).
 
-It is also possible to consider **VPN over Tor over VPN (User > VPN > Tor > VPN > Internet)** using two cash/Monero paid VPNs instead. This means that you will connect the Host OS to a first VPN from your Public Wi-Fi, then Whonix will connect to Tor and finally your VM will connect to a second VPN over Tor over VPN (see <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][270]</sup>).
+It is also possible to consider **VPN over Tor over VPN (User > VPN > Tor > VPN > Internet)** using two cash/Monero paid VPNs instead. This means that you will connect the Host OS to a first VPN from your Public Wi-Fi, then Whonix will connect to Tor and finally your VM will connect to a second VPN over Tor over VPN (see <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][273]</sup>).
 
 This will of course have a significant performance impact and might be quite slow but I think Tor is necessary somewhere for achieving reasonable anonymity.
 
@@ -3631,15 +3647,15 @@ Just using a VPN or even a VPN over VPN makes no sense as those can be traced ba
 
 For more info, please see the following references:
 
--   <https://www.whonix.org/wiki/Comparison_Of_Tor_with_CGI_Proxies,_Proxy_Chains,_and_VPN_Services#Tor_and_VPN_Services_Comparison> <sup>[[Archive.org]][271]</sup>
+-   <https://www.whonix.org/wiki/Comparison_Of_Tor_with_CGI_Proxies,_Proxy_Chains,_and_VPN_Services#Tor_and_VPN_Services_Comparison> <sup>[[Archive.org]][274]</sup>
 
--   <https://www.whonix.org/wiki/Why_does_Whonix_use_Tor> <sup>[[Archive.org]][272]</sup>
+-   <https://www.whonix.org/wiki/Why_does_Whonix_use_Tor> <sup>[[Archive.org]][275]</sup>
 
--   <https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study> <sup>[[Archive.org]][273]</sup>
+-   <https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study> <sup>[[Archive.org]][276]</sup>
 
--   <https://gist.github.com/joepie91/5a9909939e6ce7d09e29#file-vpn-md> <sup>[[Archive.org]][274]</sup>
+-   <https://gist.github.com/joepie91/5a9909939e6ce7d09e29#file-vpn-md> <sup>[[Archive.org]][277]</sup>
 
--   <https://schub.wtf/blog/2019/04/08/very-precarious-narrative.html> <sup>[[Archive.org]][275]</sup>
+-   <https://schub.wtf/blog/2019/04/08/very-precarious-narrative.html> <sup>[[Archive.org]][278]</sup>
 
 **In the context of this guide, Tor is required somewhere to achieve reasonable and safe anonymity and you should use it if you can.**
 
@@ -3677,37 +3693,37 @@ Unfortunately, using Tor alone will raise the suspicion of many destinations' pl
 
 For more information, you can also see the discussions here that could help decide yourself:
 
--   Tor Project: <https://gitlab.torproject.org/legacy/trac/-/wikis/doc/TorPlusVPN> <sup>[[Archive.org]][276]</sup>
+-   Tor Project: <https://gitlab.torproject.org/legacy/trac/-/wikis/doc/TorPlusVPN> <sup>[[Archive.org]][279]</sup>
 
 -   Tails Documentation:
 
-    -   <https://gitlab.tails.boum.org/tails/blueprints/-/wikis/vpn_support/> <sup>[[Archive.org]][277]</sup>
+    -   <https://gitlab.tails.boum.org/tails/blueprints/-/wikis/vpn_support/> <sup>[[Archive.org]][280]</sup>
 
-    -   <https://tails.boum.org/support/faq/index.en.html#index20h2> <sup>[[Archive.org]][278]</sup>
+    -   <https://tails.boum.org/support/faq/index.en.html#index20h2> <sup>[[Archive.org]][281]</sup>
 
 -   Whonix Documentation (in this order):
 
-    -   <https://www.whonix.org/wiki/Tunnels/Introduction> <sup>[[Archive.org]][279]</sup>
+    -   <https://www.whonix.org/wiki/Tunnels/Introduction> <sup>[[Archive.org]][282]</sup>
 
-    -   <https://www.whonix.org/wiki/Tunnels/Connecting_to_Tor_before_a_VPN> <sup>[[Archive.org]][280]</sup>
+    -   <https://www.whonix.org/wiki/Tunnels/Connecting_to_Tor_before_a_VPN> <sup>[[Archive.org]][283]</sup>
 
-    -   <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][270]</sup>
+    -   <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][273]</sup>
 
 -   Some papers on the matter:
 
-    -   <https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study> <sup>[[Archive.org]][273]</sup>
+    -   <https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study> <sup>[[Archive.org]][276]</sup>
 
 ### Get an anonymous VPN/Proxy:
 
 Skip this step if you want to use Tor only or VPN is not an option.
 
-See [Appendix O: Get an anonymous VPN/Proxy][314]
+See [Appendix O: Get an anonymous VPN/Proxy]
 
 ### Installation:
 
-We will follow the instructions from their own guide <https://www.qubes-os.org/doc/installation-guide/> <sup>[[Archive.org]][315]</sup>:
+We will follow the instructions from their own guide <https://www.qubes-os.org/doc/installation-guide/> <sup>[[Archive.org]][317]</sup>:
 
-Secure Boot is not supported as per their FAQ: <https://www.qubes-os.org/faq/#is-secure-boot-supported> <sup>[[Archive.org]][316]</sup> so it should be disabled in the BIOS/UEFI settings.
+Secure Boot is not supported as per their FAQ: <https://www.qubes-os.org/faq/#is-secure-boot-supported> <sup>[[Archive.org]][318]</sup> so it should be disabled in the BIOS/UEFI settings.
 
 -   Download the latest Qubes OS installation ISO according to their hardware compatibility list.
 
@@ -3715,7 +3731,7 @@ Secure Boot is not supported as per their FAQ: <https://www.qubes-os.org/faq/#is
 
 -   Install Qubes OS according to the installation guide:
 
-    -   **If you want to use Tor or VPN over Tor: Check the** "**Enabling system and template updates over the Tor anonymity network using Whonix" during the last step. This will force all Qubes OS updates to go through Tor. While this will significantly reduce your update speed, it will increase your anonymity from the start.** (If you are having issues connecting to Tor due to censorship or blocking, consider using Tor Bridges as recommended earlier. Just follow the tutorial provided here: <https://www.whonix.org/wiki/Bridges> <sup>[[Archive.org]][288]</sup>)
+    -   **If you want to use Tor or VPN over Tor: Check the** "**Enabling system and template updates over the Tor anonymity network using Whonix" during the last step. This will force all Qubes OS updates to go through Tor. While this will significantly reduce your update speed, it will increase your anonymity from the start.** (If you are having issues connecting to Tor due to censorship or blocking, consider using Tor Bridges as recommended earlier. Just follow the tutorial provided here: <https://www.whonix.org/wiki/Bridges> <sup>[[Archive.org]][291]</sup>)
 
     -   If you want to use Tor over VPN or cannot use any of those, leave it unchecked.
 
@@ -3781,7 +3797,7 @@ After you are connected to a Wi-Fi you need to update Qube OS and Whonix. It is 
 
 This tutorial should also work with any OpenVPN provider (Mullvad, IVPN or ProtonVPN for instance).
 
-This is based on the tutorial provided by Qube OS themselves (<https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/vpn.md> <sup>[[Archive.org]][317]</sup>). If you are familiar with this process, you can follow their tutorial. Here is mine:
+This is based on the tutorial provided by Qube OS themselves (<https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/vpn.md> <sup>[[Archive.org]][319]</sup>). If you are familiar with this process, you can follow their tutorial. Here is mine:
 
 #### Create the ProxyVM:
 
@@ -3809,7 +3825,7 @@ This is based on the tutorial provided by Qube OS themselves (<https://github.co
 
 -   Test your Connectivity:
 
-    -   If you are going for VPN over Tor, Test the VM connectivity to Tor by launching a Browser within the ProxyVM and going to <https://check.torproject.org> <sup>[[Archive.org]][318]</sup> (It should say you are connected to Tor)
+    -   If you are going for VPN over Tor, Test the VM connectivity to Tor by launching a Browser within the ProxyVM and going to <https://check.torproject.org> <sup>[[Archive.org]][320]</sup> (It should say you are connected to Tor)
 
     -   If you are going for Tor over VPN, Test the VM connectivity to the internet by launching a Browser within the ProxyVM and access any website.
 
@@ -3889,7 +3905,7 @@ Skip this step if you are not going to use a VPN
 
 -   ```ip6tables -I FORWARD -i eth0 -j DROP```
 
-> (These will block outbound traffic when the VPN is down, it is a kill switch, more information here <https://linuxconfig.org/how-to-create-a-vpn-killswitch-using-iptables-on-linux> <sup>[[Archive.org]][319]</sup> )
+> (These will block outbound traffic when the VPN is down, it is a kill switch, more information here <https://linuxconfig.org/how-to-create-a-vpn-killswitch-using-iptables-on-linux> <sup>[[Archive.org]][321]</sup> )
 
 -   ```iptables -A OUTPUT -d 10.8.0.1 -j ACCEPT```
 
@@ -3913,11 +3929,11 @@ Skip this step if you are not going to use a VPN
 
 -   Test the ProxyVM VPN connectivity by starting a Browser within it and going to your VPN provider test page. It should now say you are connected to a VPN:
 
-    -   Mullvad: <https://mullvad.net/en/check/> <sup>[[Archive.org]][320]</sup>
+    -   Mullvad: <https://mullvad.net/en/check/> <sup>[[Archive.org]][322]</sup>
 
-    -   IVPN: <https://www.ivpn.net/> <sup>[[Archive.org]][321]</sup> (check the top banner)
+    -   IVPN: <https://www.ivpn.net/> <sup>[[Archive.org]][323]</sup> (check the top banner)
 
-    -   ProtonVPN: Follow their instructions here <https://protonvpn.com/support/vpn-ip-change/> <sup>[[Archive.org]][322]</sup>
+    -   ProtonVPN: Follow their instructions here <https://protonvpn.com/support/vpn-ip-change/> <sup>[[Archive.org]][324]</sup>
 
 #### VPN over Tor:
 
@@ -3955,7 +3971,7 @@ Reconfigure your Whonix Gateway VM to use your ProxyVM as NetVM instead of sys-f
 
 -   Click OK
 
--   Create a Whonix Workstation Disposable VM (follow this tutorial <https://www.whonix.org/wiki/Qubes/DisposableVM> <sup>[[Archive.org]][323]</sup>)
+-   Create a Whonix Workstation Disposable VM (follow this tutorial <https://www.whonix.org/wiki/Qubes/DisposableVM> <sup>[[Archive.org]][325]</sup>)
 
 -   Launch a browser from the VM and Check that you have VPN connectivity and it should work.
 
@@ -4021,7 +4037,7 @@ Within the Applications Menu (upper left), Select the Fedora-30 template
 
 -   Launch a terminal from the VM
 
-Apply the instructions from <https://brave.com/linux/> <sup>[[Archive.org]][324]</sup> (Fedora 28+ section) and run the following commands:
+Apply the instructions from <https://brave.com/linux/> <sup>[[Archive.org]][326]</sup> (Fedora 28+ section) and run the following commands:
 
 -   ```sudo dnf install dnf-plugins-core```
 
@@ -4033,7 +4049,7 @@ Apply the instructions from <https://brave.com/linux/> <sup>[[Archive.org]][324]
 
 #### Whonix Disposable VM:
 
-Edit the Whonix Disposable VM template and follow instructions here <https://www.whonix.org/wiki/Install_Software> <sup>[[Archive.org]][292]</sup>
+Edit the Whonix Disposable VM template and follow instructions here <https://www.whonix.org/wiki/Install_Software> <sup>[[Archive.org]][295]</sup>
 
 ### Setup an Android VM:
 
@@ -4075,7 +4091,7 @@ Basically, follow the tutorial here:
 
 -   Start the Qube and open a Terminal
 
-Now you will have to follow the instructions from here: <https://github.com/anbox/anbox-modules> <sup>[[Archive.org]][325]</sup>
+Now you will have to follow the instructions from here: <https://github.com/anbox/anbox-modules> <sup>[[Archive.org]][327]</sup>
 
 -   Start by closing the AnBox Modules repository by running:
 
@@ -4093,7 +4109,7 @@ Now you will have to follow the instructions from here: <https://github.com/anbo
 
     -   ```sudo apt install snapd```
 
-Now we will follow their other tutorial from here: <https://github.com/anbox/anbox/blob/master/docs/install.md> <sup>[[Archive.org]][326]</sup>
+Now we will follow their other tutorial from here: <https://github.com/anbox/anbox/blob/master/docs/install.md> <sup>[[Archive.org]][328]</sup>
 
 -   Install AnBox by running:
 
@@ -4163,7 +4179,7 @@ You are done and can now skip the rest to go to the "[Creating your anonymous on
 
 ### Captchas:
 
-![][327]
+![][329]
 
 (Illustration by xkcd.com, licensed under CC BY-NC 2.5)
 
@@ -4173,7 +4189,7 @@ They are designed to separate bots from humans but are also used to deter anonym
 
 If you frequently use VPNs or Tor, you will quickly encounter many captchas everywhere[^306]. Quite often when using Tor, even if you succeed in solving all the puzzles, you will still be denied after solving the puzzles.
 
-See <https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor> <sup>[[Archive.org]][263]</sup>
+See <https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor> <sup>[[Archive.org]][266]</sup>
 
 While most people think those puzzles are only about solving a little puzzle, it is important to understand that it is much more complex and that modern Captchas uses advanced machine learning and risk analysis algorithms to check if you are human[^307]:
 
@@ -4187,9 +4203,9 @@ It is also very likely that those platforms could already reliably identify you 
 
 You will often experience several in a row (sometimes endless[^310]) and sometimes very difficult ones involving reading undecipherable characters or identifying various objects on endless pictures set. You will also have more captchas if you use ad blocking system or if your account was flagged for any reason for using VPNs or Tor previously.
 
-You will also have (in my experience) more Captchas (reCaptcha) in Google if you do not use Chrome. But this can be mitigated by using Chromium based browsers such as Brave or Ungoogled-Chromium. There is also a Browser extension called Buster that could help you those <https://github.com/dessant/buster> <sup>[[Archive.org]][328]</sup>.
+You will also have (in my experience) more Captchas (reCaptcha) in Google if you do not use Chrome. But this can be mitigated by using Chromium based browsers such as Brave or Ungoogled-Chromium. There is also a Browser extension called Buster that could help you those <https://github.com/dessant/buster> <sup>[[Archive.org]][330]</sup>.
 
-As for Cloudflare (hCaptcha), you could also use their Accessibility solution here (<https://www.hcaptcha.com/accessibility> <sup>[[Archive.org]][329]</sup>) which would allow you to sign-up (with your anonymous identity created later) and set a cookie within your Browser that would allow you to bypass their captchas. Another solution to mitigate hCaptcha would be to use their own solution called "Privacy Pass"[^311] <https://privacypass.github.io/> <sup>[[Archive.org]][330]</sup> in the form of a Browser extension you could install in your VM Browser.
+As for Cloudflare (hCaptcha), you could also use their Accessibility solution here (<https://www.hcaptcha.com/accessibility> <sup>[[Archive.org]][331]</sup>) which would allow you to sign-up (with your anonymous identity created later) and set a cookie within your Browser that would allow you to bypass their captchas. Another solution to mitigate hCaptcha would be to use their own solution called "Privacy Pass"[^311] <https://privacypass.github.io/> <sup>[[Archive.org]][332]</sup> in the form of a Browser extension you could install in your VM Browser.
 
 You should therefore deal with those carefully and force yourself to alter the way you are solving them (speed/movement/accuracy/...) as to prevent "Captcha Fingerprinting".
 
@@ -4253,7 +4269,7 @@ Many platforms' operators and administrators do not want traffic from these IPs 
 
 Fortunately, those systems are not "perfect' and you will (still) be able to get around those restrictions by switching identities (in the case of Tor) and looking trying to access the website each time until you find an Exit Node that is not blacklisted (yet).
 
-Sometimes some platforms will allow you to log-in with a Tor IP but not sign-up (See <https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor> <sup>[[Archive.org]][263]</sup>). Obviously, those platforms will keep a convenient permanent log of the IP you used during sign-up. And some will keep such logs indefinitely including all the IPs you used to logging in (hi Facebook).
+Sometimes some platforms will allow you to log-in with a Tor IP but not sign-up (See <https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor> <sup>[[Archive.org]][266]</sup>). Obviously, those platforms will keep a convenient permanent log of the IP you used during sign-up. And some will keep such logs indefinitely including all the IPs you used to logging in (hi Facebook).
 
 The tolerance is much higher with VPNs as they are not considered "open proxies" but that will not stop many platforms from making them hard to use by forcing increasingly difficult captchas on most VPN users.
 
@@ -4333,11 +4349,11 @@ See [Your Digital Fingerprint, Footprint, and Online Behavior:].
 
 Simple and efficient, some platforms will require than you perform financial transaction to verify your account sometimes under the pretext of verifying your age. This could be a credit card verification or a very small amount bank wire. Some will accept a donation in a main crypto like Bitcoin or Ethereum.
 
-While this might seem innocent, this is obviously an ID verification and de-anonymization method. This is just indirectly relying on third party financial KYC[^135] regulations.
+While this might seem innocent, this is obviously an ID verification and de-anonymization method. This is just indirectly relying on third party financial KYC[^197] regulations.
 
 This is for instance now the case on YouTube for some European Users[^315] but also used by services like Amazon that requires a valid payment method for creating an account.
 
-![][331]
+![][333]
 
 ### Sign-in with some platform:
 
@@ -4357,17 +4373,17 @@ This is a common method used on some Crypto trading platforms and some dating Ap
 
 Some platforms/apps will require you to take a live picture of yourself either doing something (a wink, holding an arm up ...) or showing a custom piece of information (a hand written text, a passport or ID) within the picture. Sometimes the platform/app will require several pictures to increase their certainty.
 
-![][332]
+![][334]
 
 This guide will not cover this one (yet) as it is mainly used on financial platforms (that will be able to identify you with other means anyway) and some dating apps like Tinder[^317]. Unfortunately, this method is now also sometimes being used on Facebook[^318] and Instagram as part of their verification methods (tho I did not face it yet so far).
 
-![][333]
+![][335]
 
 In some cases, these verifications must be done from your Smartphone and with an "in-app" camera to prevent you from sending a previously saved (edited) image.
 
 Recently even platforms such as PornHub decided to implement similar measures in the future[^319].
 
-This verification is very hard to defeat but possible. A method to possibly defeat those would be to use "deep fake" technology software such as the open-source FaceSwap <https://github.com/deepfakes/faceswap> <sup>[[Archive.org]][334]</sup> to generate the required verification pictures using a randomly computer-generated face that would be swapped over the picture of a complicit model (or a stock photo).
+This verification is very hard to defeat but possible. A method to possibly defeat those would be to use "deep fake" technology software such as the open-source FaceSwap <https://github.com/deepfakes/faceswap> <sup>[[Archive.org]][336]</sup> to generate the required verification pictures using a randomly computer-generated face that would be swapped over the picture of a complicit model (or a stock photo).
 
 Unfortunately, some apps require direct access to a smartphone camera to process the verification. In that case we will need to find a way to do such "face swaps" on the fly using a filter and another way to feed this into the camera used by the app.
 
@@ -4451,23 +4467,23 @@ I will help you bit by listing a few tips I learned while doing research over th
 
 -   Similarly, origin IP geolocation (your IP/location when you go to "whatsmyipaddress.com") should match your identity location as much as possible (You can pick this in the VPN client if you use the 3 layers approach or just create a new identity in Tor Browser or Brave Tor Tab until you get the appropriate Exit node, or alternatively configure Tor to restrict your Exit Nodes). You could exclude any exit IP that is not located in Western Europe/US/Canada/Japan/South Korea/Australia/New Zealand as you will have less issues. Ideally, you should get a European Union IP to get additional GDPR protection and if possible, a German exit IP due to their legal stance on using anonymous accounts on online platforms.
 
--   Brave Browser (Chromium based) with a Private Tor Tab has (IMHO) a better acceptance level than Tor Browser (Firefox based). You will experience less issues with captchas and online platforms[^312] if you use Brave than if you use Tor Browser (feel free to try this yourself).
+-   Brave Browser (Chromium based) with a Private Tor Tab has (IMHO) a better acceptance level than Tor Browser (Firefox based). You will experience less issues with captchas and online platforms[^314] if you use Brave than if you use Tor Browser (feel free to try this yourself).
 
--   Every identity you should have a matching profile picture associated to it. For this purpose, I recommend you just go to <https://thispersondoesnotexist.com/> <sup>[[Archive.org]][335]</sup> and generate a computer-generated profile picture. You can also generate such pictures yourself from your computer if you prefer by using the open-source StyleGan project here <https://github.com/NVlabs/stylegan2> <sup>[[Archive.org]][336]</sup>. Just refresh the page until you find a picture that matches your identity in all aspects (age, sex, and ethnicity) and save that picture. It would be even better to have several pictures associated to that identity but I do not have an "easy way" of doing that yet.
+-   Every identity you should have a matching profile picture associated to it. For this purpose, I recommend you just go to <https://thispersondoesnotexist.com/> <sup>[[Archive.org]][337]</sup> and generate a computer-generated profile picture. You can also generate such pictures yourself from your computer if you prefer by using the open-source StyleGan project here <https://github.com/NVlabs/stylegan2> <sup>[[Archive.org]][338]</sup>. Just refresh the page until you find a picture that matches your identity in all aspects (age, sex, and ethnicity) and save that picture. It would be even better to have several pictures associated to that identity but I do not have an "easy way" of doing that yet.
 
-    -   **Bonus**, you could also make it more real by using this service (with an anonymous identity) <https://www.myheritage.com/deep-nostalgia> <sup>[[Archive.org]][337]</sup> to make a picture more lifelike. Here is an example:
+    -   **Bonus**, you could also make it more real by using this service (with an anonymous identity) <https://www.myheritage.com/deep-nostalgia> <sup>[[Archive.org]][339]</sup> to make a picture more lifelike. Here is an example:
 
         -   Original:
 
-![][338]
+![][340]
 
-		-   Result (see Online because PDFs do not work well with embedded media):
+        -   Result:
 
 ![](/media/after.gif)
 
 Slight issue tho: **MyHeritrage.com bans Tor Exit nodes so you might have again to consider VPN over Tor for this.**
 
-You could also achieve the same result without using MyHeritage and by doing it yourself using for example <https://github.com/AliaksandrSiarohin/first-order-model> <sup>[[Archive.org]][339]</sup> but this will require more manual operations (**and requires an NVIDIA GPU**).
+You could also achieve the same result without using MyHeritage and by doing it yourself using for example <https://github.com/AliaksandrSiarohin/first-order-model> <sup>[[Archive.org]][341]</sup> but this will require more manual operations (**and requires an NVIDIA GPU**).
 
 Note: If you make several pictures of the same identity using some of the tools mentioned above, be sure to compare the similarities using the Microsoft Azure Face Verification tool at <https://azure.microsoft.com/en-us/services/cognitive-services/face/#demo>.
 
@@ -4501,9 +4517,9 @@ Note: If you make several pictures of the same identity using some of the tools 
 
 -   Always use TOTP 2FA (not SMS to prevent Sim Swapping attacks[^324] and to keep your identity working when your pre-paid card expires) using KeePassXC when available to secure your logins to various platforms.
 
--   Remember, **always use passphrases instead of passwords and use a different one for each service. Do not make it easy for an adversary to access all your information because you used the same password everywhere**[^242]**.**
+-   Remember, **always use passphrases instead of passwords and use a different one for each service. Do not make it easy for an adversary to access all your information because you used the same password everywhere**[^244]**.**
 
-Here is also a good guide on this specific topic: <https://gendersec.tacticaltech.org/wiki/index.php/Complete_manual#.22Real.22_names> <sup>[[Archive.org]][340]</sup>
+Here is also a good guide on this specific topic: <https://gendersec.tacticaltech.org/wiki/index.php/Complete_manual#.22Real.22_names> <sup>[[Archive.org]][342]</sup>
 
 Note: If you are having trouble finding an Exit node in the country of your choice you can force using specific countries for Exit Nodes (and therefore exit countries) on Tor by editing the torrc file on the Whonix Gateway or even the Tor Browser:
 
@@ -4525,51 +4541,51 @@ Once you are in the file, you can do the following:
 
 Always use uppercase letter for any setting.
 
-**Please note that this is restricting Onion Routing could limit your Anonymity if you are too restrictive. You can see a visualized list of available Exit Nodes here: <https://www.bigdatacloud.com/insights/tor-exit-nodes>** <sup>[[Archive.org]][341]</sup>
+**Please note that this is restricting Onion Routing could limit your Anonymity if you are too restrictive. You can see a visualized list of available Exit Nodes here: <https://www.bigdatacloud.com/insights/tor-exit-nodes>** <sup>[[Archive.org]][343]</sup>
 
-Here is the list of possibilities (this is a general list and many of those countries might not have Exit nodes at all): <https://b3rn3d.herokuapp.com/blog/2014/03/05/tor-country-codes/> <sup>[[Archive.org]][342]</sup>
+Here is the list of possibilities (this is a general list and many of those countries might not have Exit nodes at all): <https://b3rn3d.herokuapp.com/blog/2014/03/05/tor-country-codes/> <sup>[[Archive.org]][344]</sup>
 
 ### The Real-Name System:
 
-Unfortunately, not using your real identity is against the ToS (Terms of Services) of many services (especially those owned by Microsoft and Facebook). But don't despair, as explained in the [Requirements:][Understanding some basics of how some information can lead back to you and how to mitigate some:], it's still legal in Germany where the courts have upheld up the legality of not using real names on online platforms (§13 VI of the German Telemedia Act of 2007[^1]'[^2]). **Fortunately, ToS cannot override laws** **(yet)**.
+Unfortunately, not using your real identity is against the ToS (Terms of Services) of many services (especially those owned by Microsoft and Facebook). But don't despair, as explained in the [Requirements:], it's still legal in Germany where the courts have upheld up the legality of not using real names on online platforms (§13 VI of the German Telemedia Act of 2007[^1]'[^2]). **Fortunately, ToS cannot override laws** **(yet)**.
 
 This does not mean that it is illegal in other places but that it might be a breach of their Terms of Services if you do not have the law on your side. **Remember this guide only endorses this for German users residing in Germany.**
 
-On my side, I strongly condemn this type of real-name policy. See for instance this Wikipedia article giving some examples: <https://en.wikipedia.org/wiki/Facebook_real-name_policy_controversy> <sup>[[Archive.org]][343]</sup>
+On my side, I strongly condemn this type of real-name policy. See for instance this Wikipedia article giving some examples: <https://en.wikipedia.org/wiki/Facebook_real-name_policy_controversy> <sup>[[Archive.org]][345]</sup>
 
 Here are some more references about the German case for reference:
 
--   <https://slate.com/technology/2018/02/why-some-americans-are-cheering-germany-for-taking-on-facebooks-real-name-policy.html> <sup>[[Archive.org]][344]</sup>
+-   <https://slate.com/technology/2018/02/why-some-americans-are-cheering-germany-for-taking-on-facebooks-real-name-policy.html> <sup>[[Archive.org]][346]</sup>
 
--   <https://www.theverge.com/2018/2/12/17005746/facebook-real-name-policy-illegal-german-court-rules> <sup>[[Archive.org]][345]</sup>
+-   <https://www.theverge.com/2018/2/12/17005746/facebook-real-name-policy-illegal-german-court-rules> <sup>[[Archive.org]][347]</sup>
 
--   <https://www.pcmag.com/news/german-court-rules-facebooks-real-name-policy-is-illegal> <sup>[[Archive.org]][346]</sup>
+-   <https://www.pcmag.com/news/german-court-rules-facebooks-real-name-policy-is-illegal> <sup>[[Archive.org]][348]</sup>
 
--   <https://www.vzbv.de/sites/default/files/downloads/2018/02/14/18-02-12_vzbv_pm_facebook-urteil_en.pdf> <sup>[[Archive.org]][347]</sup>
+-   <https://www.vzbv.de/sites/default/files/downloads/2018/02/14/18-02-12_vzbv_pm_facebook-urteil_en.pdf> <sup>[[Archive.org]][349]</sup>
 
--   <https://www.pcmag.com/news/german-court-rules-facebooks-real-name-policy-is-illegal> <sup>[[Archive.org]][346]</sup>
+-   <https://www.pcmag.com/news/german-court-rules-facebooks-real-name-policy-is-illegal> <sup>[[Archive.org]][348]</sup>
 
--   <https://www.reuters.com/article/us-germany-facebook/german-court-rules-facebook-use-of-personal-data-illegal-idUSKBN1FW1FI> <sup>[[Archive.org]][348]</sup>
+-   <https://www.reuters.com/article/us-germany-facebook/german-court-rules-facebook-use-of-personal-data-illegal-idUSKBN1FW1FI> <sup>[[Archive.org]][350]</sup>
 
 Alternatively, you could be an Adult resident of any other country where you can validate and verify the legality of this yourself. Again, this is not legal advice and I am not a lawyer. **Do this at your own risk.**
 
 Other countries where this was ruled illegal
 
--   South Korea (see <https://en.wikipedia.org/wiki/Real-name_system#South_Korea> <sup>[[Archive.org]][349]</sup>)
+-   South Korea (see <https://en.wikipedia.org/wiki/Real-name_system#South_Korea> <sup>[[Archive.org]][351]</sup>)
 
 -   If you know any other, please let me know with references in the GitHub issues.
 
-Some platforms are by-passing this requirement all-together by requiring a valid payment method instead (see [Financial transactions:]). While this does not directly require a real-name through their ToS, this has the same results as they usually only accept mainstream (not Monero/Cash) payment methods (such as Visa/MasterCard/Maestro or PayPal) which do require a real-name legally as part of their KYC[^135] regulations. The result is the same and arguably even better than a simple real-name policy you could ignore in some countries such as Germany.
+Some platforms are by-passing this requirement all-together by requiring a valid payment method instead (see [Financial transactions:]). While this does not directly require a real-name through their ToS, this has the same results as they usually only accept mainstream (not Monero/Cash) payment methods (such as Visa/MasterCard/Maestro or PayPal) which do require a real-name legally as part of their KYC[^197] regulations. The result is the same and arguably even better than a simple real-name policy you could ignore in some countries such as Germany.
 
 ### Overview:
 
 This section will show you an overview of the current various requirements on some platforms.
 
--   **Consider using the recommended tools on <https://privacytools.io/>** <sup>[[Archive.org]][350]</sup> **for your better privacy instead of the usual mainstream ones.**
+-   **Consider using the recommended tools on <https://privacytools.io/>** <sup>[[Archive.org]][352]</sup> **for your better privacy instead of the usual mainstream ones.**
 
--   **Consider using the recommended tools on <https://www.whonix.org/wiki/Documentation>** <sup>[[Archive.org]][291]</sup> **as well instead of the usual mainstream ones such as E-mail providers: <https://www.whonix.org/wiki/E-Mail#Anonymity_Friendly_Email_Provider_List>** <sup>[[Archive.org]][351]</sup>
+-   **Consider using the recommended tools on <https://www.whonix.org/wiki/Documentation>** <sup>[[Archive.org]][294]</sup> **as well instead of the usual mainstream ones such as E-mail providers: <https://www.whonix.org/wiki/E-Mail#Anonymity_Friendly_Email_Provider_List>** <sup>[[Archive.org]][353]</sup>
 
-**The following overview does not mention the privacy practices of those platforms but only their requirements for registering an account. If you want to use privacy-aware tools and platforms, head on to <https://privacytools.io/>** ^[[Archive.org]][350].^
+**The following overview does not mention the privacy practices of those platforms but only their requirements for registering an account. If you want to use privacy-aware tools and platforms, head on to <https://privacytools.io/>** <sup>[[Archive.org]][352]</sup>
 
 **Legend**:
 
@@ -4993,7 +5009,7 @@ This section will show you an overview of the current various requirements on so
 
 #### Amazon:
 
--   Is this against their ToS? No but yes <https://www.amazon.com/gp/help/customer/display.html?nodeId=202140280> <sup>[[Archive.org]][352]</sup>
+-   Is this against their ToS? No but yes <https://www.amazon.com/gp/help/customer/display.html?nodeId=202140280> <sup>[[Archive.org]][354]</sup>
 
 "1. Amazon Services, Amazon Software
 
@@ -5009,7 +5025,7 @@ Because of this valid payment method requirement, I could not test this. While t
 
 #### Apple:
 
--   Is this against their ToS? Yes <https://www.apple.com/legal/internet-services/icloud/en/terms.html> <sup>[[Archive.org]][353]</sup>
+-   Is this against their ToS? Yes <https://www.apple.com/legal/internet-services/icloud/en/terms.html> <sup>[[Archive.org]][355]</sup>
 
 "IV. Your Use of the Service
 
@@ -5023,7 +5039,7 @@ In order to use the Service, you must enter your Apple ID and password to authen
 
 #### Briar:
 
--   Is this against their ToS? No <https://briarproject.org/privacy-policy/> <sup>[[Archive.org]][354]</sup>
+-   Is this against their ToS? No <https://briarproject.org/privacy-policy/> <sup>[[Archive.org]][356]</sup>
 
 -   Will they require a phone number? No, they do not even require an e-mail
 
@@ -5033,7 +5049,7 @@ In order to use the Service, you must enter your Apple ID and password to authen
 
 #### Discord:
 
--   Is this against their ToS? No <https://discord.com/terms> <sup>[[Archive.org]][355]</sup>
+-   Is this against their ToS? No <https://discord.com/terms> <sup>[[Archive.org]][357]</sup>
 
 -   Will they require a phone number? No but they do require an e-mail
 
@@ -5047,7 +5063,7 @@ Steps after creating: Enable 2FA authentication with KeePassXC TOTP
 
 #### Element:
 
--   Is this against their ToS? No <https://element.io/terms-of-service> <sup>[[Archive.org]][356]</sup>
+-   Is this against their ToS? No <https://element.io/terms-of-service> <sup>[[Archive.org]][358]</sup>
 
 -   Will they require a phone number? No, they do not even require an e-mail
 
@@ -5057,7 +5073,7 @@ Expect some Captchas during account creation.
 
 #### Facebook:
 
--   Is this against their ToS? Yes <https://www.facebook.com/terms.php> <sup>[[Archive.org]][357]</sup>
+-   Is this against their ToS? Yes <https://www.facebook.com/terms.php> <sup>[[Archive.org]][359]</sup>
 
 "1. Who can use Facebook
 
@@ -5071,7 +5087,7 @@ When people stand behind their opinions and actions, our community is safer and 
 
 -   Can you create accounts through Tor? Yes, but it is very difficult and their onion address[^327] will not help. In most cases you'll just have a random error at sign-up and your account suspended after sign-in."
 
-But this clause of their ToS is illegal in Germany (see [Requirements:][Understanding some basics of how some information can lead back to you and how to mitigate some:]).
+But this clause of their ToS is illegal in Germany (see [Requirements:]).
 
 Facebook is one of the most aggressive platforms in identity verification and is pushing hard their "real name policy". It is why this guide is only advised to German residents.
 
@@ -5107,7 +5123,7 @@ If you do file an appeal, you will have to wait for Facebook to review it (I do 
 
 #### GitHub:
 
--   Is this against their ToS? No <https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-terms-of-service> <sup>[[Archive.org]][358]</sup>
+-   Is this against their ToS? No <https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-terms-of-service> <sup>[[Archive.org]][360]</sup>
 
 -   Will they require a phone number? Nope, all good
 
@@ -5121,7 +5137,7 @@ Be sure to go into Settings > E-Mail and make your e-mail private as well as blo
 
 #### GitLab:
 
--   Is this against their ToS? No <https://about.gitlab.com/handbook/legal/subscription-agreement/> <sup>[[Archive.org]][359]</sup>
+-   Is this against their ToS? No <https://about.gitlab.com/handbook/legal/subscription-agreement/> <sup>[[Archive.org]][361]</sup>
 
 -   Will they require a phone number? Nope, all good
 
@@ -5133,7 +5149,7 @@ Just Sign-up with e-mail and password and enable two-factor authentication (TOTP
 
 #### Google:
 
--   Is this against their ToS? No <https://policies.google.com/terms> <sup>[[Archive.org]][360]</sup>
+-   Is this against their ToS? No <https://policies.google.com/terms> <sup>[[Archive.org]][362]</sup>
 
 -   Will they require a phone number? Yes, they will. There is no escape here.
 
@@ -5181,7 +5197,7 @@ It is also possible that Google will require an ID check through indirect financ
 
 #### HackerNews:
 
--   Is this against their ToS? No <https://www.ycombinator.com/legal/#tou> <sup>[[Archive.org]][361]</sup>
+-   Is this against their ToS? No <https://www.ycombinator.com/legal/#tou> <sup>[[Archive.org]][363]</sup>
 
 -   Will they require a phone number? No, they do not even require an e-mail
 
@@ -5189,7 +5205,7 @@ It is also possible that Google will require an ID check through indirect financ
 
 #### Instagram:
 
--   Is this against their ToS? **Maybe?** I am not sure <https://help.instagram.com/581066165581870?ref=dp> <sup>[[Archive.org]][362]</sup>
+-   Is this against their ToS? **Maybe?** I am not sure <https://help.instagram.com/581066165581870?ref=dp> <sup>[[Archive.org]][364]</sup>
 
 "**You can't impersonate others or provide inaccurate information. You do not have to disclose your identity on Instagram, but you must provide us with accurate and up to date information (including registration information)**. **Also, you may not impersonate someone you are not, and you can't create an account for someone else unless you have their express permission".**
 
@@ -5221,7 +5237,7 @@ After sign-up, do the following:
 
 #### Jami:
 
--   Is this against their ToS? No <https://jami.net/privacy-policy/> <sup>[[Archive.org]][363]</sup>
+-   Is this against their ToS? No <https://jami.net/privacy-policy/> <sup>[[Archive.org]][365]</sup>
 
 -   Will they require a phone number? No, they do not even require an e-mail
 
@@ -5229,7 +5245,7 @@ After sign-up, do the following:
 
 #### iVPN:
 
--   Is this against their ToS? No <https://www.ivpn.net/tos/> <sup>[[Archive.org]][364]</sup>
+-   Is this against their ToS? No <https://www.ivpn.net/tos/> <sup>[[Archive.org]][366]</sup>
 
 -   Will they require a phone number? No, they do not even require an e-mail
 
@@ -5237,11 +5253,11 @@ After sign-up, do the following:
 
 #### LinkedIn:
 
--   Is this against their ToS? Yes <https://www.linkedin.com/legal/user-agreement> <sup>[[Archive.org]][365]</sup>
+-   Is this against their ToS? Yes <https://www.linkedin.com/legal/user-agreement> <sup>[[Archive.org]][367]</sup>
 
 "To use the Services, you agree that: (1) you must be the "*Minimum Age*" (described below) or older; (2) **you will only have one LinkedIn account, which must be in your real name**; and (3) you are not already restricted by LinkedIn from using the Services. **Creating an account with false information is a violation of our terms**, including accounts registered on behalf of others or persons under the age of 16. "
 
-But this clause of their ToS is illegal in Germany (see [Requirements:][Understanding some basics of how some information can lead back to you and how to mitigate some:]).
+But this clause of their ToS is illegal in Germany (see [Requirements:]).
 
 -   Will they require a phone number? Yes, they will.
 
@@ -5267,7 +5283,7 @@ As with Twitter and google, you should do the following after signing-up:
 
 #### Medium:
 
--   Is this against their ToS? No unless it is about crypto <https://policy.medium.com/medium-terms-of-service-9db0094a1e0f> <sup>[[Archive.org]][366]</sup>
+-   Is this against their ToS? No unless it is about crypto <https://policy.medium.com/medium-terms-of-service-9db0094a1e0f> <sup>[[Archive.org]][368]</sup>
 
 -   Will they require a phone number? No but they require an e-mail
 
@@ -5277,15 +5293,15 @@ Signing-in does require an e-mail every time.
 
 #### Microsoft:
 
--   Is this against their ToS? Yes <https://www.microsoft.com/en/servicesagreement/> <sup>[[Archive.org]][367]</sup>
+-   Is this against their ToS? Yes <https://www.microsoft.com/en/servicesagreement/> <sup>[[Archive.org]][369]</sup>
 
 "i. Creating an Account. You can create a Microsoft account by signing up online. **You agree not to use any false, inaccurate or misleading information when signing up for your Microsoft account".**
 
-But this clause of their ToS is illegal in Germany (see [Requirements:][Understanding some basics of how some information can lead back to you and how to mitigate some:]).
+But this clause of their ToS is illegal in Germany (see [Requirements:]).
 
--   Will they require a phone number? Maybe but not always. Even on Tor depending on your luck/exit node, it is possible that they will only require e-mail verification.
+-   Will they require a phone number? Likely but not always. Depending on your luck with you Tor exit node, it is possible that they will only require e-mail verification. If you use a VPN over Tor, they'll likely only ask an e-mail.
 
--   Can you create accounts through Tor? Yes, you can but expect captchas, at least e-mail verification, **and possibly phone verification.**
+-   Can you create accounts through Tor? Yes, you can but expect captchas, at least e-mail verification, **and likely phone verification.**
 
 So yes, it is still possible to create an MS account without a phone number and using Tor or VPN but you might have cycle through a few exit nodes to achieve this.
 
@@ -5293,7 +5309,7 @@ After signing-up you should setup 2FA authentication within security and using K
 
 #### Mullvad:
 
--   Is this against their ToS? No <https://mullvad.net/en/help/terms-service/> <sup>[[Archive.org]][368]</sup>
+-   Is this against their ToS? No <https://mullvad.net/en/help/terms-service/> <sup>[[Archive.org]][370]</sup>
 
 -   Will they require a phone number? No, they do not even require an e-mail.
 
@@ -5301,7 +5317,7 @@ After signing-up you should setup 2FA authentication within security and using K
 
 #### Njalla:
 
--   Is this against their ToS? No <https://njal.la/tos/> <sup>[[Archive.org]][369]</sup>
+-   Is this against their ToS? No <https://njal.la/tos/> <sup>[[Archive.org]][371]</sup>
 
 -   Will they require a phone number? No but they do require an e-mail or an XMPP (Jabber) account somewhere.
 
@@ -5317,7 +5333,7 @@ After signing-up you should setup 2FA authentication within security and using K
 
 #### ProtonMail:
 
--   Is this against their ToS? No <https://ProtonMail.com/terms-and-conditions> <sup>[[Archive.org]][370]</sup>
+-   Is this against their ToS? No <https://ProtonMail.com/terms-and-conditions> <sup>[[Archive.org]][372]</sup>
 
 -   Will they require a phone number? Maybe. This depends on the IP you are coming from. If you come from Tor, it is likely. From a VPN, it is less likely.
 
@@ -5339,7 +5355,7 @@ This e-mail account will be used in the next step for creating a Google/Gmail ac
 
 #### ProtonVPN:
 
--   Is this against their ToS? No <https://protonvpn.com/terms-and-conditions> <sup>[[Archive.org]][371]</sup>
+-   Is this against their ToS? No <https://protonvpn.com/terms-and-conditions> <sup>[[Archive.org]][373]</sup>
 
 -   Will they require a phone number? No but they do require an e-mail.
 
@@ -5347,7 +5363,7 @@ This e-mail account will be used in the next step for creating a Google/Gmail ac
 
 #### Reddit:
 
--   Is this against their ToS? No <https://www.redditinc.com/policies> <sup>[[Archive.org]][372]</sup>
+-   Is this against their ToS? No <https://www.redditinc.com/policies> <sup>[[Archive.org]][374]</sup>
 
 -   Will they require a phone number? No, they will not.
 
@@ -5359,7 +5375,7 @@ You should still enable 2FA in the settings after signing-up. I had no issues wh
 
 #### Slashdot:
 
--   Is this against their ToS? Yes <https://slashdotmedia.com/terms-of-use/> <sup>[[Archive.org]][373]</sup>
+-   Is this against their ToS? Yes <https://slashdotmedia.com/terms-of-use/> <sup>[[Archive.org]][375]</sup>
 
 "
 
@@ -5373,7 +5389,7 @@ Some areas of the Sites may require you to register with us. When and if you reg
 
 #### Telegram:
 
--   Is this against their ToS? No <https://telegram.org/tos> <sup>[[Archive.org]][374]</sup>
+-   Is this against their ToS? No <https://telegram.org/tos> <sup>[[Archive.org]][376]</sup>
 
 -   Will they require a phone number? Yes unfortunately
 
@@ -5387,7 +5403,7 @@ In most cases I had no issues whether it was over Tor or VPN but I had a few cas
 
 They provide an appeal process through e-mail but I had no success with getting any answer.
 
-Their appeal process is just sending an e-mail to <recover@telegram.org> <sup>[[Archive.org]][375]</sup> stating your phone number and issue and hope they answer.
+Their appeal process is just sending an e-mail to <recover@telegram.org> <sup>[[Archive.org]][377]</sup> stating your phone number and issue and hope they answer.
 
 After signing-up you should do the following:
 
@@ -5411,7 +5427,7 @@ After signing-up you should do the following:
 
 #### Tutanota:
 
--   Is this against their ToS? No <https://tutanota.com/terms/> <sup>[[Archive.org]][376]</sup>
+-   Is this against their ToS? No <https://tutanota.com/terms/> <sup>[[Archive.org]][378]</sup>
 
 -   Will they require a phone number? No but they do require an e-mail.
 
@@ -5465,7 +5481,7 @@ After a few days, your account should get unsuspended "for good". I had no issue
 
 #### Twitch:
 
--   Is this against their ToS? No <https://www.twitch.tv/p/en/legal/terms-of-service/> <sup>[[Archive.org]][377]</sup>
+-   Is this against their ToS? No <https://www.twitch.tv/p/en/legal/terms-of-service/> <sup>[[Archive.org]][379]</sup>
 
 -   Will they require a phone number? No but they do require an e-mail.
 
@@ -5475,7 +5491,7 @@ Note that you will not be able to enable 2FA on Twitch using only e-mail. This f
 
 #### WhatsApp:
 
--   Is this against their ToS? **Yes** <https://www.whatsapp.com/legal/updates/terms-of-service-eea> <sup>[[Archive.org]][378]</sup>
+-   Is this against their ToS? **Yes** <https://www.whatsapp.com/legal/updates/terms-of-service-eea> <sup>[[Archive.org]][380]</sup>
 
 "**Registration**. You must register for our Services **using accurate information**, provide your current mobile phone number, and, if you change it, update your mobile phone number using our in-app change number feature. You agree to receive text messages and phone calls (from us or our third-party providers) with codes to register for our Services".
 
@@ -5495,7 +5511,7 @@ Note that you will not be able to enable 2FA on Twitch using only e-mail. This f
 
 You are going to have to find a different way to post there using at least seven proxies[^337] that are not known by 4chan blocking system (hint: Anonymous VPS using Monero is probably your best option).
 
-![][379]
+![][381]
 
 #### Crypto Wallets:
 
@@ -5509,7 +5525,7 @@ Ideally, you should find a way to buy/sell crypto with cash from an unknown pers
 
 There are only three ways of securely using those anonymously (that I would recommend). Using a VPN on your phone is not among those ways. All of those are unfortunately "tedious" to say the least.
 
--   Use an Android Emulator within the Windows VM and run the App through your multi-layer of Tor/VPN. Drawback is that such emulators are usually quite resource hungry and will slow down your VM and use more battery. Here is also an (outdated) guide on this matter: <https://www.bellingcat.com/resources/how-tos/2018/08/23/creating-android-open-source-research-device-pc/> <sup>[[Archive.org]][380]</sup>. As for myself I will recommend the use of x86 Android on Virtualbox (see <https://www.android-x86.org/documentation/virtualbox.html> <sup>[[Archive.org]][298]</sup>) that you can also set-up easily.
+-   Use an Android Emulator within the Windows VM and run the App through your multi-layer of Tor/VPN. Drawback is that such emulators are usually quite resource hungry and will slow down your VM and use more battery. Here is also an (outdated) guide on this matter: <https://www.bellingcat.com/resources/how-tos/2018/08/23/creating-android-open-source-research-device-pc/> <sup>[[Archive.org]][382]</sup>. As for myself I will recommend the use of x86 Android on Virtualbox (see <https://www.android-x86.org/documentation/virtualbox.html> <sup>[[Archive.org]][301]</sup>) that you can also set-up easily.
 
 -   Use a non-official app (such as Wassapp for WhatsApp) to connect from the Windows VM to the app. But at your own risk as you could get banned for violating the terms of services by using a non-official App.
 
@@ -5563,7 +5579,7 @@ This has some user experience drawbacks like for instance a new device could not
 
 **So, in short, Forward Secrecy protects past sessions against future compromises of keys or passwords.**
 
-More on this topic on this YouTube video: <https://www.youtube.com/watch?v=zSQtyW_ywZc> <sup>[[Invidious]][381]</sup>
+More on this topic on this YouTube video: <https://www.youtube.com/watch?v=zSQtyW_ywZc> <sup>[[Invidious]][383]</sup>
 
 Some providers and apps claiming to offer e2ee do not offer FS/PFS sometimes for usability reasons (group messaging for instance is more complex with PFS). It is therefore important to prefer open-source apps providing forward secrecy to those that do not.
 
@@ -5609,15 +5625,15 @@ Finally, Open-Source apps should always be preferred because they allow third pa
 
 Below you will find a small table showing the state of messaging apps as of the writing of this guide based on my tests and data from the various sources below:
 
--   Wikipedia, <https://en.wikipedia.org/wiki/Comparison_of_instant_messaging_protocols> <sup>[[Archive.org]][382]</sup>
+-   Wikipedia, <https://en.wikipedia.org/wiki/Comparison_of_instant_messaging_protocols> <sup>[[Archive.org]][384]</sup>
 
--   Wikipedia, <https://en.wikipedia.org/wiki/Comparison_of_cross-platform_instant_messaging_clients> <sup>[[Archive.org]][383]</sup>
+-   Wikipedia, <https://en.wikipedia.org/wiki/Comparison_of_cross-platform_instant_messaging_clients> <sup>[[Archive.org]][385]</sup>
 
--   Secure Messaging Apps <https://www.securemessagingapps.com/> <sup>[[Archive.org]][384]</sup>
+-   Secure Messaging Apps <https://www.securemessagingapps.com/> <sup>[[Archive.org]][386]</sup>
 
--   ProtonMail Blog, <https://protonmail.com/blog/whatsapp-alternatives/> <sup>[[Archive.org]][385]</sup>
+-   ProtonMail Blog, <https://protonmail.com/blog/whatsapp-alternatives/> <sup>[[Archive.org]][387]</sup>
 
--   Whonix Documentation, Instant Messenger Chat <https://www.whonix.org/wiki/Chat> <sup>[[Archive.org]][386]</sup>
+-   Whonix Documentation, Instant Messenger Chat <https://www.whonix.org/wiki/Chat> <sup>[[Archive.org]][388]</sup>
 
 <table>
 <thead>
@@ -5669,7 +5685,7 @@ Below you will find a small table showing the state of messaging apps as of the 
 </tr>
 <tr class="odd">
 <td>Element / Matrix.org (preferred)</td>
-<td>Yes</td>
+<td>Yes (opt-in)</td>
 <td>No</td>
 <td>Yes</td>
 <td>Yes</td>
@@ -6036,13 +6052,13 @@ Below you will find a small table showing the state of messaging apps as of the 
 
 I will recommend these option (as also recommend by privacytools.io[^345]'[^346]):
 
--   Briar (<https://briarproject.org/> <sup>[[Archive.org]][387]</sup>)*
+-   Briar (<https://briarproject.org/> <sup>[[Archive.org]][389]</sup>)*
 
--   OnionShare version >2.3 (<https://onionshare.org/> <sup>[[Archive.org]][388]</sup>)*
+-   OnionShare version >2.3 (<https://onionshare.org/> <sup>[[Archive.org]][390]</sup>)*
 
--   Jami (<https://jami.net/> <sup>[[Archive.org]][389]</sup>)
+-   Jami (<https://jami.net/> <sup>[[Archive.org]][391]</sup>)
 
--   Element/Matrix.org (<https://element.io/> <sup>[[Archive.org]][390]</sup>)
+-   Element/Matrix.org (<https://element.io/> <sup>[[Archive.org]][392]</sup>)
 
 * Note that these options (Briar and OnionShare) do not support multi-devices yet. Your information is strictly stored on the device/OS where you are setting it up. Do not use those on a non-persistent OS unless you want ephemeral use.
 
@@ -6188,15 +6204,15 @@ If you must do so, you should take some steps because you cannot really trust an
 
 -   Check the files for anything malicious: see [Appendix T: Checking files for malware]
 
--   Check the files for any watermarking: see [Watermarking:][Malware and Exploits in your apps and services:]
+-   Check the files for any watermarking: see [Watermarking:]
 
 -   Assess carefully the potential consequences and risks of communicating any sensitive information for you and others (legally, ethically, and morally). Remember ... Do not be evil. Legal is not necessarily Good.
 
 After curating the files for anything you want to leave out. Double check and even Triple check them. Then you could consider sending them to an organization such as a press organization or others.
 
-For this, I strongly recommend the use of SecureDrop[^348] (<https://securedrop.org/> <sup>[[Archive.org]][391]</sup>) which is an open-source project from the Freedom of the Press foundation.
+For this, I strongly recommend the use of SecureDrop[^348] (<https://securedrop.org/> <sup>[[Archive.org]][393]</sup>) which is an open-source project from the Freedom of the Press foundation.
 
-Ideally you should use SecureDrop over Tor and you will find a curated list of those here <https://github.com/alecmuffett/real-world-onion-sites> <sup>[[Archive.org]][392]</sup>
+Ideally you should use SecureDrop over Tor and you will find a curated list of those here <https://github.com/alecmuffett/real-world-onion-sites> <sup>[[Archive.org]][394]</sup>
 
 If not SecureDrop is not available, you could consider any other mean of communication but you should privilege those that are encrypted end to end. **Do not ever do this from your real identity but only from a secure environment using an anonymous identity.**
 
@@ -6246,7 +6262,7 @@ If you intend to break your anonymity to protect your safety:
 
 -   Check your e-mail regularly for security checks and any other account notification.
 
--   Check regularly the eventual appearance of compromise of any of your identities using <https://haveibeenpwned.com/> <sup>[[Archive.org]][393]</sup> (obviously from a safe environment).
+-   Check regularly the eventual appearance of compromise of any of your identities using <https://haveibeenpwned.com/> <sup>[[Archive.org]][395]</sup> (obviously from a safe environment).
 
 # Backing-up your work securely:
 
@@ -6270,7 +6286,7 @@ For this purpose, I will recommend the use of Veracrypt on all platforms (Linux/
 
 #### Normal File containers:
 
-The process is fairly simple and all you will need is to follow Veracrypt tutorial here: <https://www.veracrypt.fr/en/Beginner%27s%20Tutorial.html> <sup>[[Archive.org]][394]</sup>
+The process is fairly simple and all you will need is to follow Veracrypt tutorial here: <https://www.veracrypt.fr/en/Beginner%27s%20Tutorial.html> <sup>[[Archive.org]][396]</sup>
 
 In this container, you can then store sensitive data manually and or use any backup utility you want to backup files from the OS to that container.
 
@@ -6292,11 +6308,11 @@ You can then mount your hidden volume and use it to store sensitive files normal
 
 **Be careful when mounting the Outer decoy volume to update its content. You should protect the hidden volume from being overwritten when doing this as working in the decoy volume could overwrite data in the hidden volume.**
 
-To do this, when mounting the Decoy Volume, select Mount Options and Check the "Protect hidden volume" option and provide the hidden volume password on the same screen. Then mount the decoy volume. This will protect the hidden volume from being overwritten when changing the decoy files. This is also explained here in Veracrypt documentation: <https://www.veracrypt.fr/en/Protection%20of%20Hidden%20Volumes.html> <sup>[[Archive.org]][259]</sup>
+To do this, when mounting the Decoy Volume, select Mount Options and Check the "Protect hidden volume" option and provide the hidden volume password on the same screen. Then mount the decoy volume. This will protect the hidden volume from being overwritten when changing the decoy files. This is also explained here in Veracrypt documentation: <https://www.veracrypt.fr/en/Protection%20of%20Hidden%20Volumes.html> <sup>[[Archive.org]][262]</sup>
 
 **Be extremely cautious with these file containers:**
 
--   **Do not store multiple versions of them or store them anywhere where some versioning is being done (by the file system or the storage system). These file containers should be identical everywhere you store them. If you have a backup of such containers somewhere, it needs to be absolutely identical to the one you are using. If you do not take this precaution, an adversary could compare two different versions of this container and prove the existence of hidden data. Follow carefully the recommendations here <https://www.veracrypt.fr/en/Security%20Requirements%20for%20Hidden%20Volumes.html>** <sup>[[Archive.org]][257]</sup>**. Remember the [Local Data Leaks and Forensics:] section.**
+-   **Do not store multiple versions of them or store them anywhere where some versioning is being done (by the file system or the storage system). These file containers should be identical everywhere you store them. If you have a backup of such containers somewhere, it needs to be absolutely identical to the one you are using. If you do not take this precaution, an adversary could compare two different versions of this container and prove the existence of hidden data. Follow carefully the recommendations here <https://www.veracrypt.fr/en/Security%20Requirements%20for%20Hidden%20Volumes.html>** <sup>[[Archive.org]][260]</sup>**. Remember the [Local Data Leaks and Forensics:] section.**
 
 -   I strongly recommend storing such containers on external USB keys that you will only mount from your guest VMs and never from your Host OS. **After each modification to the files, you should clean the free space on the USB disk and make sure that any backup of such containers is absolutely identical on each key and your computer. See the [How to securely delete specific files/folders/data on your HDD/SDD and Thumb drives:] section of this guide for help on doing this.**
 
@@ -6358,7 +6374,7 @@ So, you should follow the steps in [Appendix E: Clonezilla]
 
 ##### QubesOS:
 
-Qubes OS recommends using their own utility for backups as documented here <https://www.qubes-os.org/doc/backup-restore/> <sup>[[Archive.org]][395]</sup> . But I think it is just a hassle and provides limited added value unless you just want to back-up a single Qube. So instead, I am also recommending just making a full image with Clonezilla which will remove all the hassle and bring you back a working system in a few easy steps.
+Qubes OS recommends using their own utility for backups as documented here <https://www.qubes-os.org/doc/backup-restore/> <sup>[[Archive.org]][397]</sup> . But I think it is just a hassle and provides limited added value unless you just want to back-up a single Qube. So instead, I am also recommending just making a full image with Clonezilla which will remove all the hassle and bring you back a working system in a few easy steps.
 
 So, you should follow the steps in [Appendix E: Clonezilla]
 
@@ -6380,11 +6396,11 @@ Follow the steps in [Appendix E: Clonezilla]
 
 #### MacOS:
 
-I would recommend just using the native Time Machine backup with encryption (and a strong passphrase that could be the same as your OS) as per the guides provided at Apple: <https://support.apple.com/en-ie/guide/mac-help/mh21241/mac> <sup>[[Archive.org]][396]</sup> and <https://support.apple.com/en-ie/guide/mac-help/mh11421/11.0/mac/11.0> <sup>[[Archive.org]][397]</sup>.
+I would recommend just using the native Time Machine backup with encryption (and a strong passphrase that could be the same as your OS) as per the guides provided at Apple: <https://support.apple.com/en-ie/guide/mac-help/mh21241/mac> <sup>[[Archive.org]][398]</sup> and <https://support.apple.com/en-ie/guide/mac-help/mh11421/11.0/mac/11.0> <sup>[[Archive.org]][399]</sup>.
 
 So, plug in an external drive and it should prompt you to use it as a Time Machine backup.
 
-**You should however consider formatting this drive as exFAT to that it is also usable by other OSes conveniently (Windows/Linux) without added software using this guide: <https://support.apple.com/en-ie/guide/disk-utility/dskutl1010/mac>** <sup>[[Archive.org]][398]</sup>
+**You should however consider formatting this drive as exFAT to that it is also usable by other OSes conveniently (Windows/Linux) without added software using this guide: <https://support.apple.com/en-ie/guide/disk-utility/dskutl1010/mac>** <sup>[[Archive.org]][400]</sup>
 
 It is just simpler and will work online while you work. You will be able to recover your data on any other Mac from the recovery options and you will be also able to use this disk for backing up other devices.
 
@@ -6400,9 +6416,9 @@ This is a tricky one. The problem is that it depends on your threat model.
 
 Obviously do not ever do/access those backups from unsecure/unsafe devices but only from the secure environments you picked before.
 
-Self-hosting (using Nextcloud for instance) is also a possibility provided you do have an anonymous hosting. You could pick one from the list here that does accept Monero: <https://www.getmonero.org/community/merchants/#hosting> <sup>[[Archive.org]][399]</sup>
+Self-hosting (using Nextcloud for instance) is also a possibility provided you do have an anonymous hosting. You could pick one from the list here that does accept Monero: <https://www.getmonero.org/community/merchants/#hosting> <sup>[[Archive.org]][401]</sup>
 
-**Consider tho that only one of those accepting Monero is recommended by Privacytools.io (<https://privacytools.io/providers/hosting/>** <sup>[[Archive.org]][400]</sup>**) and it is Njalla <https://njal.la/>** <sup>[[Archive.org]][401]</sup>
+**Consider tho that only one of those accepting Monero is recommended by Privacytools.io (<https://privacytools.io/providers/hosting/>** <sup>[[Archive.org]][402]</sup>**) and it is Njalla <https://njal.la/>** <sup>[[Archive.org]][403]</sup>
 
 **For smaller files, consider Cryptpad.fr as recommended by Privacytools.io.**
 
@@ -6412,7 +6428,7 @@ My personal recommendation is just to keep offline backups on external HDD (not 
 
 ## Synchronizing your files between devices Online:
 
-To that the answer is very simple and a clear consensus for everyone: <https://syncthing.net/> ^[[Archive.org]][402]^
+To that the answer is very simple and a clear consensus for everyone: <https://syncthing.net/> <sup>[[Archive.org]][404]</sup>
 
 Just use SyncThing, it is the safest way to synchronize between devices, it is free and open-source, and it can easily be used in a portable way without install from a container that needs syncing.
 
@@ -6420,7 +6436,7 @@ Just use SyncThing, it is the safest way to synchronize between devices, it is f
 
 ## Understanding HDD vs SSD:
 
-![][403]
+![][405]
 
 If you intend to wipe your whole HDD laptop, the process is rather simple and straightforward. The data is written at a precise location on a magnetic (hard) platter (why it is called a hard drive) and your OS knows precisely where it is on the platter, where to delete it and where to overwrite it for secure deletion using simple processes (like just overwriting that location over and over until no traces are left).
 
@@ -6432,7 +6448,7 @@ On the other hand, if you are using an SSD drive, the process is not as simple a
 
 Here are examples of the most common formats:
 
-![][404]
+![][406]
 
 All of these are sold as internal and external drives within enclosures.
 
@@ -6450,7 +6466,7 @@ Most of those old secure deletion utilities were written with HDD in mind and ha
 
 ### Trim Operations:
 
-So, what now? Well here come the Trim[^271]'[^351] operation. When you delete data on your SDD, your OS should support what is called a Trim operation command and **could (should)** issue this Trim command to the SSD drive periodically (daily, weekly, monthly...). This Trim command will then let know the SSD drive controller that there are pages within blocks containing data which are now free to be really deleted without deleting anything itself.
+So, what now? Well here come the Trim[^273]'[^351] operation. When you delete data on your SDD, your OS should support what is called a Trim operation command and **could (should)** issue this Trim command to the SSD drive periodically (daily, weekly, monthly...). This Trim command will then let know the SSD drive controller that there are pages within blocks containing data which are now free to be really deleted without deleting anything itself.
 
 Trim should be enabled by default on all modern Operating Systems detecting an SSD drive covered in this guide (MacOS, Windows 10, Ubuntu, Qubes OS...).
 
@@ -6460,9 +6476,9 @@ If Trim operations are not done regularly (or at all), then the data is never de
 
 Here is an illustration from Wikipedia showing how it works on an SSD drive:
 
-![][405]
+![][407]
 
-As you can see in the above illustration, data (from a file) will be written to the 4 first pages of Block X. Later new data will be written to the remaining pages and the data from the first files will be marked as invalid (for instance by a Trim operation when deleting a file). As explained on <https://en.wikipedia.org/wiki/Trim_(computing)> <sup>[[Archive.org]][406]</sup>; the erase operation can only be done on entire blocks (and not on single pages).
+As you can see in the above illustration, data (from a file) will be written to the 4 first pages of Block X. Later new data will be written to the remaining pages and the data from the first files will be marked as invalid (for instance by a Trim operation when deleting a file). As explained on <https://en.wikipedia.org/wiki/Trim_(computing)> <sup>[[Archive.org]][408]</sup>; the erase operation can only be done on entire blocks (and not on single pages).
 
 In addition to marking files for deletion (on reputable SSD drives) Trim usually makes those unreadable using a method called "Deterministic Read After Trim" or "Deterministic Zeroes After Trim". This means that if an adversary tries to read data from a trimmed page/block and somehow manages to disable garbage collection, the controller will not return any meaningful data.
 
@@ -6482,7 +6498,7 @@ Within the context of this guide which also uses full disk encryption. Deletion 
 
 ## How to securely wipe your whole Laptop/Drives if you want to erase everything:
 
-![][407]
+![][409]
 
 So, you want to be sure. To achieve 100% secure deletion on an SSD drive, we will need to use specific SDD techniques (If you are using an HDD drive, skip this part and go to your OS of choice):
 
@@ -6528,13 +6544,13 @@ If you can afford it, just buy Parted Magic for 11$ which provides an easy-to-us
 
 First please see [Appendix K: Considerations for using external SSD drives]
 
-Trim should be sufficient in most cases and you could just use the blkdiscard command to force an entire device trim as explained here: <https://wiki.archlinux.org/index.php/Solid_state_drive#Trim_an_entire_device> <sup>[[Archive.org]][408]</sup>
+Trim should be sufficient in most cases and you could just use the blkdiscard command to force an entire device trim as explained here: <https://wiki.archlinux.org/index.php/Solid_state_drive#Trim_an_entire_device> <sup>[[Archive.org]][410]</sup>
 
 If your USB controller and USB SSD disk supports Trim and ATA/NVMe secure erase, you could wipe them cautiously using hdparm using the same method as the System Disk above except you will not install Linux on it obviously. Keep in mind tho that this is not recommended (see Considerations above).
 
 If it does not support Trim and/or ATA secure erase, you could (not securely) wipe the drive normally (without passes like an HDD) and re-encrypt it completely using your utility of choice (LUKS or Veracrypt for instance). The full disk decryption and re-encryption process will overwrite the entirety of the SSD disk and should ensure a secure wipe.
 
-Alternatively, you could also (not securely) wipe the disk normally and then fill it completely with pseudorandom data which should also ensure secure deletion (this can be done with BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][409]</sup> or from the command line using secure-delete using this tutorial <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][410]</sup>).
+Alternatively, you could also (not securely) wipe the disk normally and then fill it completely with pseudorandom data which should also ensure secure deletion (this can be done with BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][411]</sup> or from the command line using secure-delete using this tutorial <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][412]</sup>).
 
 **Keep in mind all these options need to be applied on the entire physical drive and not on a specific partition/volume. If you do not, wear-leveling mechanisms might prevent this from working properly.**
 
@@ -6550,15 +6566,15 @@ Alternatively, you could also (not securely) wipe the disk normally and then fil
 
 -   Option A: Follow one of these tutorials:
 
-    -   <https://linuxhint.com/completely_wipe_hard_drive_ubuntu/> <sup>[[Archive.org]][411]</sup>
+    -   <https://linuxhint.com/completely_wipe_hard_drive_ubuntu/> <sup>[[Archive.org]][413]</sup>
 
-    -   <https://linoxide.com/linux-command/commands-wipe-disk-linux/> <sup>[[Archive.org]][412]</sup>
+    -   <https://linoxide.com/linux-command/commands-wipe-disk-linux/> <sup>[[Archive.org]][414]</sup>
 
-    -   <https://wiki.archlinux.org/index.php/Securely_wipe_disk> <sup>[[Archive.org]][413]</sup>
+    -   <https://wiki.archlinux.org/index.php/Securely_wipe_disk> <sup>[[Archive.org]][415]</sup>
 
 I recommend using dd or shred for this purpose.
 
--   Option B: Install and use BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][409]</sup> or follow this EFF tutorial <https://ssd.eff.org/en/module/how-delete-your-data-securely-linux> <sup>[[Archive.org]][414]</sup>
+-   Option B: Install and use BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][411]</sup> or follow this EFF tutorial <https://ssd.eff.org/en/module/how-delete-your-data-securely-linux> <sup>[[Archive.org]][416]</sup>
 
 -   Option C: See [Appendix I: Using ShredOS to securely wipe an HDD drive:]
 
@@ -6604,9 +6620,9 @@ Alternatively, you could also (not securely) wipe the disk normally and then fil
 
 -   Option B: Use external tools such as:
 
-    -   Eraser (open-source): <https://eraser.heidi.ie/download/> <sup>[[Archive.org]][415]</sup>
+    -   Eraser (open-source): <https://eraser.heidi.ie/download/> <sup>[[Archive.org]][417]</sup>
 
-    -   KillDisk Free: <http://killdisk.com/killdisk-freeware.htm> <sup>[[Archive.org]][416]</sup>
+    -   KillDisk Free: <http://killdisk.com/killdisk-freeware.htm> <sup>[[Archive.org]][418]</sup>
 
 -   Option C: See [Appendix I: Using ShredOS to securely wipe an HDD drive:]
 
@@ -6614,7 +6630,7 @@ Alternatively, you could also (not securely) wipe the disk normally and then fil
 
 #### System/Internal SSD:
 
-Unfortunately, the MacOS Recovery disk utility will not be able to perform a secure erase of your SSD drive as stated in Apple documentation <https://support.apple.com/en-gb/guide/disk-utility/dskutl14079/mac> <sup>[[Archive.org]][417]</sup>.
+Unfortunately, the MacOS Recovery disk utility will not be able to perform a secure erase of your SSD drive as stated in Apple documentation <https://support.apple.com/en-gb/guide/disk-utility/dskutl14079/mac> <sup>[[Archive.org]][419]</sup>.
 
 In most cases, if your disk was encrypted with Filevault and you just perform a normal erase, it should be "enough" according to them. It is not according to me so you have no option besides re-installing MacOS again and re-encrypt it with Filevault again after re-installing. This should perform a "crypto erase" by overwriting your previous install and encryption. This method will be quite slow unfortunately.
 
@@ -6628,9 +6644,9 @@ If your USB controller and USB SSD disk supports Trim and ATA secure erase, and 
 
 If you are not sure about Trim support or want more certainty, you can (not securely) wipe it using MacOS disk utility before fully re-encrypting them again using these two tutorials from Apple:
 
--   <https://support.apple.com/guide/disk-utility/erase-and-reformat-a-storage-device-dskutl14079/mac> <sup>[[Archive.org]][418]</sup>
+-   <https://support.apple.com/guide/disk-utility/erase-and-reformat-a-storage-device-dskutl14079/mac> <sup>[[Archive.org]][420]</sup>
 
--   <https://support.apple.com/guide/disk-utility/encrypt-protect-a-storage-device-password-dskutl35612/mac> <sup>[[Archive.org]][419]</sup> or using Veracrypt full disk encryption.
+-   <https://support.apple.com/guide/disk-utility/encrypt-protect-a-storage-device-password-dskutl35612/mac> <sup>[[Archive.org]][421]</sup> or using Veracrypt full disk encryption.
 
 The full disk re-encryption process will overwrite the entirety of the SSD disk and should ensure a secure wipe.
 
@@ -6638,7 +6654,7 @@ The full disk re-encryption process will overwrite the entirety of the SSD disk 
 
 #### External HDD and Thumb Drives:
 
-Follow this tutorial: <https://support.apple.com/guide/disk-utility/erase-and-reformat-a-storage-device-dskutl14079/mac> <sup>[[Archive.org]][418]</sup> and use the secure erase option from Disk Utility which should work fine on HDD and Thumb drives.
+Follow this tutorial: <https://support.apple.com/guide/disk-utility/erase-and-reformat-a-storage-device-dskutl14079/mac> <sup>[[Archive.org]][420]</sup> and use the secure erase option from Disk Utility which should work fine on HDD and Thumb drives.
 
 ## How to securely delete specific files/folders/data on your HDD/SDD and Thumb drives:
 
@@ -6666,7 +6682,7 @@ If data was deleted by some utility (for instance by Virtualbox when reverting a
 
 Just open Windows Explorer, Right Click on your System Drive and click Properties. Select Tools. Click Optimize and then Optimize again to force a Trim. You are done. I think that is probably enough in my opinion.
 
-![][420]
+![][422]
 
 If you want more security and do not trust the Trim operation then you will have no option but to either:
 
@@ -6686,7 +6702,7 @@ The process is very simple depending on the tool you picked from the Appendix:
 
     -   PrivaZer: Delete without a trace
 
-    -   BleachBit: Shred with BleachBit (or see this tutorial from the EFF <https://ssd.eff.org/en/module/how-delete-your-data-securely-windows> <sup>[[Archive.org]][421]</sup>)
+    -   BleachBit: Shred with BleachBit (or see this tutorial from the EFF <https://ssd.eff.org/en/module/how-delete-your-data-securely-windows> <sup>[[Archive.org]][423]</sup>)
 
 In the case of USB thumb drives, consider wiping free space using one of the above utilities after file deletion or wiping them completely using Eraser / KillDisk as instructed previously.
 
@@ -6716,17 +6732,17 @@ If you do not want to wait for the periodic Trim (set to Weekly by default in Ub
 
 If you want more security and do not trust the Trim operation then you will have no option but to either:
 
--   Decrypt and re-encrypt (using LUKS for instance following this tutorial <https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#Re-encrypting_devices> <sup>[[Archive.org]][422]</sup>) the whole drive to overwrite all free space after data deletion. This will ensure overwriting of all the free space.
+-   Decrypt and re-encrypt (using LUKS for instance following this tutorial <https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#Re-encrypting_devices> <sup>[[Archive.org]][424]</sup>) the whole drive to overwrite all free space after data deletion. This will ensure overwriting of all the free space.
 
 -   Trim using ```fstrim --all``` and then fill up the entire free space of the disk using a utility such as:
 
-    -   BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][409]</sup>
+    -   BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][411]</sup>
 
     -   Install secure-delete package and use sfill on the root of the drive:
 
         -   ```sudo sfill -l -l /``` for instance should do the trick (this will take a substantial amount of time)
 
-    -   Use the old school dd method (taken from this answer <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][410]</sup>) run these commands on the drive you want to fill:
+    -   Use the old school dd method (taken from this answer <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][412]</sup>) run these commands on the drive you want to fill:
 
         -   ```dd if=/dev/zero of=zero.small.file bs=1024 count=102400```
 
@@ -6742,9 +6758,9 @@ If you want more security and do not trust the Trim operation then you will have
 
 #### Internal/External HDD drive or a Thumb Drive:
 
--   You can do this the graphical way with BleachBit following this tutorial from the EFF: <https://ssd.eff.org/en/module/how-delete-your-data-securely-linux> <sup>[[Archive.org]][414]</sup>
+-   You can do this the graphical way with BleachBit following this tutorial from the EFF: <https://ssd.eff.org/en/module/how-delete-your-data-securely-linux> <sup>[[Archive.org]][416]</sup>
 
--   Or you can do this from the command line following this tutorial: <https://linuxhint.com/completely_wipe_hard_drive_ubuntu/> <sup>[[Archive.org]][411]</sup> (For this purpose I recommend wipe and shred).
+-   Or you can do this from the command line following this tutorial: <https://linuxhint.com/completely_wipe_hard_drive_ubuntu/> <sup>[[Archive.org]][413]</sup> (For this purpose I recommend wipe and shred).
 
 #### External SSD drive:
 
@@ -6754,17 +6770,17 @@ If Trim is supported and enabled by your Linux Distribution for your external SS
 
 If Trim is not supported or you want to be sure, you might have to ensure secure data deletion by filling up the entire free space of the disk using a utility such as:
 
--   Decrypt and re-encrypt (using LUKS using this tutorial <https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#Re-encrypting_devices> <sup>[[Archive.org]][422]</sup> or Veracrypt from the graphical interface for instance) the whole drive to overwrite all free space after data deletion. This will ensure overwriting of all the free space.
+-   Decrypt and re-encrypt (using LUKS using this tutorial <https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#Re-encrypting_devices> <sup>[[Archive.org]][424]</sup> or Veracrypt from the graphical interface for instance) the whole drive to overwrite all free space after data deletion. This will ensure overwriting of all the free space.
 
 -   Fill the free space using one of those methods:
 
-    -   BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][409]</sup>
+    -   BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][411]</sup>
 
     -   Install secure-delete package and use sfill on the root of the drive:
 
         -   ```sudo sfill -l -l /``` for instance should do the trick (this will take a substantial amount of time)
 
-    -   Use the old school dd method (taken from this answer <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][410]</sup>) run these commands:
+    -   Use the old school dd method (taken from this answer <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][412]</sup>) run these commands:
 
         -   ```dd if=/dev/zero of=zero.small.file bs=1024 count=102400```
 
@@ -6784,21 +6800,21 @@ If Trim is not supported or you want to be sure, you might have to ensure secure
 
 As with other Linux distros, normal deletion and trim should be sufficient on most SSD drives. So just permanently delete the file (and empty any recycle bin) and it should be unrecoverable due to periodic Trim operations and garbage collection.
 
-Please follow this documentation to Trim within Qubes OS: <https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/disk-trim.md> <sup>[[Archive.org]][423]</sup>
+Please follow this documentation to Trim within Qubes OS: <https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/disk-trim.md> <sup>[[Archive.org]][425]</sup>
 
 As with other Linux Systems, if you want more security and do not trust the Trim operation then you will have no option but to either:
 
--   Decrypt and re-encrypt the whole drive to overwrite all free space after data deletion. This will ensure overwriting of all the free space. I didn't find a reliable tutorial on how to do this safely on Qubes OS but it's possible this Tutorial could work as well <https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#Re-encrypting_devices> <sup>[[Archive.org]][422]</sup> (at your own risk, this has not been tested yet).
+-   Decrypt and re-encrypt the whole drive to overwrite all free space after data deletion. This will ensure overwriting of all the free space. I didn't find a reliable tutorial on how to do this safely on Qubes OS but it's possible this Tutorial could work as well <https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#Re-encrypting_devices> <sup>[[Archive.org]][424]</sup> (at your own risk, this has not been tested yet).
 
--   Refer to this Documentation (<https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/disk-trim.md> <sup>[[Archive.org]][423]</sup>) and then trim using "fstrim --all" and then fill up the entire free space of the disk using an utility such as:
+-   Refer to this Documentation (<https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/disk-trim.md> <sup>[[Archive.org]][425]</sup>) and then trim using "fstrim --all" and then fill up the entire free space of the disk using an utility such as:
 
-    -   BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][409]</sup>
+    -   BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][411]</sup>
 
     -   Install secure-delete package and use sfill on the root of the drive:
 
         -   ```sudo sfill -l -l /``` for instance should do the trick (this will take a substantial amount of time)
 
-    -   Use the old school dd method (taken from this answer <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][410]</sup>) run these commands on the drive you want to fill:
+    -   Use the old school dd method (taken from this answer <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][412]</sup>) run these commands on the drive you want to fill:
 
         -   ```dd if=/dev/zero of=zero.small.file bs=1024 count=102400```
 
@@ -6816,29 +6832,29 @@ As with other Linux Systems, if you want more security and do not trust the Trim
 
 Use the same method as Linux from a Qubes connected to that specific USB device
 
--   You can do this the graphical way with BleachBit following this tutorial from the EFF: <https://ssd.eff.org/en/module/how-delete-your-data-securely-linux> <sup>[[Archive.org]][414]</sup>
+-   You can do this the graphical way with BleachBit following this tutorial from the EFF: <https://ssd.eff.org/en/module/how-delete-your-data-securely-linux> <sup>[[Archive.org]][416]</sup>
 
--   Or you can do this from the command line following this tutorial: <https://linuxhint.com/completely_wipe_hard_drive_ubuntu/> <sup>[[Archive.org]][411]</sup> (For this purpose I recommend wipe and shred).
+-   Or you can do this from the command line following this tutorial: <https://linuxhint.com/completely_wipe_hard_drive_ubuntu/> <sup>[[Archive.org]][413]</sup> (For this purpose I recommend wipe and shred).
 
 #### External SSD drive:
 
 First please see [Appendix K: Considerations for using external SSD drives]
 
-If Trim is supported and enabled by your Linux Distribution for your external SSD drive. There should be no issue in securely deleting data normally and just issue an "fstrim --all" from terminal to trim the drive. Refer to this Documentation (<https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/disk-trim.md> <sup>[[Archive.org]][423]</sup>) to enable trim on a drive.
+If Trim is supported and enabled by your Linux Distribution for your external SSD drive. There should be no issue in securely deleting data normally and just issue an "fstrim --all" from terminal to trim the drive. Refer to this Documentation (<https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/disk-trim.md> <sup>[[Archive.org]][425]</sup>) to enable trim on a drive.
 
 If Trim is not supported or you want to be sure, you might have to ensure secure data deletion by filling up the entire free space of the disk using a utility from a Qubes connected to the USB device in question:
 
--   Decrypt and re-encrypt (using LUKS using this tutorial <https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#Re-encrypting_devices> <sup>[[Archive.org]][422]</sup> or Veracrypt from the graphical interface for instance) the whole drive to overwrite all free space after data deletion. This will ensure overwriting of all the free space.
+-   Decrypt and re-encrypt (using LUKS using this tutorial <https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption#Re-encrypting_devices> <sup>[[Archive.org]][424]</sup> or Veracrypt from the graphical interface for instance) the whole drive to overwrite all free space after data deletion. This will ensure overwriting of all the free space.
 
 -   Fill the free space using one of those methods:
 
-    -   BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][409]</sup>
+    -   BleachBit <https://www.bleachbit.org/download/linux> <sup>[[Archive.org]][411]</sup>
 
     -   Install secure-delete package and use sfill on the root of the drive:
 
         -   ```sudo sfill -l -l /``` for instance should do the trick (this will take a substantial amount of time)
 
-    -   Use the old school dd method (taken from this answer <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][410]</sup>) run these commands:
+    -   Use the old school dd method (taken from this answer <https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux> <sup>[[Archive.org]][412]</sup>) run these commands:
 
         -   ```dd if=/dev/zero of=zero.small.file bs=1024 count=102400```
 
@@ -6868,17 +6884,17 @@ Just permanently delete the file (and empty recycle bin) and it should be unreco
 
 Yes. TRIM operations are issued asynchronously from when files are deleted or free space is reclaimed, which ensures that these operations are performed only after metadata changes are persisted to stable storage".
 
--   If your file system is HFS+, you could run First Aid on your System Drive from the Disk Utility which should perform a Trim operation in the details (<https://support.apple.com/en-us/HT210898> <sup>[[Archive.org]][424]</sup>)
+-   If your file system is HFS+, you could run First Aid on your System Drive from the Disk Utility which should perform a Trim operation in the details (<https://support.apple.com/en-us/HT210898> <sup>[[Archive.org]][426]</sup>)
 
-![][425]
+![][427]
 
 #### System/Internal, External HDD drive or a Thumb Drive:
 
 Unfortunately, Apple has removed the secure erase options from the trash bin even for HDD drives[^367]. So, you are left with using other tools:
 
--   Permanent Eraser <http://www.edenwaith.com/products/permanent%20eraser/> <sup>[[Archive.org]][426]</sup>
+-   Permanent Eraser <http://www.edenwaith.com/products/permanent%20eraser/> <sup>[[Archive.org]][428]</sup>
 
--   From the terminal you can use the "rm --P filename" command which should erase the file and overwrite it as explained in this EFF tutorial <https://ssd.eff.org/en/module/how-delete-your-data-securely-macos> <sup>[[Archive.org]][427]</sup>.
+-   From the terminal you can use the "rm --P filename" command which should erase the file and overwrite it as explained in this EFF tutorial <https://ssd.eff.org/en/module/how-delete-your-data-securely-macos> <sup>[[Archive.org]][429]</sup>.
 
 In the case of USB thumb drives, consider wiping them completely using Disk Utility as instructed previously.
 
@@ -6902,19 +6918,19 @@ I am not aware of any 100% reliable method to delete single files selectively an
 
 In addition, most of these measures here should not be needed since your whole drive should be encrypted and therefore your data should not be accessible for forensic analysis through SSD/HDD examination anyway. So, these are just "bonus measures" for weak/unskilled adversaries.
 
-Consider also reading this documentation if you're going with Whonix <https://www.whonix.org/wiki/Anti-Forensics_Precautions> <sup>[[Archive.org]][293]</sup> as well as their general hardening tutorial for all platforms here <https://www.whonix.org/wiki/System_Hardening_Checklist> <sup>[[Archive.org]][428]</sup>
+Consider also reading this documentation if you're going with Whonix <https://www.whonix.org/wiki/Anti-Forensics_Precautions> <sup>[[Archive.org]][296]</sup> as well as their general hardening tutorial for all platforms here <https://www.whonix.org/wiki/System_Hardening_Checklist> <sup>[[Archive.org]][430]</sup>
 
 ### Removing Metadata from Files/Documents/Pictures:
 
 #### Pictures and videos:
 
-On Windows, MacOS and Linux I would recommend ExifTool (<https://exiftool.org/> <sup>[[Archive.org]][429]</sup>) and/or ExifCleaner (<https://exifcleaner.com/> <sup>[[Archive.org]][430]</sup>) that allows viewing and/or removing those properties.
+On Windows, MacOS and Linux I would recommend ExifTool (<https://exiftool.org/> <sup>[[Archive.org]][431]</sup>) and/or ExifCleaner (<https://exifcleaner.com/> <sup>[[Archive.org]][432]</sup>) that allows viewing and/or removing those properties.
 
 **ExifTool is natively available on TAILS and Whonix Workstation.**
 
 ##### ExifCleaner:
 
-Just install it from <https://exifcleaner.com/> <sup>[[Archive.org]][430]</sup>, run and drag and drop the files into the GUI.
+Just install it from <https://exifcleaner.com/> <sup>[[Archive.org]][432]</sup>, run and drag and drop the files into the GUI.
 
 ##### ExifTool:
 
@@ -6928,27 +6944,27 @@ It is actually simple, jut install exiftool and run:
 
 ##### Windows Native tool:
 
-Here is a tutorial to remove metadata from a Picture using OS provided tools: <https://www.purevpn.com/internet-privacy/how-to-remove-metadata-from-photos> <sup>[[Archive.org]][431]</sup>
+Here is a tutorial to remove metadata from a Picture using OS provided tools: <https://www.purevpn.com/internet-privacy/how-to-remove-metadata-from-photos> <sup>[[Archive.org]][433]</sup>
 
 ##### Cloaking/Obfuscating to prevent picture recognition:
 
-Consider the use of Fawkes <https://sandlab.cs.uchicago.edu/fawkes/> <sup>[[Archive.org]][432]</sup> (<https://github.com/Shawn-Shan/fawkes> <sup>[[Archive.org]][433]</sup>) to cloak the images from picture recognition tech on various platforms.
+Consider the use of Fawkes <https://sandlab.cs.uchicago.edu/fawkes/> <sup>[[Archive.org]][434]</sup> (<https://github.com/Shawn-Shan/fawkes> <sup>[[Archive.org]][435]</sup>) to cloak the images from picture recognition tech on various platforms.
 
 Or if you want on-line versions, consider:
 
--   <https://lowkey.umiacs.umd.edu/> <sup>[[Archive.org]][434]</sup>
+-   <https://lowkey.umiacs.umd.edu/> <sup>[[Archive.org]][436]</sup>
 
--   <https://adversarial.io/> <sup>[[Archive.org]][435]</sup>
+-   <https://adversarial.io/> <sup>[[Archive.org]][437]</sup>
 
 #### PDF Documents:
 
 ##### PDFParanoia (Linux/Windows/MacOS/QubesOS):
 
-Consider using <https://github.com/kanzure/pdfparanoia> <sup>[[Archive.org]][436]</sup> which will remove metadata and watermarks on any PDF.
+Consider using <https://github.com/kanzure/pdfparanoia> <sup>[[Archive.org]][438]</sup> which will remove metadata and watermarks on any PDF.
 
 ##### ExifCleaner (Linux/Windows/MacOS/QubesOS):
 
-Just install it from <https://exifcleaner.com/> <sup>[[Archive.org]][430]</sup>, run and drag and drop the files into the GUI.
+Just install it from <https://exifcleaner.com/> <sup>[[Archive.org]][432]</sup>, run and drag and drop the files into the GUI.
 
 ##### ExifTool (Linux/Windows/MacOS/QubesOS):
 
@@ -6960,13 +6976,13 @@ It is actually simple, jut install exiftool and run:
 
 #### MS Office Documents:
 
-First, here is a tutorial to remove metadata from Office documents: <https://support.microsoft.com/en-us/office/remove-hidden-data-and-personal-information-by-inspecting-documents-presentations-or-workbooks-356b7b5d-77af-44fe-a07f-9aa4d085966f> <sup>[[Archive.org]][437]</sup>. Make sure however that you do use the latest version of Office with the latest security updates.
+First, here is a tutorial to remove metadata from Office documents: <https://support.microsoft.com/en-us/office/remove-hidden-data-and-personal-information-by-inspecting-documents-presentations-or-workbooks-356b7b5d-77af-44fe-a07f-9aa4d085966f> <sup>[[Archive.org]][439]</sup>. Make sure however that you do use the latest version of Office with the latest security updates.
 
-Alternatively, on Windows, MacOS, Qubes OS, and Linux I would recommend ExifTool (<https://exiftool.org/> <sup>[[Archive.org]][429]</sup>) and/or ExifCleaner (<https://exifcleaner.com/> <sup>[[Archive.org]][430]</sup>) that allows viewing and/or removing those properties
+Alternatively, on Windows, MacOS, Qubes OS, and Linux I would recommend ExifTool (<https://exiftool.org/> <sup>[[Archive.org]][431]</sup>) and/or ExifCleaner (<https://exifcleaner.com/> <sup>[[Archive.org]][432]</sup>) that allows viewing and/or removing those properties
 
 ##### ExifCleaner:
 
-Just install it from <https://exifcleaner.com/> <sup>[[Archive.org]][430]</sup>, run and drag and drop the files into the GUI.
+Just install it from <https://exifcleaner.com/> <sup>[[Archive.org]][432]</sup>, run and drag and drop the files into the GUI.
 
 ##### ExifTool:
 
@@ -6984,11 +7000,11 @@ Go to Tools > Options > Security and Check:
 
 -   Remove Personal information on saving
 
-Alternatively, on Windows, MacOS, Qubes OS, and Linux I would recommend ExifTool (<https://exiftool.org/> <sup>[[Archive.org]][429]</sup>) and/or ExifCleaner (<https://exifcleaner.com/> <sup>[[Archive.org]][430]</sup>) that allows viewing and/or removing those properties
+Alternatively, on Windows, MacOS, Qubes OS, and Linux I would recommend ExifTool (<https://exiftool.org/> <sup>[[Archive.org]][431]</sup>) and/or ExifCleaner (<https://exifcleaner.com/> <sup>[[Archive.org]][432]</sup>) that allows viewing and/or removing those properties
 
 ##### ExifCleaner:
 
-Just install it from <https://exifcleaner.com/> <sup>[[Archive.org]][430]</sup>, run and drag and drop the files into the GUI.
+Just install it from <https://exifcleaner.com/> <sup>[[Archive.org]][432]</sup>, run and drag and drop the files into the GUI.
 
 ##### ExifTool:
 
@@ -7000,11 +7016,11 @@ It is actually simple, jut install exiftool and run:
 
 #### All-in-one Tool:
 
-Another option good tool IMHO to remove metadata from various documents is the open-source mat2 recommended by privacytools.io[^368] (<https://0xacab.org/jvoisin/mat2> <sup>[[Archive.org]][438]</sup>) which you can use on Linux quite easily. I never managed to make it work properly within Windows due various dependencies issues despite the provided instructions. It is however very straightforward to install and use on Linux.
+Another option good tool IMHO to remove metadata from various documents is the open-source mat2 recommended by privacytools.io[^368] (<https://0xacab.org/jvoisin/mat2> <sup>[[Archive.org]][440]</sup>) which you can use on Linux quite easily. I never managed to make it work properly within Windows due various dependencies issues despite the provided instructions. It is however very straightforward to install and use on Linux.
 
 So, I would suggest creating a small Debian VM within Virtualbox (behind your Whonix Gateway) which you can then use from your other VMs to analyze various files from a convenient web interface. For this see [Appendix L: Creating a mat2-web guest VM for removing metadata from files]
 
-![][439]
+![][441]
 
 Mat2 is also pre-installed on the Whonix Workstation VM[^369] and available on TAILS by default[^370].
 
@@ -7014,7 +7030,7 @@ TAILS is great for this; you have nothing to worry about even if you use an SSD 
 
 ### Whonix:
 
-Note that it's possible to run Whonix in Live mode leaving no traces when you shut down the VMs, consider reading their documentation here <https://www.whonix.org/wiki/VM_Live_Mode> <sup>[[Archive.org]][440]</sup> and here <https://www.whonix.org/wiki/Warning#Whonix_.E2.84.A2_Persistence_vs_Live_vs_Amnesic> <sup>[[Archive.org]][188]</sup>.
+Note that it's possible to run Whonix in Live mode leaving no traces when you shut down the VMs, consider reading their documentation here <https://www.whonix.org/wiki/VM_Live_Mode> <sup>[[Archive.org]][442]</sup> and here <https://www.whonix.org/wiki/Warning#Whonix_.E2.84.A2_Persistence_vs_Live_vs_Amnesic> <sup>[[Archive.org]][190]</sup>.
 
 ### MacOS:
 
@@ -7024,7 +7040,7 @@ Revert to a previous snapshot on Virtualbox (or any other VM software you are us
 
 #### Host OS:
 
-Most of the info from this section can also be found at this nice guide <https://github.com/drduh/macOS-Security-and-Privacy-Guide> <sup>[[Archive.org]][249]</sup>
+Most of the info from this section can also be found at this nice guide <https://github.com/drduh/macOS-Security-and-Privacy-Guide> <sup>[[Archive.org]][252]</sup>
 
 ##### Quarantine Database (used by Gatekeeper and XProtect):
 
@@ -7042,7 +7058,7 @@ Obviously, this is a goldmine for forensics and you should disable this:
 
 -   Run the following command to lock the file and prevent further download history from being written there: ```sudo chflags schg ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV2```
 
-Refer to this section of this guide for further information <https://github.com/drduh/macOS-Security-and-Privacy-Guide#gatekeeper-and-xprotect> <sup>[[Archive.org]][249]</sup>
+Refer to this section of this guide for further information <https://github.com/drduh/macOS-Security-and-Privacy-Guide#gatekeeper-and-xprotect> <sup>[[Archive.org]][252]</sup>
 
 In addition to this convenient database, each saved file will also carry detailed file system HFS+/APFS attributes showing for instance when it was downloaded, with what and from where.
 
@@ -7089,29 +7105,29 @@ Clearing the QuarantineEventsV2 is easy as explained above. Removing the attribu
 
 In addition, MacOS keeps various logs of mounted devices, connected devices, known networks, analytics, documents revisions...
 
-See this section of this guide for guidance on where to find and how to delete such artifacts: <https://github.com/drduh/macOS-Security-and-Privacy-Guide#metadata-and-artifacts> <sup>[[Archive.org]][249]</sup>
+See this section of this guide for guidance on where to find and how to delete such artifacts: <https://github.com/drduh/macOS-Security-and-Privacy-Guide#metadata-and-artifacts> <sup>[[Archive.org]][252]</sup>
 
-Many of those can be deleted using some various commercial third-party tools but I would personally recommend using the free and well-known Onyx which you can find here: <https://www.titanium-software.fr/en/onyx.html> <sup>[[Archive.org]][441]</sup>. Unfortunately, it is closed-source but it is notarized, signed and has been trusted for many years.
+Many of those can be deleted using some various commercial third-party tools but I would personally recommend using the free and well-known Onyx which you can find here: <https://www.titanium-software.fr/en/onyx.html> <sup>[[Archive.org]][443]</sup>. Unfortunately, it is closed-source but it is notarized, signed and has been trusted for many years.
 
 ##### Force a Trim operation after cleaning:
 
 -   If your file system is APFS, you do not need to worry about Trim, it happens asynchronously as the OS writes data.
 
--   If your file system is HFS+ (or any other than APFS), you could run First Aid on your System Drive from the Disk Utility which should perform a Trim operation in the details (<https://support.apple.com/en-us/HT210898> <sup>[[Archive.org]][424]</sup>).
+-   If your file system is HFS+ (or any other than APFS), you could run First Aid on your System Drive from the Disk Utility which should perform a Trim operation in the details (<https://support.apple.com/en-us/HT210898> <sup>[[Archive.org]][426]</sup>).
 
-![][425]
+![][427]
 
 ### Linux (Qubes OS):
 
-Please consider their guidelines <https://github.com/Qubes-Community/Contents/blob/master/docs/security/security-guidelines.md> <sup>[[Archive.org]][442]</sup>
+Please consider their guidelines <https://github.com/Qubes-Community/Contents/blob/master/docs/security/security-guidelines.md> <sup>[[Archive.org]][444]</sup>
 
 If you are using Whonix on Qubes OS, please consider following some of their guides:
 
--   Whonix System Hardening guide <https://www.whonix.org/wiki/System_Hardening_Checklist> <sup>[[Archive.org]][428]</sup>
+-   Whonix System Hardening guide <https://www.whonix.org/wiki/System_Hardening_Checklist> <sup>[[Archive.org]][430]</sup>
 
--   Enabling App Armor on Qubes <https://www.whonix.org/wiki/Qubes/AppArmor> <sup>[[Archive.org]][443]</sup>
+-   Enabling App Armor on Qubes <https://www.whonix.org/wiki/Qubes/AppArmor> <sup>[[Archive.org]][445]</sup>
 
--   Also consider the use of Linux Kernel Guard <https://www.whonix.org/wiki/Linux_Kernel_Runtime_Guard_LKRG> <sup>[[Archive.org]][444]</sup>
+-   Also consider the use of Linux Kernel Guard <https://www.whonix.org/wiki/Linux_Kernel_Runtime_Guard_LKRG> <sup>[[Archive.org]][446]</sup>
 
 ### Linux (non-Qubes):
 
@@ -7123,11 +7139,11 @@ Revert to a previous snapshot of the Guest VM on Virtualbox (or any other VM sof
 
 Normally you should not have traces to clean within the Host OS since you are doing everything from a VM if you follow this guide.
 
-Nevertheless, you might want to clean some logs. Just use this convenient tool: <https://github.com/sundowndev/go-covermyass> <sup>[[Archive.org]][445]</sup> (instructions on the page)
+Nevertheless, you might want to clean some logs. Just use this convenient tool: <https://github.com/sundowndev/go-covermyass> <sup>[[Archive.org]][447]</sup> (instructions on the page)
 
 After cleaning up, make sure you have the fstrim utility installed (should be by default on Fedora) and part of the ```util-linux``` package on Debian/Ubuntu. Then just run ```fstrim --all``` on the Host OS. This should be sufficient on SSD drives as explained earlier.
 
-Consider the use of Linux Kernel Guard as an added measure <https://www.whonix.org/wiki/Linux_Kernel_Runtime_Guard_LKRG> <sup>[[Archive.org]][444]</sup>
+Consider the use of Linux Kernel Guard as an added measure <https://www.whonix.org/wiki/Linux_Kernel_Runtime_Guard_LKRG> <sup>[[Archive.org]][446]</sup>
 
 ### Windows:
 
@@ -7155,7 +7171,7 @@ Then let us re-randomize the MAC addresses of your Virtual Machines and the Blue
 
 ##### Event logs:
 
-Windows Event logs will keep many various pieces of information that could contain traces of your activities such as the devices that were mounted (including Veracrypt NTFS volumes for instance[^270]), your network connections, app crash information and various errors. It is always best to clean those up regularly. Do not do this on the Decoy OS.
+Windows Event logs will keep many various pieces of information that could contain traces of your activities such as the devices that were mounted (including Veracrypt NTFS volumes for instance[^272]), your network connections, app crash information and various errors. It is always best to clean those up regularly. Do not do this on the Decoy OS.
 
 -   Start, search for Event Viewer, and launch Event Viewer:
 
@@ -7199,7 +7215,7 @@ Now you should clean the history within any app that you used including Browser 
 
 Now it is time to clear the history of the Wi-Fi you connect to. Unfortunately, Windows keeps storing a list of past Networks in the registry even if you "forgot" those in the Wi-Fi settings. As far as I know, no utilities clean those yet (BleachBit or PrivaZer for instance) so you will have to do it the manual way:
 
--   Launch Regedit using this tutorial: <https://support.microsoft.com/en-us/windows/how-to-open-registry-editor-in-windows-10-deab38e6-91d6-e0aa-4b7c-8878d9e07b11> <sup>[[Archive.org]][446]</sup>
+-   Launch Regedit using this tutorial: <https://support.microsoft.com/en-us/windows/how-to-open-registry-editor-in-windows-10-deab38e6-91d6-e0aa-4b7c-8878d9e07b11> <sup>[[Archive.org]][448]</sup>
 
 -   Within Regedit, enter this to the address bar: ```Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles```
 
@@ -7209,9 +7225,9 @@ Now it is time to clear the history of the Wi-Fi you connect to. Unfortunately, 
 
 ##### Shellbags:
 
-As explained earlier, Shellbags are basically histories of accessed volumes/files on your computer. Remember that shellbags are very good sources of information for forensics[^263] and you need to clean those. Especially if you mounted any "hidden volume" anywhere. Again, you should not do this on the Decoy OS.
+As explained earlier, Shellbags are basically histories of accessed volumes/files on your computer. Remember that shellbags are very good sources of information for forensics[^265] and you need to clean those. Especially if you mounted any "hidden volume" anywhere. Again, you should not do this on the Decoy OS.
 
--   Download Shellbag Analyzer & Cleaner from <https://privazer.com/en/download-shellbag-analyzer-shellbag-cleaner.php> <sup>[[Archive.org]][447]</sup>
+-   Download Shellbag Analyzer & Cleaner from <https://privazer.com/en/download-shellbag-analyzer-shellbag-cleaner.php> <sup>[[Archive.org]][449]</sup>
 
     -   Launch it
 
@@ -7245,7 +7261,7 @@ Please refer to [Appendix H: Windows Cleaning Tools] before continuing.
 
 Here are the steps for PrivaZer:
 
--   Download and install PrivaZer from <https://privazer.com/en/download.php> <sup>[[Archive.org]][448]</sup>
+-   Download and install PrivaZer from <https://privazer.com/en/download.php> <sup>[[Archive.org]][450]</sup>
 
     -   Run PrivaZer after install
 
@@ -7267,7 +7283,7 @@ Here are the steps for PrivaZer:
 
         -   If you have an SSD drive:
 
-            -   Secure Overwriting Tab: Personally, I would just pick Normal Deletion + Trim (Trim itself should be enough[^274]). Secure Deletion with Trim[^271] (1 pass) might be redundant and overkill here if you intend to overwrite the free space anyway.
+            -   Secure Overwriting Tab: Personally, I would just pick Normal Deletion + Trim (Trim itself should be enough[^276]). Secure Deletion with Trim[^273] (1 pass) might be redundant and overkill here if you intend to overwrite the free space anyway.
 
             -   Free Space Tab: Personally, and again "just to be sure", I would select Normal Cleanup which will fill the entire free space with Data. I do not really trust Smart Cleanup as it does not actually fill all the free space of the SSD with Data. But again, I think this is probably not needed and overkill in most cases.
 
@@ -7291,7 +7307,7 @@ Here are the steps for PrivaZer:
 
 Here are the steps for BleachBit:
 
--   Get and install the latest version from BleachBit here <https://www.bleachbit.org/download> <sup>[[Archive.org]][449]</sup>
+-   Get and install the latest version from BleachBit here <https://www.bleachbit.org/download> <sup>[[Archive.org]][451]</sup>
 
 -   Run BleachBit
 
@@ -7317,7 +7333,7 @@ With this Native Windows 10 utility, you can just trigger a Trim on your SSD whi
 
 Just open Windows Explorer, Right Click on your System Drive and click Properties. Select Tools. Click Optimize and then Optimize again. You are done. I think that is probably enough in my opinion.
 
-![][420]
+![][422]
 
 ## Removing some traces of your identities on search engines and various platforms:
 
@@ -7333,9 +7349,9 @@ Contrary to popular belief, it is possible to have some but not all this informa
 
 You can check some useful information about how to and get delete various accounts on these websites:
 
--   <https://justdeleteme.xyz/> <sup>[[Archive.org]][450]</sup>
+-   <https://justdeleteme.xyz/> <sup>[[Archive.org]][452]</sup>
 
--   <https://justgetmydata.com/> <sup>[[Archive.org]][451]</sup>
+-   <https://justgetmydata.com/> <sup>[[Archive.org]][453]</sup>
 
 When you are done with this part, you should now handle search engines and while you may not be able to have the information deleted, you can ask them to update/remove outdated information which could then remove some cached information.
 
@@ -7343,7 +7359,7 @@ When you are done with this part, you should now handle search engines and while
 
 **Unfortunately, this will require you to have a Google account to request the update/removal (however this can be done with any Google account from anyone). There is no way around this except waiting.**
 
-Go to their "Remove outdated content from Google Search" page here: <https://search.google.com/search-console/remove-outdated-content> <sup>[[Archive.org]][452]</sup> and submit a request accordingly.
+Go to their "Remove outdated content from Google Search" page here: <https://search.google.com/search-console/remove-outdated-content> <sup>[[Archive.org]][454]</sup> and submit a request accordingly.
 
 If your profile/username was deleted/changed, they should re-index the content and update accordingly and remove these traces.
 
@@ -7353,7 +7369,7 @@ These requests might take several days to process. Be patient.
 
 **Unfortunately, this will require you to have a Microsoft account to request the update/removal (however this can be done with any Microsoft account from any identity). There is no way around this except waiting.**
 
-Go to their "Content Removal" page here: <https://www.bing.com/webmasters/tools/contentremoval> <sup>[[Archive.org]][453]</sup> and submit a request accordingly.
+Go to their "Content Removal" page here: <https://www.bing.com/webmasters/tools/contentremoval> <sup>[[Archive.org]][455]</sup> and submit a request accordingly.
 
 If your profile/username was deleted/changed, they should re-index the content and update accordingly and remove these traces.
 
@@ -7369,7 +7385,7 @@ In addition, DuckDuckGo source most of their searches from Bing (and not google)
 
 **Unfortunately, this will require you to have a Yandex account to request removals (however this can be done with any Yandex account from any identity). There is no way around this except waiting.**
 
-Once have your Yandex account, head to the Yandex Webmaster tools <https://webmaster.yandex.com> <sup>[[Archive.org]][454]</sup> and then select Tools and Delete URL <https://webmaster.yandex.com/tools/del-url/> <sup>[[Archive.org]][455]</sup>
+Once have your Yandex account, head to the Yandex Webmaster tools <https://webmaster.yandex.com> <sup>[[Archive.org]][456]</sup> and then select Tools and Delete URL <https://webmaster.yandex.com/tools/del-url/> <sup>[[Archive.org]][457]</sup>
 
 There you can input the URL that do not exist anymore if you had them deleted.
 
@@ -7383,7 +7399,7 @@ As far as I know, there is no readily available tool to force this and you will 
 
 ### Yahoo Search:
 
-Yes, Yahoo Search still exists but as per their help page <https://help.yahoo.com/kb/SLN4530.html> <sup>[[Archive.org]][456]</sup> , there is no way to remove information or refresh information besides waiting. This could take 6 to 8 weeks.
+Yes, Yahoo Search still exists but as per their help page <https://help.yahoo.com/kb/SLN4530.html> <sup>[[Archive.org]][458]</sup> , there is no way to remove information or refresh information besides waiting. This could take 6 to 8 weeks.
 
 ### Baidu:
 
@@ -7391,7 +7407,7 @@ As far as I know, there is no readily available tool to force this unless you co
 
 ### Wikipedia:
 
-As far as I know, there is no way to remove information from Wikipedia articles themselves but if you just want to remove traces of your username from it (as a user that contributed), you can do so by following these steps: <https://en.wikipedia.org/wiki/Wikipedia:Courtesy_vanishing> <sup>[[Archive.org]][457]</sup>
+As far as I know, there is no way to remove information from Wikipedia articles themselves but if you just want to remove traces of your username from it (as a user that contributed), you can do so by following these steps: <https://en.wikipedia.org/wiki/Wikipedia:Courtesy_vanishing> <sup>[[Archive.org]][459]</sup>
 
 This will not remove any information about your online identities that could appear in other articles but only your own identity on Wikipedia as a user.
 
@@ -7445,13 +7461,13 @@ Most likely if someone went through your document to read it and re-placed it ca
 
 # Some last OPSEC thoughts:
 
--   **Remember to use passphrases instead of passwords and use a different one for each service**[^242]**.**
+-   **Remember to use passphrases instead of passwords and use a different one for each service**[^244]**.**
 
 -   Make sure you are not keeping a copy of this guide anywhere unsafe after. The sole presence of this guide will most likely defeat all your plausible deniability possibilities.
 
--   Consider the use of Haven <https://guardianproject.github.io/haven/> <sup>[[Archive.org]][458]</sup> on some old android phone to keep watch on your home/room while you are away.
+-   Consider the use of Haven <https://guardianproject.github.io/haven/> <sup>[[Archive.org]][460]</sup> on some old android phone to keep watch on your home/room while you are away.
 
--   Doxx "yourself" and your identities from time to time by looking for them yourself online using various search engines to monitor your online identities. You can even automate the process somewhat using various tools such as Google Alerts <https://www.google.com/alerts> <sup>[[Archive.org]][459]</sup>.
+-   Doxx "yourself" and your identities from time to time by looking for them yourself online using various search engines to monitor your online identities. You can even automate the process somewhat using various tools such as Google Alerts <https://www.google.com/alerts> <sup>[[Archive.org]][461]</sup>.
 
 -   Remember [Appendix N: Warning about smartphones and smart devices]. Do not forget your smart devices can compromise your anonymity.
 
@@ -7471,21 +7487,21 @@ Most likely if someone went through your document to read it and re-placed it ca
 
 -   Keep plausible deniability as an option but remember it will not help against the 5$ wrench either.
 
--   Never ever leave your laptop unattended/on/unlocked anywhere when conducting sensitive activities. Remember the story of Ross Ulbricht and his arrest <https://en.wikipedia.org/wiki/Ross_Ulbricht#Silk_Road,_arrest_and_trial> <sup>[[Archive.org]][460]</sup>.
+-   Never ever leave your laptop unattended/on/unlocked anywhere when conducting sensitive activities. Remember the story of Ross Ulbricht and his arrest <https://en.wikipedia.org/wiki/Ross_Ulbricht#Silk_Road,_arrest_and_trial> <sup>[[Archive.org]][462]</sup>.
 
 -   Check for tampering regularly (not only your devices but also your home/room).
 
--   If you can, do not talk to the police (at least if you are in the US) <https://www.youtube.com/watch?v=d-7o9xYp7eE> <sup>[[Invidious]][461]</sup> without a lawyer.
+-   If you can, do not talk to the police (at least if you are in the US) <https://www.youtube.com/watch?v=d-7o9xYp7eE> <sup>[[Invidious]][463]</sup> without a lawyer.
 
 -   Know and always have at your disposal the details of a lawyer that could help you as a last resort in case things go wrong.
 
--   Read those tips here <https://www.whonix.org/wiki/DoNot> <sup>[[Archive.org]][290]</sup>
+-   Read those tips here <https://www.whonix.org/wiki/DoNot> <sup>[[Archive.org]][293]</sup>
 
 -   Finally, have common sense, do not be dumb, look and learn from others' mistakes:
 
-    -   DEFCON 22, Adrian Crenshaw- Dropping Docs on Darknets: How People Got Caught, <https://www.youtube.com/watch?v=eQ2OZKitRwc> ^[[Invidious]][462]^ ([Slides][] <sup>[[Archive.org]][463]</sup>)
+    -   DEFCON 22, Adrian Crenshaw- Dropping Docs on Darknets: How People Got Caught, <https://www.youtube.com/watch?v=eQ2OZKitRwc> <sup>[[Invidious]][464]</sup> ([Slides][] <sup>[[Archive.org]][465]</sup>)
 
-    -   Bad Opsec - How Tor Users Got Caught, <https://www.youtube.com/watch?v=GR_U0G-QGA0> <sup>[[Invidious]][464]</sup>
+    -   Bad Opsec - How Tor Users Got Caught, <https://www.youtube.com/watch?v=GR_U0G-QGA0> <sup>[[Invidious]][466]</sup>
 
 # **If you think you got burned:**
 
@@ -7517,7 +7533,7 @@ Most likely if someone went through your document to read it and re-placed it ca
 
 -   Contact a lawyer if possible and hope for the best and if you cannot contact one (yet), try to remain silent (if your country allows it) until you have a lawyer to help you and if your law allows you to remain silent.
 
-Keep in mind that many countries have specific laws to compel you to reveal your passwords that could override your "right to remain silent". See this Wikipedia article: <https://en.wikipedia.org/wiki/Key_disclosure_law> <sup>[[Archive.org]][465]</sup> and this other visual resource with law references <https://www.gp-digital.org/world-map-of-encryption/> <sup>[[Archive.org]][466]</sup>.
+Keep in mind that many countries have specific laws to compel you to reveal your passwords that could override your "right to remain silent". See this Wikipedia article: <https://en.wikipedia.org/wiki/Key_disclosure_law> <sup>[[Archive.org]][467]</sup> and this other visual resource with law references <https://www.gp-digital.org/world-map-of-encryption/> <sup>[[Archive.org]][468]</sup>.
 
 # A small final editorial note:
 
@@ -7539,15 +7555,15 @@ You should not hesitate to question this type of information from any source in 
 
 Please keep thinking for yourself and be open to critical thinking. Please keep an open mind. Dare to know!
 
-If you want to give a hand to users facing censorship and oppression accessing the Tor Network, consider using <https://addons.mozilla.org/en-US/firefox/addon/torproject-snowflake/> <sup>[[Archive.org]][467]</sup> [^378]
+If you want to give a hand to users facing censorship and oppression accessing the Tor Network, consider using <https://addons.mozilla.org/en-US/firefox/addon/torproject-snowflake/> <sup>[[Archive.org]][469]</sup> [^378]
 
 "In the end the Party would announce that two and two made five, and you would have to believe it." -- George Orwell, 1984.
 
 # Donations:
 
-This project has no funding and donations are welcome at <https://anonymousplanet.org/donations.html> <sup>[[Mirror]][468]</sup> <sup>[[Archive.org]][469]</sup> ^[[Tor Mirror]][470]^ or directly by sending Monero (XMR) to this address: ```4549BGJrEPBfpiPRL9CVGzGMgJnC1Dzf8EXLVfY8Ukrnj7LzkTV611dGf9tuQHiSQjbixsNWiffNiV5fPB3LkyF7UXi3vwQ```
+This project has no funding and donations are welcome at <https://anonymousplanet.org/donations.html> <sup>[[Mirror]][470]</sup> <sup>[[Archive.org]][471]</sup> <sup>[[Tor Mirror]][472]</sup> or directly by sending Monero (XMR) to this address: ```4549BGJrEPBfpiPRL9CVGzGMgJnC1Dzf8EXLVfY8Ukrnj7LzkTV611dGf9tuQHiSQjbixsNWiffNiV5fPB3LkyF7UXi3vwQ```
 
-![][471]
+![][473]
 
 **(Please do verify the checksum and gpg signature of this file for authenticity, this is explained in the README of the repository if you do not know how to do that)**.
 
@@ -7559,7 +7575,7 @@ This project has no funding and donations are welcome at <https://anonymousplane
 
 Note that these addresses are being changed at each release but the old ones remain valid.
 
-![][472]____________________![][473]
+![][474]____________________![][475]
 
 **(Please do verify the checksum and gpg signature of this file for authenticity, this is explained in the README of the repository if you do not know how to do that)**.
 
@@ -7633,7 +7649,7 @@ Note that these addresses are being changed at each release but the old ones rem
 
 -   Thanks to the many researchers, journalists, lawyers, and individuals referenced in this guide for their various research and projects
 
--   **Special Thanks to Edward Snowden and who inspired me to write this guide (buy and read his book please <https://en.wikipedia.org/wiki/Permanent_Record_(autobiography)>** <sup>[[Archive.org]][474]</sup>**)**
+-   **Special Thanks to Edward Snowden and who inspired me to write this guide (buy and read his book please <https://en.wikipedia.org/wiki/Permanent_Record_(autobiography)>** <sup>[[Archive.org]][476]</sup>**)**
 
 # Appendix A: Windows Installation
 
@@ -7793,7 +7809,7 @@ Here are the steps in details:
 
 Do these steps from a different computer to not connect Windows 10 to the internet before those settings are applied. You can download and copy those to the USB key (for transfer onto a Windows 10 fresh installation) or if it is a VM, you can transfer them to the VM within Virtualbox (VM Settings > General > Advanced > Drag n Drop > Enable Host to Guest).
 
--   Download and install W10Privacy from <https://www.w10privacy.de/english-home/> <sup>[[Archive.org]][475]</sup>
+-   Download and install W10Privacy from <https://www.w10privacy.de/english-home/> <sup>[[Archive.org]][477]</sup>
 
     -   Open the app as Administrator (right click > more > run as administrator)
 
@@ -7803,7 +7819,7 @@ Do these steps from a different computer to not connect Windows 10 to the intern
 
     -   Reboot
 
--   Download and run WindowsSpyBlocker from <https://crazymax.dev/WindowsSpyBlocker/download/> <sup>[[Archive.org]][476]</sup>
+-   Download and run WindowsSpyBlocker from <https://crazymax.dev/WindowsSpyBlocker/download/> <sup>[[Archive.org]][478]</sup>
 
     -   Type 1 and go into Telemetry
 
@@ -7823,7 +7839,7 @@ These measures added to the settings during installation should be hopefully suf
 
 These are the steps to create a Windows 10 (20H2) Installation Media using this tool and instructions:
 
-<https://www.microsoft.com/en-us/software-download/windows10> <sup>[[Archive.org]][477]</sup>
+<https://www.microsoft.com/en-us/software-download/windows10> <sup>[[Archive.org]][479]</sup>
 
 -   Download the tool and execute it from your Download folder.
 
@@ -7847,7 +7863,7 @@ These instructions are valid for all Operating Systems:
 
 -   System Rescue:
 
-    -   Create a System Rescue USB disk following these instructions <https://www.system-rescue.org/Installing-SystemRescue-on-a-USB-memory-stick/> <sup>[[Archive.org]][478]</sup> (download the ISO and write to an USB stick with Rufus).
+    -   Create a System Rescue USB disk following these instructions <https://www.system-rescue.org/Installing-SystemRescue-on-a-USB-memory-stick/> <sup>[[Archive.org]][480]</sup> (download the ISO and write to an USB stick with Rufus).
 
     -   Disable Secure Boot in your BIOS/UEFI settings and change the boot order to the USB disk (System Rescue bootloader is not signed and will not boot with secure boot enabled).
 
@@ -7863,15 +7879,15 @@ These instructions are valid for all Operating Systems:
 
         -   Follow one of these tutorials
 
-            -   <https://wiki.archlinux.org/index.php/Solid_state_drive/Memory_cell_clearing> <sup>[[Archive.org]][479]</sup>
+            -   <https://wiki.archlinux.org/index.php/Solid_state_drive/Memory_cell_clearing> <sup>[[Archive.org]][481]</sup>
 
-            -   <https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase> <sup>[[Archive.org]][480]</sup>
+            -   <https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase> <sup>[[Archive.org]][482]</sup>
 
-            -   <https://tinyapps.org/docs/wipe_drives_hdparm.html> <sup>[[Archive.org]][481]</sup>
+            -   <https://tinyapps.org/docs/wipe_drives_hdparm.html> <sup>[[Archive.org]][483]</sup>
 
     -   ATA Sanitize:
 
-        -   Follow this tutorial <https://tinyapps.org/docs/ata_sanitize_hdparm.html> <sup>[[Archive.org]][482]</sup>
+        -   Follow this tutorial <https://tinyapps.org/docs/ata_sanitize_hdparm.html> <sup>[[Archive.org]][484]</sup>
 
 -   NVMe SSD:
 
@@ -7879,25 +7895,25 @@ These instructions are valid for all Operating Systems:
 
     -   Follow one of these tutorials:
 
-        -   <https://wiki.archlinux.org/index.php/Solid_state_drive/Memory_cell_clearing> <sup>[[Archive.org]][479]</sup>
+        -   <https://wiki.archlinux.org/index.php/Solid_state_drive/Memory_cell_clearing> <sup>[[Archive.org]][481]</sup>
 
-        -   <https://tinyapps.org/docs/nvme-secure-erase.html> <sup>[[Archive.org]][483]</sup>
+        -   <https://tinyapps.org/docs/nvme-secure-erase.html> <sup>[[Archive.org]][485]</sup>
 
-        -   <https://tinyapps.org/docs/nvme-sanitize.html> <sup>[[Archive.org]][484]</sup>
+        -   <https://tinyapps.org/docs/nvme-sanitize.html> <sup>[[Archive.org]][486]</sup>
 
 # Appendix E: Clonezilla
 
--   Get Clonezilla by just following these instructions: <https://clonezilla.org/liveusb.php> <sup>[[Archive.org]][485]</sup> (I recommend the Alternative version AMD64 that should work with most recent laptops)
+-   Get Clonezilla by just following these instructions: <https://clonezilla.org/liveusb.php> <sup>[[Archive.org]][487]</sup> (I recommend the Alternative version AMD64 that should work with most recent laptops)
 
 -   Boot from Clonezilla
 
--   Follow these steps to make a backup: <https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/01_Save_disk_image> <sup>[[Archive.org]][486]</sup>
+-   Follow these steps to make a backup: <https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/01_Save_disk_image> <sup>[[Archive.org]][488]</sup>
 
     -   **If you are backing up a disk with simple Encryption, encryption of the backup is not required since you are backing up an already encrypted disk but you can still encrypt the backup anyway if you want additional security (and slower backup).**
 
     -   **If you intend to back-up a device with plausible deniability encryption, I strongly advise against it as this backup image could be used to prove the existence of the hidden volume using forensics techniques as explained earlier. Do not make an image backup of the partition containing your hidden OS.**
 
--   You are done, if you need to restore, follow these instructions: <https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/02_Restore_disk_image> <sup>[[Archive.org]][487]</sup>
+-   You are done, if you need to restore, follow these instructions: <https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/02_Restore_disk_image> <sup>[[Archive.org]][489]</sup>
 
 Each backup could take a while depending on the speed of your laptop and the speed of your external drive. In my experience, expect about 1 hour per backup depending on the drive size and the write speed of your backup media (my tests were done backing up 256GB SDDs on a USB 3.0 7200rpm HDD).
 
@@ -7937,11 +7953,11 @@ This guide will **[only recommend]{.ul}** using Tor browser within the host OS b
 
 This Browser on the host OS will only be used to download various utilities and will never be used for actual sensitive activities.
 
--   Download and install Tor Browser according to the instructions from <https://www.torproject.org/download/> <sup>[[Archive.org]][488]</sup>
+-   Download and install Tor Browser according to the instructions from <https://www.torproject.org/download/> <sup>[[Archive.org]][490]</sup>
 
 -   Open Tor Browser
 
--   Click the little shield Icon and select your Security level (see <https://tb-manual.torproject.org/security-settings/> <sup>[[Archive.org]][489]</sup> for details):
+-   Click the little shield Icon and select your Security level (see <https://tb-manual.torproject.org/security-settings/> <sup>[[Archive.org]][491]</sup> for details):
 
     -   Standard
 
@@ -7949,7 +7965,7 @@ This Browser on the host OS will only be used to download various utilities and 
 
     -   Safest (this will have Javascript disabled on all websites and while increasing your security, it might reduce your anonymity and make your browsing experience quite unpleasant on many non-static websites).
 
-If you are experiencing issues connecting to Tor due to Censorship or Blocking, you might consider using Tor bridges as explained here: <https://bridges.torproject.org/> <sup>[[Archive.org]][490]</sup>
+If you are experiencing issues connecting to Tor due to Censorship or Blocking, you might consider using Tor bridges as explained here: <https://bridges.torproject.org/> <sup>[[Archive.org]][492]</sup>
 
 **Use this browser for all the next steps within the host OS unless instructed otherwise.**
 
@@ -7971,19 +7987,19 @@ In this guide I will recommend two third native tools and two third party tools:
 
 -   Native Tools:
 
-    -   Windows 10 Disk Cleanup Utility: <https://support.microsoft.com/en-us/windows/disk-cleanup-in-windows-10-8a96ff42-5751-39ad-23d6-434b4d5b9a68> <sup>[[Archive.org]][491]</sup>
+    -   Windows 10 Disk Cleanup Utility: <https://support.microsoft.com/en-us/windows/disk-cleanup-in-windows-10-8a96ff42-5751-39ad-23d6-434b4d5b9a68> <sup>[[Archive.org]][493]</sup>
 
 > This tool will cleanup a bunch of things natively. It is not enough and I instead recommend using third party tools below to clean more stuff. PrivaZer for instance will use the disk cleanup utility directly itself and BleachBit will use its own mechanisms.
 
--   Windows 10 Optimize Utility (Defrag on HDD Drives): <https://support.microsoft.com/en-us/windows/defragment-your-windows-10-pc-048aefac-7f1f-4632-d48a-9700c4ec702a> <sup>[[Archive.org]][492]</sup>
+-   Windows 10 Optimize Utility (Defrag on HDD Drives): <https://support.microsoft.com/en-us/windows/defragment-your-windows-10-pc-048aefac-7f1f-4632-d48a-9700c4ec702a> <sup>[[Archive.org]][494]</sup>
 
 > For security, this tool is very useful on SSD drives at this "Optimize" function will in fact force a Disk wide Trim operation to occur. This will most likely be more than enough to make sure any deleted data that was not trimmed before for any reason will be this time. Deleted data with Trim is very unlikely to be recovered as explained before in this guide.
 
 -   Third Party Tools:
 
-    -   The open-source utility BleachBit <https://www.bleachbit.org/> <sup>[[Archive.org]][493]</sup>
+    -   The open-source utility BleachBit <https://www.bleachbit.org/> <sup>[[Archive.org]][495]</sup>
 
-    -   The closed-source utility PrivaZer <https://privazer.com/> <sup>[[Archive.org]][494]</sup>
+    -   The closed-source utility PrivaZer <https://privazer.com/> <sup>[[Archive.org]][496]</sup>
 
 Personally, I prefer PrivaZer because it has more customization and smarter features but I would understand if you do not trust them and prefer open-source software in which case I would recommend BleachBit which offers a bit less customization but similar functionalities.
 
@@ -8007,19 +8023,19 @@ Both these utilities can delete files and can overwrite the free space after del
 
 # Appendix I: Using ShredOS to securely wipe an HDD drive:
 
-There are several utilities that are recommend (like the old unmaintained DBAN[^384]) or System Rescue CD (<https://www.system-rescue.org/> <sup>[[Archive.org]][495]</sup>) for this but personally, I will recommend the use of ShredOS.
+There are several utilities that are recommend (like the old unmaintained DBAN[^384]) or System Rescue CD (<https://www.system-rescue.org/> <sup>[[Archive.org]][497]</sup>) for this but personally, I will recommend the use of ShredOS.
 
-Feel free do go with DBAN instead if you want (using this tutorial: <https://www.lifewire.com/how-to-erase-a-hard-drive-using-dban-2619148> <sup>[[Archive.org]][496]</sup>), the process is basically the same but will not work out of the box with UEFI laptops.
+Feel free do go with DBAN instead if you want (using this tutorial: <https://www.lifewire.com/how-to-erase-a-hard-drive-using-dban-2619148> <sup>[[Archive.org]][498]</sup>), the process is basically the same but will not work out of the box with UEFI laptops.
 
 If you want to go with System-Rescue, just head to their website and follow the instructions.
 
 ## Windows:
 
--   Download ShredOS from <https://github.com/PartialVolume/shredos.2020.02> <sup>[[Archive.org]][497]</sup>
+-   Download ShredOS from <https://github.com/PartialVolume/shredos.2020.02> <sup>[[Archive.org]][499]</sup>
 
 -   Unzip the ISO file
 
--   Download Rufus from <https://rufus.ie/> <sup>[[Archive.org]][498]</sup>
+-   Download Rufus from <https://rufus.ie/> <sup>[[Archive.org]][500]</sup>
 
 -   Launch Rufus
 
@@ -8033,7 +8049,7 @@ If you want to go with System-Rescue, just head to their website and follow the 
 
 ## Linux:
 
--   Follow instructions on <https://github.com/PartialVolume/shredos.2020.02> <sup>[[Archive.org]][497]</sup>
+-   Follow instructions on <https://github.com/PartialVolume/shredos.2020.02> <sup>[[Archive.org]][499]</sup>
 
 -   Reboot and boot the USB key
 
@@ -8049,41 +8065,41 @@ Unfortunately, most of these tools are Windows only.
 
 ## Tools that provide a boot disk for wiping from boot:
 
--   SanDisk DashBoard: <https://kb.sandisk.com/app/answers/detail/a_id/15108/~/dashboard-support-information> <sup>[[Archive.org]][499]</sup>
+-   SanDisk DashBoard: <https://kb.sandisk.com/app/answers/detail/a_id/15108/~/dashboard-support-information> <sup>[[Archive.org]][501]</sup>
 
--   Seagate SeaTools: <https://www.seagate.com/support/downloads/seatools/> <sup>[[Archive.org]][500]</sup>
+-   Seagate SeaTools: <https://www.seagate.com/support/downloads/seatools/> <sup>[[Archive.org]][502]</sup>
 
--   Samsung Magican: <https://www.samsung.com/semiconductor/minisite/ssd/download/tools/> <sup>[[Archive.org]][501]</sup>
+-   Samsung Magican: <https://www.samsung.com/semiconductor/minisite/ssd/download/tools/> <sup>[[Archive.org]][503]</sup>
 
--   Kingston SSD Manager: <https://www.kingston.com/unitedstates/en/support/technical/ssdmanager> <sup>[[Archive.org]][502]</sup>
+-   Kingston SSD Manager: <https://www.kingston.com/unitedstates/en/support/technical/ssdmanager> <sup>[[Archive.org]][504]</sup>
 
 -   Lenovo:
 
     -   Most likely native utility available within the BIOS/UEFI, please check
 
-    -   Drive Erase Utility: <https://support.lenovo.com/us/en/downloads/ds019026-thinkpad-drive-erase-utility-for-resetting-the-cryptographic-key-and-erasing-the-solid-state-drive-thinkpad> <sup>[[Archive.org]][503]</sup>
+    -   Drive Erase Utility: <https://support.lenovo.com/us/en/downloads/ds019026-thinkpad-drive-erase-utility-for-resetting-the-cryptographic-key-and-erasing-the-solid-state-drive-thinkpad> <sup>[[Archive.org]][505]</sup>
 
--   Crucial Storage Executive: <https://www.crucial.com/support/storage-executive> <sup>[[Archive.org]][504]</sup>
+-   Crucial Storage Executive: <https://www.crucial.com/support/storage-executive> <sup>[[Archive.org]][506]</sup>
 
--   Western Digital Dashboard: <https://support.wdc.com/downloads.aspx?p=279> <sup>[[Archive.org]][505]</sup>
+-   Western Digital Dashboard: <https://support.wdc.com/downloads.aspx?p=279> <sup>[[Archive.org]][507]</sup>
 
--   HP: Follow instructions on <https://store.hp.com/us/en/tech-takes/how-to-secure-erase-ssd> <sup>[[Archive.org]][506]</sup>
+-   HP: Follow instructions on <https://store.hp.com/us/en/tech-takes/how-to-secure-erase-ssd> <sup>[[Archive.org]][508]</sup>
 
--   Transcend SSD Scope: <https://www.transcend-info.com/Support/Software-10/> <sup>[[Archive.org]][507]</sup>
+-   Transcend SSD Scope: <https://www.transcend-info.com/Support/Software-10/> <sup>[[Archive.org]][509]</sup>
 
 -   Dell:
 
-    -   Most likely native utility available within the BIOS/UEFI, please check <https://www.dell.com/support/kbdoc/en-us/000134997/using-the-dell-bios-data-wipe-function-for-optiplex-precision-and-latitude-systems-built-after-november-2015?lwp=rt> <sup>[[Archive.org]][508]</sup>
+    -   Most likely native utility available within the BIOS/UEFI, please check <https://www.dell.com/support/kbdoc/en-us/000134997/using-the-dell-bios-data-wipe-function-for-optiplex-precision-and-latitude-systems-built-after-november-2015?lwp=rt> <sup>[[Archive.org]][510]</sup>
 
 ## Tools that provide only support from running OS (for external drives).
 
--   Toshiba Storage Tools: <https://www.toshiba-storage.com/downloads/> <sup>[[Archive.org]][509]</sup>
+-   Toshiba Storage Tools: <https://www.toshiba-storage.com/downloads/> <sup>[[Archive.org]][511]</sup>
 
 # Appendix K: Considerations for using external SSD drives
 
 **I do not recommend using external SSDs due to the uncertainty about their support for Trim, ATA Secure Erase and Sanitize options through USB controllers. Instead, I recommend using external HDD disks which can be cleaned/wiped safely and securely without hassle (albeit much slower than SSD drives).**
 
-Please do not buy or use gimmicky self-encrypting devices such as these: <https://syscall.eu/blog/2018/03/12/aigo_part1/> <sup>[[Archive.org]][201]</sup>
+Please do not buy or use gimmicky self-encrypting devices such as these: <https://syscall.eu/blog/2018/03/12/aigo_part1/> <sup>[[Archive.org]][203]</sup>
 
 Some might be very efficient[^385] but many are gimmicky gadgets.
 
@@ -8119,15 +8135,15 @@ If it does not work. Just decrypt and re-encrypt the whole drive or fill up the 
 
 ### Trim Support:
 
-Follow this good tutorial: <https://www.glump.net/howto/desktop/enable-trim-on-an-external-ssd-on-linux> <sup>[[Archive.org]][510]</sup>
+Follow this good tutorial: <https://www.glump.net/howto/desktop/enable-trim-on-an-external-ssd-on-linux> <sup>[[Archive.org]][512]</sup>
 
 ### ATA/NVMe Operations (Secure Erase/Sanitize):
 
-**It is not "recommended". Please read the disclaimers here <https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase>** <sup>[[Archive.org]][480]</sup> **and here <https://wiki.archlinux.org/index.php/Solid_state_drive/Memory_cell_clearing>** <sup>[[Archive.org]][479]</sup>
+**It is not "recommended". Please read the disclaimers here <https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase>** <sup>[[Archive.org]][482]</sup> **and here <https://wiki.archlinux.org/index.php/Solid_state_drive/Memory_cell_clearing>** <sup>[[Archive.org]][481]</sup>
 
 But this seems to be based on anecdotal experiences. So, if you are sure your external SSD supports Trim (see vendor documentation). You could just **try at your own risk** to use nvme-cli or hdparm to issue secure erases.
 
-See also this tutorial <https://code.mendhak.com/securely-wipe-ssd/> <sup>[[Archive.org]][511]</sup>
+See also this tutorial <https://code.mendhak.com/securely-wipe-ssd/> <sup>[[Archive.org]][513]</sup>
 
 **Your mileage may vary. Use at your own risk.**
 
@@ -8135,13 +8151,13 @@ See also this tutorial <https://code.mendhak.com/securely-wipe-ssd/> <sup>[[Arch
 
 ### Trim Support:
 
-According to Apple Documentation[^376], Trim is supported on APFS (asynchronously) and HFS+ (through period trim or first-aid).
+According to Apple Documentation[^378], Trim is supported on APFS (asynchronously) and HFS+ (through period trim or first-aid).
 
 So, if it is supported (and enabled on your external SSD), you should be able to issue a Trim on a non-APFS drive using Disk Utility and First Aid which should issue a Trim.
 
-If your disk supports it but it is not enabled in MacOS. You could try issuing a "sudo trimforce enable" command from the Terminal and see if it enables Trim on your external SSD. And then again check the first aid command if it is not APFS (see this Tutorial for info <https://www.lifewire.com/enable-trim-for-ssd-in-os-x-yosemite-2260789> <sup>[[Archive.org]][512]</sup>)
+If your disk supports it but it is not enabled in MacOS. You could try issuing a "sudo trimforce enable" command from the Terminal and see if it enables Trim on your external SSD. And then again check the first aid command if it is not APFS (see this Tutorial for info <https://www.lifewire.com/enable-trim-for-ssd-in-os-x-yosemite-2260789> <sup>[[Archive.org]][514]</sup>)
 
-If it does not work, I am not aware of any reliable method to enable TRIM besides the commercial utility Trim Enabler here <https://cindori.org/trimenabler/> <sup>[[Archive.org]][513]</sup> which claims support for external drives.
+If it does not work, I am not aware of any reliable method to enable TRIM besides the commercial utility Trim Enabler here <https://cindori.org/trimenabler/> <sup>[[Archive.org]][515]</sup> which claims support for external drives.
 
 ### ATA/NVMe Operations (Secure Erase/Sanitize):
 
@@ -8155,7 +8171,7 @@ I am not aware of any method of doing so reliably and safely on MacOS. So, you w
 
 # Appendix L: Creating a mat2-web guest VM for removing metadata from files
 
-Download the latest Debian testing amd64 netinst ISO from <https://www.debian.org/CD/netinst/> <sup>[[Archive.org]][514]</sup>
+Download the latest Debian testing amd64 netinst ISO from <https://www.debian.org/CD/netinst/> <sup>[[Archive.org]][516]</sup>
 
 **(Get testing to get the latest mat2 release, stable is a few versions back)**
 
@@ -8307,13 +8323,13 @@ After each use of this VM, you should revert to the Snapshot to erase all traces
 
 Here are some links on how to securely wipe your drive (HDD/SDD) from the BIOS for various brands:
 
--   Lenovo ThinkPads: <https://support.lenovo.com/be/en/solutions/migr-68369> <sup>[[Archive.org]][515]</sup>
+-   Lenovo ThinkPads: <https://support.lenovo.com/be/en/solutions/migr-68369> <sup>[[Archive.org]][517]</sup>
 
--   HP (all): <https://support.hp.com/gb-en/document/c06204100> <sup>[[Archive.org]][516]</sup>
+-   HP (all): <https://support.hp.com/gb-en/document/c06204100> <sup>[[Archive.org]][518]</sup>
 
--   Dell (all): <https://www.dell.com/support/kbdoc/en-us/000146892/dell-data-wipe> <sup>[[Archive.org]][517]</sup>
+-   Dell (all): <https://www.dell.com/support/kbdoc/en-us/000146892/dell-data-wipe> <sup>[[Archive.org]][519]</sup>
 
--   Acer (Travelmate only): <https://us.answers.acer.com/app/answers/detail/a_id/41567/~/how-to-use-disk-sanitizer-on-acer-travelmate-notebooks> <sup>[[Archive.org]][518]</sup>
+-   Acer (Travelmate only): <https://us.answers.acer.com/app/answers/detail/a_id/41567/~/how-to-use-disk-sanitizer-on-acer-travelmate-notebooks> <sup>[[Archive.org]][520]</sup>
 
 -   Asus: no option AFAIK except maybe for some ROG models.
 
@@ -8337,9 +8353,9 @@ When conducting sensitive activities, remember that:
 
 **Note: Please do not consider commercial gimmicky all-in devices for anonymity. The only way to achieve proper opsec is by doing it yourself. See those examples to see why it is not a good idea:**
 
--   **Encrochat: <https://en.wikipedia.org/wiki/EncroChat>** <sup>[[Archive.org]][519]</sup>
+-   **Encrochat: <https://en.wikipedia.org/wiki/EncroChat>** <sup>[[Archive.org]][521]</sup>
 
--   **Sky ECC: <https://en.wikipedia.org/wiki/Sky_ECC>** <sup>[[Archive.org]][520]</sup>
+-   **Sky ECC: <https://en.wikipedia.org/wiki/Sky_ECC>** <sup>[[Archive.org]][522]</sup>
 
 **You should never rely on some external commercial service to protect your anonymity.**
 
@@ -8351,7 +8367,7 @@ I only see two possible options for you to get an anonymous VPN/Proxy:
 
 ## Cash/Monero-Paid VPN (preferred):
 
-There are three VPN companies recommended by privacytools.io (<https://privacytools.io/providers/vpn/> <sup>[[Archive.org]][521]</sup>) that accept cash payments: Mullvad, iVPN and ProtonVPN.
+There are three VPN companies recommended by privacytools.io (<https://privacytools.io/providers/vpn/> <sup>[[Archive.org]][523]</sup>) that accept cash payments: Mullvad, iVPN and ProtonVPN.
 
 Personally, I would recommend Mullvad due to personal experience.
 
@@ -8397,17 +8413,17 @@ The other alternative is setting up your own VPN/Proxy using a VPS (Virtual Priv
 
 This will offer some advantages as the chances of your IP being blacklisted somewhere are lower than known VPN providers.
 
-This does offer some disadvantage as Monero is not perfect as explained earlier in this guide and some global adversaries could maybe still track you. You will need to get Monero from an Exchange using the normal financial system and then pick a hosting (list here <https://www.getmonero.org/community/merchants/#exchanges> <sup>[[Archive.org]][399]</sup>)
+This does offer some disadvantage as Monero is not perfect as explained earlier in this guide and some global adversaries could maybe still track you. You will need to get Monero from an Exchange using the normal financial system and then pick a hosting (list here <https://www.getmonero.org/community/merchants/#exchanges> <sup>[[Archive.org]][401]</sup>)
 
-You could use <https://evolution-host.com/vps-hosting.php> <sup>[[Archive.org]][522]</sup> (who supports Whonix) which does accept Monero payments. Or pick one from the list here that do accept Monero: <https://www.getmonero.org/community/merchants/#hosting> <sup>[[Archive.org]][399]</sup>
+You could use <https://evolution-host.com/vps-hosting.php> <sup>[[Archive.org]][524]</sup> (who supports Whonix) which does accept Monero payments. Or pick one from the list here that do accept Monero: <https://www.getmonero.org/community/merchants/#hosting> <sup>[[Archive.org]][401]</sup>
 
-**Consider tho that only one of those accepting Monero is recommended by Privacytools.io (<https://privacytools.io/providers/hosting/>** <sup>[[Archive.org]][400]</sup>**) and it is Njalla <https://njal.la/>** <sup>[[Archive.org]][401]</sup> **and I would recommend them as well.**
+**Consider tho that only one of those accepting Monero is recommended by Privacytools.io (<https://privacytools.io/providers/hosting/>** <sup>[[Archive.org]][402]</sup>**) and it is Njalla <https://njal.la/>** <sup>[[Archive.org]][403]</sup> **and I would recommend them as well.**
 
 **Do not in any circumstance use this new VPS/VPN/Proxy using your known connections. Only access it through Tor using Whonix Workstation for instance (this is explained later). This VPN will only be used later within a Virtual Machin over the Tor Network in a secure way as we do not trust VPN providers "no logging policies". This VPN provider should never know your real origin IP.**
 
 ### VPN VPS:
 
-There are plenty of tutorials on how to do this like this one <https://proprivacy.com/vpn/guides/create-your-own-vpn-server> <sup>[[Archive.org]][523]</sup>
+There are plenty of tutorials on how to do this like this one <https://proprivacy.com/vpn/guides/create-your-own-vpn-server> <sup>[[Archive.org]][525]</sup>
 
 ### Socks Proxy VPS:
 
@@ -8417,13 +8433,13 @@ It is probably the easiest thing to set-up since you will just use the SSH conne
 
 Here are a few tutorials on how to do this very quickly:
 
--   (Windows/Linux/MacOS) <https://linuxize.com/post/how-to-setup-ssh-socks-tunnel-for-private-browsing/> <sup>[[Archive.org]][524]</sup>
+-   (Windows/Linux/MacOS) <https://linuxize.com/post/how-to-setup-ssh-socks-tunnel-for-private-browsing/> <sup>[[Archive.org]][526]</sup>
 
--   (Windows/Linux/MacOS) <https://www.digitalocean.com/community/tutorials/how-to-route-web-traffic-securely-without-a-vpn-using-a-socks-tunnel> <sup>[[Archive.org]][525]</sup>
+-   (Windows/Linux/MacOS) <https://www.digitalocean.com/community/tutorials/how-to-route-web-traffic-securely-without-a-vpn-using-a-socks-tunnel> <sup>[[Archive.org]][527]</sup>
 
--   (Windows) <https://www.forwardproxy.com/2018/12/using-putty-to-setup-a-quick-socks-proxy/> <sup>[[Archive.org]][526]</sup>
+-   (Windows) <https://www.forwardproxy.com/2018/12/using-putty-to-setup-a-quick-socks-proxy/> <sup>[[Archive.org]][528]</sup>
 
--   (Linux/MacOS) <https://ma.ttias.be/socks-proxy-linux-ssh-bypass-content-filters/> <sup>[[Archive.org]][527]</sup>
+-   (Linux/MacOS) <https://ma.ttias.be/socks-proxy-linux-ssh-bypass-content-filters/> <sup>[[Archive.org]][529]</sup>
 
 Here is my basic tutorial:
 
@@ -8459,11 +8475,11 @@ Here are the steps:
 
 -   Get your anonymous VPS set-up
 
--   Download and install Putty from <https://www.putty.org/> <sup>[[Archive.org]][528]</sup>
+-   Download and install Putty from <https://www.putty.org/> <sup>[[Archive.org]][530]</sup>
 
 -   Set the following Options in Putty and connect to your server
 
-![][529]
+![][531]
 
 -   Connect to your VPS using those settings
 
@@ -8481,7 +8497,7 @@ Now, there might also be situations where simply using Tor or a VPN alone could 
 
 But you still want to do something anonymously without disclosing/leaking any information.
 
-In that case my last resort recommendation is to connect safely **from a distance** to a Public Wi-Fi (See [Find some safe places with decent public Wi-Fi:]) using your laptop and TAILS "unsafe browser". See <https://tails.boum.org/contribute/design/Unsafe_Browser/> <sup>[[Archive.org]][530]</sup>.
+In that case my last resort recommendation is to connect safely **from a distance** to a Public Wi-Fi (See [Find some safe places with decent public Wi-Fi:]) using your laptop and TAILS "unsafe browser". See <https://tails.boum.org/contribute/design/Unsafe_Browser/> <sup>[[Archive.org]][532]</sup>.
 
 **In Tor usage alone is suspicious or risky, you should NOT allow TAILS to try establishing a Tor connection at start-up by doing the following:**
 
@@ -8507,21 +8523,21 @@ You could also use the other routes (Whonix and Qubes OS without using Tor/VPN) 
 
 **Be safe and extremely cautious. This is entirely at your own risk.**
 
-Consider reading this older but still relevant guide <https://archive.flossmanuals.net/bypassing-censorship/index.html> <sup>[[Archive.org]][531]</sup>
+Consider reading this older but still relevant guide <https://archive.flossmanuals.net/bypassing-censorship/index.html> <sup>[[Archive.org]][533]</sup>
 
 # Appendix Q: Using long range Antenna to connect to Public Wi-Fis from a safe distance:
 
 It is possible to access/connect to remote distant Public Wi-Fis from a distance using a cheap directional Antenna that looks like this:
 
-![][532]
+![][534]
 
 These antennas are widely available on various online shops for a cheap price (Amazon, AliExpress, Banggood ...). The only issue is that they are not discrete and you might have to find a way to hide it (for instance in a Poster cardboard container in a Backpack). Or in a large enough Bag. Optionally (but riskier) you could even consider using it from your home if you have a nice Window view to various places where some Public Wi-Fi is available.
 
 Such antennas need to be combined with specific USB adapters that have an external Antenna plug and sufficiently high power to use them.
 
-**Personally, I would recommend the AWUS036 series in the Alfa brand of adapters (see <https://www.alfa.com.tw/>** <sup>[[Archive.org]][533]</sup>**).** But you could also go with some other brands if you want such as the TP-Link TL-WN722 (see <https://www.tp-link.com/us/home-networking/usb-adapter/tl-wn722n/> <sup>[[Archive.org]][534]</sup>).
+**Personally, I would recommend the AWUS036 series in the Alfa brand of adapters (see <https://www.alfa.com.tw/>** <sup>[[Archive.org]][535]</sup>**).** But you could also go with some other brands if you want such as the TP-Link TL-WN722 (see <https://www.tp-link.com/us/home-networking/usb-adapter/tl-wn722n/> <sup>[[Archive.org]][536]</sup>).
 
-See this post for a comparison of various adapters: <https://www.wirelesshack.org/best-kali-linux-compatible-usb-adapter-dongles.html> <sup>[[Archive.org]][535]</sup> (Usually those antennas are used by Penetration Testers to probe Wi-Fis from a distance and are often discussed within the scope of the Kali Linux distribution).
+See this post for a comparison of various adapters: <https://www.wirelesshack.org/best-kali-linux-compatible-usb-adapter-dongles.html> <sup>[[Archive.org]][537]</sup> (Usually those antennas are used by Penetration Testers to probe Wi-Fis from a distance and are often discussed within the scope of the Kali Linux distribution).
 
 The process is simple:
 
@@ -8537,7 +8553,7 @@ The process is simple:
 
 -   Connect to the Wi-Fi of your choice.
 
-**Do not forget tho that this will only delay a motivated adversary. Your signal can be triangulated easily by a motivated adversary in a matter of minutes once they reach the physical location of the Wi-Fi you're connecting to (for instance using a device such as AirCheck <https://www.youtube.com/watch?v=8FV2QZ1BPnw>** <sup>[[Invidious]][536]</sup>**, also see their other products here <https://www.netally.com/products/#wifi_s>** <sup>[[Archive.org]][537]</sup>**). These products can easily be deployed on mobile units (in a Car for instance) and pinpoint your location in a matter of minutes.**
+**Do not forget tho that this will only delay a motivated adversary. Your signal can be triangulated easily by a motivated adversary in a matter of minutes once they reach the physical location of the Wi-Fi you're connecting to (for instance using a device such as AirCheck <https://www.youtube.com/watch?v=8FV2QZ1BPnw>** <sup>[[Invidious]][538]</sup>**, also see their other products here <https://www.netally.com/products/#wifi_s>** <sup>[[Archive.org]][539]</sup>**). These products can easily be deployed on mobile units (in a Car for instance) and pinpoint your location in a matter of minutes.**
 
 Ideally this should "not be an issue" since this guide provides multiple ways of hiding your origin IP using VPNs and Tor. But if you are in the situation where VPN and Tor are not an option, then this could be your only security.
 
@@ -8545,31 +8561,31 @@ Ideally this should "not be an issue" since this guide provides multiple ways of
 
 Download the VPN client installer of your cash paid VPN service and install it on Host OS (Tor over VPN, VPN over Tor over VPN) or the VM of your choice (VPN over Tor).
 
--   Whonix Tutorial (should work with any VPN provider): <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][270]</sup> (use the Linux configurations below to get the necessary configuration files)
+-   Whonix Tutorial (should work with any VPN provider): <https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor> <sup>[[Archive.org]][273]</sup> (use the Linux configurations below to get the necessary configuration files)
 
 -   Windows Tutorials:
 
-    -   Mullvad: <https://mullvad.net/en/help/install-mullvad-app-windows/> <sup>[[Archive.org]][538]</sup>
+    -   Mullvad: <https://mullvad.net/en/help/install-mullvad-app-windows/> <sup>[[Archive.org]][540]</sup>
 
-    -   iVPN: <https://www.ivpn.net/apps-windows> <sup>[[Archive.org]][539]</sup>
+    -   iVPN: <https://www.ivpn.net/apps-windows> <sup>[[Archive.org]][541]</sup>
 
-    -   ProtonVPN: <https://protonvpn.com/support/protonvpn-windows-vpn-application/> <sup>[[Archive.org]][540]</sup>
+    -   ProtonVPN: <https://protonvpn.com/support/protonvpn-windows-vpn-application/> <sup>[[Archive.org]][542]</sup>
 
 -   MacOS:
 
-    -   Mullvad: <https://mullvad.net/en/help/install-and-use-mullvad-app-macos/> <sup>[[Archive.org]][541]</sup>
+    -   Mullvad: <https://mullvad.net/en/help/install-and-use-mullvad-app-macos/> <sup>[[Archive.org]][543]</sup>
 
-    -   IVPN: <https://www.ivpn.net/apps-macos/> <sup>[[Archive.org]][542]</sup>
+    -   IVPN: <https://www.ivpn.net/apps-macos/> <sup>[[Archive.org]][544]</sup>
 
-    -   ProtonVPN: <https://protonvpn.com/support/protonvpn-mac-vpn-application/> <sup>[[Archive.org]][543]</sup>
+    -   ProtonVPN: <https://protonvpn.com/support/protonvpn-mac-vpn-application/> <sup>[[Archive.org]][545]</sup>
 
 -   Linux:
 
-    -   Mullvad: <https://mullvad.net/en/help/install-mullvad-app-linux/> <sup>[[Archive.org]][544]</sup>
+    -   Mullvad: <https://mullvad.net/en/help/install-mullvad-app-linux/> <sup>[[Archive.org]][546]</sup>
 
-    -   iVPN: <https://www.ivpn.net/apps-linux/> <sup>[[Archive.org]][545]</sup>
+    -   iVPN: <https://www.ivpn.net/apps-linux/> <sup>[[Archive.org]][547]</sup>
 
-    -   ProtonVPN: <https://protonvpn.com/support/linux-vpn-setup/> <sup>[[Archive.org]][546]</sup>
+    -   ProtonVPN: <https://protonvpn.com/support/linux-vpn-setup/> <sup>[[Archive.org]][548]</sup>
 
 **Important note: Tor does not support UDP and you should use TCP instead with the VPN client in the Tor over VPN cases (on the VMs).**
 
@@ -8579,11 +8595,11 @@ Here are some guides provided by the recommended VPN providers in this guide:
 
 -   Windows:
 
-    -   iVPN: <https://www.ivpn.net/knowledgebase/general/do-you-offer-a-kill-switch-or-vpn-firewall/> <sup>[[Archive.org]][547]</sup>
+    -   iVPN: <https://www.ivpn.net/knowledgebase/general/do-you-offer-a-kill-switch-or-vpn-firewall/> <sup>[[Archive.org]][549]</sup>
 
-    -   ProtonVPN: <https://protonvpn.com/support/what-is-kill-switch/> <sup>[[Archive.org]][548]</sup>
+    -   ProtonVPN: <https://protonvpn.com/support/what-is-kill-switch/> <sup>[[Archive.org]][550]</sup>
 
-    -   Mullvad: <https://mullvad.net/en/help/using-mullvad-vpn-app/#killswitch> <sup>[[Archive.org]][549]</sup>
+    -   Mullvad: <https://mullvad.net/en/help/using-mullvad-vpn-app/#killswitch> <sup>[[Archive.org]][551]</sup>
 
 -   Whonix Workstation: Coming Soon, it is certainly possible but I did not find a suitable and easy tutorial yet. It is also worth remembering that if your VPN stops on Whonix, you will still be behind the Tor Network.
 
@@ -8593,27 +8609,27 @@ Here are some guides provided by the recommended VPN providers in this guide:
 
     -   iVPN same as Windows, the option should be in the provided VPN client
 
-    -   ProtonVPN same as Windows with the client, the option should be in the provided VPN client <https://protonvpn.com/blog/macos-vpn-kill-switch/> <sup>[[Archive.org]][550]</sup>
+    -   ProtonVPN same as Windows with the client, the option should be in the provided VPN client <https://protonvpn.com/blog/macos-vpn-kill-switch/> <sup>[[Archive.org]][552]</sup>
 
 -   Linux:
 
     -   Mullvad:
 
-        -   <https://mullvad.net/en/help/wireguard-and-mullvad-vpn/> <sup>[[Archive.org]][551]</sup>
+        -   <https://mullvad.net/en/help/wireguard-and-mullvad-vpn/> <sup>[[Archive.org]][553]</sup>
 
-        -   <https://mullvad.net/en/help/linux-openvpn-installation/> <sup>[[Archive.org]][552]</sup>
+        -   <https://mullvad.net/en/help/linux-openvpn-installation/> <sup>[[Archive.org]][554]</sup>
 
-    -   ProtonVPN: <https://github.com/ProtonVPN/linux-cli/blob/master/USAGE.md#kill-switch> <sup>[[Archive.org]][553]</sup>
+    -   ProtonVPN: <https://github.com/ProtonVPN/linux-cli/blob/master/USAGE.md#kill-switch> <sup>[[Archive.org]][555]</sup>
 
     -   iVPN:
 
-        -   <https://www.ivpn.net/knowledgebase/linux/linux-wireguard-kill-switch/> <sup>[[Archive.org]][554]</sup>
+        -   <https://www.ivpn.net/knowledgebase/linux/linux-wireguard-kill-switch/> <sup>[[Archive.org]][556]</sup>
 
-        -   <https://www.ivpn.net/knowledgebase/linux/linux-kill-switch-using-the-uncomplicated-firewall-ufw/> <sup>[[Archive.org]][555]</sup>
+        -   <https://www.ivpn.net/knowledgebase/linux/linux-kill-switch-using-the-uncomplicated-firewall-ufw/> <sup>[[Archive.org]][557]</sup>
 
 # Appendix S: Check your network for surveillance/censorship using OONI
 
-So, what is OONI? OONI stands for Open Observatory of Network Interference and is a sub-project of the Tor Project[^233].
+So, what is OONI? OONI stands for Open Observatory of Network Interference and is a sub-project of the Tor Project[^235].
 
 First OONI will allow you to check online for surveillance/censorship in your country just by looking at their Explorer that features test results from other people. This can be done here: <https://explorer.ooni.org/>
 
@@ -8635,7 +8651,7 @@ While this might not be important in a normal environment, this could put you at
 
 -   **Only consider running these tests quickly from a Public Wi-Fi from a safe distance (see [Appendix P: Accessing the internet as safely as possible when Tor and VPNs are not an option]).**
 
-The probe can be found here: <https://ooni.org/install/> <sup>[[Archive.org]][556]</sup> for various platforms (iOS, Android, Windows, MacOS, and Linux).
+The probe can be found here: <https://ooni.org/install/> <sup>[[Archive.org]][558]</sup> for various platforms (iOS, Android, Windows, MacOS, and Linux).
 
 # Appendix T: Checking files for malware
 
@@ -8695,9 +8711,9 @@ In essence:
 
 -   Install GPG for your OS:
 
-    -   Windows: gpg4win (<https://www.gpg4win.org/> <sup>[[Archive.org]][557]</sup>)
+    -   Windows: gpg4win (<https://www.gpg4win.org/> <sup>[[Archive.org]][559]</sup>)
 
-    -   MacOS: GPGTools (<https://gpgtools.org/> <sup>[[Archive.org]][558]</sup>)
+    -   MacOS: GPGTools (<https://gpgtools.org/> <sup>[[Archive.org]][560]</sup>)
 
     -   Linux: It should be pre-installed in most distributions
 
@@ -8739,11 +8755,11 @@ In essence:
 
 For some other tutorials, please see:
 
--   <https://support.torproject.org/tbb/how-to-verify-signature/> <sup>[[Archive.org]][559]</sup>
+-   <https://support.torproject.org/tbb/how-to-verify-signature/> <sup>[[Archive.org]][561]</sup>
 
--   <https://tails.boum.org/install/vm-download/index.en.html> <sup>[[Archive.org]][560]</sup> (See Basic OpenPGP verification).
+-   <https://tails.boum.org/install/vm-download/index.en.html> <sup>[[Archive.org]][562]</sup> (See Basic OpenPGP verification).
 
--   <https://www.whonix.org/wiki/Verify_the_Whonix_images> <sup>[[Archive.org]][561]</sup>
+-   <https://www.whonix.org/wiki/Verify_the_Whonix_images> <sup>[[Archive.org]][563]</sup>
 
 All these guides should also apply to any other file with any other key.
 
@@ -8763,7 +8779,7 @@ Contrary to popular myths perpetuating the idea that only Windows is subject to 
 
 -   Yes, there are viruses and malware for Linux[^409]'[^410]'[^411]'[^412]'[^413]
 
--   Yes, there are viruses and malware for MacOS[^418]'[^414][^415]'[^416][^417]
+-   Yes, there are viruses and malware for MacOS[^421]'[^414][^415]'[^416][^417]
 
 My personal take on the matter is on the pragmatic side. I think there is still a room for some AV software for some selective and limited use. But it depends which one and how you use them.
 
@@ -8773,19 +8789,19 @@ My personal take on the matter is on the pragmatic side. I think there is still 
 
 -   Do use Open-Source non-real time offline Anti-Virus/Anti-Malware tools as an added measure to scan some files such as:
 
-    -   Windows/Linux/MacOS/Qubes OS: ClamAV (<https://www.clamav.net/> <sup>[[Archive.org]][562]</sup>)
+    -   Windows/Linux/MacOS/Qubes OS: ClamAV (<https://www.clamav.net/> <sup>[[Archive.org]][564]</sup>)
 
-    -   Linux/Qubes OS: RFXN Linux Malware Detect (<https://github.com/rfxn/linux-malware-detect> <sup>[[Archive.org]][563]</sup>)
+    -   Linux/Qubes OS: RFXN Linux Malware Detect (<https://github.com/rfxn/linux-malware-detect> <sup>[[Archive.org]][565]</sup>)
 
-    -   Linux/Qubes OS: Chkrootkit (<http://www.chkrootkit.org/> <sup>[[Archive.org]][564]</sup>)
+    -   Linux/Qubes OS: Chkrootkit (<http://www.chkrootkit.org/> <sup>[[Archive.org]][566]</sup>)
 
 -   You could also use online services for **non-sensitive files*** such as VirusTotal (<https://www.virustotal.com/gui>) or Hybrid-analysis (<https://hybrid-analysis.com/>).
 
-    -   You could also just check the VirusTotal database for the hash of your file if you don't want to send it over (see <https://developers.virustotal.com/v3.0/docs/search-by-hash> <sup>[[Archive.org]][565]</sup> (See the [Integrity (if available):] section again for guidance on how to generate hashes).
+    -   You could also just check the VirusTotal database for the hash of your file if you don't want to send it over (see <https://developers.virustotal.com/v3.0/docs/search-by-hash> <sup>[[Archive.org]][567]</sup> (See the [Integrity (if available):] section again for guidance on how to generate hashes).
 
-    -   Other tools are also available for non-sensitive files and a convenient list is right here: <https://github.com/rshipp/awesome-malware-analysis#online-scanners-and-sandboxes> <sup>[[Archive.org]][566]</sup>
+    -   Other tools are also available for non-sensitive files and a convenient list is right here: <https://github.com/rshipp/awesome-malware-analysis#online-scanners-and-sandboxes> <sup>[[Archive.org]][568]</sup>
 
-* **Please be aware that while VirusTotal might seem very practical for scanning various files, their "privacy policy" is problematic (see <https://support.virustotal.com/hc/en-us/articles/115002168385-Privacy-Policy>** <sup>[[Archive.org]][567]</sup>**) and states:**
+* **Please be aware that while VirusTotal might seem very practical for scanning various files, their "privacy policy" is problematic (see <https://support.virustotal.com/hc/en-us/articles/115002168385-Privacy-Policy>** <sup>[[Archive.org]][569]</sup>**) and states:**
 
 "When you submit Samples to the Services, if you submit Samples to the Services, we will collect all of the information in the Sample itself and information about the act of submitting it".
 
@@ -8807,7 +8823,7 @@ These methods require more tinkering but can be useful if you want to go the ext
 
 #### PDF files:
 
-Again, regarding the PDFs of this guide and as explained in the README of my repository, you could check for anomalies using PDFID which you can download at <https://blog.didierstevens.com/programs/pdf-tools/> <sup>[[Archive.org]][568]</sup>
+Again, regarding the PDFs of this guide and as explained in the README of my repository, you could check for anomalies using PDFID which you can download at <https://blog.didierstevens.com/programs/pdf-tools/> <sup>[[Archive.org]][570]</sup>
 
 -   Install Python 3 (on Windows/Linux/MacOS/Qubes OS)
 
@@ -8841,23 +8857,23 @@ Again, regarding the PDFs of this guide and as explained in the README of my rep
 
 Now what if you think the PDF is still suspicious? Fear not ... there are more things you can do to ensure it is not malicious:
 
--   **Qubes OS:** Consider using <https://github.com/QubesOS/qubes-app-linux-pdf-converter> <sup>[[Archive.org]][569]</sup> which will convert your PDF into a flattened image file. This should theoretically remove any malicious code in it. Note that this will also render the PDF formatting useless (such as links, headings, bookmarks, and references).
+-   **Qubes OS:** Consider using <https://github.com/QubesOS/qubes-app-linux-pdf-converter> <sup>[[Archive.org]][571]</sup> which will convert your PDF into a flattened image file. This should theoretically remove any malicious code in it. Note that this will also render the PDF formatting useless (such as links, headings, bookmarks, and references).
 
--   **(Deprecated) Linux/Qubes OS** (or possibly MacOS through Homebrew or Windows through Cygwin): Consider not using <https://github.com/firstlookmedia/pdf-redact-tools> <sup>[[Archive.org]][570]</sup> which will also turn your PDF into a flattened image file. Again, this should theoretically remove any malicious code in it. Again, this will also render the PDF formatting useless (such as links, headings, bookmarks, and references). **Note that this tool is deprecated and relies on a library called "ImageMagick" which is known for several security issues**[^418]**. You should not use this tool even if it is recommended in some other guides.**
+-   **(Deprecated) Linux/Qubes OS** (or possibly MacOS through Homebrew or Windows through Cygwin): Consider not using <https://github.com/firstlookmedia/pdf-redact-tools> <sup>[[Archive.org]][572]</sup> which will also turn your PDF into a flattened image file. Again, this should theoretically remove any malicious code in it. Again, this will also render the PDF formatting useless (such as links, headings, bookmarks, and references). **Note that this tool is deprecated and relies on a library called "ImageMagick" which is known for several security issues**[^418]**. You should not use this tool even if it is recommended in some other guides.**
 
--   **Windows/Linux/Qubes/OS/MacOS:** Consider using <https://github.com/firstlookmedia/dangerzone> <sup>[[Archive.org]][571]</sup> which was inspired by Qubes PDF Converted above and does the same but is well maintained and works on all OSes. This tool also works with Images, ODF files and Office files (Warning: On Windows, this tool requires Docker-Desktop installed and this might (will) interfere with Virtualbox and other Virtualization software because it requires enabling Hyper-V. VirtualBox and Hyper-V do not play nice together[^419]. Consider installing this within a Linux VM for convenience instead of a Windows OS).
+-   **Windows/Linux/Qubes/OS/MacOS:** Consider using <https://github.com/firstlookmedia/dangerzone> <sup>[[Archive.org]][573]</sup> which was inspired by Qubes PDF Converted above and does the same but is well maintained and works on all OSes. This tool also works with Images, ODF files and Office files (Warning: On Windows, this tool requires Docker-Desktop installed and this might (will) interfere with Virtualbox and other Virtualization software because it requires enabling Hyper-V. VirtualBox and Hyper-V do not play nice together[^419]. Consider installing this within a Linux VM for convenience instead of a Windows OS).
 
 #### Other type of files:
 
 Here are some various resources for this purpose where you will find what tool to use for what type:
 
--   For Documents/Pictures: Consider using <https://github.com/firstlookmedia/dangerzone> <sup>[[Archive.org]][571]</sup> which was inspired by Qubes PDF Converted above and does the same but is well maintained and works on all OSes. This tool also works with Images, ODF files and Office files (Warning: On Windows, this tool requires Docker-Desktop installed and this might (will) interfere with Virtualbox and other Virtualization software because it requires enabling Hyper-V. VirtualBox and Hyper-V do not play nice together[^420]. Consider installing this within a Linux VM for convenience instead of a Windows OS).
+-   For Documents/Pictures: Consider using <https://github.com/firstlookmedia/dangerzone> <sup>[[Archive.org]][573]</sup> which was inspired by Qubes PDF Converted above and does the same but is well maintained and works on all OSes. This tool also works with Images, ODF files and Office files (Warning: On Windows, this tool requires Docker-Desktop installed and this might (will) interfere with Virtualbox and other Virtualization software because it requires enabling Hyper-V. VirtualBox and Hyper-V do not play nice together[^420]. Consider installing this within a Linux VM for convenience instead of a Windows OS).
 
--   This practical cheat sheet from SANS: <https://digital-forensics.sans.org/media/analyzing-malicious-document-files.pdf> <sup>[[Archive.org]][572]</sup> (warning, many of those tools might be harder to use on Windows and you might consider using them from a Linux OS such as Tails, Whonix Workstation or a Linux distribution of your choice as explained later in this guide. There are also other guides out there[^421] that might be of use).
+-   This practical cheat sheet from SANS: <https://digital-forensics.sans.org/media/analyzing-malicious-document-files.pdf> <sup>[[Archive.org]][574]</sup> (warning, many of those tools might be harder to use on Windows and you might consider using them from a Linux OS such as Tails, Whonix Workstation or a Linux distribution of your choice as explained later in this guide. There are also other guides out there[^421] that might be of use).
 
--   This GitHub repository with various resources on malware analysis: <https://github.com/rshipp/awesome-malware-analysis> <sup>[[Archive.org]][566]</sup>
+-   This GitHub repository with various resources on malware analysis: <https://github.com/rshipp/awesome-malware-analysis> <sup>[[Archive.org]][568]</sup>
 
--   This interesting PDF detailing which tool to use for which file type <https://www.winitor.com/pdf/Malware-Analysis-Fundamentals-Files-Tools.pdf> <sup>[[Archive.org]][573]</sup>
+-   This interesting PDF detailing which tool to use for which file type <https://www.winitor.com/pdf/Malware-Analysis-Fundamentals-Files-Tools.pdf> <sup>[[Archive.org]][575]</sup>
 
 **Even with all those resources, keep in mind you might still get advanced malware if those are not detected by those various tools. Be careful and remember to handle these files within Virtual Machines if possible, to limit the attack surface and vectors.**
 
@@ -9031,7 +9047,7 @@ Basically, it is like the Inception movie with computers. You have emulated soft
 
 Here is a little basic illustration of what Virtualization is:
 
-![][574]
+![][576]
 
 Each Virtual Machine is a sandbox. Remember the reasons for using them is to prevent the following risks:
 
@@ -9045,7 +9061,7 @@ Each Virtual Machine is a sandbox. Remember the reasons for using them is to pre
 
 In some environments, your ISPs might be trying to prevent you from accessing Tor. Or accessing Tor openly might be a safety risk.
 
-In those cases, it might be necessary to use Tor bridges to connect to the Tor network (see Tor Documentation <https://2019.www.torproject.org/docs/bridges> <sup>[[Archive.org]][205]</sup> and Whonix Documentation <https://www.whonix.org/wiki/Bridges> <sup>[[Archive.org]][288]</sup>).
+In those cases, it might be necessary to use Tor bridges to connect to the Tor network (see Tor Documentation <https://2019.www.torproject.org/docs/bridges> <sup>[[Archive.org]][207]</sup> and Whonix Documentation <https://www.whonix.org/wiki/Bridges> <sup>[[Archive.org]][291]</sup>).
 
 Bridges are special Tor entry nodes that are not listed on the Tor public directory. Some of those are running on people running the Snowflake Browser extension[^424] while others are running on various servers around the world. Most of those bridges are running some type of obfuscation method called obfs4[^425].
 
@@ -9053,9 +9069,9 @@ Here is the definition from the Tor Browser Manual[^426]: "obfs4 makes Tor traff
 
 Some of those are called "Meek" bridges and are using a technique called "Domain Fronting" where your Tor client (TAILS, Tor Browser, Whonix Gateway) will connect to a common CDN used by other services. To a censor, it would appear you are connecting to a normal website such as Microsoft.com. See <https://gitlab.torproject.org/legacy/trac/-/wikis/doc/meek> for more information.
 
-As per their definition from their manual[^435]: "meek transports make it look like you are browsing a major web site instead of using Tor. meek-azure makes it look like you are using a Microsoft web site".
+As per their definition from their manual[^426]: "meek transports make it look like you are browsing a major web site instead of using Tor. meek-azure makes it look like you are using a Microsoft web site".
 
-First you should, proceed with the following checklist to make sure you cannot circumvent Tor Blocking (double-check) and try to use Tor Bridges (<https://bridges.torproject.org/> <sup>[[Archive.org]][490]</sup>).
+First you should, proceed with the following checklist to make sure you cannot circumvent Tor Blocking (double-check) and try to use Tor Bridges (<https://bridges.torproject.org/> <sup>[[Archive.org]][492]</sup>).
 
 -   (Recommended if blocked but **safe**) Try to get an obfs4 bridge in the Tor connection options.
 
@@ -9063,7 +9079,7 @@ First you should, proceed with the following checklist to make sure you cannot c
 
 -   **(Recommended if hostile/risky environment)** Try to get a meek bridge in the Tor connection options (might be your only option if you are for instance in China).
 
-![][575]
+![][577]
 
 If none of those build-in methods are working, you could try getting a manual bridge either from:
 
@@ -9073,7 +9089,7 @@ If none of those build-in methods are working, you could try getting a manual br
 
 This website obviously could be blocked/monitored too so you could instead (if you have the ability) ask someone to do this for you if you have a trusted contact and some e2e encrypted messaging app.
 
-Finally, you could also request a bridge request by e-mail to <bridges@torproject.org> with the subject empty and the body being: "get transport obfs4" or "get transport meek". There is some limitation with this method tho as it is only available from a Gmail address or a Riseup.net (<https://riseup.net/>) address.
+Finally, you could also request a bridge request by e-mail to <bridges@torproject.org> with the subject empty and the body being: "get transport obfs4" or "get transport meek". There is some limitation with this method tho as it is only available from a Gmail e-mail address or a Riseup.net (<https://riseup.net/>) e-mail address.
 
 Hopefully these bridges should be enough to get you connected even in a hostile environment.
 
@@ -9091,7 +9107,7 @@ This is the Windows 10 AME installation process that should be valid for any Win
 
 -   **This version has no anti-virus at all and so you should be extra-careful when running things.**
 
--   **This project is more known than you think: <https://www.youtube.com/watch?v=nwkiU6GG-YU>** <sup>[[Invidious]][576]</sup>
+-   **This project is more known than you think: <https://www.youtube.com/watch?v=nwkiU6GG-YU>** <sup>[[Invidious]][578]</sup>
 
 -   **I checked myself the latest release (AME_20H2_(2021-04-01).iso) for viruses/malware using various AVs and it came out clean. I cannot vouch for any further releases.**
 
@@ -9101,15 +9117,21 @@ This is the Windows 10 AME installation process that should be valid for any Win
 
 **Unfortunately, this build of Windows can only be downloaded through a Torrent client by fetching the torrent file on their Telegram group @amereleases. Use Telegram desktop for this. This does require a valid Telegram account with a registered phone number which is a bad point.**
 
-Here is a magnet link to their latest release (AME_20H2_(2021-04-01).iso) **as of the writing of this guide** (this might be outdated and you should check their website if a new one is available, you can preview this without telegram by going to <https://t.me/s/amereleases>) so you can skip the Telegram channel (open this link with any Torrent client, personally I recommend qBittorrent):
+Here is a magnet link to their latest release (AME_20H2_(2021-04-01).iso) **as of the writing of this guide** (this might be outdated and you should check their website if a new one is available, you can preview this without telegram by going to <https://t.me/s/amereleases>) so you can skip the Telegram channel (open this link with any Torrent client, personally I recommend qBittorrent <https://www.qbittorrent.org/>):
+
+Within qBittorrent, just open the following magnet link (without quotes):
 
 ```magnet:?xt=urn:btih:a21e7dba7f0615ae3377dfaca3dddac9c5cf2e86&dn=AME_20H2_(2021-04-01).iso&tr=http%3a%2f%2ftracker2.wasabii.com.tw%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.sktorrent.net%3a6969%2fannounce&tr=http%3a%2f%2fwww.wareztorrent.com%3a80%2fannounce&tr=udp%3a%2f%2fbt.xxx-tracker.com%3a2710%2fannounce&tr=udp%3a%2f%2ftracker.eddie4.nl%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.grepler.com%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.mg64.net%3a2710%2fannounce&tr=udp%3a%2f%2fwambo.club%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.dutchtracking.com%3a6969%2fannounce&tr=udp%3a%2f%2ftc.animereactor.ru%3a8082%2fannounce&tr=udp%3a%2f%2ftracker.justseed.it%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=https%3a%2f%2fopen.kickasstracker.com%3a443%2fannounce&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2fopen.stealth.si%3a80%2fannounce&tr=http%3a%2f%2f87.253.152.137%2fannounce&tr=http%3a%2f%2f91.216.110.47%2fannounce&tr=http%3a%2f%2f91.217.91.21%3a3218%2fannounce&tr=http%3a%2f%2f91.218.230.81%3a6969%2fannounce&tr=http%3a%2f%2f93.92.64.5%2fannounce&tr=http%3a%2f%2fatrack.pow7.com%2fannounce&tr=http%3a%2f%2fbt.henbt.com%3a2710%2fannounce&tr=http%3a%2f%2fbt.pusacg.org%3a8080%2fannounce&tr=https%3a%2f%2ftracker.bt-hash.com%3a443%2fannounce&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969&tr=https%3a%2f%2f182.176.139.129%3a6969%2fannounce&tr=udp%3a%2f%2fzephir.monocul.us%3a6969%2fannounce&tr=https%3a%2f%2ftracker.dutchtracking.com%3a80%2fannounce&tr=https%3a%2f%2fgrifon.info%3a80%2fannounce&tr=udp%3a%2f%2ftracker.kicks-ass.net%3a80%2fannounce&tr=udp%3a%2f%2fp4p.arenabg.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.aletorrenty.pl%3a2710%2fannounce&tr=udp%3a%2f%2ftracker.internetwarriors.net%3a1337%2fannounce&tr=https%3a%2f%2ftracker.parrotsec.org%3a443%2fannounce&tr=https%3a%2f%2ftracker.moxing.party%3a6969%2fannounce&tr=https%3a%2f%2ftracker.ipv6tracker.ru%3a80%2fannounce&tr=https%3a%2f%2ftracker.fastdownload.xyz%3a443%2fannounce&tr=https%3a%2f%2fgwp2-v19.rinet.ru%3a80%2fannounce&tr=https%3a%2f%2ftr.kxmp.cf%3a80%2fannounce&tr=https%3a%2f%2fexplodie.org%3a6969%2fannounce```
 
+**Do not forget to remove the torrent and quit qBittorrent when you're done (without deleting the downloaded files).**
+
 ## Installation:
 
-The official guide is here: <https://telegra.ph/AME-Download-Guide-09-07> <sup>[[Archive.org]][577]</sup>
+The official guide is here: <https://telegra.ph/AME-Download-Guide-09-07> <sup>[[Archive.org]][579]</sup>
 
-Meaning you can also build this ISO yourself from their scripts if you do not trust their release using the guide here and from their open-source scripts: <https://wiki.ameliorated.info/doku.php?id=documentation_20H2> <sup>[[Archive.org]][578]</sup>
+You can also build this ISO yourself from their scripts if you do not trust their provided ISO release using the guide here: <https://wiki.ameliorated.info/doku.php?id=documentation_20H2> <sup>[[Archive.org]][580]</sup>
+
+Here is my guide using their provided ISO file:
 
 -   Start the bootable Windows AME install
 
@@ -9149,894 +9171,896 @@ Meaning you can also build this ISO yourself from their scripts if you do not tr
 
 -   Login with username "user" and password "malte" (check the lower right language and switch to your layout if you do not use a default US English keyboard).
 
-[^1]: English translation of German Telemedia Act <https://www.huntonprivacyblog.com/wp-content/uploads/sites/28/2016/02/Telemedia_Act__TMA_.pdf> <sup>[[Archive.org]][579]</sup>. Section 13, Article 6, "The service provider must enable the use of Telemedia and payment for them to occur anonymously or via a pseudonym where this is technically possible and reasonable. The recipient of the service is to be informed about this possibility. ".
+[^1]: English translation of German Telemedia Act <https://www.huntonprivacyblog.com/wp-content/uploads/sites/28/2016/02/Telemedia_Act__TMA_.pdf> <sup>[[Archive.org]][581]</sup>. Section 13, Article 6, "The service provider must enable the use of Telemedia and payment for them to occur anonymously or via a pseudonym where this is technically possible and reasonable. The recipient of the service is to be informed about this possibility. ".
 
-[^2]: Wikipedia, Real-Name System Germany <https://en.wikipedia.org/wiki/Real-name_system#Germany> <sup>[[Archive.org]][349]</sup>
+[^2]: Wikipedia, Real-Name System Germany <https://en.wikipedia.org/wiki/Real-name_system#Germany> <sup>[[Archive.org]][351]</sup>
 
-[^3]: Wikipedia, Don't be evil <https://en.wikipedia.org/wiki/Don%27t_be_evil> <sup>[[Archive.org]][580]</sup>
+[^3]: Wikipedia, Don't be evil <https://en.wikipedia.org/wiki/Don%27t_be_evil> <sup>[[Archive.org]][582]</sup>
 
-[^4]: YouTube, <https://www.youtube.com/watch?v=6DGNZnfKYnU> <sup>[[Invidious]][581]</sup>
+[^4]: YouTube, <https://www.youtube.com/watch?v=6DGNZnfKYnU> <sup>[[Invidious]][583]</sup>
 
-[^5]: Wikipedia, OSINT <https://en.wikipedia.org/wiki/Open-source_intelligence> <sup>[[Archive.org]][582]</sup>
+[^5]: Wikipedia, OSINT <https://en.wikipedia.org/wiki/Open-source_intelligence> <sup>[[Archive.org]][584]</sup>
 
-[^6]: YouTube Internet Historian Playlist, HWNDU <https://www.youtube.com/playlist?list=PLna1KTNJu3y09Tu70U6yPn28sekaNhOMY> <sup>[[Invidious]][583]</sup>
+[^6]: YouTube Internet Historian Playlist, HWNDU <https://www.youtube.com/playlist?list=PLna1KTNJu3y09Tu70U6yPn28sekaNhOMY> <sup>[[Invidious]][585]</sup>
 
-[^7]: Wikipedia, 4chan <https://en.wikipedia.org/wiki/4chan> <sup>[[Archive.org]][584]</sup>
+[^7]: Wikipedia, 4chan <https://en.wikipedia.org/wiki/4chan> <sup>[[Archive.org]][586]</sup>
 
-[^8]: PIA, See this good article on the matter <https://www.privateinternetaccess.com/blog/how-does-privacy-differ-from-anonymity-and-why-are-both-important/> <sup>[[Archive.org]][585]</sup> (disclaimer: this is not an endorsement or recommendation for this commercial service).
+[^8]: PIA, See this good article on the matter <https://www.privateinternetaccess.com/blog/how-does-privacy-differ-from-anonymity-and-why-are-both-important/> <sup>[[Archive.org]][587]</sup> (disclaimer: this is not an endorsement or recommendation for this commercial service).
 
 [^9]: Medium.com, Privacy, Blockchain and Onion Routing <https://medium.com/unitychain/privacy-blockchain-and-onion-routing-d5609c611841>
 
-[^10]: This World of Ours, James Mickens <https://scholar.harvard.edu/files/mickens/files/thisworldofours.pdf> <sup>[[Archive.org]][586]</sup>
+[^10]: This World of Ours, James Mickens <https://scholar.harvard.edu/files/mickens/files/thisworldofours.pdf> <sup>[[Archive.org]][588]</sup>
 
-[^11]: XKCD, Security <https://xkcd.com/538/> <sup>[[Archive.org]][587]</sup>
+[^11]: XKCD, Security <https://xkcd.com/538/> <sup>[[Archive.org]][589]</sup>
 
-[^12]: Wikipedia, Threat Model <https://en.wikipedia.org/wiki/Threat_model> <sup>[[Archive.org]][588]</sup>
+[^12]: Wikipedia, Threat Model <https://en.wikipedia.org/wiki/Threat_model> <sup>[[Archive.org]][590]</sup>
 
-[^13]: Bellingcat <https://www.bellingcat.com/> <sup>[[Archive.org]][589]</sup>
+[^13]: Bellingcat <https://www.bellingcat.com/> <sup>[[Archive.org]][591]</sup>
 
-[^14]: Wikipedia, Doxing <https://en.wikipedia.org/wiki/Doxing> <sup>[[Archive.org]][590]</sup>
+[^14]: Wikipedia, Doxing <https://en.wikipedia.org/wiki/Doxing> <sup>[[Archive.org]][592]</sup>
 
-[^15]: YouTube, Internet Historian, The Bikelock Fugitive of Berkeley <https://www.youtube.com/watch?v=muoR8Td44UE> <sup>[[Invidious]][591]</sup>
+[^15]: YouTube, Internet Historian, The Bikelock Fugitive of Berkeley <https://www.youtube.com/watch?v=muoR8Td44UE> <sup>[[Invidious]][593]</sup>
 
-[^16]: BBC News, Tor Mirror <https://www.bbc.com/news/technology-50150981> <sup>[[Archive.org]][592]</sup>
+[^16]: BBC News, Tor Mirror <https://www.bbc.com/news/technology-50150981> <sup>[[Archive.org]][594]</sup>
 
-[^17]: GitHub, Real World Onion websites <https://github.com/alecmuffett/real-world-onion-sites> <sup>[[Archive.org]][392]</sup>
+[^17]: GitHub, Real World Onion websites <https://github.com/alecmuffett/real-world-onion-sites> <sup>[[Archive.org]][394]</sup>
 
-[^18]: Tor Project, Who Uses Tor <https://2019.www.torproject.org/about/torusers.html.en> <sup>[[Archive.org]][593]</sup>
+[^18]: Tor Project, Who Uses Tor <https://2019.www.torproject.org/about/torusers.html.en> <sup>[[Archive.org]][595]</sup>
 
-[^19]: Whonix Documentation, The importance of Anonymity <https://www.whonix.org/wiki/Anonymity> <sup>[[Archive.org]][594]</sup>
+[^19]: Whonix Documentation, The importance of Anonymity <https://www.whonix.org/wiki/Anonymity> <sup>[[Archive.org]][596]</sup>
 
-[^20]: Geek Feminism, <https://geekfeminism.wikia.org/wiki/Who_is_harmed_by_a_%22Real_Names%22_policy%3F> <sup>[[Archive.org]][595]</sup>
+[^20]: Geek Feminism, <https://geekfeminism.wikia.org/wiki/Who_is_harmed_by_a_%22Real_Names%22_policy%3F> <sup>[[Archive.org]][597]</sup>
 
-[^21]: Tor Project, Tor Users <https://2019.www.torproject.org/about/torusers.html.en> <sup>[[Archive.org]][593]</sup>
+[^21]: Tor Project, Tor Users <https://2019.www.torproject.org/about/torusers.html.en> <sup>[[Archive.org]][595]</sup>
 
-[^22]: PrivacyHub, Internet Privacy in the Age of Surveillance <https://www.cyberghostvpn.com/privacyhub/internet-privacy-surveillance/> <sup>[[Archive.org]][596]</sup>
+[^22]: PrivacyHub, Internet Privacy in the Age of Surveillance <https://www.cyberghostvpn.com/privacyhub/internet-privacy-surveillance/> <sup>[[Archive.org]][598]</sup>
 
-[^23]: Wikipedia, IANAL <https://en.wikipedia.org/wiki/IANAL> <sup>[[Archive.org]][597]</sup>
+[^23]: Wikipedia, IANAL <https://en.wikipedia.org/wiki/IANAL> <sup>[[Archive.org]][599]</sup>
 
-[^24]: Wikipedia, Trust but verify <https://en.wikipedia.org/wiki/Trust,_but_verify> <sup>[[Archive.org]][598]</sup>
+[^24]: Wikipedia, Trust but verify <https://en.wikipedia.org/wiki/Trust,_but_verify> <sup>[[Archive.org]][600]</sup>
 
-[^25]: Wikipedia, IP Address, <https://en.wikipedia.org/wiki/IP_address> <sup>[[Archive.org]][599]</sup>
+[^25]: Wikipedia, IP Address, <https://en.wikipedia.org/wiki/IP_address> <sup>[[Archive.org]][601]</sup>
 
-[^26]: Wikipedia; Data Retention <https://en.wikipedia.org/wiki/Data_retention> <sup>[[Archive.org]][600]</sup>
+[^26]: Wikipedia; Data Retention <https://en.wikipedia.org/wiki/Data_retention> <sup>[[Archive.org]][602]</sup>
 
-[^27]: Wikipedia, Tor Anonymity Network <https://en.wikipedia.org/wiki/Tor_(anonymity_network)> <sup>[[Archive.org]][601]</sup>
+[^27]: Wikipedia, Tor Anonymity Network <https://en.wikipedia.org/wiki/Tor_(anonymity_network)> <sup>[[Archive.org]][603]</sup>
 
-[^28]: Wikipedia, VPN <https://en.wikipedia.org/wiki/Virtual_private_network> <sup>[[Archive.org]][602]</sup>
+[^28]: Wikipedia, VPN <https://en.wikipedia.org/wiki/Virtual_private_network> <sup>[[Archive.org]][604]</sup>
 
-[^29]: Wikipedia, DNS <https://en.wikipedia.org/wiki/Domain_Name_System> <sup>[[Archive.org]][603]</sup>
+[^29]: Wikipedia, DNS <https://en.wikipedia.org/wiki/Domain_Name_System> <sup>[[Archive.org]][605]</sup>
 
-[^30]: Wikipedia, DNS Blocking <https://en.wikipedia.org/wiki/DNS_blocking> <sup>[[Archive.org]][604]</sup>
+[^30]: Wikipedia, DNS Blocking <https://en.wikipedia.org/wiki/DNS_blocking> <sup>[[Archive.org]][606]</sup>
 
-[^31]: CensoredPlanet <https://censoredplanet.org/> <sup>[[Archive.org]][193]</sup>
+[^31]: CensoredPlanet <https://censoredplanet.org/> <sup>[[Archive.org]][195]</sup>
 
-[^32]: ArXiv, Characterizing Smart Home IoT Traffic in the Wild <https://arxiv.org/pdf/2001.08288.pdf> <sup>[[Archive.org]][605]</sup>
+[^32]: ArXiv, Characterizing Smart Home IoT Traffic in the Wild <https://arxiv.org/pdf/2001.08288.pdf> <sup>[[Archive.org]][607]</sup>
 
-[^33]: Labzilla.io, Your Smart TV is probably ignoring your Pi-Hole <https://labzilla.io/blog/force-dns-pihole> <sup>[[Archive.org]][606]</sup>
+[^33]: Labzilla.io, Your Smart TV is probably ignoring your Pi-Hole <https://labzilla.io/blog/force-dns-pihole> <sup>[[Archive.org]][608]</sup>
 
-[^34]: Wikipedia, DNS over HTTPS: <https://en.wikipedia.org/wiki/DNS_over_HTTPS> <sup>[[Archive.org]][607]</sup>
+[^34]: Wikipedia, DNS over HTTPS: <https://en.wikipedia.org/wiki/DNS_over_HTTPS> <sup>[[Archive.org]][609]</sup>
 
-[^35]: Wikipedia, DNS over TLS, <https://en.wikipedia.org/wiki/DNS_over_TLS> <sup>[[Archive.org]][608]</sup>
+[^35]: Wikipedia, DNS over TLS, <https://en.wikipedia.org/wiki/DNS_over_TLS> <sup>[[Archive.org]][610]</sup>
 
-[^36]: Wikipedia, Pi-Hole <https://en.wikipedia.org/wiki/Pi-hole> <sup>[[Archive.org]][609]</sup>
+[^36]: Wikipedia, Pi-Hole <https://en.wikipedia.org/wiki/Pi-hole> <sup>[[Archive.org]][611]</sup>
 
-[^37]: Wikipedia, SNI <https://en.wikipedia.org/wiki/Server_Name_Indication> <sup>[[Archive.org]][610]</sup>
+[^37]: Wikipedia, SNI <https://en.wikipedia.org/wiki/Server_Name_Indication> <sup>[[Archive.org]][612]</sup>
 
-[^38]: Wikipedia, eSNI <https://en.wikipedia.org/wiki/Server_Name_Indication#Encrypted_Client_Hello> <sup>[[Archive.org]][610]</sup>
+[^38]: Wikipedia, eSNI <https://en.wikipedia.org/wiki/Server_Name_Indication#Encrypted_Client_Hello> <sup>[[Archive.org]][612]</sup>
 
-[^39]: Wikipedia, ECH, <https://en.wikipedia.org/wiki/Server_Name_Indication#Encrypted_Client_Hello> <sup>[[Archive.org]][610]</sup>
+[^39]: Wikipedia, ECH, <https://en.wikipedia.org/wiki/Server_Name_Indication#Encrypted_Client_Hello> <sup>[[Archive.org]][612]</sup>
 
-[^40]: Mozilla Blog, Encrypted Client Hello: the future of ESNI in Firefox <https://blog.mozilla.org/security/2021/01/07/encrypted-client-hello-the-future-of-esni-in-firefox/> <sup>[[Archive.org]][611]</sup>
+[^40]: Mozilla Blog, Encrypted Client Hello: the future of ESNI in Firefox <https://blog.mozilla.org/security/2021/01/07/encrypted-client-hello-the-future-of-esni-in-firefox/> <sup>[[Archive.org]][613]</sup>
 
-[^41]: Usenix.org, On the Importance of Encrypted-SNI (ESNI) to Censorship Circumvention <https://www.usenix.org/system/files/foci19-paper_chai_0.pdf> <sup>[[Archive.org]][612]</sup>
+[^41]: Usenix.org, On the Importance of Encrypted-SNI (ESNI) to Censorship Circumvention <https://www.usenix.org/system/files/foci19-paper_chai_0.pdf> <sup>[[Archive.org]][614]</sup>
 
-[^42]: Wikipedia, CDN <https://en.wikipedia.org/wiki/Content_delivery_network> <sup>[[Archive.org]][613]</sup>
+[^42]: Wikipedia, CDN <https://en.wikipedia.org/wiki/Content_delivery_network> <sup>[[Archive.org]][615]</sup>
 
-[^43]: Cloudflare, Good-bye ESNI, hello ECH! <https://blog.cloudflare.com/encrypted-client-hello/> <sup>[[Archive.org]][614]</sup>
+[^43]: Cloudflare, Good-bye ESNI, hello ECH! <https://blog.cloudflare.com/encrypted-client-hello/> <sup>[[Archive.org]][616]</sup>
 
-[^44]: ZDNET, Russia wants to ban the use of secure protocols such as TLS 1.3, DoH, DoT, ESNI <https://www.zdnet.com/article/russia-wants-to-ban-the-use-of-secure-protocols-such-as-tls-1-3-doh-dot-esni/> <sup>[[Archive.org]][615]</sup>
+[^44]: ZDNET, Russia wants to ban the use of secure protocols such as TLS 1.3, DoH, DoT, ESNI <https://www.zdnet.com/article/russia-wants-to-ban-the-use-of-secure-protocols-such-as-tls-1-3-doh-dot-esni/> <sup>[[Archive.org]][617]</sup>
 
-[^45]: ZDNET, China is now blocking all encrypted HTTPS traffic that uses TLS 1.3 and ESNI <https://www.zdnet.com/article/china-is-now-blocking-all-encrypted-https-traffic-using-tls-1-3-and-esni/> <sup>[[Archive.org]][616]</sup>
+[^45]: ZDNET, China is now blocking all encrypted HTTPS traffic that uses TLS 1.3 and ESNI <https://www.zdnet.com/article/china-is-now-blocking-all-encrypted-https-traffic-using-tls-1-3-and-esni/> <sup>[[Archive.org]][618]</sup>
 
-[^46]: KUL, Encrypted DNS=⇒Privacy? A Traffic Analysis Perspective <https://www.esat.kuleuven.be/cosic/publications/article-3153.pdf> <sup>[[Archive.org]][617]</sup>
+[^46]: KUL, Encrypted DNS=⇒Privacy? A Traffic Analysis Perspective <https://www.esat.kuleuven.be/cosic/publications/article-3153.pdf> <sup>[[Archive.org]][619]</sup>
 
-[^47]: ResearhGate, Oblivious DNS: Practical Privacy for DNS Queries <https://www.researchgate.net/publication/332893422_Oblivious_DNS_Practical_Privacy_for_DNS_Queries> <sup>[[Archive.org]][618]</sup>
+[^47]: ResearhGate, Oblivious DNS: Practical Privacy for DNS Queries <https://www.researchgate.net/publication/332893422_Oblivious_DNS_Practical_Privacy_for_DNS_Queries> <sup>[[Archive.org]][620]</sup>
 
-[^48]: Nymity.ch, The Effect of DNS on Tor's Anonymity <https://nymity.ch/tor-dns/> <sup>[[Archive.org]][619]</sup>
+[^48]: Nymity.ch, The Effect of DNS on Tor's Anonymity <https://nymity.ch/tor-dns/> <sup>[[Archive.org]][621]</sup>
 
-[^49]: Wikipedia, IMEI <https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity> <sup>[[Archive.org]][620]</sup>
+[^49]: Wikipedia, RFID <https://en.wikipedia.org/wiki/Radio-frequency_identification> <sup>[[Archive.org]][55]</sup>
 
-[^50]: Wikipedia, IMSI <https://en.wikipedia.org/wiki/International_mobile_subscriber_identity> <sup>[[Archive.org]][621]</sup>
+[^50]: Wikipedia, NFC <https://en.wikipedia.org/wiki/Near-field_communication> <sup>[[Archive.org]][622]</sup>
 
-[^51]: Android Documentation, Device Identifiers <https://source.android.com/devices/tech/config/device-identifiers> <sup>[[Archive.org]][622]</sup>
+[^51]: Samsonite Online Shop, RFID accessories, <https://shop.samsonite.com/accessories/rfid-accessories/> <sup>[[Archive.org]][623]</sup>
 
-[^52]: Google Privacy Policy, Look for IMEI <https://policies.google.com/privacy/embedded?hl=en-US> <sup>[[Archive.org]][623]</sup>
+[^52]: Google Android Help, Android Location Services <https://support.google.com/accounts/answer/3467281?hl=en> <sup>[[Archive.org]][624]</sup>
 
-[^53]: Wikipedia, IMEI and the Law <https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity#IMEI_and_the_law> <sup>[[Archive.org]][620]</sup>
+[^53]: Apple Support, Location Services and Privacy <https://support.apple.com/en-us/HT207056> <sup>[[Archive.org]][625]</sup>
 
-[^54]: Bellingcat, The GRU Globetrotters: Mission London <https://www.bellingcat.com/news/uk-and-europe/2019/06/28/the-gru-globetrotters-mission-london/> <sup>[[Archive.org]][624]</sup>
+[^54]: State University of New York, Towards 3D Human Pose Construction Using Wi-Fi <https://cse.buffalo.edu/~lusu/papers/MobiCom2020.pdf> <sup>[[Archive.org]][626]</sup>
 
-[^55]: Bellingcat,"V" For "Vympel": FSB's Secretive Department "V" Behind Assassination Of Georgian Asylum Seeker In Germany <https://www.bellingcat.com/news/uk-and-europe/2020/02/17/v-like-vympel-fsbs-secretive-department-v-behind-assassination-of-zelimkhan-khangoshvili/> <sup>[[Archive.org]][625]</sup>
+[^55]: Digi.Ninja, Jasager <https://digi.ninja/jasager/> <sup>[[Archive.org]][627]</sup>
 
-[^56]: Wikipedia, CCTV <https://en.wikipedia.org/wiki/Closed-circuit_television> <sup>[[Archive.org]][626]</sup>
+[^56]: Hak5 Shop, Wi-Fi Pineapple <https://shop.hak5.org/products/wifi-pineapple> <sup>[[Archive.org]][628]</sup>
 
-[^57]: Apple, Transparency Report, Device Requests <https://www.apple.com/legal/transparency/device-requests.html> <sup>[[Archive.org]][627]</sup>
+[^57]: Wikipedia, Deautentication Attack <https://en.wikipedia.org/wiki/Wi-Fi_deauthentication_attack> <sup>[[Archive.org]][629]</sup>
 
-[^58]: The Intercept, How Cops Can Secretly Track Your Phone <https://theintercept.com/2020/07/31/protests-surveillance-stingrays-dirtboxes-phone-tracking/> <sup>[[Archive.org]][628]</sup>
+[^58]: Wikipedia, Capture Portal <https://en.wikipedia.org/wiki/Captive_portal> <sup>[[Archive.org]][630]</sup>
 
-[^59]: Wikipedia, IMSI Catcher <https://en.wikipedia.org/wiki/IMSI-catcher> <sup>[[Archive.org]][629]</sup>
+[^59]: HackerFactor Blog, Deanonymizing Tor Circuits <https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html> <sup>[[Archive.org]][631]</sup>
 
-[^60]: Wikipedia, Stingray <https://en.wikipedia.org/wiki/Stingray_phone_tracker> <sup>[[Archive.org]][630]</sup>
+[^60]: KU Leuven, Website Fingerprinting through Deep Learning <https://distrinet.cs.kuleuven.be/software/tor-wf-dl/> <sup>[[Archive.org]][632]</sup>
 
-[^61]: Gizmodo, Cops Turn to Canadian Phone-Tracking Firm After Infamous 'Stingrays' Become 'Obsolete' <https://gizmodo.com/american-cops-turns-to-canadian-phone-tracking-firm-aft-1845442778> <sup>[[Archive.org]][631]</sup>
+[^61]: DailyDot, How Tor helped catch the Harvard bomb threat suspect <https://www.dailydot.com/unclick/tor-harvard-bomb-suspect/> <sup>[[Archive.org]][633]</sup>
 
-[^62]: Wikipedia, MITM <https://en.wikipedia.org/wiki/Man-in-the-middle_attack> <sup>[[Archive.org]][632]</sup>
+[^62]: ArsTechnica, How the NSA can break trillions of encrypted Web and VPN connections <https://arstechnica.com/information-technology/2015/10/how-the-nsa-can-break-trillions-of-encrypted-web-and-vpn-connections/> <sup>[[Archive.org]][634]</sup>
 
-[^63]: Purism, Librem 5 <https://shop.puri.sm/shop/librem-5/> <sup>[[Archive.org]][633]</sup>
+[^63]: ArsTechnica, Does Tor provide more benefit or harm? New paper says it depends <https://arstechnica.com/gadgets/2020/11/does-tor-provide-more-benefit-or-harm-new-paper-says-it-depends/> <sup>[[Archive.org]][635]</sup>
 
-[^64]: Wikipedia, MAC Address <https://en.wikipedia.org/wiki/MAC_address> <sup>[[Archive.org]][634]</sup>
+[^64]: ResearchGate, The potential harms of the Tor anonymity network cluster disproportionately in free countries <https://www.pnas.org/content/early/2020/11/24/2011893117> <sup>[[Archive.org]][636]</sup>
 
-[^65]: Acyclica Road Trend Product Sheet, <https://amsignalinc.com/data-sheets/Acyclica/Acyclica-RoadTrend-Product-Sheet.pdf> <sup>[[Archive.org]][635]</sup>
+[^65]: CryptoEngineering, How does Apple (privately) find your offline devices? <https://blog.cryptographyengineering.com/2019/06/05/how-does-apple-privately-find-your-offline-devices/> <sup>[[Archive.org]][637]</sup>
 
-[^66]: ResearchGate, Tracking Anonymized Bluetooth Devices <https://www.researchgate.net/publication/334590931_Tracking_Anonymized_Bluetooth_Devices/fulltext/5d3308db92851cd04675a469/Tracking-Anonymized-Bluetooth-Devices.pdf> <sup>[[Archive.org]][636]</sup>
+[^66]: Apple Support <https://support.apple.com/en-us/HT210515> <sup>[[Archive.org]][638]</sup>
 
-[^67]: Apple, Differential Privacy White Paper <https://www.apple.com/privacy/docs/Differential_Privacy_Overview.pdf> <sup>[[Archive.org]][637]</sup>
+[^67]: XDA, Samsung's Find My Mobile app can locate Galaxy devices even when they're offline <https://www.xda-developers.com/samsung-find-my-mobile-app-locate-galaxy-devices-offline/> <sup>[[Archive.org]][639]</sup>
 
-[^68]: Wikipedia, Differential Privacy <https://en.wikipedia.org/wiki/Differential_privacy> <sup>[[Archive.org]][638]</sup>
+[^68]: Apple Support, If your Mac is lost or stolen <https://support.apple.com/en-us/HT204756> <sup>[[Archive.org]][640]</sup>
 
-[^69]: Google Android Help, Android Location Services <https://support.google.com/accounts/answer/3467281?hl=en> <sup>[[Archive.org]][639]</sup>
+[^69]: Wikipedia, BLE <https://en.wikipedia.org/wiki/Bluetooth_Low_Energy> <sup>[[Archive.org]][641]</sup>
 
-[^70]: Apple Support, Location Services and Privacy <https://support.apple.com/en-us/HT207056> <sup>[[Archive.org]][640]</sup>
+[^70]: Cryptography Engineering Blog, How does Apple (privately) find your offline devices? <https://blog.cryptographyengineering.com/2019/06/05/how-does-apple-privately-find-your-offline-devices/> <sup>[[Archive.org]][637]</sup>
 
-[^71]: State University of New York, Towards 3D Human Pose Construction Using Wi-Fi <https://cse.buffalo.edu/~lusu/papers/MobiCom2020.pdf> <sup>[[Archive.org]][641]</sup>
+[^71]: Wikipedia, IMEI <https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity> <sup>[[Archive.org]][642]</sup>
 
-[^72]: Using Metadata to find Paul Revere (<https://kieranhealy.org/blog/archives/2013/06/09/using-metadata-to-find-paul-revere/> <sup>[[Archive.org]][642]</sup>)
+[^72]: Wikipedia, IMSI <https://en.wikipedia.org/wiki/International_mobile_subscriber_identity> <sup>[[Archive.org]][643]</sup>
 
-[^73]: Wikipedia, Google SensorVault, <https://en.wikipedia.org/wiki/Sensorvault> <sup>[[Archive.org]][643]</sup>
+[^73]: Android Documentation, Device Identifiers <https://source.android.com/devices/tech/config/device-identifiers> <sup>[[Archive.org]][644]</sup>
 
-[^74]: NRKBeta, My Phone Was Spying on Me, so I Tracked Down the Surveillants <https://nrkbeta.no/2020/12/03/my-phone-was-spying-on-me-so-i-tracked-down-the-surveillants/> <sup>[[Archive.org]][644]</sup>
+[^74]: Google Privacy Policy, Look for IMEI <https://policies.google.com/privacy/embedded?hl=en-US> <sup>[[Archive.org]][645]</sup>
 
-[^75]: New York Times <https://www.nytimes.com/interactive/2019/12/19/opinion/location-tracking-cell-phone.html> <sup>[[Archive.org]][645]</sup>
+[^75]: Wikipedia, IMEI and the Law <https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity#IMEI_and_the_law> <sup>[[Archive.org]][642]</sup>
 
-[^76]: Sophos, Google data puts innocent man at the scene of a crime <https://nakedsecurity.sophos.com/2020/03/10/google-data-puts-innocent-man-at-the-scene-of-a-crime/> <sup>[[Archive.org]][646]</sup>
+[^76]: Bellingcat, The GRU Globetrotters: Mission London <https://www.bellingcat.com/news/uk-and-europe/2019/06/28/the-gru-globetrotters-mission-london/> <sup>[[Archive.org]][646]</sup>
 
-[^77]: Wikipedia, Geofence Warrant <https://en.wikipedia.org/wiki/Geo-fence_warrant> <sup>[[Archive.org]][647]</sup>
+[^77]: Bellingcat,"V" For "Vympel": FSB's Secretive Department "V" Behind Assassination Of Georgian Asylum Seeker In Germany <https://www.bellingcat.com/news/uk-and-europe/2020/02/17/v-like-vympel-fsbs-secretive-department-v-behind-assassination-of-zelimkhan-khangoshvili/> <sup>[[Archive.org]][647]</sup>
 
-[^78]: Vice.com, Military Unit That Conducts Drone Strikes Bought Location Data From Ordinary Apps <https://www.vice.com/en/article/y3g97x/location-data-apps-drone-strikes-iowa-national-guard> <sup>[[Archive.org]][648]</sup>
+[^78]: Wikipedia, CCTV <https://en.wikipedia.org/wiki/Closed-circuit_television> <sup>[[Archive.org]][648]</sup>
 
-[^79]: Wikipedia, Room 641A <https://en.wikipedia.org/wiki/Room_641A> <sup>[[Archive.org]][649]</sup>
+[^79]: Apple, Transparency Report, Device Requests <https://www.apple.com/legal/transparency/device-requests.html> <sup>[[Archive.org]][649]</sup>
 
-[^80]: Wikipedia, Edward Snowden <https://en.wikipedia.org/wiki/Edward_Snowden> <sup>[[Archive.org]][650]</sup>
+[^80]: The Intercept, How Cops Can Secretly Track Your Phone <https://theintercept.com/2020/07/31/protests-surveillance-stingrays-dirtboxes-phone-tracking/> <sup>[[Archive.org]][650]</sup>
 
-[^81]: Wikipedia, Permanent Record <https://en.wikipedia.org/wiki/Permanent_Record_(autobiography)> <sup>[[Archive.org]][474]</sup>
+[^81]: Wikipedia, IMSI Catcher <https://en.wikipedia.org/wiki/IMSI-catcher> <sup>[[Archive.org]][651]</sup>
 
-[^82]: Wikipedia, XKEYSCORE <https://en.wikipedia.org/wiki/XKeyscore> <sup>[[Archive.org]][651]</sup>
+[^82]: Wikipedia, Stingray <https://en.wikipedia.org/wiki/Stingray_phone_tracker> <sup>[[Archive.org]][652]</sup>
 
-[^83]: ElectroSpaces, Danish military intelligence uses XKEYSCORE to tap cables in cooperation with the NSA <https://www.electrospaces.net/2020/10/danish-military-intelligence-uses.html> <sup>[[Archive.org]][652]</sup>
+[^83]: Gizmodo, Cops Turn to Canadian Phone-Tracking Firm After Infamous 'Stingrays' Become 'Obsolete' <https://gizmodo.com/american-cops-turns-to-canadian-phone-tracking-firm-aft-1845442778> <sup>[[Archive.org]][653]</sup>
 
-[^84]: Wikipedia, MUSCULAR <https://en.m.wikipedia.org/wiki/MUSCULAR_(surveillance_program)> <sup>[[Archive.org]][653]</sup>
+[^84]: Wikipedia, MITM <https://en.wikipedia.org/wiki/Man-in-the-middle_attack> <sup>[[Archive.org]][654]</sup>
 
-[^85]: Wikipedia, PRISM <https://en.wikipedia.org/wiki/PRISM_(surveillance_program)> <sup>[[Archive.org]][654]</sup>
+[^85]: Purism, Librem 5 <https://shop.puri.sm/shop/librem-5/> <sup>[[Archive.org]][655]</sup>
 
-[^86]: Justsecurity, General Hayden <https://www.justsecurity.org/10318/video-clip-director-nsa-cia-we-kill-people-based-metadata/> <sup>[[Archive.org]][655]</sup>
+[^86]: Wikipedia, MAC Address <https://en.wikipedia.org/wiki/MAC_address> <sup>[[Archive.org]][656]</sup>
 
-[^87]: Trinity College Dublin, Mobile Handset Privacy: Measuring The Data iOS and Android Send to Apple And Google <https://www.scss.tcd.ie/doug.leith/apple_google.pdf> <sup>[[Archive.org]][57]</sup>
+[^87]: Acyclica Road Trend Product Sheet, <https://amsignalinc.com/data-sheets/Acyclica/Acyclica-RoadTrend-Product-Sheet.pdf> <sup>[[Archive.org]][657]</sup>
 
-[^88]: Reuters, Exclusive: Apple dropped plan for encrypting backups after FBI complained -- sources <https://www.reuters.com/article/us-apple-fbi-icloud-exclusive-idUSKBN1ZK1CT> <sup>[[Archive.org]][656]</sup>
+[^88]: ResearchGate, Tracking Anonymized Bluetooth Devices <https://www.researchgate.net/publication/334590931_Tracking_Anonymized_Bluetooth_Devices/fulltext/5d3308db92851cd04675a469/Tracking-Anonymized-Bluetooth-Devices.pdf> <sup>[[Archive.org]][658]</sup>
 
-[^89]: ZDnet, I asked Apple for all my data. Here's what was sent back <https://www.zdnet.com/article/apple-data-collection-stored-request/> <sup>[[Archive.org]][657]</sup>
+[^89]: Wikipedia, CPU <https://en.wikipedia.org/wiki/Central_processing_unit> <sup>[[Archive.org]][659]</sup>
 
-[^90]: De Correspondent, Here's how we found the names and addresses of soldiers and secret agents using a simple fitness app <https://decorrespondent.nl/8481/heres-how-we-found-the-names-and-addresses-of-soldiers-and-secret-agents-using-a-simple-fitness-app/412999257-6756ba27> <sup>[[Archive.org]][658]</sup>
+[^90]: Wikipedia, Intel Management Engine <https://en.wikipedia.org/wiki/Intel_Management_Engine> <sup>[[Archive.org]][660]</sup>
 
-[^91]: Wired, The Strava Heat Map and the End of Secrets <https://www.wired.com/story/strava-heat-map-military-bases-fitness-trackers-privacy/> <sup>[[Archive.org]][659]</sup>
+[^91]: Wikipedia, AMD Platform Security Processor <https://en.wikipedia.org/wiki/AMD_Platform_Security_Processor> <sup>[[Archive.org]][661]</sup>
 
-[^92]: Bellingcat, How to Use and Interpret Data from Strava's Activity Map <https://www.bellingcat.com/resources/how-tos/2018/01/29/strava-interpretation-guide/> <sup>[[Archive.org]][660]</sup>
+[^92]: Wikipedia, IME, Security Vulnerabilities <https://en.wikipedia.org/wiki/Intel_Management_Engine#Security_vulnerabilities> <sup>[[Archive.org]][660]</sup>
 
-[^93]: The Guardian, Fitness tracking app Strava gives away location of secret US army bases <https://www.theguardian.com/world/2018/jan/28/fitness-tracking-app-gives-away-location-of-secret-us-army-bases> <sup>[[Archive.org]][661]</sup>
+[^93]: Wikipedia, IME, Assertions that ME is a backdoor <https://en.wikipedia.org/wiki/Intel_Management_Engine#Assertions_that_ME_is_a_backdoor> <sup>[[Archive.org]][660]</sup>
 
-[^94]: Telegraph, Running app reveals locations of secret service agents in MI6 and GCHQ <https://www.telegraph.co.uk/technology/2018/07/08/running-app-exposes-mi6-gchq-workers-whereabouts/> <sup>[[Archive.org]][662]</sup>
+[^94]: Wikipedia, IME, Disabling the ME <https://en.wikipedia.org/wiki/Intel_Management_Engine#Disabling_the_ME> <sup>[[Archive.org]][660]</sup>
 
-[^95]: Washington Post, Alexa has been eavesdropping on you this whole time <https://www.washingtonpost.com/technology/2019/05/06/alexa-has-been-eavesdropping-you-this-whole-time/?utm_term=.8514f3a17b1c&itid=lk_interstitial_manual_59> <sup>[[Archive.org]][663]</sup>
+[^95]: Libreboot, <https://libreboot.org/> <sup>[[Archive.org]][662]</sup>
 
-[^96]: CryptoEngineering, How does Apple (privately) find your offline devices? <https://blog.cryptographyengineering.com/2019/06/05/how-does-apple-privately-find-your-offline-devices/> <sup>[[Archive.org]][664]</sup>
+[^96]: Apple, Differential Privacy White Paper <https://www.apple.com/privacy/docs/Differential_Privacy_Overview.pdf> <sup>[[Archive.org]][663]</sup>
 
-[^97]: Apple Support <https://support.apple.com/en-us/HT210515> <sup>[[Archive.org]][665]</sup>
+[^97]: Wikipedia, Differential Privacy <https://en.wikipedia.org/wiki/Differential_privacy> <sup>[[Archive.org]][664]</sup>
 
-[^98]: XDA, Samsung's Find My Mobile app can locate Galaxy devices even when they're offline <https://www.xda-developers.com/samsung-find-my-mobile-app-locate-galaxy-devices-offline/> <sup>[[Archive.org]][666]</sup>
+[^98]: Trinity College Dublin, Mobile Handset Privacy: Measuring The Data iOS and Android Send to Apple And Google <https://www.scss.tcd.ie/doug.leith/apple_google.pdf> <sup>[[Archive.org]][74]</sup>
 
-[^99]: Apple Support, If your Mac is lost or stolen <https://support.apple.com/en-us/HT204756> <sup>[[Archive.org]][667]</sup>
+[^99]: Reuters, Exclusive: Apple dropped plan for encrypting backups after FBI complained -- sources <https://www.reuters.com/article/us-apple-fbi-icloud-exclusive-idUSKBN1ZK1CT> <sup>[[Archive.org]][665]</sup>
 
-[^100]: Wikipedia, BLE <https://en.wikipedia.org/wiki/Bluetooth_Low_Energy> <sup>[[Archive.org]][668]</sup>
+[^100]: ZDnet, I asked Apple for all my data. Here's what was sent back <https://www.zdnet.com/article/apple-data-collection-stored-request/> <sup>[[Archive.org]][666]</sup>
 
-[^101]: Cryptography Engineering Blog, How does Apple (privately) find your offline devices? <https://blog.cryptographyengineering.com/2019/06/05/how-does-apple-privately-find-your-offline-devices/> <sup>[[Archive.org]][664]</sup>
+[^101]: De Correspondent, Here's how we found the names and addresses of soldiers and secret agents using a simple fitness app <https://decorrespondent.nl/8481/heres-how-we-found-the-names-and-addresses-of-soldiers-and-secret-agents-using-a-simple-fitness-app/412999257-6756ba27> <sup>[[Archive.org]][667]</sup>
 
-[^102]: Wikipedia, RFID <https://en.wikipedia.org/wiki/Radio-frequency_identification> <sup>[[Archive.org]][69]</sup>
+[^102]: Wired, The Strava Heat Map and the End of Secrets <https://www.wired.com/story/strava-heat-map-military-bases-fitness-trackers-privacy/> <sup>[[Archive.org]][668]</sup>
 
-[^103]: Wikipedia, NFC <https://en.wikipedia.org/wiki/Near-field_communication> <sup>[[Archive.org]][669]</sup>
+[^103]: Bellingcat, How to Use and Interpret Data from Strava's Activity Map <https://www.bellingcat.com/resources/how-tos/2018/01/29/strava-interpretation-guide/> <sup>[[Archive.org]][669]</sup>
 
-[^104]: Samsonite Online Shop, RFID accessories, <https://shop.samsonite.com/accessories/rfid-accessories/> <sup>[[Archive.org]][670]</sup>
+[^104]: The Guardian, Fitness tracking app Strava gives away location of secret US army bases <https://www.theguardian.com/world/2018/jan/28/fitness-tracking-app-gives-away-location-of-secret-us-army-bases> <sup>[[Archive.org]][670]</sup>
 
-[^105]: Bellingcat, Joseph Mifsud: Rush for the EXIF <https://www.bellingcat.com/news/americas/2018/10/26/joseph-mifsud-rush-exif/> <sup>[[Archive.org]][671]</sup>
+[^105]: Telegraph, Running app reveals locations of secret service agents in MI6 and GCHQ <https://www.telegraph.co.uk/technology/2018/07/08/running-app-exposes-mi6-gchq-workers-whereabouts/> <sup>[[Archive.org]][671]</sup>
 
-[^106]: Wikipedia, Exploit <https://en.wikipedia.org/wiki/Exploit_(computer_security)> <sup>[[Archive.org]][672]</sup>
+[^106]: Washington Post, Alexa has been eavesdropping on you this whole time <https://www.washingtonpost.com/technology/2019/05/06/alexa-has-been-eavesdropping-you-this-whole-time/?utm_term=.8514f3a17b1c&itid=lk_interstitial_manual_59> <sup>[[Archive.org]][672]</sup>
 
-[^107]: Wikipedia, Freedom Hosting <https://en.wikipedia.org/wiki/Freedom_Hosting> <sup>[[Archive.org]][673]</sup>
+[^107]: Using Metadata to find Paul Revere (<https://kieranhealy.org/blog/archives/2013/06/09/using-metadata-to-find-paul-revere/> <sup>[[Archive.org]][673]</sup>)
 
-[^108]: Wired, 2013 FBI Admits It Controlled Tor Servers Behind Mass Malware Attack <https://www.wired.com/2013/09/freedom-hosting-fbi/> <sup>[[Archive.org]][674]</sup>
+[^108]: Wikipedia, Google SensorVault, <https://en.wikipedia.org/wiki/Sensorvault> <sup>[[Archive.org]][674]</sup>
 
-[^109]: Wikipedia, 2020 United States federal government data breach <https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach> <sup>[[Archive.org]][675]</sup>
+[^109]: NRKBeta, My Phone Was Spying on Me, so I Tracked Down the Surveillants <https://nrkbeta.no/2020/12/03/my-phone-was-spying-on-me-so-i-tracked-down-the-surveillants/> <sup>[[Archive.org]][675]</sup>
 
-[^110]: BBC, China social media: WeChat and the Surveillance State <https://www.bbc.com/news/blogs-china-blog-48552907> <sup>[[Archive.org]][676]</sup>
+[^110]: New York Times <https://www.nytimes.com/interactive/2019/12/19/opinion/location-tracking-cell-phone.html> <sup>[[Archive.org]][676]</sup>
 
-[^111]: The Intercept, Revealed: Massive Chinese Police Database <https://theintercept.com/2021/01/29/china-uyghur-muslim-surveillance-police/> <sup>[[Archive.org]][677]</sup>
+[^111]: Sophos, Google data puts innocent man at the scene of a crime <https://nakedsecurity.sophos.com/2020/03/10/google-data-puts-innocent-man-at-the-scene-of-a-crime/> <sup>[[Archive.org]][677]</sup>
 
-[^112]: Wikipedia, Sandbox <https://en.wikipedia.org/wiki/Sandbox_(computer_security)> <sup>[[Archive.org]][678]</sup>
+[^112]: Wikipedia, Geofence Warrant <https://en.wikipedia.org/wiki/Geo-fence_warrant> <sup>[[Archive.org]][678]</sup>
 
-[^113]: Zoom Support, Adding a watermark <https://support.zoom.us/hc/en-us/articles/209605273-Adding-a-Watermark> <sup>[[Archive.org]][679]</sup>
+[^113]: Vice.com, Military Unit That Conducts Drone Strikes Bought Location Data From Ordinary Apps <https://www.vice.com/en/article/y3g97x/location-data-apps-drone-strikes-iowa-national-guard> <sup>[[Archive.org]][679]</sup>
 
-[^114]: Zoom Support, Audio Watermark <https://support.zoom.us/hc/en-us/articles/360021839031-Audio-Watermark> <sup>[[Archive.org]][680]</sup>
+[^114]: Wikipedia, Room 641A <https://en.wikipedia.org/wiki/Room_641A> <sup>[[Archive.org]][680]</sup>
 
-[^115]: CreativeCloud Extension, IMATAG <https://exchange.adobe.com/creativecloud.details.101789.imatag-invisible-watermark-and-image-monitoring.html> <sup>[[Archive.org]][681]</sup>
+[^115]: Wikipedia, Edward Snowden <https://en.wikipedia.org/wiki/Edward_Snowden> <sup>[[Archive.org]][681]</sup>
 
-[^116]: NexGuard, <https://dtv.nagra.com/nexguard-forensic-watermarking> <sup>[[Archive.org]][682]</sup>
+[^116]: Wikipedia, Permanent Record <https://en.wikipedia.org/wiki/Permanent_Record_(autobiography)> <sup>[[Archive.org]][476]</sup>
 
-[^117]: Vobile Solutions, <https://www.vobilegroup.com/solutions> <sup>[[Archive.org]][683]</sup>
+[^117]: Wikipedia, XKEYSCORE <https://en.wikipedia.org/wiki/XKeyscore> <sup>[[Archive.org]][682]</sup>
 
-[^118]: Cinavia, <https://www.cinavia.com/languages/english/pages/technology.html> <sup>[[Archive.org]][684]</sup>
+[^118]: ElectroSpaces, Danish military intelligence uses XKEYSCORE to tap cables in cooperation with the NSA <https://www.electrospaces.net/2020/10/danish-military-intelligence-uses.html> <sup>[[Archive.org]][683]</sup>
 
-[^119]: Imatag, <https://www.imatag.com/> <sup>[[Archive.org]][685]</sup>
+[^119]: Wikipedia, MUSCULAR <https://en.m.wikipedia.org/wiki/MUSCULAR_(surveillance_program)> <sup>[[Archive.org]][684]</sup>
 
-[^120]: Wikipedia, Steganography <https://en.wikipedia.org/wiki/Steganography> <sup>[[Archive.org]][686]</sup>
+[^120]: Wikipedia, PRISM <https://en.wikipedia.org/wiki/PRISM_(surveillance_program)> <sup>[[Archive.org]][685]</sup>
 
-[^121]: IEEExplore, A JPEG compression resistant steganography scheme for raster graphics images <https://ieeexplore.ieee.org/document/4428921> <sup>[[Archive.org]][687]</sup>
+[^121]: Justsecurity, General Hayden <https://www.justsecurity.org/10318/video-clip-director-nsa-cia-we-kill-people-based-metadata/> <sup>[[Archive.org]][686]</sup>
 
-[^122]: ScienceDirect, Robust audio watermarking using perceptual masking <https://www.sciencedirect.com/science/article/abs/pii/S0165168498000140> <sup>[[Archive.org]][688]</sup>
+[^122]: IDMB, The Social Dilemma <https://www.imdb.com/title/tt11464826/> <sup>[[Archive.org]][687]</sup>
 
-[^123]: IEEExplore, Spread-spectrum watermarking of audio signals <https://ieeexplore.ieee.org/abstract/document/1188746> <sup>[[Archive.org]][689]</sup>
+[^123]: ArsTechnica, How the way you type can shatter anonymity---even on Tor <https://arstechnica.com/information-technology/2015/07/how-the-way-you-type-can-shatter-anonymity-even-on-tor/> <sup>[[Archive.org]][688]</sup>
 
-[^124]: Google Scholar, source camera identification <https://scholar.google.com/scholar?q=source+camera+identification> <sup>[[Archive.org]][690]</sup>
+[^124]: Wikipedia, Stylometry <https://en.wikipedia.org/wiki/Stylometry> <sup>[[Archive.org]][689]</sup>
 
-[^125]: Wikipedia, Printing Steganography <https://en.wikipedia.org/wiki/Machine_Identification_Code> <sup>[[Archive.org]][691]</sup>
+[^125]: Paul Moore Blog, Behavioral Profiling: The password you can't change. <https://paul.reviews/behavioral-profiling-the-password-you-cant-change/> <sup>[[Archive.org]][690]</sup>
 
-[^126]: MIT, SeeingYellow, <http://seeingyellow.com/> <sup>[[Archive.org]][692]</sup>
+[^126]: Wikipedia, Sentiment Analysis, <https://en.wikipedia.org/wiki/Sentiment_analysis> <sup>[[Archive.org]][691]</sup>
 
-[^127]: HackerFactor Blog, Deanonymizing Tor Circuits <https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html> <sup>[[Archive.org]][693]</sup>
+[^127]: EFF CoverYourTracks, <https://coveryourtracks.eff.org/> <sup>[[Archive.org]][692]</sup>
 
-[^128]: KU Leuven, Website Fingerprinting through Deep Learning <https://distrinet.cs.kuleuven.be/software/tor-wf-dl/> <sup>[[Archive.org]][694]</sup>
+[^128]: Berkeley.edu, On the Feasibility of Internet-Scale Author Identification <https://people.eecs.berkeley.edu/~dawnsong/papers/2012%20On%20the%20Feasibility%20of%20Internet-Scale%20Author%20Identification.pdf> <sup>[[Archive.org]][693]</sup>
 
-[^129]: DailyDot, How Tor helped catch the Harvard bomb threat suspect <https://www.dailydot.com/unclick/tor-harvard-bomb-suspect/> <sup>[[Archive.org]][695]</sup>
+[^129]: SecuredTouch Blog, Behavioral Biometrics 101: Behavioral Biometrics vs. Behavioral Analytics <https://blog.securedtouch.com/behavioral-biometrics-101-an-in-depth-look-at-behavioral-biometrics-vs-behavioral-analytics> <sup>[[Archive.org]][694]</sup>
 
-[^130]: ArsTechnica, How the NSA can break trillions of encrypted Web and VPN connections <https://arstechnica.com/information-technology/2015/10/how-the-nsa-can-break-trillions-of-encrypted-web-and-vpn-connections/> <sup>[[Archive.org]][696]</sup>
+[^130]: ArsTechnica, Stakeout: how the FBI tracked and busted a Chicago Anon <https://arstechnica.com/tech-policy/2012/03/stakeout-how-the-fbi-tracked-and-busted-a-chicago-anon/> <sup>[[Archive.org]][695]</sup>
 
-[^131]: ArsTechnica, Does Tor provide more benefit or harm? New paper says it depends <https://arstechnica.com/gadgets/2020/11/does-tor-provide-more-benefit-or-harm-new-paper-says-it-depends/> <sup>[[Archive.org]][697]</sup>
+[^131]: Bellingcat MH17 - Russian GRU Commander 'Orion' Identified as Oleg Ivannikov <https://www.bellingcat.com/news/uk-and-europe/2018/05/25/mh17-russian-gru-commander-orion-identified-oleg-ivannikov/> <sup>[[Archive.org]][696]</sup>
 
-[^132]: ResearchGate, The potential harms of the Tor anonymity network cluster disproportionately in free countries <https://www.pnas.org/content/early/2020/11/24/2011893117> <sup>[[Archive.org]][698]</sup>
+[^132]: Facebook Research, Deepface <https://research.fb.com/publications/deepface-closing-the-gap-to-human-level-performance-in-face-verification/> <sup>[[Archive.org]][697]</sup>
 
-[^133]: arXiv, An Analysis of Anonymity in the Bitcoin System <https://arxiv.org/abs/1107.4524> <sup>[[Archive.org]][699]</sup>
+[^133]: Privacy News Online, Putting the "face" in Facebook: how Mark Zuckerberg is building a world without public anonymity <https://www.privateinternetaccess.com/blog/putting-face-facebook-mark-zuckerberg-building-world-without-public-anonymity/> <sup>[[Archive.org]][698]</sup>
 
-[^134]: Bellingcat, How To Track Illegal Funding Campaigns Via Cryptocurrency, <https://www.bellingcat.com/resources/how-tos/2019/03/26/how-to-track-illegal-funding-campaigns-via-cryptocurrency/> <sup>[[Archive.org]][700]</sup>
+[^134]: CNBC, "Facebook has mapped populations in 23 countries as it explores satellites to expand internet" <https://www.cnbc.com/2017/09/01/facebook-has-mapped-human-population-building-internet-in-space.html> <sup>[[Archive.org]][699]</sup>
 
-[^135]: Wikipedia, KYC <https://en.wikipedia.org/wiki/Know_your_customer> <sup>[[Archive.org]][701]</sup>
+[^135]: MIT Technology Review, This is how we lost control of our faces, <https://www.technologyreview.com/2021/02/05/1017388/ai-deep-learning-facial-recognition-data-history/> <sup>[[Archive.org]][700]</sup>
 
-[^136]: arXiv.org, Probing the Mystery of Cryptocurrency Theft:An Investigation into Methods for Taint Analysis <https://arxiv.org/pdf/1906.05754.pdf> <sup>[[Archive.org]][702]</sup>
+[^136]: Bellingcat, Shadow of a Doubt: Crowdsourcing Time Verification of the MH17 Missile Launch Photo <https://www.bellingcat.com/resources/case-studies/2015/08/07/shadow-of-a-doubt/> <sup>[[Archive.org]][701]</sup>
 
-[^137]: YouTube, Breaking Monero <https://www.youtube.com/watch?v=WOyC6OB6ezA&list=PLsSYUeVwrHBnAUre2G_LYDsdo-tD0ov-y> <sup>[[Invidious]][703]</sup>
+[^137]: Brown Institute, Open-Source Investigation, <https://brown.columbia.edu/open-source-investigation/> <sup>[[Archive.org]][702]</sup>
 
-[^138]: Monero, Monero vs Princeton Researchers, <https://monero.org/monero-vs-princeton-researchers/> <sup>[[Archive.org]][704]</sup>
+[^138]: NewScientist, Facebook can recognize you in photos even if you're not looking <https://www.newscientist.com/article/dn27761-facebook-can-recognise-you-in-photos-even-if-youre-not-looking/> <sup>[[Archive.org]][703]</sup>
 
-[^139]: Wikipedia, Cryptocurrency Tumbler <https://en.wikipedia.org/wiki/Cryptocurrency_tumbler> <sup>[[Archive.org]][705]</sup>
+[^139]: Google Patent, Techniques for emotion detection and content delivery <https://patents.google.com/patent/US20150242679> <sup>[[Archive.org]][704]</sup>
 
-[^140]: Wikipedia, Security Through Obscurity <https://en.wikipedia.org/wiki/Security_through_obscurity> <sup>[[Archive.org]][706]</sup>
+[^140]: APNews, Chinese 'gait recognition' tech IDs people by how they walk <https://apnews.com/article/bf75dd1c26c947b7826d270a16e2658a> <sup>[[Archive.org]][705]</sup>
 
-[^141]: ArXiv, Tracking Mixed Bitcoins, <https://arxiv.org/abs/2009.14007> <sup>[[Archive.org]][707]</sup>
+[^141]: TechCrunch, Facial recognition reveals political party in troubling new research <https://techcrunch.com/2021/01/13/facial-recognition-reveals-political-party-in-troubling-new-research/> <sup>[[Archive.org]][706]</sup>
 
-[^142]: SSRN, The Cryptocurrency Tumblers: Risks, Legality and Oversight <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3080361> <sup>[[Archive.org]][708]</sup>
+[^142]: Nature.com, Facial recognition technology can expose political orientation from naturalistic facial images <https://www.nature.com/articles/s41598-020-79310-1> <sup>[[Archive.org]][707]</sup>
 
-[^143]: Wikipedia, CPU <https://en.wikipedia.org/wiki/Central_processing_unit> <sup>[[Archive.org]][709]</sup>
+[^143]: Slate <https://slate.com/technology/2018/04/facebook-collects-data-on-non-facebook-users-if-they-want-to-delete-it-they-have-to-sign-up.html> <sup>[[Archive.org]][708]</sup>
 
-[^144]: Wikipedia, Intel Management Engine <https://en.wikipedia.org/wiki/Intel_Management_Engine> <sup>[[Archive.org]][710]</sup>
+[^144]: The Conversation <https://theconversation.com/shadow-profiles-facebook-knows-about-you-even-if-youre-not-on-facebook-94804> <sup>[[Archive.org]][709]</sup>
 
-[^145]: Wikipedia, AMD Platform Security Processor <https://en.wikipedia.org/wiki/AMD_Platform_Security_Processor> <sup>[[Archive.org]][711]</sup>
+[^145]: The Verge <https://www.theverge.com/2018/4/11/17225482/facebook-shadow-profiles-zuckerberg-congress-data-privacy> <sup>[[Archive.org]][710]</sup>
 
-[^146]: Wikipedia, IME, Security Vulnerabilities <https://en.wikipedia.org/wiki/Intel_Management_Engine#Security_vulnerabilities> <sup>[[Archive.org]][710]</sup>
+[^146]: ZDNET <https://www.zdnet.com/article/anger-mounts-after-facebooks-shadow-profiles-leak-in-bug/> <sup>[[Archive.org]][711]</sup>
 
-[^147]: Wikipedia, IME, Assertions that ME is a backdoor <https://en.wikipedia.org/wiki/Intel_Management_Engine#Assertions_that_ME_is_a_backdoor> <sup>[[Archive.org]][710]</sup>
+[^147]: CNET <https://www.cnet.com/news/shadow-profiles-facebook-has-information-you-didnt-hand-over/> <sup>[[Archive.org]][712]</sup>
 
-[^148]: Wikipedia, IME, Disabling the ME <https://en.wikipedia.org/wiki/Intel_Management_Engine#Disabling_the_ME> <sup>[[Archive.org]][710]</sup>
+[^148]: Anyvision <https://www.anyvision.co/> <sup>[[Archive.org]][713]</sup>
 
-[^149]: Libreboot, <https://libreboot.org/> <sup>[[Archive.org]][712]</sup>
+[^149]: BuzzFeed.news, Surveillance Nation <https://www.buzzfeednews.com/article/ryanmac/clearview-ai-local-police-facial-recognition> <sup>[[Archive.org]][714]</sup>
 
-[^150]: Digi.Ninja, Jasager <https://digi.ninja/jasager/> <sup>[[Archive.org]][713]</sup>
+[^150]: NEC, Neoface <https://www.nec.com/en/global/solutions/biometrics/face/neofacewatch.html> <sup>[[Archive.org]][715]</sup>
 
-[^151]: Hak5 Shop, Wi-Fi Pineapple <https://shop.hak5.org/products/wifi-pineapple> <sup>[[Archive.org]][714]</sup>
+[^151]: BBC, Met police deploy live facial recognition technology <https://www.theguardian.com/uk-news/2020/feb/11/met-police-deploy-live-facial-recognition-technology> <sup>[[Archive.org]][716]</sup>
 
-[^152]: Wikipedia, Deautentication Attack <https://en.wikipedia.org/wiki/Wi-Fi_deauthentication_attack> <sup>[[Archive.org]][715]</sup>
+[^152]: YouTube, The Economist, China: facial recognition and state control <https://www.youtube.com/watch?v=lH2gMNrUuEY> <sup>[[Invidious]][717]</sup>
 
-[^153]: Wikipedia, Capture Portal <https://en.wikipedia.org/wiki/Captive_portal> <sup>[[Archive.org]][716]</sup>
+[^153]: Washington Post, Huawei tested AI software that could recognize Uighur minorities and alert police, report says <https://www.washingtonpost.com/technology/2020/12/08/huawei-tested-ai-software-that-could-recognize-uighur-minorities-alert-police-report-says/> <sup>[[Archive.org]][718]</sup>
 
-[^154]: Wired, Why the Security of USB Is Fundamentally Broken <https://www.wired.com/2014/07/usb-security/> <sup>[[Archive.org]][717]</sup>
+[^154]: The Intercept, How a Facial Recognition Mismatch Can Ruin Your Life <https://theintercept.com/2016/10/13/how-a-facial-recognition-mismatch-can-ruin-your-life/> <sup>[[Archive.org]][719]</sup>
 
-[^155]: Wikipedia, Stuxnet <https://en.wikipedia.org/wiki/Stuxnet> <sup>[[Archive.org]][718]</sup>
+[^155]: BBC, WhatsApp photo drug dealer caught by 'groundbreaking' work <https://www.bbc.com/news/uk-wales-43711477> <sup>[[Archive.org]][720]</sup>
 
-[^156]: Superuser.com, How do I safely investigate a USB stick found in the parking lot at work? <https://superuser.com/questions/1206321/how-do-i-safely-investigate-a-usb-stick-found-in-the-parking-lot-at-work> <sup>[[Archive.org]][719]</sup>
+[^156]: JUSTIA Patent, Identification of taste attributes from an audio signal <https://patents.justia.com/patent/10891948> <sup>[[Archive.org]][721]</sup>
 
-[^157]: Magnet Forensics, Magnet AXIOM <https://www.magnetforensics.com/products/magnet-axiom/cloud/> <sup>[[Archive.org]][720]</sup>
+[^157]: IMDB, Gattaca 1997, <https://www.imdb.com/title/tt0119177/> <sup>[[Archive.org]][722]</sup>
 
-[^158]: Cellebrite, Unlock cloud-based evidence to solve the case sooner <https://www.cellebrite.com/en/ufed-cloud/> <sup>[[Archive.org]][721]</sup>
+[^158]: IMDB, Person of Interest 2011 <https://www.imdb.com/title/tt1839578> <sup>[[Archive.org]][723]</sup>
 
-[^159]: IDMB, The Social Dilemma <https://www.imdb.com/title/tt11464826/> <sup>[[Archive.org]][722]</sup>
+[^159]: IMDB, Minority Report 2002, <https://www.imdb.com/title/tt0181689> <sup>[[Archive.org]][724]</sup>
 
-[^160]: ArsTechnica, How the way you type can shatter anonymity---even on Tor <https://arstechnica.com/information-technology/2015/07/how-the-way-you-type-can-shatter-anonymity-even-on-tor/> <sup>[[Archive.org]][723]</sup>
+[^160]: Wikipedia, Deepfake <https://en.wikipedia.org/wiki/Deepfake> <sup>[[Archive.org]][725]</sup>
 
-[^161]: Wikipedia, Stylometry <https://en.wikipedia.org/wiki/Stylometry> <sup>[[Archive.org]][724]</sup>
+[^161]: Econotimes, Deepfake Voice Technology: The Good. The Bad. The Future <https://www.econotimes.com/Deepfake-Voice-Technology-The-Good-The-Bad-The-Future-1601278> <sup>[[Archive.org]][726]</sup>
 
-[^162]: Paul Moore Blog, Behavioral Profiling: The password you can't change. <https://paul.reviews/behavioral-profiling-the-password-you-cant-change/> <sup>[[Archive.org]][725]</sup>
+[^162]: Wikipedia, Deepfake Events <https://en.wikipedia.org/wiki/Deepfake#Example_events> <sup>[[Archive.org]][725]</sup>
 
-[^163]: Wikipedia, Sentiment Analysis, <https://en.wikipedia.org/wiki/Sentiment_analysis> <sup>[[Archive.org]][726]</sup>
+[^163]: Forbes, A Voice Deepfake Was Used To Scam A CEO Out Of $243,000 <https://www.forbes.com/sites/jessedamiani/2019/09/03/a-voice-deepfake-was-used-to-scam-a-ceo-out-of-243000/> <sup>[[Archive.org]][727]</sup>
 
-[^164]: EFF CoverYourTracks, <https://coveryourtracks.eff.org/> <sup>[[Archive.org]][727]</sup>
+[^164]: Joseph Steinberg, How To Prevent Facial Recognition Technology From Identifying You <https://josephsteinberg.com/how-to-prevent-facial-recognition-technology-from-identifying-you/> <sup>[[Archive.org]][728]</sup>
 
-[^165]: Berkeley.edu, On the Feasibility of Internet-Scale Author Identification <https://people.eecs.berkeley.edu/~dawnsong/papers/2012%20On%20the%20Feasibility%20of%20Internet-Scale%20Author%20Identification.pdf> <sup>[[Archive.org]][728]</sup>
+[^165]: NIST, Face recognition accuracy with masks using pre-COVID-19 algorithms <https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8311.pdf> <sup>[[Archive.org]][729]</sup>
 
-[^166]: SecuredTouch Blog, Behavioral Biometrics 101: Behavioral Biometrics vs. Behavioral Analytics <https://blog.securedtouch.com/behavioral-biometrics-101-an-in-depth-look-at-behavioral-biometrics-vs-behavioral-analytics> <sup>[[Archive.org]][729]</sup>
+[^166]: BBC, Facial recognition identifies people wearing masks <https://www.bbc.com/news/technology-55573802> <sup>[[Archive.org]][730]</sup>
 
-[^167]: ArsTechnica, Stakeout: how the FBI tracked and busted a Chicago Anon <https://arstechnica.com/tech-policy/2012/03/stakeout-how-the-fbi-tracked-and-busted-a-chicago-anon/> <sup>[[Archive.org]][730]</sup>
+[^167]: University of Wisconsin, Exploring Reflectacles As Anti-Surveillance Glasses and for Adversarial Machine Learning in Computer Vision <http://diglib.uwgb.edu/digital/api/collection/p17003coll4/id/71/download> <sup>[[Archive.org]][731]</sup>
 
-[^168]: Bellingcat MH17 - Russian GRU Commander 'Orion' Identified as Oleg Ivannikov <https://www.bellingcat.com/news/uk-and-europe/2018/05/25/mh17-russian-gru-commander-orion-identified-oleg-ivannikov/> <sup>[[Archive.org]][731]</sup>
+[^168]: Wikipedia, Phishing <https://en.wikipedia.org/wiki/Phishing> <sup>[[Archive.org]][732]</sup>
 
-[^169]: Facebook Research, Deepface <https://research.fb.com/publications/deepface-closing-the-gap-to-human-level-performance-in-face-verification/> <sup>[[Archive.org]][732]</sup>
+[^169]: Wikipedia, Social Engineering <https://en.wikipedia.org/wiki/Social_engineering_(security)> <sup>[[Archive.org]][733]</sup>
 
-[^170]: Privacy News Online, Putting the "face" in Facebook: how Mark Zuckerberg is building a world without public anonymity <https://www.privateinternetaccess.com/blog/putting-face-facebook-mark-zuckerberg-building-world-without-public-anonymity/> <sup>[[Archive.org]][733]</sup>
+[^170]: Wikipedia, Exploit <https://en.wikipedia.org/wiki/Exploit_(computer_security)> <sup>[[Archive.org]][734]</sup>
 
-[^171]: CNBC, "Facebook has mapped populations in 23 countries as it explores satellites to expand internet" <https://www.cnbc.com/2017/09/01/facebook-has-mapped-human-population-building-internet-in-space.html> <sup>[[Archive.org]][734]</sup>
+[^171]: Wikipedia, Freedom Hosting <https://en.wikipedia.org/wiki/Freedom_Hosting> <sup>[[Archive.org]][735]</sup>
 
-[^172]: MIT Technology Review, This is how we lost control of our faces, <https://www.technologyreview.com/2021/02/05/1017388/ai-deep-learning-facial-recognition-data-history/> <sup>[[Archive.org]][735]</sup>
+[^172]: Wired, 2013 FBI Admits It Controlled Tor Servers Behind Mass Malware Attack <https://www.wired.com/2013/09/freedom-hosting-fbi/> <sup>[[Archive.org]][736]</sup>
 
-[^173]: Bellingcat, Shadow of a Doubt: Crowdsourcing Time Verification of the MH17 Missile Launch Photo <https://www.bellingcat.com/resources/case-studies/2015/08/07/shadow-of-a-doubt/> <sup>[[Archive.org]][736]</sup>
+[^173]: Wikipedia, 2020 United States federal government data breach <https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach> <sup>[[Archive.org]][737]</sup>
 
-[^174]: Brown Institute, Open-Source Investigation, <https://brown.columbia.edu/open-source-investigation/> <sup>[[Archive.org]][737]</sup>
+[^174]: BBC, China social media: WeChat and the Surveillance State <https://www.bbc.com/news/blogs-china-blog-48552907> <sup>[[Archive.org]][738]</sup>
 
-[^175]: NewScientist, Facebook can recognize you in photos even if you're not looking <https://www.newscientist.com/article/dn27761-facebook-can-recognise-you-in-photos-even-if-youre-not-looking/> <sup>[[Archive.org]][738]</sup>
+[^175]: The Intercept, Revealed: Massive Chinese Police Database <https://theintercept.com/2021/01/29/china-uyghur-muslim-surveillance-police/> <sup>[[Archive.org]][739]</sup>
 
-[^176]: Google Patent, Techniques for emotion detection and content delivery <https://patents.google.com/patent/US20150242679> <sup>[[Archive.org]][739]</sup>
+[^176]: Wikipedia, Sandbox <https://en.wikipedia.org/wiki/Sandbox_(computer_security)> <sup>[[Archive.org]][740]</sup>
 
-[^177]: APNews, Chinese 'gait recognition' tech IDs people by how they walk <https://apnews.com/article/bf75dd1c26c947b7826d270a16e2658a> <sup>[[Archive.org]][740]</sup>
+[^177]: Wired, Why the Security of USB Is Fundamentally Broken <https://www.wired.com/2014/07/usb-security/> <sup>[[Archive.org]][741]</sup>
 
-[^178]: TechCrunch, Facial recognition reveals political party in troubling new research <https://techcrunch.com/2021/01/13/facial-recognition-reveals-political-party-in-troubling-new-research/> <sup>[[Archive.org]][741]</sup>
+[^178]: Wikipedia, Stuxnet <https://en.wikipedia.org/wiki/Stuxnet> <sup>[[Archive.org]][742]</sup>
 
-[^179]: Nature.com, Facial recognition technology can expose political orientation from naturalistic facial images <https://www.nature.com/articles/s41598-020-79310-1> <sup>[[Archive.org]][742]</sup>
+[^179]: Superuser.com, How do I safely investigate a USB stick found in the parking lot at work? <https://superuser.com/questions/1206321/how-do-i-safely-investigate-a-usb-stick-found-in-the-parking-lot-at-work> <sup>[[Archive.org]][743]</sup>
 
-[^180]: Slate <https://slate.com/technology/2018/04/facebook-collects-data-on-non-facebook-users-if-they-want-to-delete-it-they-have-to-sign-up.html> <sup>[[Archive.org]][743]</sup>
+[^180]: Bellingcat, Joseph Mifsud: Rush for the EXIF <https://www.bellingcat.com/news/americas/2018/10/26/joseph-mifsud-rush-exif/> <sup>[[Archive.org]][744]</sup>
 
-[^181]: The Conversation <https://theconversation.com/shadow-profiles-facebook-knows-about-you-even-if-youre-not-on-facebook-94804> <sup>[[Archive.org]][744]</sup>
+[^181]: Zoom Support, Adding a watermark <https://support.zoom.us/hc/en-us/articles/209605273-Adding-a-Watermark> <sup>[[Archive.org]][745]</sup>
 
-[^182]: The Verge <https://www.theverge.com/2018/4/11/17225482/facebook-shadow-profiles-zuckerberg-congress-data-privacy> <sup>[[Archive.org]][745]</sup>
+[^182]: Zoom Support, Audio Watermark <https://support.zoom.us/hc/en-us/articles/360021839031-Audio-Watermark> <sup>[[Archive.org]][746]</sup>
 
-[^183]: ZDNET <https://www.zdnet.com/article/anger-mounts-after-facebooks-shadow-profiles-leak-in-bug/> <sup>[[Archive.org]][746]</sup>
+[^183]: CreativeCloud Extension, IMATAG <https://exchange.adobe.com/creativecloud.details.101789.imatag-invisible-watermark-and-image-monitoring.html> <sup>[[Archive.org]][747]</sup>
 
-[^184]: CNET <https://www.cnet.com/news/shadow-profiles-facebook-has-information-you-didnt-hand-over/> <sup>[[Archive.org]][747]</sup>
+[^184]: NexGuard, <https://dtv.nagra.com/nexguard-forensic-watermarking> <sup>[[Archive.org]][748]</sup>
 
-[^185]: Anyvision <https://www.anyvision.co/> <sup>[[Archive.org]][748]</sup>
+[^185]: Vobile Solutions, <https://www.vobilegroup.com/solutions> <sup>[[Archive.org]][749]</sup>
 
-[^186]: BuzzFeed.news, Surveillance Nation <https://www.buzzfeednews.com/article/ryanmac/clearview-ai-local-police-facial-recognition> <sup>[[Archive.org]][749]</sup>
+[^186]: Cinavia, <https://www.cinavia.com/languages/english/pages/technology.html> <sup>[[Archive.org]][750]</sup>
 
-[^187]: NEC, Neoface <https://www.nec.com/en/global/solutions/biometrics/face/neofacewatch.html> <sup>[[Archive.org]][750]</sup>
+[^187]: Imatag, <https://www.imatag.com/> <sup>[[Archive.org]][751]</sup>
 
-[^188]: BBC, Met police deploy live facial recognition technology <https://www.theguardian.com/uk-news/2020/feb/11/met-police-deploy-live-facial-recognition-technology> <sup>[[Archive.org]][751]</sup>
+[^188]: Wikipedia, Steganography <https://en.wikipedia.org/wiki/Steganography> <sup>[[Archive.org]][752]</sup>
 
-[^189]: YouTube, The Economist, China: facial recognition and state control | The Economist <https://www.youtube.com/watch?v=lH2gMNrUuEY> <sup>[[Invidious]][752]</sup>
+[^189]: IEEExplore, A JPEG compression resistant steganography scheme for raster graphics images <https://ieeexplore.ieee.org/document/4428921> <sup>[[Archive.org]][753]</sup>
 
-[^190]: Washington Post, Huawei tested AI software that could recognize Uighur minorities and alert police, report says <https://www.washingtonpost.com/technology/2020/12/08/huawei-tested-ai-software-that-could-recognize-uighur-minorities-alert-police-report-says/> <sup>[[Archive.org]][753]</sup>
+[^190]: ScienceDirect, Robust audio watermarking using perceptual masking <https://www.sciencedirect.com/science/article/abs/pii/S0165168498000140> <sup>[[Archive.org]][754]</sup>
 
-[^191]: The Intercept, How a Facial Recognition Mismatch Can Ruin Your Life <https://theintercept.com/2016/10/13/how-a-facial-recognition-mismatch-can-ruin-your-life/> <sup>[[Archive.org]][754]</sup>
+[^191]: IEEExplore, Spread-spectrum watermarking of audio signals <https://ieeexplore.ieee.org/abstract/document/1188746> <sup>[[Archive.org]][755]</sup>
 
-[^192]: BBC, WhatsApp photo drug dealer caught by 'groundbreaking' work <https://www.bbc.com/news/uk-wales-43711477> <sup>[[Archive.org]][755]</sup>
+[^192]: Google Scholar, source camera identification <https://scholar.google.com/scholar?q=source+camera+identification> <sup>[[Archive.org]][756]</sup>
 
-[^193]: JUSTIA Patent, Identification of taste attributes from an audio signal <https://patents.justia.com/patent/10891948> <sup>[[Archive.org]][756]</sup>
+[^193]: Wikipedia, Printing Steganography <https://en.wikipedia.org/wiki/Machine_Identification_Code> <sup>[[Archive.org]][757]</sup>
 
-[^194]: IMDB, Gattaca 1997, <https://www.imdb.com/title/tt0119177/> <sup>[[Archive.org]][757]</sup>
+[^194]: MIT, SeeingYellow, <http://seeingyellow.com/> <sup>[[Archive.org]][758]</sup>
 
-[^195]: IMDB, Person of Interest 2011 <https://www.imdb.com/title/tt1839578> <sup>[[Archive.org]][758]</sup>
+[^195]: arXiv, An Analysis of Anonymity in the Bitcoin System <https://arxiv.org/abs/1107.4524> <sup>[[Archive.org]][759]</sup>
 
-[^196]: IMDB, Minority Report 2002, <https://www.imdb.com/title/tt0181689> <sup>[[Archive.org]][759]</sup>
+[^196]: Bellingcat, How To Track Illegal Funding Campaigns Via Cryptocurrency, <https://www.bellingcat.com/resources/how-tos/2019/03/26/how-to-track-illegal-funding-campaigns-via-cryptocurrency/> <sup>[[Archive.org]][760]</sup>
 
-[^197]: Wikipedia, Deepfake <https://en.wikipedia.org/wiki/Deepfake> <sup>[[Archive.org]][760]</sup>
+[^197]: Wikipedia, KYC <https://en.wikipedia.org/wiki/Know_your_customer> <sup>[[Archive.org]][761]</sup>
 
-[^198]: Econotimes, Deepfake Voice Technology: The Good. The Bad. The Future <https://www.econotimes.com/Deepfake-Voice-Technology-The-Good-The-Bad-The-Future-1601278> <sup>[[Archive.org]][761]</sup>
+[^198]: arXiv.org, Probing the Mystery of Cryptocurrency Theft:An Investigation into Methods for Taint Analysis <https://arxiv.org/pdf/1906.05754.pdf> <sup>[[Archive.org]][762]</sup>
 
-[^199]: Wikipedia, Deepfake Events <https://en.wikipedia.org/wiki/Deepfake#Example_events> <sup>[[Archive.org]][760]</sup>
+[^199]: YouTube, Breaking Monero <https://www.youtube.com/watch?v=WOyC6OB6ezA&list=PLsSYUeVwrHBnAUre2G_LYDsdo-tD0ov-y> <sup>[[Invidious]][763]</sup>
 
-[^200]: Forbes, A Voice Deepfake Was Used To Scam A CEO Out Of $243,000 <https://www.forbes.com/sites/jessedamiani/2019/09/03/a-voice-deepfake-was-used-to-scam-a-ceo-out-of-243000/> <sup>[[Archive.org]][762]</sup>
+[^200]: Monero, Monero vs Princeton Researchers, <https://monero.org/monero-vs-princeton-researchers/> <sup>[[Archive.org]][764]</sup>
 
-[^201]: Joseph Steinberg, How To Prevent Facial Recognition Technology From Identifying You <https://josephsteinberg.com/how-to-prevent-facial-recognition-technology-from-identifying-you/> <sup>[[Archive.org]][763]</sup>
+[^201]: Wikipedia, Cryptocurrency Tumbler <https://en.wikipedia.org/wiki/Cryptocurrency_tumbler> <sup>[[Archive.org]][765]</sup>
 
-[^202]: NIST, Face recognition accuracy with masks using pre-COVID-19 algorithms <https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8311.pdf> <sup>[[Archive.org]][764]</sup>
+[^202]: Wikipedia, Security Through Obscurity <https://en.wikipedia.org/wiki/Security_through_obscurity> <sup>[[Archive.org]][766]</sup>
 
-[^203]: BBC, Facial recognition identifies people wearing masks <https://www.bbc.com/news/technology-55573802> <sup>[[Archive.org]][765]</sup>
+[^203]: ArXiv, Tracking Mixed Bitcoins, <https://arxiv.org/abs/2009.14007> <sup>[[Archive.org]][767]</sup>
 
-[^204]: University of Wisconsin, Exploring Reflectacles As Anti-Surveillance Glasses and for Adversarial Machine Learning in Computer Vision <http://diglib.uwgb.edu/digital/api/collection/p17003coll4/id/71/download> <sup>[[Archive.org]][766]</sup>
+[^204]: SSRN, The Cryptocurrency Tumblers: Risks, Legality and Oversight <https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3080361> <sup>[[Archive.org]][768]</sup>
 
-[^205]: Chromium Documentation, Technical analysis of client identification mechanisms <https://sites.google.com/a/chromium.org/dev/Home/chromium-security/client-identification-mechanisms#TOC-Machine-specific-characteristics> <sup>[[Archive.org]][767]</sup>
+[^205]: Magnet Forensics, Magnet AXIOM <https://www.magnetforensics.com/products/magnet-axiom/cloud/> <sup>[[Archive.org]][769]</sup>
 
-[^206]: Mozilla Wiki, Fingerprinting <https://wiki.mozilla.org/Fingerprinting> <sup>[[Archive.org]][768]</sup>
+[^206]: Cellebrite, Unlock cloud-based evidence to solve the case sooner <https://www.cellebrite.com/en/ufed-cloud/> <sup>[[Archive.org]][770]</sup>
 
-[^207]: Wikipedia, Phishing <https://en.wikipedia.org/wiki/Phishing> <sup>[[Archive.org]][769]</sup>
+[^207]: Chromium Documentation, Technical analysis of client identification mechanisms <https://sites.google.com/a/chromium.org/dev/Home/chromium-security/client-identification-mechanisms#TOC-Machine-specific-characteristics> <sup>[[Archive.org]][771]</sup>
 
-[^208]: Wikipedia, Social Engineering <https://en.wikipedia.org/wiki/Social_engineering_(security)> <sup>[[Archive.org]][770]</sup>
+[^208]: Mozilla Wiki, Fingerprinting <https://wiki.mozilla.org/Fingerprinting> <sup>[[Archive.org]][772]</sup>
 
-[^209]: Grayshirt, <https://www.grayshift.com/> <sup>[[Archive.org]][771]</sup>
+[^209]: Grayshirt, <https://www.grayshift.com/> <sup>[[Archive.org]][773]</sup>
 
-[^210]: Securephones.io, Data Security on Mobile Devices: Current State of the Art, Open Problems, and Proposed Solutions <https://securephones.io/main.pdf> <sup>[[Archive.org]][772]</sup>
+[^210]: Securephones.io, Data Security on Mobile Devices: Current State of the Art, Open Problems, and Proposed Solutions <https://securephones.io/main.pdf> <sup>[[Archive.org]][774]</sup>
 
-[^211]: Loup-Vaillant.fr, Rolling Your Own Crypto <https://loup-vaillant.fr/articles/rolling-your-own-crypto> <sup>[[Archive.org]][773]</sup>
+[^211]: Loup-Vaillant.fr, Rolling Your Own Crypto <https://loup-vaillant.fr/articles/rolling-your-own-crypto> <sup>[[Archive.org]][775]</sup>
 
-[^212]: Dhole Moments, Crackpot Cryptography and Security Theater <https://soatok.blog/2021/02/09/crackpot-cryptography-and-security-theater/> <sup>[[Archive.org]][774]</sup>
+[^212]: Dhole Moments, Crackpot Cryptography and Security Theater <https://soatok.blog/2021/02/09/crackpot-cryptography-and-security-theater/> <sup>[[Archive.org]][776]</sup>
 
-[^213]: Vice.com, Why You Don't Roll Your Own Crypto <https://www.vice.com/en/article/wnx8nq/why-you-dont-roll-your-own-crypto> <sup>[[Archive.org]][775]</sup>
+[^213]: Vice.com, Why You Don't Roll Your Own Crypto <https://www.vice.com/en/article/wnx8nq/why-you-dont-roll-your-own-crypto> <sup>[[Archive.org]][777]</sup>
 
-[^214]: YouTube, Great Crypto Failures <https://www.youtube.com/watch?v=loy84K3AJ5Q> <sup>[[Invidious]][776]</sup>
+[^214]: YouTube, Great Crypto Failures <https://www.youtube.com/watch?v=loy84K3AJ5Q> <sup>[[Invidious]][778]</sup>
 
-[^215]: Cryptography Dispatches, The Most Backdoor-Looking Bug I've Ever Seen <https://buttondown.email/cryptography-dispatches/archive/cryptography-dispatches-the-most-backdoor-looking/> <sup>[[Archive.org]][142]</sup>
+[^215]: Cryptography Dispatches, The Most Backdoor-Looking Bug I've Ever Seen <https://buttondown.email/cryptography-dispatches/archive/cryptography-dispatches-the-most-backdoor-looking/> <sup>[[Archive.org]][144]</sup>
 
-[^216]: Citizenlab.ca, Move Fast and Roll Your Own Crypto <https://citizenlab.ca/2020/04/move-fast-roll-your-own-crypto-a-quick-look-at-the-confidentiality-of-zoom-meetings/> <sup>[[Archive.org]][777]</sup>
+[^216]: Citizenlab.ca, Move Fast and Roll Your Own Crypto <https://citizenlab.ca/2020/04/move-fast-roll-your-own-crypto-a-quick-look-at-the-confidentiality-of-zoom-meetings/> <sup>[[Archive.org]][779]</sup>
 
-[^217]: Jack Poon, The myth of military grade encryption <https://medium.com/@atcipher/the-myth-of-military-grade-encryption-292313ae6369> <sup>[[Archive.org]][778]</sup>
+[^217]: Jack Poon, The myth of military grade encryption <https://medium.com/@atcipher/the-myth-of-military-grade-encryption-292313ae6369> <sup>[[Archive.org]][780]</sup>
 
-[^218]: Congruent Labs, Stop calling it "Military-Grade Encryption" <https://blog.congruentlabs.co/military-grade-encryption/> <sup>[[Archive.org]][779]</sup>
+[^218]: Congruent Labs, Stop calling it "Military-Grade Encryption" <https://blog.congruentlabs.co/military-grade-encryption/> <sup>[[Archive.org]][781]</sup>
 
-[^219]: IronCoreLabs Blog, "Military Grade Encryption" <https://blog.ironcorelabs.com/military-grade-encryption-69aae0145588> <sup>[[Archive.org]][780]</sup>
+[^219]: IronCoreLabs Blog, "Military Grade Encryption" <https://blog.ironcorelabs.com/military-grade-encryption-69aae0145588> <sup>[[Archive.org]][782]</sup>
 
-[^220]: Wikipedia, Gag Order, <https://en.wikipedia.org/wiki/Gag_order> <sup>[[Archive.org]][781]</sup>
+[^220]: Wikipedia, Gag Order, <https://en.wikipedia.org/wiki/Gag_order> <sup>[[Archive.org]][783]</sup>
 
-[^221]: Wikipedia, National Security Letter <https://en.wikipedia.org/wiki/National_security_letter> <sup>[[Archive.org]][782]</sup>
+[^221]: Wikipedia, National Security Letter <https://en.wikipedia.org/wiki/National_security_letter> <sup>[[Archive.org]][784]</sup>
 
-[^222]: Heise Online (German), <https://www.heise.de/news/Gericht-zwingt-Mailprovider-Tutanota-zu-Ueberwachungsfunktion-4972460.html> <sup>[[Archive.org]][783]</sup>
+[^222]: Heise Online (German), <https://www.heise.de/news/Gericht-zwingt-Mailprovider-Tutanota-zu-Ueberwachungsfunktion-4972460.html> <sup>[[Archive.org]][785]</sup>
 
-[^223]: PCMag, Did PureVPN Cross a Line When It Disclosed User Information? <https://www.pcmag.com/opinions/did-purevpn-cross-a-line-when-it-disclosed-user-information> <sup>[[Archive.org]][784]</sup>
+[^223]: PCMag, Did PureVPN Cross a Line When It Disclosed User Information? <https://www.pcmag.com/opinions/did-purevpn-cross-a-line-when-it-disclosed-user-information> <sup>[[Archive.org]][786]</sup>
 
-[^224]: Internet Archive, Wipeyourdata, "No logs" EarthVPN user arrested after police finds logs <https://archive.is/XNuVw#selection-230.0-230.1> <sup>[[Archive.org]][785]</sup>
+[^224]: Internet Archive, Wipeyourdata, "No logs" EarthVPN user arrested after police finds logs <https://archive.is/XNuVw#selection-230.0-230.1> <sup>[[Archive.org]][787]</sup>
 
-[^225]: Internet Archive, Invisibler, What Everybody Ought to Know About HideMyAss <https://archive.is/ag9w4#selection-136.0-136.1> <sup>[[Archive.org]][786]</sup>
+[^225]: Internet Archive, Invisibler, What Everybody Ought to Know About HideMyAss <https://archive.is/ag9w4#selection-136.0-136.1> <sup>[[Archive.org]][788]</sup>
 
-[^226]: Wikipedia, Lavabit Suspension and Gag order, <https://en.wikipedia.org/wiki/Lavabit#Suspension_and_gag_order> <sup>[[Archive.org]][787]</sup>
+[^226]: Wikipedia, Lavabit Suspension and Gag order, <https://en.wikipedia.org/wiki/Lavabit#Suspension_and_gag_order> <sup>[[Archive.org]][789]</sup>
 
-[^227]: Wikipedia, Warrant Canary <https://en.wikipedia.org/wiki/Warrant_canary> <sup>[[Archive.org]][788]</sup>
+[^227]: Wikipedia, Warrant Canary <https://en.wikipedia.org/wiki/Warrant_canary> <sup>[[Archive.org]][790]</sup>
 
-[^228]: Washington Post, The intelligence coup of the century <https://www.washingtonpost.com/graphics/2020/world/national-security/cia-crypto-encryption-machines-espionage/> <sup>[[Archive.org]][789]</sup>
+[^228]: Washington Post, The intelligence coup of the century <https://www.washingtonpost.com/graphics/2020/world/national-security/cia-crypto-encryption-machines-espionage/> <sup>[[Archive.org]][791]</sup>
 
-[^229]: Swissinfo.ch, Second Swiss firm allegedly sold encrypted spying devices <https://www.swissinfo.ch/eng/second-swiss-firm-allegedly-sold-encrypted-spying-devices/46186432> <sup>[[Archive.org]][790]</sup>
+[^229]: Swissinfo.ch, Second Swiss firm allegedly sold encrypted spying devices <https://www.swissinfo.ch/eng/second-swiss-firm-allegedly-sold-encrypted-spying-devices/46186432> <sup>[[Archive.org]][792]</sup>
 
-[^230]: Wikipedia, Das Leben der Anderen <https://en.wikipedia.org/wiki/The_Lives_of_Others> <sup>[[Archive.org]][791]</sup>
+[^230]: Wikipedia, Das Leben der Anderen <https://en.wikipedia.org/wiki/The_Lives_of_Others> <sup>[[Archive.org]][793]</sup>
 
-[^231]: Wired, Mind the Gap: This Researcher Steals Data With Noise, Light, and Magnets <https://www.wired.com/story/air-gap-researcher-mordechai-guri/> <sup>[[Archive.org]][792]</sup>
+[^231]: Wired, Mind the Gap: This Researcher Steals Data With Noise, Light, and Magnets <https://www.wired.com/story/air-gap-researcher-mordechai-guri/> <sup>[[Archive.org]][794]</sup>
 
-[^232]: Ben Nassi, Lamphone, <https://www.nassiben.com/lamphone> <sup>[[Archive.org]][793]</sup>
+[^232]: Ben Nassi, Lamphone, <https://www.nassiben.com/lamphone> <sup>[[Archive.org]][795]</sup>
 
 [^233]: Wikipedia, Rubber-hose Cryptanalysis https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis
 
-[^234]: Defuse.ca, TrueCrypt's Plausible Deniability is Theoretically Useless <https://defuse.ca/truecrypt-plausible-deniability-useless-by-game-theory.htm> <sup>[[Archive.org]][209]</sup>
+[^234]: Defuse.ca, TrueCrypt's Plausible Deniability is Theoretically Useless <https://defuse.ca/truecrypt-plausible-deniability-useless-by-game-theory.htm> <sup>[[Archive.org]][212]</sup>
 
-[^235]: Wikipedia, OONI, <https://en.wikipedia.org/wiki/OONI> <sup>[[Archive.org]][794]</sup>
+[^235]: Wikipedia, OONI, <https://en.wikipedia.org/wiki/OONI> <sup>[[Archive.org]][796]</sup>
 
-[^236]: Privacy International, Timeline of SIM Card Registration Laws <https://privacyinternational.org/long-read/3018/timeline-sim-card-registration-laws> <sup>[[Archive.org]][795]</sup>
+[^236]: Privacy International, Timeline of SIM Card Registration Laws <https://privacyinternational.org/long-read/3018/timeline-sim-card-registration-laws> <sup>[[Archive.org]][797]</sup>
 
-[^237]: NYTimes, Lost Passwords Lock Millionaires Out of Their Bitcoin Fortunes <https://www.nytimes.com/2021/01/12/technology/bitcoin-passwords-wallets-fortunes.html> <sup>[[Archive.org]][796]</sup>
+[^237]: NYTimes, Lost Passwords Lock Millionaires Out of Their Bitcoin Fortunes <https://www.nytimes.com/2021/01/12/technology/bitcoin-passwords-wallets-fortunes.html> <sup>[[Archive.org]][798]</sup>
 
-[^238]: Usenix.org, Shedding too much Light on a Microcontroller's Firmware Protection <https://www.usenix.org/system/files/conference/woot17/woot17-paper-obermaier.pdf> <sup>[[Archive.org]][797]</sup>
+[^238]: Usenix.org, Shedding too much Light on a Microcontroller's Firmware Protection <https://www.usenix.org/system/files/conference/woot17/woot17-paper-obermaier.pdf> <sup>[[Archive.org]][799]</sup>
 
-[^239]: Wikipedia, TAILS, <https://en.wikipedia.org/wiki/Tails_(operating_system)> <sup>[[Archive.org]][798]</sup>
+[^239]: Wikipedia, TAILS, <https://en.wikipedia.org/wiki/Tails_(operating_system)> <sup>[[Archive.org]][800]</sup>
 
-[^240]: Veracrypt Documentation, Trim Operations <https://www.veracrypt.fr/en/Trim%20Operation.html> <sup>[[Archive.org]][799]</sup>
+[^240]: Veracrypt Documentation, Trim Operations <https://www.veracrypt.fr/en/Trim%20Operation.html> <sup>[[Archive.org]][801]</sup>
 
-[^241]: Coreboot, <https://www.coreboot.org/> <sup>[[Archive.org]][800]</sup>
+[^241]: Coreboot, <https://www.coreboot.org/> <sup>[[Archive.org]][802]</sup>
 
-[^242]: YouTube, 36C3 - Uncover, Understand, Own - Regaining Control Over Your AMD CPU <https://www.youtube.com/watch?v=bKH5nGLgi08&t=2834s> <sup>[[Invidious]][95]</sup>
+[^242]: YouTube, 36C3 - Uncover, Understand, Own - Regaining Control Over Your AMD CPU <https://www.youtube.com/watch?v=bKH5nGLgi08&t=2834s> <sup>[[Invidious]][68]</sup>
 
-[^243]: Qubes OS, Anti-Evil Maid, <https://github.com/QubesOS/qubes-antievilmaid> <sup>[[Archive.org]][233]</sup>
+[^243]: Qubes OS, Anti-Evil Maid, <https://github.com/QubesOS/qubes-antievilmaid> <sup>[[Archive.org]][236]</sup>
 
-[^244]: XKCD, Password Strength <https://xkcd.com/936/> <sup>[[Archive.org]][801]</sup>
+[^244]: XKCD, Password Strength <https://xkcd.com/936/> <sup>[[Archive.org]][803]</sup>
 
-[^245]: QubesOS FAQ, <https://www.qubes-os.org/faq/#is-secure-boot-supported> <sup>[[Archive.org]][316]</sup>
+[^245]: QubesOS FAQ, <https://www.qubes-os.org/faq/#is-secure-boot-supported> <sup>[[Archive.org]][318]</sup>
 
-[^246]: Wikipedia, Secure Boot, <https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#Secure_boot> <sup>[[Archive.org]][802]</sup>
+[^246]: Wikipedia, Secure Boot, <https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#Secure_boot> <sup>[[Archive.org]][804]</sup>
 
-[^247]: Wikipedia, Booting <https://en.wikipedia.org/wiki/Booting> <sup>[[Archive.org]][803]</sup>
+[^247]: Wikipedia, Booting <https://en.wikipedia.org/wiki/Booting> <sup>[[Archive.org]][805]</sup>
 
-[^248]: Wired <https://www.wired.com/2013/12/better-data-security-nail-polish/> <sup>[[Archive.org]][804]</sup>
+[^248]: Wired <https://www.wired.com/2013/12/better-data-security-nail-polish/> <sup>[[Archive.org]][806]</sup>
 
-[^249]: Wikipedia, Virtual Machine <https://en.wikipedia.org/wiki/Virtual_machine> <sup>[[Archive.org]][805]</sup>
+[^249]: Wikipedia, Virtual Machine <https://en.wikipedia.org/wiki/Virtual_machine> <sup>[[Archive.org]][807]</sup>
 
-[^250]: Wikipedia, Plausible Deniability <https://en.wikipedia.org/wiki/Plausible_deniability> <sup>[[Archive.org]][806]</sup>
+[^250]: Wikipedia, Plausible Deniability <https://en.wikipedia.org/wiki/Plausible_deniability> <sup>[[Archive.org]][808]</sup>
 
-[^251]: Wikipedia, Deniable Encryption <https://en.wikipedia.org/wiki/Deniable_encryption> <sup>[[Archive.org]][807]</sup>
+[^251]: Wikipedia, Deniable Encryption <https://en.wikipedia.org/wiki/Deniable_encryption> <sup>[[Archive.org]][809]</sup>
 
-[^252]: Privacytools.io, Don't use Windows 10 - It's a privacy nightmare <https://privacytools.io/operating-systems/#win10> <sup>[[Archive.org]][808]</sup>
+[^252]: Privacytools.io, Don't use Windows 10 - It's a privacy nightmare <https://privacytools.io/operating-systems/#win10> <sup>[[Archive.org]][810]</sup>
 
-[^253]: Wikipedia, Deniable Encryption <https://en.wikipedia.org/wiki/Deniable_encryption> <sup>[[Archive.org]][807]</sup>
+[^253]: Wikipedia, Deniable Encryption <https://en.wikipedia.org/wiki/Deniable_encryption> <sup>[[Archive.org]][809]</sup>
 
-[^254]: Wikipedia, Key Disclosure Laws <https://en.wikipedia.org/wiki/Key_disclosure_law> <sup>[[Archive.org]][465]</sup>
+[^254]: Wikipedia, Key Disclosure Laws <https://en.wikipedia.org/wiki/Key_disclosure_law> <sup>[[Archive.org]][467]</sup>
 
-[^255]: GP Digital, World map of encryption laws and policies <https://www.gp-digital.org/world-map-of-encryption/> <sup>[[Archive.org]][466]</sup>
+[^255]: GP Digital, World map of encryption laws and policies <https://www.gp-digital.org/world-map-of-encryption/> <sup>[[Archive.org]][468]</sup>
 
-[^256]: Wikipedia, Bitlocker <https://en.wikipedia.org/wiki/BitLocker> <sup>[[Archive.org]][809]</sup>
+[^256]: Wikipedia, Bitlocker <https://en.wikipedia.org/wiki/BitLocker> <sup>[[Archive.org]][811]</sup>
 
-[^257]: Alpine Linux Wiki, Setting up a laptop <https://wiki.alpinelinux.org/wiki/Setting_up_a_laptop> <sup>[[Archive.org]][810]</sup>
+[^257]: Alpine Linux Wiki, Setting up a laptop <https://wiki.alpinelinux.org/wiki/Setting_up_a_laptop> <sup>[[Archive.org]][812]</sup>
 
-[^258]: Wikipedia, Evil Maid Attack <https://en.wikipedia.org/wiki/Evil_maid_attack> <sup>[[Archive.org]][811]</sup>
+[^258]: Wikipedia, Evil Maid Attack <https://en.wikipedia.org/wiki/Evil_maid_attack> <sup>[[Archive.org]][813]</sup>
 
-[^259]: Wikipedia, Cold Boot Attack <https://en.wikipedia.org/wiki/Cold_boot_attack> <sup>[[Archive.org]][812]</sup>
+[^259]: Wikipedia, Cold Boot Attack <https://en.wikipedia.org/wiki/Cold_boot_attack> <sup>[[Archive.org]][814]</sup>
 
-[^260]: CITP 2008 (<https://www.youtube.com/watch?v=JDaicPIgn9U>) <sup>[[Invidious]][813]</sup>
+[^260]: CITP 2008 (<https://www.youtube.com/watch?v=JDaicPIgn9U>) <sup>[[Invidious]][815]</sup>
 
-[^261]: ResearchGate, Defeating Plausible Deniability of VeraCrypt Hidden Operating Systems <https://www.researchgate.net/publication/318155607_Defeating_Plausible_Deniability_of_VeraCrypt_Hidden_Operating_Systems> <sup>[[Archive.org]][814]</sup>
+[^261]: ResearchGate, Defeating Plausible Deniability of VeraCrypt Hidden Operating Systems <https://www.researchgate.net/publication/318155607_Defeating_Plausible_Deniability_of_VeraCrypt_Hidden_Operating_Systems> <sup>[[Archive.org]][816]</sup>
 
-[^262]: SANS.org, Mission Implausible: Defeating Plausible Deniability with Digital Forensics <https://www.sans.org/reading-room/whitepapers/forensics/mission-implausible-defeating-plausible-deniability-digital-forensics-39500> <sup>[[Archive.org]][815]</sup>
+[^262]: SANS.org, Mission Implausible: Defeating Plausible Deniability with Digital Forensics <https://www.sans.org/reading-room/whitepapers/forensics/mission-implausible-defeating-plausible-deniability-digital-forensics-39500> <sup>[[Archive.org]][817]</sup>
 
-[^263]: SourceForge, Veracrypt Forum <https://sourceforge.net/p/veracrypt/discussion/technical/thread/53f33faf/> <sup>[[Archive.org]][816]</sup>
+[^263]: SourceForge, Veracrypt Forum <https://sourceforge.net/p/veracrypt/discussion/technical/thread/53f33faf/> <sup>[[Archive.org]][818]</sup>
 
-[^264]: Microsoft, BitLocker Countermeasures <https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-countermeasures> <sup>[[Archive.org]][817]</sup>
+[^264]: Microsoft, BitLocker Countermeasures <https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-countermeasures> <sup>[[Archive.org]][819]</sup>
 
-[^265]: SANS, Windows ShellBag Forensics in-depth <https://www.sans.org/reading-room/whitepapers/forensics/windows-shellbag-forensics-in-depth-34545> <sup>[[Archive.org]][818]</sup>
+[^265]: SANS, Windows ShellBag Forensics in-depth <https://www.sans.org/reading-room/whitepapers/forensics/windows-shellbag-forensics-in-depth-34545> <sup>[[Archive.org]][820]</sup>
 
-[^266]: University of York, Forensic data recovery from the Windows Search Database <https://eprints.whiterose.ac.uk/75046/1/Forensic_Data_Recovery_From_The_Windows_Search_Database_preprint_DIIN328.pdf> <sup>[[Archive.org]][819]</sup>
+[^266]: University of York, Forensic data recovery from the Windows Search Database <https://eprints.whiterose.ac.uk/75046/1/Forensic_Data_Recovery_From_The_Windows_Search_Database_preprint_DIIN328.pdf> <sup>[[Archive.org]][821]</sup>
 
-[^267]: A forensic insight into Windows 10 Jump Lists <https://cyberforensicator.com/wp-content/uploads/2017/01/1-s2.0-S1742287616300202-main.2-14.pdf> <sup>[[Archive.org]][820]</sup>
+[^267]: A forensic insight into Windows 10 Jump Lists <https://cyberforensicator.com/wp-content/uploads/2017/01/1-s2.0-S1742287616300202-main.2-14.pdf> <sup>[[Archive.org]][822]</sup>
 
-[^268]: Wikipedia, Gatekeeper <https://en.wikipedia.org/wiki/Gatekeeper_(macOS)> <sup>[[Archive.org]][821]</sup>
+[^268]: Wikipedia, Gatekeeper <https://en.wikipedia.org/wiki/Gatekeeper_(macOS)> <sup>[[Archive.org]][823]</sup>
 
-[^269]: Wikipedia Veracrypt <https://en.wikipedia.org/wiki/VeraCrypt> <sup>[[Archive.org]][822]</sup>
+[^269]: Wikipedia Veracrypt <https://en.wikipedia.org/wiki/VeraCrypt> <sup>[[Archive.org]][824]</sup>
 
-[^270]: OSTIF Veracrypt Audit, 2016, <https://ostif.org/the-veracrypt-audit-results/> <sup>[[Archive.org]][823]</sup>
+[^270]: OSTIF Veracrypt Audit, 2016, <https://ostif.org/the-veracrypt-audit-results/> <sup>[[Archive.org]][825]</sup>
 
-[^271]: Veracrypt Documentation, Unencrypted Data in RAM <https://www.veracrypt.fr/en/Unencrypted%20Data%20in%20RAM.html> <sup>[[Archive.org]][824]</sup>
+[^271]: Veracrypt Documentation, Unencrypted Data in RAM <https://www.veracrypt.fr/en/Unencrypted%20Data%20in%20RAM.html> <sup>[[Archive.org]][826]</sup>
 
-[^272]: Veracrypt Documentation, Data Leaks <https://www.veracrypt.fr/code/VeraCrypt/plain/doc/html/Data%20Leaks.html> <sup>[[Archive.org]][825]</sup>
+[^272]: Veracrypt Documentation, Data Leaks <https://www.veracrypt.fr/code/VeraCrypt/plain/doc/html/Data%20Leaks.html> <sup>[[Archive.org]][827]</sup>
 
-[^273]: Wikipedia, Trim <https://en.wikipedia.org/wiki/Trim_(computing)> <sup>[[Archive.org]][406]</sup>
+[^273]: Wikipedia, Trim <https://en.wikipedia.org/wiki/Trim_(computing)> <sup>[[Archive.org]][408]</sup>
 
-[^274]: Veracrypt Documentation, Trim Operations <https://www.veracrypt.fr/en/Trim%20Operation.html> <sup>[[Archive.org]][799]</sup>
+[^274]: Veracrypt Documentation, Trim Operations <https://www.veracrypt.fr/en/Trim%20Operation.html> <sup>[[Archive.org]][801]</sup>
 
-[^275]: Veracrypt Documentation, Rescue Disk <https://www.veracrypt.fr/en/VeraCrypt%20Rescue%20Disk.html> <sup>[[Archive.org]][826]</sup>
+[^275]: Veracrypt Documentation, Rescue Disk <https://www.veracrypt.fr/en/VeraCrypt%20Rescue%20Disk.html> <sup>[[Archive.org]][828]</sup>
 
-[^276]: St Cloud State University, Forensic Research on Solid State Drives using Trim Analysis <https://repository.stcloudstate.edu/cgi/viewcontent.cgi?article=1141&context=msia_etds> <sup>[[Archive.org]][827]</sup>
+[^276]: St Cloud State University, Forensic Research on Solid State Drives using Trim Analysis <https://repository.stcloudstate.edu/cgi/viewcontent.cgi?article=1141&context=msia_etds> <sup>[[Archive.org]][829]</sup>
 
-[^277]: WindowsCentral, Trim Tutorial <https://www.windowscentral.com/how-ensure-trim-enabled-windows-10-speed-ssd-performance> <sup>[[Archive.org]][828]</sup>
+[^277]: WindowsCentral, Trim Tutorial <https://www.windowscentral.com/how-ensure-trim-enabled-windows-10-speed-ssd-performance> <sup>[[Archive.org]][830]</sup>
 
-[^278]: Veracrypt Documentation, Trim Operation <https://veracrypt.eu/en/docs/trim-operation/> <sup>[[Archive.org]][829]</sup>
+[^278]: Veracrypt Documentation, Trim Operation <https://veracrypt.eu/en/docs/trim-operation/> <sup>[[Archive.org]][831]</sup>
 
-[^279]: Black Hat 2018, Perfectly Deniable Steganographic Disk Encryption <https://i.blackhat.com/eu-18/Thu-Dec-6/eu-18-Schaub-Perfectly-Deniable-Steganographic-Disk-Encryption.pdf> <sup>[[Archive.org]][830]</sup>
+[^279]: Black Hat 2018, Perfectly Deniable Steganographic Disk Encryption <https://i.blackhat.com/eu-18/Thu-Dec-6/eu-18-Schaub-Perfectly-Deniable-Steganographic-Disk-Encryption.pdf> <sup>[[Archive.org]][832]</sup>
 
-[^280]: Milan Broz's Blog, TRIM & dm-crypt ... problems? <http://asalor.blogspot.com/2011/08/trim-dm-crypt-problems.html> <sup>[[Archive.org]][831]</sup>
+[^280]: Milan Broz's Blog, TRIM & dm-crypt ... problems? <http://asalor.blogspot.com/2011/08/trim-dm-crypt-problems.html> <sup>[[Archive.org]][833]</sup>
 
-[^281]: Veracrypt Documentation, Rescue Disk <https://www.veracrypt.fr/en/VeraCrypt%20Rescue%20Disk.html> <sup>[[Archive.org]][826]</sup>
+[^281]: Veracrypt Documentation, Rescue Disk <https://www.veracrypt.fr/en/VeraCrypt%20Rescue%20Disk.html> <sup>[[Archive.org]][828]</sup>
 
-[^282]: Wikipedia, Virtualbox <https://en.wikipedia.org/wiki/VirtualBox> <sup>[[Archive.org]][832]</sup>
+[^282]: Wikipedia, Virtualbox <https://en.wikipedia.org/wiki/VirtualBox> <sup>[[Archive.org]][834]</sup>
 
-[^283]: VirtualBox Ticket 17987 <https://www.virtualbox.org/ticket/17987> <sup>[[Archive.org]][833]</sup>
+[^283]: VirtualBox Ticket 17987 <https://www.virtualbox.org/ticket/17987> <sup>[[Archive.org]][835]</sup>
 
-[^284]: Whonix Documentation, Spectre Meltdown, <https://www.whonix.org/wiki/Spectre_Meltdown#VirtualBox> <sup>[[Archive.org]][99]</sup>
+[^284]: Whonix Documentation, Spectre Meltdown, <https://www.whonix.org/wiki/Spectre_Meltdown#VirtualBox> <sup>[[Archive.org]][72]</sup>
 
-[^285]: Whonix Documentation, Stream Isolation <https://www.whonix.org/wiki/Stream_Isolation> <sup>[[Archive.org]][267]</sup>
+[^285]: Whonix Documentation, Stream Isolation <https://www.whonix.org/wiki/Stream_Isolation> <sup>[[Archive.org]][270]</sup>
 
-[^286]: Whonix Documentation, Tunnels Comparison Table, <https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table> <sup>[[Archive.org]][269]</sup>
+[^286]: Whonix Documentation, Tunnels Comparison Table, <https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table> <sup>[[Archive.org]][272]</sup>
 
-[^287]: Wikipedia, Whonix <https://en.wikipedia.org/wiki/Whonix> <sup>[[Archive.org]][834]</sup>
+[^287]: Wikipedia, Whonix <https://en.wikipedia.org/wiki/Whonix> <sup>[[Archive.org]][836]</sup>
 
-[^288]: Oracle Virtualbox Manual, Snapshots <https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/snapshots.html> <sup>[[Archive.org]][835]</sup>
+[^288]: Oracle Virtualbox Manual, Snapshots <https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/snapshots.html> <sup>[[Archive.org]][837]</sup>
 
-[^289]: Utica College, FORENSIC RECOVERY OF EVIDENCE FROM DELETED ORACLE VIRTUALBOX VIRTUAL MACHINES <https://programs.online.utica.edu/sites/default/files/Neal_6_Gonnella_Forensic_Recovery_of_Evidence_from_Deleted_Oracle_VirtualBox_Virtual_Machine.pdf> <sup>[[Archive.org]][836]</sup>
+[^289]: Utica College, FORENSIC RECOVERY OF EVIDENCE FROM DELETED ORACLE VIRTUALBOX VIRTUAL MACHINES <https://programs.online.utica.edu/sites/default/files/Neal_6_Gonnella_Forensic_Recovery_of_Evidence_from_Deleted_Oracle_VirtualBox_Virtual_Machine.pdf> <sup>[[Archive.org]][838]</sup>
 
-[^290]: Wikipedia, Spectre <https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)> <sup>[[Archive.org]][837]</sup>
+[^290]: Wikipedia, Spectre <https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)> <sup>[[Archive.org]][839]</sup>
 
-[^291]: Wikipedia, Meltdown <https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)> <sup>[[Archive.org]][838]</sup>
+[^291]: Wikipedia, Meltdown <https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)> <sup>[[Archive.org]][840]</sup>
 
-[^292]: Whonix Documentation, Stream Isolation, By Settings <https://www.whonix.org/wiki/Stream_Isolation#By_Settings> <sup>[[Archive.org]][839]</sup>
+[^292]: Whonix Documentation, Stream Isolation, By Settings <https://www.whonix.org/wiki/Stream_Isolation#By_Settings> <sup>[[Archive.org]][841]</sup>
 
-[^293]: Wikipedia, TOTP <https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm> <sup>[[Archive.org]][840]</sup>
+[^293]: Wikipedia, TOTP <https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm> <sup>[[Archive.org]][842]</sup>
 
-[^294]: Wikipedia, Multi-Factor Authentication <https://en.wikipedia.org/wiki/Multi-factor_authentication> <sup>[[Archive.org]][841]</sup>
+[^294]: Wikipedia, Multi-Factor Authentication <https://en.wikipedia.org/wiki/Multi-factor_authentication> <sup>[[Archive.org]][843]</sup>
 
-[^295]: Qubes OS, System Requirements <https://www.qubes-os.org/doc/system-requirements/> <sup>[[Archive.org]][842]</sup>
+[^295]: Qubes OS, System Requirements <https://www.qubes-os.org/doc/system-requirements/> <sup>[[Archive.org]][844]</sup>
 
-[^296]: Whonix Documentation, Stream Isolation <https://www.whonix.org/wiki/Stream_Isolation> <sup>[[Archive.org]][267]</sup>
+[^296]: Whonix Documentation, Stream Isolation <https://www.whonix.org/wiki/Stream_Isolation> <sup>[[Archive.org]][270]</sup>
 
-[^297]: Whonix Documentation, Tunnels Comparison Table, <https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table> <sup>[[Archive.org]][269]</sup>
+[^297]: Whonix Documentation, Tunnels Comparison Table, <https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table> <sup>[[Archive.org]][272]</sup>
 
-[^298]: Qubes OS Issues, Simulate Hibernation / Suspend-To-Disk #2414 <https://github.com/QubesOS/qubes-issues/issues/2414> <sup>[[Archive.org]][843]</sup>
+[^298]: Qubes OS Issues, Simulate Hibernation / Suspend-To-Disk #2414 <https://github.com/QubesOS/qubes-issues/issues/2414> <sup>[[Archive.org]][845]</sup>
 
-[^299]: Wikipedia, TOTP <https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm> <sup>[[Archive.org]][840]</sup>
+[^299]: Wikipedia, TOTP <https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm> <sup>[[Archive.org]][842]</sup>
 
-[^300]: Wikipedia, Multi-Factor Authentication <https://en.wikipedia.org/wiki/Multi-factor_authentication> <sup>[[Archive.org]][841]</sup>
+[^300]: Wikipedia, Multi-Factor Authentication <https://en.wikipedia.org/wiki/Multi-factor_authentication> <sup>[[Archive.org]][843]</sup>
 
-[^301]: Wikipedia, Captcha <https://en.wikipedia.org/wiki/CAPTCHA> <sup>[[Archive.org]][844]</sup>
+[^301]: Wikipedia, Captcha <https://en.wikipedia.org/wiki/CAPTCHA> <sup>[[Archive.org]][846]</sup>
 
-[^302]: Wikipedia, Turing Test <https://en.wikipedia.org/wiki/Turing_test> <sup>[[Archive.org]][845]</sup>
+[^302]: Wikipedia, Turing Test <https://en.wikipedia.org/wiki/Turing_test> <sup>[[Archive.org]][847]</sup>
 
-[^303]: Google reCaptcha <https://www.google.com/recaptcha/about/> <sup>[[Archive.org]][846]</sup>
+[^303]: Google reCaptcha <https://www.google.com/recaptcha/about/> <sup>[[Archive.org]][848]</sup>
 
-[^304]: hCaptcha <https://www.hcaptcha.com/> <sup>[[Archive.org]][847]</sup>
+[^304]: hCaptcha <https://www.hcaptcha.com/> <sup>[[Archive.org]][849]</sup>
 
-[^305]: hCaptcha, hCaptcha Is Now the Largest Independent CAPTCHA Service, Runs on 15% Of The Internet <https://www.hcaptcha.com/post/hcaptcha-now-the-largest-independent-captcha-service> <sup>[[Archive.org]][848]</sup>
+[^305]: hCaptcha, hCaptcha Is Now the Largest Independent CAPTCHA Service, Runs on 15% Of The Internet <https://www.hcaptcha.com/post/hcaptcha-now-the-largest-independent-captcha-service> <sup>[[Archive.org]][850]</sup>
 
-[^306]: Nearcyan.com, You (probably) don't need ReCAPTCHA <https://nearcyan.com/you-probably-dont-need-recaptcha/> <sup>[[Archive.org]][849]</sup>
+[^306]: Nearcyan.com, You (probably) don't need ReCAPTCHA <https://nearcyan.com/you-probably-dont-need-recaptcha/> <sup>[[Archive.org]][851]</sup>
 
-[^307]: ArsTechnica, "Google's reCAPTCHA turns "invisible," will separate bots from people without challenges" <https://arstechnica.com/gadgets/2017/03/googles-recaptcha-announces-invisible-background-captchas/> <sup>[[Archive.org]][850]</sup>
+[^307]: ArsTechnica, "Google's reCAPTCHA turns "invisible," will separate bots from people without challenges" <https://arstechnica.com/gadgets/2017/03/googles-recaptcha-announces-invisible-background-captchas/> <sup>[[Archive.org]][852]</sup>
 
-[^308]: BlackHat Asia 2016, "I'm not a human: Breaking the Google reCAPTCHA", <https://www.blackhat.com/docs/asia-16/materials/asia-16-Sivakorn-Im-Not-a-Human-Breaking-the-Google-reCAPTCHA-wp.pdf> <sup>[[Archive.org]][851]</sup>
+[^308]: BlackHat Asia 2016, "I'm not a human: Breaking the Google reCAPTCHA", <https://www.blackhat.com/docs/asia-16/materials/asia-16-Sivakorn-Im-Not-a-Human-Breaking-the-Google-reCAPTCHA-wp.pdf> <sup>[[Archive.org]][853]</sup>
 
-[^309]: Google Blog <https://security.googleblog.com/2014/12/are-you-robot-introducing-no-captcha.html> <sup>[[Archive.org]][852]</sup>
+[^309]: Google Blog <https://security.googleblog.com/2014/12/are-you-robot-introducing-no-captcha.html> <sup>[[Archive.org]][854]</sup>
 
-[^310]: Tor Project Community, Cloudflare Captcha Monitoring <https://community.torproject.org/gsoc/cloudflare-captcha-monitoring/> <sup>[[Archive.org]][853]</sup>
+[^310]: Tor Project Community, Cloudflare Captcha Monitoring <https://community.torproject.org/gsoc/cloudflare-captcha-monitoring/> <sup>[[Archive.org]][855]</sup>
 
-[^311]: Cloudflare Blog, Cloudflare supports Privacy Pass <https://blog.cloudflare.com/cloudflare-supports-privacy-pass/> <sup>[[Archive.org]][854]</sup>
+[^311]: Cloudflare Blog, Cloudflare supports Privacy Pass <https://blog.cloudflare.com/cloudflare-supports-privacy-pass/> <sup>[[Archive.org]][856]</sup>
 
-[^312]: Privacy International, Timeline of SIM Card Registration Laws <https://privacyinternational.org/long-read/3018/timeline-sim-card-registration-laws> <sup>[[Archive.org]][795]</sup>
+[^312]: Privacy International, Timeline of SIM Card Registration Laws <https://privacyinternational.org/long-read/3018/timeline-sim-card-registration-laws> <sup>[[Archive.org]][797]</sup>
 
-[^313]: Wikipedia, Device Fingerprinting <https://en.wikipedia.org/wiki/Device_fingerprint> <sup>[[Archive.org]][855]</sup>
+[^313]: Wikipedia, Device Fingerprinting <https://en.wikipedia.org/wiki/Device_fingerprint> <sup>[[Archive.org]][857]</sup>
 
 [^314]: Developers Google Blog,
 
-    Guidance to developers affected by our effort to block less secure browsers and applications <https://developers.googleblog.com/2020/08/guidance-for-our-effort-to-block-less-secure-browser-and-apps.html> <sup>[[Archive.org]][856]</sup>
+    Guidance to developers affected by our effort to block less secure browsers and applications <https://developers.googleblog.com/2020/08/guidance-for-our-effort-to-block-less-secure-browser-and-apps.html> <sup>[[Archive.org]][858]</sup>
 
-[^315]: Google Help, Access age-restricted content & features <https://support.google.com/accounts/answer/10071085> <sup>[[Archive.org]][857]</sup>
+[^315]: Google Help, Access age-restricted content & features <https://support.google.com/accounts/answer/10071085> <sup>[[Archive.org]][859]</sup>
 
-[^316]: Wikipedia, Dark Pattern <https://en.wikipedia.org/wiki/Dark_pattern> <sup>[[Archive.org]][858]</sup>
+[^316]: Wikipedia, Dark Pattern <https://en.wikipedia.org/wiki/Dark_pattern> <sup>[[Archive.org]][860]</sup>
 
-[^317]: The Verge, Tinder will give you a verified blue check mark if you pass its catfishing test <https://www.theverge.com/2020/1/23/21077423/tinder-photo-verification-blue-checkmark-safety-center-launch-noonlight> <sup>[[Archive.org]][859]</sup>
+[^317]: The Verge, Tinder will give you a verified blue check mark if you pass its catfishing test <https://www.theverge.com/2020/1/23/21077423/tinder-photo-verification-blue-checkmark-safety-center-launch-noonlight> <sup>[[Archive.org]][861]</sup>
 
-[^318]: DigitalInformationWorld, Facebook will now require you to Create a Video Selfie for Identity Verification <https://www.digitalinformationworld.com/2020/03/facebook-is-now-demanding-some-users-to-create-a-video-selfie-for-identity-verification.html> <sup>[[Archive.org]][860]</sup>
+[^318]: DigitalInformationWorld, Facebook will now require you to Create a Video Selfie for Identity Verification <https://www.digitalinformationworld.com/2020/03/facebook-is-now-demanding-some-users-to-create-a-video-selfie-for-identity-verification.html> <sup>[[Archive.org]][862]</sup>
 
-[^319]: Vice.com, PornHub Announces 'Biometric Technology' to Verify Users <https://www.vice.com/en/article/m7a4eq/pornhub-new-verification-policy-biometric-id> <sup>[[Archive.org]][861]</sup>
+[^319]: Vice.com, PornHub Announces 'Biometric Technology' to Verify Users <https://www.vice.com/en/article/m7a4eq/pornhub-new-verification-policy-biometric-id> <sup>[[Archive.org]][863]</sup>
 
-[^320]: Variety, China Launches Hotline to Report Online Comments That 'Distort' History or 'Deny' Its Cultural Excellence <https://variety.com/2021/digital/news/china-censorship-hotline-historical-nihilism-1234950554/> <sup>[[Archive.org]][862]</sup>
+[^320]: Variety, China Launches Hotline to Report Online Comments That 'Distort' History or 'Deny' Its Cultural Excellence <https://variety.com/2021/digital/news/china-censorship-hotline-historical-nihilism-1234950554/> <sup>[[Archive.org]][864]</sup>
 
-[^321]: Wikipedia, Trust but verify <https://en.wikipedia.org/wiki/Trust,_but_verify> <sup>[[Archive.org]][598]</sup>
+[^321]: Wikipedia, Trust but verify <https://en.wikipedia.org/wiki/Trust,_but_verify> <sup>[[Archive.org]][600]</sup>
 
-[^322]: Wikipedia, Zero-trust Security Model <https://en.wikipedia.org/wiki/Zero_trust_security_model> <sup>[[Archive.org]][863]</sup>
+[^322]: Wikipedia, Zero-trust Security Model <https://en.wikipedia.org/wiki/Zero_trust_security_model> <sup>[[Archive.org]][865]</sup>
 
-[^323]: Wikipedia, Espionage, Organization <https://en.wikipedia.org/wiki/Espionage#Organization> <sup>[[Archive.org]][864]</sup>
+[^323]: Wikipedia, Espionage, Organization <https://en.wikipedia.org/wiki/Espionage#Organization> <sup>[[Archive.org]][866]</sup>
 
-[^324]: Wikipedia, Sim Swapping <https://en.wikipedia.org/wiki/SIM_swap_scam> <sup>[[Archive.org]][865]</sup>
+[^324]: Wikipedia, Sim Swapping <https://en.wikipedia.org/wiki/SIM_swap_scam> <sup>[[Archive.org]][867]</sup>
 
-[^325]: Whonix Documentation, <https://www.whonix.org/wiki/Tor#Edit_Tor_Configuration> <sup>[[Archive.org]][866]</sup>
+[^325]: Whonix Documentation, <https://www.whonix.org/wiki/Tor#Edit_Tor_Configuration> <sup>[[Archive.org]][868]</sup>
 
-[^326]: Tor Browser Documentation, <https://support.torproject.org/tbb/tbb-editing-torrc/> <sup>[[Archive.org]][867]</sup>
+[^326]: Tor Browser Documentation, <https://support.torproject.org/tbb/tbb-editing-torrc/> <sup>[[Archive.org]][869]</sup>
 
 [^327]: Facebook Onion Website <http://facebookcorewwwi.onion>
 
-[^328]: Google Help <https://support.google.com/accounts/answer/114129?hl=en> <sup>[[Archive.org]][868]</sup>
+[^328]: Google Help <https://support.google.com/accounts/answer/114129?hl=en> <sup>[[Archive.org]][870]</sup>
 
-[^329]: Google Help <https://support.google.com/google-ads/answer/7474263?hl=en> <sup>[[Archive.org]][869]</sup>
+[^329]: Google Help <https://support.google.com/google-ads/answer/7474263?hl=en> <sup>[[Archive.org]][871]</sup>
 
-[^330]: Google, Your account is disabled <https://support.google.com/accounts/answer/40695> <sup>[[Archive.org]][870]</sup>
+[^330]: Google, Your account is disabled <https://support.google.com/accounts/answer/40695> <sup>[[Archive.org]][872]</sup>
 
-[^331]: Google, Request to restore the account <https://support.google.com/accounts/contact/disabled2> <sup>[[Archive.org]][871]</sup>
+[^331]: Google, Request to restore the account <https://support.google.com/accounts/contact/disabled2> <sup>[[Archive.org]][873]</sup>
 
-[^332]: Google Help, Update your account to meet age requirements <https://support.google.com/accounts/answer/1333913?hl=en> <sup>[[Archive.org]][872]</sup>
+[^332]: Google Help, Update your account to meet age requirements <https://support.google.com/accounts/answer/1333913?hl=en> <sup>[[Archive.org]][874]</sup>
 
-[^333]: Jumio, ID verification features <https://www.jumio.com/features/> <sup>[[Archive.org]][873]</sup>
+[^333]: Jumio, ID verification features <https://www.jumio.com/features/> <sup>[[Archive.org]][875]</sup>
 
-[^334]: Privacytools.io Recommended E-mail Providers <https://privacytools.io/providers/email/> <sup>[[Archive.org]][874]</sup>
+[^334]: Privacytools.io Recommended E-mail Providers <https://privacytools.io/providers/email/> <sup>[[Archive.org]][876]</sup>
 
-[^335]: ProtonMail Human Verification System [https://ProtonMail.com/support/knowledge-base/human-verification/][] <sup>[[Archive.org]][875]</sup>
+[^335]: ProtonMail Human Verification System [https://ProtonMail.com/support/knowledge-base/human-verification/][] <sup>[[Archive.org]][877]</sup>
 
 [^336]: Twitter Appeal Form <https://help.twitter.com/forms/general>
 
-[^337]: KnowYourMeme, Good Luck, I'm Behind 7 Proxies <https://knowyourmeme.com/memes/good-luck-im-behind-7-proxies> <sup>[[Archive.org]][876]</sup>
+[^337]: KnowYourMeme, Good Luck, I'm Behind 7 Proxies <https://knowyourmeme.com/memes/good-luck-im-behind-7-proxies> <sup>[[Archive.org]][878]</sup>
 
-[^338]: Wikipedia, end-to-end encryption, <https://en.wikipedia.org/wiki/End-to-end_encryption> <sup>[[Archive.org]][877]</sup>
+[^338]: Wikipedia, end-to-end encryption, <https://en.wikipedia.org/wiki/End-to-end_encryption> <sup>[[Archive.org]][879]</sup>
 
-[^339]: Wikipedia, Forward Secrecy, <https://en.wikipedia.org/wiki/Forward_secrecy> <sup>[[Archive.org]][878]</sup>
+[^339]: Wikipedia, Forward Secrecy, <https://en.wikipedia.org/wiki/Forward_secrecy> <sup>[[Archive.org]][880]</sup>
 
-[^340]: Protonblog, What is zero-access encryption and why it is important for security <https://protonmail.com/blog/zero-access-encryption/> <sup>[[Archive.org]][879]</sup>
+[^340]: Protonblog, What is zero-access encryption and why it is important for security <https://protonmail.com/blog/zero-access-encryption/> <sup>[[Archive.org]][881]</sup>
 
-[^341]: Wikipedia, Cambridge Analytica Scandal, <https://en.wikipedia.org/wiki/Facebook%E2%80%93Cambridge_Analytica_data_scandal> <sup>[[Archive.org]][880]</sup>
+[^341]: Wikipedia, Cambridge Analytica Scandal, <https://en.wikipedia.org/wiki/Facebook%E2%80%93Cambridge_Analytica_data_scandal> <sup>[[Archive.org]][882]</sup>
 
-[^342]: Signal Blog, Technology preview: Sealed sender for Signal <https://signal.org/blog/sealed-sender/> <sup>[[Archive.org]][881]</sup>
+[^342]: Signal Blog, Technology preview: Sealed sender for Signal <https://signal.org/blog/sealed-sender/> <sup>[[Archive.org]][883]</sup>
 
-[^343]: Signal Blog, Private Contact Discovery, <https://signal.org/blog/private-contact-discovery/> <sup>[[Archive.org]][882]</sup>
+[^343]: Signal Blog, Private Contact Discovery, <https://signal.org/blog/private-contact-discovery/> <sup>[[Archive.org]][884]</sup>
 
-[^344]: Signal Blog, Private Group System, <https://signal.org/blog/signal-private-group-system/> <sup>[[Archive.org]][883]</sup>
+[^344]: Signal Blog, Private Group System, <https://signal.org/blog/signal-private-group-system/> <sup>[[Archive.org]][885]</sup>
 
-[^345]: Privacytools.io, File-Sharing <https://privacytools.io/software/file-sharing/> <sup>[[Archive.org]][884]</sup>
+[^345]: Privacytools.io, File-Sharing <https://privacytools.io/software/file-sharing/> <sup>[[Archive.org]][886]</sup>
 
-[^346]: Privacytools.io, Real-Time Communication <https://privacytools.io/software/real-time-communication/> <sup>[[Archive.org]][885]</sup>
+[^346]: Privacytools.io, Real-Time Communication <https://privacytools.io/software/real-time-communication/> <sup>[[Archive.org]][887]</sup>
 
-[^347]: Praxis Films, Open Letter from Laura Poitras <https://www.praxisfilms.org/open-letter-from-laura-poitras/> <sup>[[Archive.org]][886]</sup>
+[^347]: Praxis Films, Open Letter from Laura Poitras <https://www.praxisfilms.org/open-letter-from-laura-poitras/> <sup>[[Archive.org]][888]</sup>
 
-[^348]: Wikipedia, SecureDrop <https://en.wikipedia.org/wiki/SecureDrop> <sup>[[Archive.org]][887]</sup>
+[^348]: Wikipedia, SecureDrop <https://en.wikipedia.org/wiki/SecureDrop> <sup>[[Archive.org]][889]</sup>
 
-[^349]: Wikipedia, TPM <https://en.wikipedia.org/wiki/Trusted_Platform_Module> <sup>[[Archive.org]][888]</sup>
+[^349]: Wikipedia, TPM <https://en.wikipedia.org/wiki/Trusted_Platform_Module> <sup>[[Archive.org]][890]</sup>
 
-[^350]: Wikipedia, Wear Leveling <https://en.wikipedia.org/wiki/Wear_leveling> <sup>[[Archive.org]][889]</sup>
+[^350]: Wikipedia, Wear Leveling <https://en.wikipedia.org/wiki/Wear_leveling> <sup>[[Archive.org]][891]</sup>
 
-[^351]: Wikipedia, Trim <https://en.wikipedia.org/wiki/Write_amplification#TRIM> <sup>[[Archive.org]][890]</sup>
+[^351]: Wikipedia, Trim <https://en.wikipedia.org/wiki/Write_amplification#TRIM> <sup>[[Archive.org]][892]</sup>
 
-[^352]: Wikipedia, Write Amplification <https://en.wikipedia.org/wiki/Write_amplification> <sup>[[Archive.org]][890]</sup>
+[^352]: Wikipedia, Write Amplification <https://en.wikipedia.org/wiki/Write_amplification> <sup>[[Archive.org]][892]</sup>
 
-[^353]: Wikipedia, Trim Disadvantages <https://en.wikipedia.org/wiki/Trim_(computing)#Disadvantages> <sup>[[Archive.org]][406]</sup>
+[^353]: Wikipedia, Trim Disadvantages <https://en.wikipedia.org/wiki/Trim_(computing)#Disadvantages> <sup>[[Archive.org]][408]</sup>
 
-[^354]: Wikipedia, Garbage Collection <https://en.wikipedia.org/wiki/Write_amplification#Garbage_collection> <sup>[[Archive.org]][890]</sup>
+[^354]: Wikipedia, Garbage Collection <https://en.wikipedia.org/wiki/Write_amplification#Garbage_collection> <sup>[[Archive.org]][892]</sup>
 
-[^355]: Techgage, Too TRIM? When SSD Data Recovery is Impossible <https://techgage.com/article/too_trim_when_ssd_data_recovery_is_impossible/> <sup>[[Archive.org]][891]</sup>
+[^355]: Techgage, Too TRIM? When SSD Data Recovery is Impossible <https://techgage.com/article/too_trim_when_ssd_data_recovery_is_impossible/> <sup>[[Archive.org]][893]</sup>
 
-[^356]: ResearchGate, Live forensics method for acquisition on the Solid-State Drive (SSD) NVMe TRIM function <https://www.researchgate.net/publication/341761017_Live_forensics_method_for_acquisition_on_the_Solid_State_Drive_SSD_NVMe_TRIM_function> <sup>[[Archive.org]][892]</sup>
+[^356]: ResearchGate, Live forensics method for acquisition on the Solid-State Drive (SSD) NVMe TRIM function <https://www.researchgate.net/publication/341761017_Live_forensics_method_for_acquisition_on_the_Solid_State_Drive_SSD_NVMe_TRIM_function> <sup>[[Archive.org]][894]</sup>
 
-[^357]: ElcomSoft, Life after Trim: Using Factory Access Mode for Imaging SSD Drives <https://blog.elcomsoft.com/2019/01/life-after-trim-using-factory-access-mode-for-imaging-ssd-drives/> <sup>[[Archive.org]][893]</sup>
+[^357]: ElcomSoft, Life after Trim: Using Factory Access Mode for Imaging SSD Drives <https://blog.elcomsoft.com/2019/01/life-after-trim-using-factory-access-mode-for-imaging-ssd-drives/> <sup>[[Archive.org]][895]</sup>
 
-[^358]: Forensic Focus, Forensic Acquisition Of Solid State Drives With Open Source Tools <https://www.forensicfocus.com/articles/forensic-acquisition-of-solid-state-drives-with-open-source-tools/> <sup>[[Archive.org]][894]</sup>
+[^358]: Forensic Focus, Forensic Acquisition Of Solid State Drives With Open Source Tools <https://www.forensicfocus.com/articles/forensic-acquisition-of-solid-state-drives-with-open-source-tools/> <sup>[[Archive.org]][896]</sup>
 
-[^359]: ResearchGate, Solid State Drive Forensics: Where Do We Stand? <https://www.researchgate.net/publication/325976653_Solid_State_Drive_Forensics_Where_Do_We_Stand> <sup>[[Archive.org]][895]</sup>
+[^359]: ResearchGate, Solid State Drive Forensics: Where Do We Stand? <https://www.researchgate.net/publication/325976653_Solid_State_Drive_Forensics_Where_Do_We_Stand> <sup>[[Archive.org]][897]</sup>
 
-[^360]: Wikipedia, Parted Magic <https://en.wikipedia.org/wiki/Parted_Magic> <sup>[[Archive.org]][896]</sup>
+[^360]: Wikipedia, Parted Magic <https://en.wikipedia.org/wiki/Parted_Magic> <sup>[[Archive.org]][898]</sup>
 
-[^361]: Wikipedia, hdparm <https://en.wikipedia.org/wiki/Hdparm> <sup>[[Archive.org]][897]</sup>
+[^361]: Wikipedia, hdparm <https://en.wikipedia.org/wiki/Hdparm> <sup>[[Archive.org]][899]</sup>
 
-[^362]: GitHub, nvme-cli <https://github.com/linux-nvme/nvme-cli> <sup>[[Archive.org]][898]</sup>
+[^362]: GitHub, nvme-cli <https://github.com/linux-nvme/nvme-cli> <sup>[[Archive.org]][900]</sup>
 
-[^363]: PartedMagic Secure Erase, <https://partedmagic.com/secure-erase/> <sup>[[Archive.org]][899]</sup>
+[^363]: PartedMagic Secure Erase, <https://partedmagic.com/secure-erase/> <sup>[[Archive.org]][901]</sup>
 
-[^364]: Partedmagic NVMe Secure Erase, <https://partedmagic.com/nvme-secure-erase/> <sup>[[Archive.org]][900]</sup>
+[^364]: Partedmagic NVMe Secure Erase, <https://partedmagic.com/nvme-secure-erase/> <sup>[[Archive.org]][902]</sup>
 
-[^365]: UFSExplorer, Can I recover data from an encrypted storage? <https://www.ufsexplorer.com/solutions/data-recovery-on-encrypted-storage.php> <sup>[[Archive.org]][901]</sup>
+[^365]: UFSExplorer, Can I recover data from an encrypted storage? <https://www.ufsexplorer.com/solutions/data-recovery-on-encrypted-storage.php> <sup>[[Archive.org]][903]</sup>
 
-[^366]: Apple Developer Documentation, <https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/APFS_Guide/FAQ/FAQ.html> <sup>[[Archive.org]][902]</sup>
+[^366]: Apple Developer Documentation, <https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/APFS_Guide/FAQ/FAQ.html> <sup>[[Archive.org]][904]</sup>
 
-[^367]: EFF, How to: Delete Your Data Securely on MacOS <https://ssd.eff.org/en/module/how-delete-your-data-securely-macos> <sup>[[Archive.org]][427]</sup>
+[^367]: EFF, How to: Delete Your Data Securely on MacOS <https://ssd.eff.org/en/module/how-delete-your-data-securely-macos> <sup>[[Archive.org]][429]</sup>
 
-[^368]: Privacytools.io, Productivity tools <https://www.privacytools.io/software/productivity/> <sup>[[Archive.org]][903]</sup>
+[^368]: Privacytools.io, Productivity tools <https://www.privacytools.io/software/productivity/> <sup>[[Archive.org]][905]</sup>
 
-[^369]: Whonix Documentation, Scrubbing Metadata <https://www.whonix.org/wiki/Metadata> <sup>[[Archive.org]][904]</sup>
+[^369]: Whonix Documentation, Scrubbing Metadata <https://www.whonix.org/wiki/Metadata> <sup>[[Archive.org]][906]</sup>
 
-[^370]: TAILS documentation, MAT <https://gitlab.tails.boum.org/tails/blueprints/-/wikis/doc/mat/> <sup>[[Archive.org]][905]</sup>
+[^370]: TAILS documentation, MAT <https://gitlab.tails.boum.org/tails/blueprints/-/wikis/doc/mat/> <sup>[[Archive.org]][907]</sup>
 
-[^371]: DuckDuckGo help, Cache <https://help.duckduckgo.com/duckduckgo-help-pages/features/cache/> <sup>[[Archive.org]][906]</sup>
+[^371]: DuckDuckGo help, Cache <https://help.duckduckgo.com/duckduckgo-help-pages/features/cache/> <sup>[[Archive.org]][908]</sup>
 
-[^372]: DuckDuckGo help, Sources <https://help.duckduckgo.com/duckduckgo-help-pages/results/sources/> <sup>[[Archive.org]][907]</sup>
+[^372]: DuckDuckGo help, Sources <https://help.duckduckgo.com/duckduckgo-help-pages/results/sources/> <sup>[[Archive.org]][909]</sup>
 
-[^373]: Wikipedia, Dead Drop <https://en.wikipedia.org/wiki/Dead_drop> <sup>[[Archive.org]][908]</sup>
+[^373]: Wikipedia, Dead Drop <https://en.wikipedia.org/wiki/Dead_drop> <sup>[[Archive.org]][910]</sup>
 
-[^374]: Wikipedia, Secure Communication Obfuscation <https://en.wikipedia.org/wiki/Obfuscation#Secure_communication> <sup>[[Archive.org]][909]</sup>
+[^374]: Wikipedia, Secure Communication Obfuscation <https://en.wikipedia.org/wiki/Obfuscation#Secure_communication> <sup>[[Archive.org]][911]</sup>
 
-[^375]: Wikipedia, Steganography <https://en.wikipedia.org/wiki/Steganography> <sup>[[Archive.org]][686]</sup>
+[^375]: Wikipedia, Steganography <https://en.wikipedia.org/wiki/Steganography> <sup>[[Archive.org]][752]</sup>
 
-[^376]: Wikipedia, Kleptography <https://en.wikipedia.org/wiki/Kleptography> <sup>[[Archive.org]][910]</sup>
+[^376]: Wikipedia, Kleptography <https://en.wikipedia.org/wiki/Kleptography> <sup>[[Archive.org]][912]</sup>
 
-[^377]: Wikipedia, Koalang <https://en.wikipedia.org/wiki/Koalang> <sup>[[Archive.org]][911]</sup>
+[^377]: Wikipedia, Koalang <https://en.wikipedia.org/wiki/Koalang> <sup>[[Archive.org]][913]</sup>
 
-[^378]: Tor Documentation, Snowflake, <https://gitlab.torproject.org/legacy/trac/-/wikis/doc/Snowflake/> <sup>[[Archive.org]][912]</sup>
+[^378]: Tor Documentation, Snowflake, <https://gitlab.torproject.org/legacy/trac/-/wikis/doc/Snowflake/> <sup>[[Archive.org]][914]</sup>
 
-[^379]: Privacytools.io, Operating Systems <https://privacytools.io/operating-systems/> <sup>[[Archive.org]][808]</sup>
+[^379]: Privacytools.io, Operating Systems <https://privacytools.io/operating-systems/> <sup>[[Archive.org]][810]</sup>
 
-[^380]: Brave Support, What is a Private Window with Tor? <https://support.brave.com/hc/en-us/articles/360018121491-What-is-a-Private-Window-with-Tor-> <sup>[[Archive.org]][913]</sup>
+[^380]: Brave Support, What is a Private Window with Tor? <https://support.brave.com/hc/en-us/articles/360018121491-What-is-a-Private-Window-with-Tor-> <sup>[[Archive.org]][915]</sup>
 
-[^381]: Medium.com, The Windows USN Journal <https://medium.com/velociraptor-ir/the-windows-usn-journal-f0c55c9010e> <sup>[[Archive.org]][914]</sup>
+[^381]: Medium.com, The Windows USN Journal <https://medium.com/velociraptor-ir/the-windows-usn-journal-f0c55c9010e> <sup>[[Archive.org]][916]</sup>
 
-[^382]: Medium.com, Digging into the System Resource Usage Monitor (SRUM) <https://medium.com/velociraptor-ir/digging-into-the-system-resource-usage-monitor-srum-afbadb1a375> <sup>[[Archive.org]][915]</sup>
+[^382]: Medium.com, Digging into the System Resource Usage Monitor (SRUM) <https://medium.com/velociraptor-ir/digging-into-the-system-resource-usage-monitor-srum-afbadb1a375> <sup>[[Archive.org]][917]</sup>
 
-[^383]: SANS, Timestamped Registry & NTFS Artifacts from Unallocated Space <https://www.sans.org/blog/timestamped-registry-ntfs-artifacts-from-unallocated-space/> <sup>[[Archive.org]][916]</sup>
+[^383]: SANS, Timestamped Registry & NTFS Artifacts from Unallocated Space <https://www.sans.org/blog/timestamped-registry-ntfs-artifacts-from-unallocated-space/> <sup>[[Archive.org]][918]</sup>
 
-[^384]: DBAN, <https://dban.org/> <sup>[[Archive.org]][917]</sup>
+[^384]: DBAN, <https://dban.org/> <sup>[[Archive.org]][919]</sup>
 
-[^385]: NYTimes, Lost Passwords Lock Millionaires Out of Their Bitcoin Fortunes <https://www.nytimes.com/2021/01/12/technology/bitcoin-passwords-wallets-fortunes.html> <sup>[[Archive.org]][796]</sup>
+[^385]: NYTimes, Lost Passwords Lock Millionaires Out of Their Bitcoin Fortunes <https://www.nytimes.com/2021/01/12/technology/bitcoin-passwords-wallets-fortunes.html> <sup>[[Archive.org]][798]</sup>
 
-[^386]: CrystalDiskInfo <https://crystalmark.info/en/software/crystaldiskinfo/> <sup>[[Archive.org]][918]</sup>
+[^386]: CrystalDiskInfo <https://crystalmark.info/en/software/crystaldiskinfo/> <sup>[[Archive.org]][920]</sup>
 
-[^387]: Wikipedia, Faraday Cage, <https://en.wikipedia.org/wiki/Faraday_cage> <sup>[[Archive.org]][919]</sup>
+[^387]: Wikipedia, Faraday Cage, <https://en.wikipedia.org/wiki/Faraday_cage> <sup>[[Archive.org]][921]</sup>
 
-[^388]: Edith Cowan University, A forensic examination of several mobile device Faraday bags & materials to test their effectiveness materials to test their effectiveness <https://ro.ecu.edu.au/cgi/viewcontent.cgi?article=1165&context=adf> <sup>[[Archive.org]][920]</sup>
+[^388]: Edith Cowan University, A forensic examination of several mobile device Faraday bags & materials to test their effectiveness materials to test their effectiveness <https://ro.ecu.edu.au/cgi/viewcontent.cgi?article=1165&context=adf> <sup>[[Archive.org]][922]</sup>
 
-[^389]: arXiv, Deep-Spying: Spying using Smartwatch and Deep Learning <https://arxiv.org/abs/1512.05616> <sup>[[Archive.org]][921]</sup>
+[^389]: arXiv, Deep-Spying: Spying using Smartwatch and Deep Learning <https://arxiv.org/abs/1512.05616> <sup>[[Archive.org]][923]</sup>
 
-[^390]: YouTube, Fingerprinting Paper - Forensic Education <https://www.youtube.com/watch?v=sO98kDLkh-M> <sup>[[Invidious]][922]</sup>
+[^390]: YouTube, Fingerprinting Paper - Forensic Education <https://www.youtube.com/watch?v=sO98kDLkh-M> <sup>[[Invidious]][924]</sup>
 
-[^391]: Wikipedia, Touch DNA, <https://en.wikipedia.org/wiki/Touch_DNA> <sup>[[Archive.org]][923]</sup>
+[^391]: Wikipedia, Touch DNA, <https://en.wikipedia.org/wiki/Touch_DNA> <sup>[[Archive.org]][925]</sup>
 
-[^392]: TheDNAGuide, DNA from Postage Stamps or Hair Samples? Yeeesssss..... <https://www.yourdnaguide.com/ydgblog/dna-hair-samples-postage-stamps> <sup>[[Archive.org]][924]</sup>
+[^392]: TheDNAGuide, DNA from Postage Stamps or Hair Samples? Yeeesssss..... <https://www.yourdnaguide.com/ydgblog/dna-hair-samples-postage-stamps> <sup>[[Archive.org]][926]</sup>
 
-[^393]: GitHub, Mhinkie, OONI-Detection <https://github.com/mhinkie/ooni-detection> <sup>[[Archive.org]][925]</sup>
+[^393]: GitHub, Mhinkie, OONI-Detection <https://github.com/mhinkie/ooni-detection> <sup>[[Archive.org]][927]</sup>
 
-[^394]: Wikipedia, File Verification <https://en.wikipedia.org/wiki/File_verification> <sup>[[Archive.org]][926]</sup>
+[^394]: Wikipedia, File Verification <https://en.wikipedia.org/wiki/File_verification> <sup>[[Archive.org]][928]</sup>
 
-[^395]: Wikipedia, CRC <https://en.wikipedia.org/wiki/Cyclic_redundancy_check> <sup>[[Archive.org]][927]</sup>
+[^395]: Wikipedia, CRC <https://en.wikipedia.org/wiki/Cyclic_redundancy_check> <sup>[[Archive.org]][929]</sup>
 
-[^396]: Wikipedia, MD5 <https://en.wikipedia.org/wiki/MD5> <sup>[[Archive.org]][928]</sup>
+[^396]: Wikipedia, MD5 <https://en.wikipedia.org/wiki/MD5> <sup>[[Archive.org]][930]</sup>
 
-[^397]: Wikipedia, MD5 Security <https://en.wikipedia.org/wiki/MD5#Security> <sup>[[Archive.org]][928]</sup>
+[^397]: Wikipedia, MD5 Security <https://en.wikipedia.org/wiki/MD5#Security> <sup>[[Archive.org]][930]</sup>
 
-[^398]: Wikipedia, Collisions <https://en.wikipedia.org/wiki/Collision_(computer_science)> <sup>[[Archive.org]][929]</sup>
+[^398]: Wikipedia, Collisions <https://en.wikipedia.org/wiki/Collision_(computer_science)> <sup>[[Archive.org]][931]</sup>
 
-[^399]: Wikipedia, SHA <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms> <sup>[[Archive.org]][930]</sup>
+[^399]: Wikipedia, SHA <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms> <sup>[[Archive.org]][932]</sup>
 
-[^400]: Wikipedia, SHA-2 <https://en.wikipedia.org/wiki/SHA-2> <sup>[[Archive.org]][931]</sup>
+[^400]: Wikipedia, SHA-2 <https://en.wikipedia.org/wiki/SHA-2> <sup>[[Archive.org]][933]</sup>
 
-[^401]: Wikipedia, Collision Resistance <https://en.wikipedia.org/wiki/Collision_resistance> <sup>[[Archive.org]][932]</sup>
+[^401]: Wikipedia, Collision Resistance <https://en.wikipedia.org/wiki/Collision_resistance> <sup>[[Archive.org]][934]</sup>
 
-[^402]: GnuPG Gpg4win Wiki, Check integrity of Gpg4win packages <https://wiki.gnupg.org/Gpg4win/CheckIntegrity> <sup>[[Archive.org]][933]</sup>
+[^402]: GnuPG Gpg4win Wiki, Check integrity of Gpg4win packages <https://wiki.gnupg.org/Gpg4win/CheckIntegrity> <sup>[[Archive.org]][935]</sup>
 
-[^403]: Medium.com, How to verify checksum on Mac <https://medium.com/@EvgeniIvanov/how-to-verify-checksum-on-mac-988f166b0c4f> <sup>[[Archive.org]][934]</sup>
+[^403]: Medium.com, How to verify checksum on Mac <https://medium.com/@EvgeniIvanov/how-to-verify-checksum-on-mac-988f166b0c4f> <sup>[[Archive.org]][936]</sup>
 
-[^404]: Wikipedia, GPG <https://en.wikipedia.org/wiki/GNU_Privacy_Guard> <sup>[[Archive.org]][935]</sup>
+[^404]: Wikipedia, GPG <https://en.wikipedia.org/wiki/GNU_Privacy_Guard> <sup>[[Archive.org]][937]</sup>
 
-[^405]: Wikipedia, Public-Key Cryptography <https://en.wikipedia.org/wiki/Public-key_cryptography> <sup>[[Archive.org]][936]</sup>
+[^405]: Wikipedia, Public-Key Cryptography <https://en.wikipedia.org/wiki/Public-key_cryptography> <sup>[[Archive.org]][938]</sup>
 
-[^406]: Wikipedia, Polymorphic Code <https://en.wikipedia.org/wiki/Polymorphic_code> <sup>[[Archive.org]][937]</sup>
+[^406]: Wikipedia, Polymorphic Code <https://en.wikipedia.org/wiki/Polymorphic_code> <sup>[[Archive.org]][939]</sup>
 
-[^407]: Whonix Documentation, Use of AV, <https://www.whonix.org/wiki/Malware_and_Firmware_Trojans#The_Utility_of_Antivirus_Tools> <sup>[[Archive.org]][938]</sup>
+[^407]: Whonix Documentation, Use of AV, <https://www.whonix.org/wiki/Malware_and_Firmware_Trojans#The_Utility_of_Antivirus_Tools> <sup>[[Archive.org]][940]</sup>
 
-[^408]: Whonix Forums, <https://forums.whonix.org/t/installation-of-antivirus-scanners-by-default/9755/8> <sup>[[Archive.org]][939]</sup>
+[^408]: Whonix Forums, <https://forums.whonix.org/t/installation-of-antivirus-scanners-by-default/9755/8> <sup>[[Archive.org]][941]</sup>
 
-[^409]: AV-Test Security Report 2018-2019, <https://www.av-test.org/fileadmin/pdf/security_report/AV-TEST_Security_Report_2018-2019.pdf> <sup>[[Archive.org]][940]</sup>
+[^409]: AV-Test Security Report 2018-2019, <https://www.av-test.org/fileadmin/pdf/security_report/AV-TEST_Security_Report_2018-2019.pdf> <sup>[[Archive.org]][942]</sup>
 
-[^410]: ZDNet, ESET discovers 21 new Linux malware families <https://www.zdnet.com/article/eset-discovers-21-new-linux-malware-families/> <sup>[[Archive.org]][941]</sup>
+[^410]: ZDNet, ESET discovers 21 new Linux malware families <https://www.zdnet.com/article/eset-discovers-21-new-linux-malware-families/> <sup>[[Archive.org]][943]</sup>
 
-[^411]: NakeSecurity, EvilGnome -- Linux malware aimed at your desktop, not your servers <https://nakedsecurity.sophos.com/2019/07/25/evilgnome-linux-malware-aimed-at-your-laptop-not-your-servers/> <sup>[[Archive.org]][942]</sup>
+[^411]: NakeSecurity, EvilGnome -- Linux malware aimed at your desktop, not your servers <https://nakedsecurity.sophos.com/2019/07/25/evilgnome-linux-malware-aimed-at-your-laptop-not-your-servers/> <sup>[[Archive.org]][944]</sup>
 
-[^412]: Immunify, HiddenWasp: How to detect malware hidden on Linux & IoT <https://blog.imunify360.com/hiddenwasp-how-to-detect-malware-hidden-on-linux-iot> <sup>[[Archive.org]][943]</sup>
+[^412]: Immunify, HiddenWasp: How to detect malware hidden on Linux & IoT <https://blog.imunify360.com/hiddenwasp-how-to-detect-malware-hidden-on-linux-iot> <sup>[[Archive.org]][945]</sup>
 
-[^413]: Wikipedia, Linux Malware <https://en.wikipedia.org/wiki/Linux_malware> <sup>[[Archive.org]][944]</sup>
+[^413]: Wikipedia, Linux Malware <https://en.wikipedia.org/wiki/Linux_malware> <sup>[[Archive.org]][946]</sup>
 
-[^414]: Wikipedia, MacOS Malware <https://en.wikipedia.org/wiki/MacOS_malware> <sup>[[Archive.org]][945]</sup>
+[^414]: Wikipedia, MacOS Malware <https://en.wikipedia.org/wiki/MacOS_malware> <sup>[[Archive.org]][947]</sup>
 
-[^415]: MacWorld, List of Mac viruses, malware and security flaws <https://www.macworld.co.uk/feature/mac-viruses-list-3668354/> <sup>[[Archive.org]][946]</sup>
+[^415]: MacWorld, List of Mac viruses, malware and security flaws <https://www.macworld.co.uk/feature/mac-viruses-list-3668354/> <sup>[[Archive.org]][948]</sup>
 
-[^416]: JAMF, The Mac Malware of 2020 <https://resources.jamf.com/documents/macmalware-2020.pdf> <sup>[[Archive.org]][947]</sup>
+[^416]: JAMF, The Mac Malware of 2020 <https://resources.jamf.com/documents/macmalware-2020.pdf> <sup>[[Archive.org]][949]</sup>
 
-[^417]: MacOS Security and Privacy Guide, <https://github.com/drduh/macOS-Security-and-Privacy-Guide#viruses-and-malware> <sup>[[Archive.org]][249]</sup>
+[^417]: MacOS Security and Privacy Guide, <https://github.com/drduh/macOS-Security-and-Privacy-Guide#viruses-and-malware> <sup>[[Archive.org]][252]</sup>
 
-[^418]: ImageTragick.com, <https://imagetragick.com/> <sup>[[Archive.org]][948]</sup>
+[^418]: ImageTragick.com, <https://imagetragick.com/> <sup>[[Archive.org]][950]</sup>
 
-[^419]: Oracle Virtualbox Documentation, <https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/hyperv-support.html> <sup>[[Archive.org]][949]</sup>
+[^419]: Oracle Virtualbox Documentation, <https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/hyperv-support.html> <sup>[[Archive.org]][951]</sup>
 
-[^420]: Oracle Virtualbox Documentation, <https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/hyperv-support.html> <sup>[[Archive.org]][949]</sup>
+[^420]: Oracle Virtualbox Documentation, <https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/hyperv-support.html> <sup>[[Archive.org]][951]</sup>
 
-[^421]: Lenny Zeltser, Analyzing Malicious Documents Cheat Sheet <https://zeltser.com/analyzing-malicious-documents/> <sup>[[Archive.org]][950]</sup>
+[^421]: Lenny Zeltser, Analyzing Malicious Documents Cheat Sheet <https://zeltser.com/analyzing-malicious-documents/> <sup>[[Archive.org]][952]</sup>
 
-[^422]: Wikipedia, Portable Applications <https://en.wikipedia.org/wiki/Portable_application> <sup>[[Archive.org]][951]</sup>
+[^422]: Wikipedia, Portable Applications <https://en.wikipedia.org/wiki/Portable_application> <sup>[[Archive.org]][953]</sup>
 
-[^423]: Wikipedia, Virtualization <https://en.wikipedia.org/wiki/Virtualization> <sup>[[Archive.org]][952]</sup>
+[^423]: Wikipedia, Virtualization <https://en.wikipedia.org/wiki/Virtualization> <sup>[[Archive.org]][954]</sup>
 
-[^424]: Tor Project, Project Snowflake <https://snowflake.torproject.org/> <sup>[[Archive.org]][953]</sup>
+[^424]: Tor Project, Project Snowflake <https://snowflake.torproject.org/> <sup>[[Archive.org]][955]</sup>
 
-[^425]: GitHub, Obfs4 Repository <https://github.com/Yawning/obfs4/> <sup>[[Archive.org]][954]</sup>
+[^425]: GitHub, Obfs4 Repository <https://github.com/Yawning/obfs4/> <sup>[[Archive.org]][956]</sup>
 
-[^426]: Tor Browser Manual, Pluggable Transport <https://tb-manual.torproject.org/circumvention/> <sup>[[Archive.org]][955]</sup>
+[^426]: Tor Browser Manual, Pluggable Transport <https://tb-manual.torproject.org/circumvention/> <sup>[[Archive.org]][957]</sup>
 
   [Table of Contents]: #table-of-contents
   [Requirements:]: #requirements
   [Introduction:]: #introduction
   [Understanding some basics of how some information can lead back to you and how to mitigate some:]: #understanding-some-basics-of-how-some-information-can-lead-back-to-you-and-how-to-mitigate-some
+  [Your Network:]: #your-network
   [Your IP address:]: #your-ip-address
   [Your DNS requests:]: #your-dns-requests
+  [Your RFID enabled devices:]: #your-rfid-enabled-devices
+  [The Wi-Fis and Bluetooth devices around you:]: #the-wi-fis-and-bluetooth-devices-around-you
+  [Malicious/Rogue Wi-Fi Access Points:]: #maliciousrogue-wi-fi-access-points
+  [Your Anonymized Tor/VPN traffic:]: #your-anonymized-torvpn-traffic
+  [Some Devices can be tracked even when offline:]: #some-devices-can-be-tracked-even-when-offline
+  [Your Hardware Identifiers:]: #your-hardware-identifiers
   [Your IMEI and IMSI (and by extension, your phone number):]: #your-imei-and-imsi-and-by-extension-your-phone-number
   [Your Wi-Fi or Ethernet MAC address:]: #your-wi-fi-or-ethernet-mac-address
   [Your Bluetooth MAC address:]: #your-bluetooth-mac-address
-  [Your Operating Systems and Apps telemetry services:]: #your-operating-systems-and-apps-telemetry-services
-  [The Wi-Fis and Bluetooth devices around you:]: #the-wi-fis-and-bluetooth-devices-around-you
-  [Your Metadata including your Geo-Location:]: #your-metadata-including-your-geo-location
-  [Your Smart devices in general:]: #your-smart-devices-in-general
-  [Your Devices can be tracked even when offline:]: #your-devices-can-be-tracked-even-when-offline
-  [Your RFID enabled devices:]: #your-rfid-enabled-devices
-  [Your Files Properties/Metadata:]: #your-files-propertiesmetadata
-  [Malware:]: #malware
-  [Malware in your files/documents:]: #malware-in-your-filesdocuments
-  [Malware and Exploits in your apps and services:]: #malware-and-exploits-in-your-apps-and-services
-  [Watermarking:]: #watermarking
-  [Pictures/Videos/Audio:]: #picturesvideosaudio
-  [Printing Watermarking:]: #printing-watermarking
-  [Your Pixelized/Blurred Information:]: #your-pixelizedblurred-information
-  [Your Anonymized Tor/VPN traffic:]: #your-anonymized-torvpn-traffic
-  [Your Crypto currencies transactions:]: #your-crypto-currencies-transactions
   [Your CPU:]: #your-cpu
-  [Malicious/Rogue Wi-Fi Access Points:]: #maliciousrogue-wi-fi-access-points
-  [Malicious USB devices:]: #malicious-usb-devices
-  [Your Cloud backups/sync services:]: #your-cloud-backupssync-services
+  [Your Operating Systems and Apps telemetry services:]: #your-operating-systems-and-apps-telemetry-services
+  [Your Smart devices in general:]: #your-smart-devices-in-general
+  [Yourself:]: #yourself
+  [Your Metadata including your Geo-Location:]: #your-metadata-including-your-geo-location
   [Your Digital Fingerprint, Footprint, and Online Behavior:]: #your-digital-fingerprint-footprint-and-online-behavior
   [Your Clues about your Real Life and OSINT:]: #your-clues-about-your-real-life-and-osint
   [Your Face, Voice, Biometrics and Pictures:]: #your-face-voice-biometrics-and-pictures
-  [Your Browser and Device Fingerprints:]: #your-browser-and-device-fingerprints
   [Phishing and Social Engineering:]: #phishing-and-social-engineering
+  [Malware, exploit, and viruses:]: #malware-exploit-and-viruses
+  [Malware in your files/documents:]: #malware-in-your-filesdocuments
+  [Malware and Exploits in your apps and services:]: #malware-and-exploits-in-your-apps-and-services
+  [Malicious USB devices:]: #malicious-usb-devices
+  [Your files, documents, pictures, and videos:]: #your-files-documents-pictures-and-videos
+  [Your Files Properties/Metadata:]: #your-files-propertiesmetadata
+  [Watermarking:]: #watermarking
+  [Your Pixelized/Blurred Information:]: #your-pixelizedblurred-information
+  [Your Crypto currencies transactions:]: #your-crypto-currencies-transactions
+  [Your Cloud backups/sync services:]: #your-cloud-backupssync-services
+  [Your Browser and Device Fingerprints:]: #your-browser-and-device-fingerprints
   [Local Data Leaks and Forensics:]: #local-data-leaks-and-forensics
   [Bad Cryptography:]: #bad-cryptography
   [No logging but logging anyway policies:]: #no-logging-but-logging-anyway-policies
@@ -10235,7 +10259,8 @@ Meaning you can also build this ISO yourself from their scripts if you do not tr
   [32]: https://web.archive.org/web/https://anonymousplanet.org/guide-dark.pdf
   [33]: http://thgtoa7imksbg7rit4grgijl2ef6kc7b56bp56pmtta4g354lydlzkqd.onion/guide-dark.pdf
   [34]: https://web.archive.org/web/https://github.com/iv-org/invidious
-  [Your Face, Voice, Biometrics and Pictures: 31]: #_Toc69469176
+  [Your Network: 10]: #_Toc69819049
+  [Your Face, Voice, Biometrics and Pictures: 25]: #_Toc69819068
   [35]: media/image1.jpeg 
   [36]: media/image2.jpeg
   [37]: media/image3.jpeg 
@@ -10256,910 +10281,913 @@ Meaning you can also build this ISO yourself from their scripts if you do not tr
   [52]: https://web.archive.org/web/https://github.com/alecmuffett/dohot
   [53]: media/image4.jpeg 
   [54]: https://web.archive.org/web/https://github.com/Eloston/ungoogled-chromium
-  [55]: https://yewtu.be/watch?v=siCk4pGGcqA
-  [56]: https://web.archive.org/web/https://policies.google.com/privacy
-  [57]: https://web.archive.org/web/https://www.scss.tcd.ie/doug.leith/apple_google.pdf
-  [58]: https://web.archive.org/web/https://www.apple.com/legal/privacy/en-ww/
-  [59]: https://web.archive.org/web/https://support.apple.com/en-us/HT202100
-  [60]: https://web.archive.org/web/https://docs.microsoft.com/en-us/windows/privacy/required-windows-diagnostic-data-events-and-fields-2004
-  [61]: https://web.archive.org/web/https://docs.microsoft.com/en-us/windows/privacy/windows-diagnostic-data
-  [62]: https://web.archive.org/web/https://support.apple.com/guide/mac-help/share-analytics-information-mac-apple-mh27990/mac
-  [63]: https://web.archive.org/web/https://ubuntu.com/desktop/statistics
-  [64]: https://web.archive.org/web/http://rfpose.csail.mit.edu/
-  [65]: https://yewtu.be/watch?v=HgDdaMy8KNE
-  [66]: media/image5.jpeg
-  [67]: https://web.archive.org/web/https://twitter.com/idf/status/1125066395010699264
-  [68]: https://web.archive.org/web/https://www.shodan.io/
-  [69]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Radio-frequency_identification
-  [70]: media/image6.jpeg
-  [71]: https://yewtu.be/watch?v=VVdmmN0su6E
-  [72]: https://yewtu.be/watch?v=hdCs6bPM4is
-  [73]: https://web.archive.org/web/https://theintercept.com/2021/01/18/leak-zoom-meeting/
-  [74]: https://web.archive.org/web/https://www.eff.org/issues/printers
-  [75]: https://yewtu.be/watch?v=izMGMsIZK4U
-  [76]: https://web.archive.org/web/https://www.eff.org/pages/list-printers-which-do-or-do-not-display-tracking-dots
-  [77]: https://web.archive.org/web/https://www.whonix.org/wiki/Printing_and_Scanning
-  [78]: https://web.archive.org/web/https://github.com/beurtschipper/Depix
-  [79]: media/image7.jpeg
-  [80]: https://web.archive.org/web/https://medium.com/@somdevsangwan/unblurring-images-for-osint-and-more-part-1-5ee36db6a70b
-  [81]: https://web.archive.org/web/https://medium.com/@somdevsangwan/deblurring-images-for-osint-part-2-ba564af8eb5d
-  [82]: media/image8.jpeg 
-  [83]: https://web.archive.org/web/https://github.com/subeeshvasu/Awesome-Deblurring
-  [84]: https://web.archive.org/web/https://www.myheritage.com/photo-enhancer
-  [85]: media/image9.jpg 
-  [86]: media/image10.jpeg
-  [87]: media/image11.jpeg
-  [88]: media/image12.jpeg
-  [89]: https://web.archive.org/web/https://github.com/Attacks-on-Tor/Attacks-on-Tor
-  [90]: https://web.archive.org/web/https://www.researchgate.net/publication/323627387_Shedding_Light_on_the_Dark_Corners_of_the_Internet_A_Survey_of_Tor_Research
-  [91]: https://web.archive.org/web/https://svn-archive.torproject.org/svn/projects/design-paper/tor-design.pdf
-  [92]: https://web.archive.org/web/https://bitcoin.org/en/you-need-to-know
-  [93]: https://web.archive.org/web/https://bitcoin.org/en/protect-your-privacy
-  [94]: https://yewtu.be/watch?v=mYsTBPqbya8
-  [95]: https://yewtu.be/watch?v=bKH5nGLgi08&t=2834s
-  [96]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Transient_execution_CPU_vulnerability
-  [97]: https://web.archive.org/web/https://github.com/speed47/spectre-meltdown-checker
-  [98]: https://web.archive.org/web/https://www.grc.com/inspectre.htm
-  [99]: https://web.archive.org/web/https://www.whonix.org/wiki/Spectre_Meltdown
-  [100]: https://yewtu.be/watch?v=7v3JR4Wlw4Q
-  [101]: https://web.archive.org/web/https://shop.hak5.org/products/usb-rubber-ducky-deluxe
-  [102]: https://yewtu.be/watch?v=V5mBJHotZv0
-  [103]: https://web.archive.org/web/https://www.keelog.com/
-  [104]: https://web.archive.org/web/https://www.aliexpress.com/i/4000710369016.html
-  [105]: https://web.archive.org/web/https://support.apple.com/en-us/HT202303
-  [106]: https://web.archive.org/web/https://faq.whatsapp.com/android/chats/about-google-drive-backups/
-  [107]: https://web.archive.org/web/https://www.dropbox.com/privacy
-  [108]: https://web.archive.org/web/https://privacy.microsoft.com/en-us/privacystatement
-  [109]: https://web.archive.org/web/https://link.springer.com/10.1007/978-1-4614-7163-9_110198-1
-  [110]: https://web.archive.org/web/https://www.sciencedirect.com/science/article/pii/S1877042811013747/pdf?md5=253d8f1bb615d5dee195d353dc077d46&pid=1-s2.0-S1877042811013747-main.pdf
-  [111]: https://web.archive.org/web/https://www.researchgate.net/publication/300562034_Using_Social_Networks_Data_for_Behavior_and_Sentiment_Analysis
-  [112]: https://web.archive.org/web/https://www.academia.edu/30936118/A_Survey_on_User_Behaviour_Analysis_in_Social_Networks
-  [113]: https://web.archive.org/web/https://sci-hub.do/10.1007/978-3-030-02592-2
-  [114]: https://web.archive.org/web/https://docs.google.com/spreadsheets/d/18rtqh8EG2q1xBo2cLNyhIDuK9jrPGwYr9DI2UncoqJQ/edit
-  [115]: https://web.archive.org/web/https://github.com/jivoi/awesome-osint
-  [116]: https://yewtu.be/playlist?list=PLrFPX1Vfqk3ehZKSFeb9pVIHqxqrNW8Sy
-  [117]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2019/12/26/guide-to-using-reverse-image-search-for-investigations/
-  [118]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2019/02/19/using-the-new-russian-facial-recognition-site-searchface-ru/
-  [119]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2018/10/24/dali-warhol-boshirov-determining-time-alleged-photograph-skripal-suspect-chepiga/
-  [120]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2017/06/30/advanced-guide-verifying-video-content/
-  [121]: https://web.archive.org/web/https://www.bellingcat.com/resources/2020/12/03/using-the-sun-and-the-shadows-for-geolocation/
-  [122]: https://web.archive.org/web/https://www.bellingcat.com/news/uk-and-europe/2021/01/27/navalny-poison-squad-implicated-in-murders-of-three-russian-activists/
-  [123]: https://web.archive.org/web/https://www.bellingcat.com/news/2021/03/19/berlin-assassination-new-evidence-on-suspected-fsb-hitman-passed-to-german-investigators/
-  [124]: media/image13.jpg 
-  [125]: https://web.archive.org/web/https://media.ccc.de/v/rc3-11406-spot_the_surveillance
-  [126]: https://web.archive.org/web/https://www.eff.org/sls
-  [127]: https://web.archive.org/web/https://www.respeecher.com/
-  [128]: https://web.archive.org/web/https://www.descript.com/overdub
-  [129]: https://yewtu.be/watch?v=t5yw5cR79VA
-  [130]: https://web.archive.org/web/https://www.reflectacles.com/
-  [131]: https://web.archive.org/web/https://amiunique.org/links
-  [132]: https://web.archive.org/web/https://brave.com/brave-fingerprinting-and-privacy-budgets/
-  [133]: https://web.archive.org/web/https://palant.info/2020/12/10/how-anti-fingerprinting-extensions-tend-to-make-fingerprinting-easier/
-  [134]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Advance-fee_scam
-  [135]: https://yewtu.be/watch?v=Z20XNp-luNA
-  [136]: https://web.archive.org/web/https://www.upturn.org/reports/2020/mass-extraction/
-  [137]: https://web.archive.org/web/https://www.nytimes.com/2020/10/21/technology/iphone-encryption-police.html
-  [138]: https://web.archive.org/web/https://www.vice.com/en/article/vbxxxd/unlock-iphone-ios11-graykey-grayshift-police
-  [139]: https://web.archive.org/web/http://encase-docs.opentext.com/documentation/encase/forensic/8.07/Content/Resources/External%20Files/EnCase%20Forensic%20v8.07%20User%20Guide.pdf
-  [140]: https://web.archive.org/web/https://accessdata.com/products-services/forensic-toolkit-ftk
-  [141]: https://web.archive.org/web/https://latacora.micro.blog/2018/04/03/cryptographic-right-answers.html
-  [142]: https://web.archive.org/web/https://buttondown.email/cryptography-dispatches/archive/cryptography-dispatches-the-most-backdoor-looking/
-  [143]: https://web.archive.org/web/https://www.cryptofails.com/
-  [144]: media/image14.jpeg 
-  [145]: https://web.archive.org/web/https://cyber.bgu.ac.il/advanced-cyber/airgap
-  [146]: https://yewtu.be/watch?v=mSNt4h7EDKo
-  [147]: https://yewtu.be/watch?v=1kBGDHVr7x0
-  [148]: https://yewtu.be/watch?v=om5fNqKjj2M
-  [149]: https://yewtu.be/watch?v=auoYKSzdOj4
-  [150]: https://yewtu.be/watch?v=v2_sZIfZkDQ
-  [151]: https://yewtu.be/watch?v=4vIu8ld68fc
-  [152]: https://yewtu.be/watch?v=E28V1t-k8Hk
-  [153]: https://yewtu.be/watch?v=H7lQXmSLiP8
-  [154]: https://yewtu.be/watch?v=RChj7Mg3rC4
-  [155]: https://yewtu.be/watch?v=2OzTWiGl1rM&t=20s
-  [156]: https://yewtu.be/watch?v=yz8E5n1Tzlo
-  [157]: https://yewtu.be/watch?v=2WtiHZNeveY
-  [158]: https://yewtu.be/watch?v=ZrkZUO2g4DE
-  [159]: https://yewtu.be/watch?v=XGD343nq1dg
-  [160]: https://yewtu.be/watch?v=vhNnc0ln63c
-  [161]: https://web.archive.org/web/https://arxiv.org/abs/1804.04014
-  [162]: https://yewtu.be/watch?v=t32QvpfOHqw
-  [163]: https://yewtu.be/watch?v=YKRtFgunyj4
-  [164]: https://web.archive.org/web/https://www.whonix.org/wiki/Data_Collection_Techniques
-  [165]: https://web.archive.org/web/https://tosdr.org/
-  [166]: https://web.archive.org/web/https://www.eff.org/issues/privacy
-  [167]: https://web.archive.org/web/https://en.wikipedia.org/wiki/List_of_government_mass_surveillance_projects
-  [168]: https://web.archive.org/web/https://www.gwern.net/Death-Note-Anonymity
-  [169]: https://web.archive.org/web/https://www.freehaven.net/anonbib/date.html
-  [170]: https://web.archive.org/web/https://transparencyreport.google.com/user-data/overview
-  [171]: https://web.archive.org/web/https://transparency.facebook.com/
-  [172]: https://web.archive.org/web/https://www.apple.com/legal/transparency/
-  [173]: https://web.archive.org/web/https://www.cloudflare.com/transparency/
-  [174]: https://web.archive.org/web/https://www.snap.com/en-US/privacy/transparency
-  [175]: https://web.archive.org/web/https://t.me/transparency
-  [176]: https://web.archive.org/web/https://www.microsoft.com/en-us/corporate-responsibility/law-enforcement-requests-report
-  [177]: https://web.archive.org/web/https://www.amazon.com/gp/help/customer/display.html?nodeId=GYSDRGWQ2C2CRYEF
-  [178]: https://web.archive.org/web/https://www.dropbox.com/transparency
-  [179]: https://web.archive.org/web/https://blog.discord.com/discord-transparency-report-jan-june-2020-2ef4a3ee346d
-  [180]: https://web.archive.org/web/https://github.blog/2021-02-25-2020-transparency-report/
-  [181]: https://web.archive.org/web/https://www.snap.com/en-US/privacy/transparency/
-  [182]: https://web.archive.org/web/https://www.tiktok.com/safety/resources/transparency-report?lang=en
-  [183]: https://web.archive.org/web/https://www.reddit.com/wiki/transparency
-  [184]: https://web.archive.org/web/https://transparency.twitter.com/
-  [185]: https://yewtu.be/watch?v=euSsqXO53GY
-  [186]: https://web.archive.org/web/https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZT_SECURITY_MODEL_UOO115131-21.PDF
-  [187]: media/image15.jpg 
-  [188]: https://web.archive.org/web/https://www.whonix.org/wiki/Warning
-  [189]: https://web.archive.org/web/https://www.whonix.org/wiki/Dev/Threat_Model
-  [190]: https://web.archive.org/web/https://www.whonix.org/wiki/Comparison_with_Others
-  [191]: https://web.archive.org/web/https://ssd.eff.org/en/module/understanding-and-circumventing-network-censorship
-  [192]: https://web.archive.org/web/https://explorer.ooni.org/
-  [193]: https://web.archive.org/web/https://censoredplanet.org/
-  [194]: media/image16.jpeg
-  [195]: https://web.archive.org/web/https://prepaid-data-sim-card.fandom.com/wiki/Registration_Policies_Per_Country
-  [196]: https://web.archive.org/web/https://dtmf.io/
-  [197]: https://web.archive.org/web/https://virtualsim.net/
-  [198]: https://web.archive.org/web/https://www.sms77.io/
-  [199]: https://web.archive.org/web/https://onlinesim.ru/
-  [200]: https://web.archive.org/web/https://cryptwerk.com/companies/sms/xmr/
-  [201]: https://web.archive.org/web/https://syscall.eu/blog/2018/03/12/aigo_part1/
-  [202]: https://web.archive.org/web/https://tails.boum.org/doc/about/warning/index.en.html
-  [203]: https://web.archive.org/web/https://tails.boum.org/install/index.en.html
-  [204]: https://web.archive.org/web/https://tails.boum.org/doc/first_steps/welcome_screen/bridge_mode/index.en.html
-  [205]: https://web.archive.org/web/https://2019.www.torproject.org/docs/bridges
-  [206]: https://web.archive.org/web/https://github.com/aforensics/HiddenVM
-  [207]: media/image17.jpg 
-  [208]: https://web.archive.org/web/https://www.whonix.org/wiki/Whonix-Host
-  [209]: https://web.archive.org/web/https://defuse.ca/truecrypt-plausible-deniability-useless-by-game-theory.htm
-  [210]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis
-  [211]: https://web.archive.org/web/https://github.com/aforensics/HiddenVM/releases
-  [212]: https://web.archive.org/web/https://www.whonix.org/wiki/VirtualBox/XFCE
-  [213]: https://web.archive.org/web/https://puri.sm/
-  [214]: https://web.archive.org/web/https://system76.com/
-  [215]: https://web.archive.org/web/https://freundschafter.com/research/system-alternatives-without-intel-me-iamt-and-amd-psp-secure-technology/
-  [216]: https://web.archive.org/web/https://libreboot.org/docs/hardware/
-  [217]: https://web.archive.org/web/https://coreboot.org/status/board-status.html
-  [218]: https://web.archive.org/web/https://store.hp.com/us/en/tech-takes/how-to-enter-bios-setup-windows-pcs
-  [219]: https://yewtu.be/watch?v=QDSlWa9xQuA
-  [220]: https://yewtu.be/watch?v=0fZdL3ufVOI
-  [221]: https://web.archive.org/web/https://support.apple.com/en-au/HT204455
-  [222]: https://web.archive.org/web/https://support.apple.com/en-gb/guide/security/sec28382c9ca/web
-  [223]: https://web.archive.org/web/https://mullvad.net/en/help/how-tamper-protect-laptop/
-  [224]: media/image18.jpeg
-  [225]: media/image19.jpeg
-  [226]: https://web.archive.org/web/https://www.whonix.org/wiki/Cold_Boot_Attack_Defense
-  [227]: https://web.archive.org/web/https://www.whonix.org/wiki/Protection_Against_Physical_Attacks
-  [228]: https://web.archive.org/web/https://github.com/0xPoly/Centry
-  [229]: https://web.archive.org/web/https://github.com/AnonymousPlanet/Centry
-  [230]: https://web.archive.org/web/https://github.com/hephaest0s/usbkill
-  [231]: https://web.archive.org/web/https://github.com/Lvl4Sword/Killer
-  [232]: https://web.archive.org/web/https://askubuntu.com/questions/153245/how-to-wipe-ram-on-shutdown-prevent-cold-boot-attacks
-  [233]: https://web.archive.org/web/https://github.com/QubesOS/qubes-antievilmaid
-  [234]: https://web.archive.org/web/https://www.sans.org/security-resources/posters/windows-forensic-analysis/170/download
-  [235]: https://web.archive.org/web/https://www.whonix.org/wiki/Full_Disk_Encryption
-  [236]: https://web.archive.org/web/https://madaidans-insecurities.github.io/linux.html
-  [237]: https://web.archive.org/web/https://ubuntu.com/tutorials/install-ubuntu-desktop
-  [238]: https://web.archive.org/web/https://help.ubuntu.com/community/ManualFullSystemEncryption
-  [239]: https://web.archive.org/web/https://vitux.com/how-to-force-ubuntu-to-stop-collecting-your-data-from-your-pc/
-  [240]: https://web.archive.org/web/https://www.addictivetips.com/ubuntu-linux-tips/disable-bluetooth-in-ubuntu/
-  [241]: https://web.archive.org/web/https://www.linuxuprising.com/2019/07/how-to-completely-disable-tracker.html
-  [242]: https://web.archive.org/web/https://help.ubuntu.com/16.04/ubuntu-help/power-hibernate.html
-  [243]: https://web.archive.org/web/http://ubuntuhandbook.org/index.php/2020/05/lid-close-behavior-ubuntu-20-04/
-  [244]: https://web.archive.org/web/https://tipsonubuntu.com/2018/04/28/change-lid-close-action-ubuntu-18-04-lts/
-  [245]: https://web.archive.org/web/https://help.ubuntu.com/community/EnableHibernateWithEncryptedSwap
-  [246]: https://web.archive.org/web/https://help.ubuntu.com/community/AnonymizingNetworkMACAddresses
-  [247]: https://web.archive.org/web/https://josh.works/shell-script-basics-change-mac-address
-  [248]: https://web.archive.org/web/https://madaidans-insecurities.github.io/guides/linux-hardening.html
-  [249]: https://web.archive.org/web/https://github.com/drduh/macOS-Security-and-Privacy-Guide
-  [250]: https://web.archive.org/web/https://support.apple.com/en-us/HT204455
-  [251]: https://web.archive.org/web/https://sneak.berlin/20201112/your-computer-isnt-yours/
-  [252]: https://web.archive.org/web/https://blog.jacopo.io/en/post/apple-ocsp/
-  [253]: https://web.archive.org/web/https://technitium.com/tmac/
-  [254]: https://web.archive.org/web/https://www.veracrypt.fr/en/Downloads.html
-  [255]: https://web.archive.org/web/https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/disable-and-re-enable-hibernation
-  [256]: https://web.archive.org/web/https://www.veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html
-  [257]: https://web.archive.org/web/https://www.veracrypt.fr/en/Security%20Requirements%20for%20Hidden%20Volumes.html
-  [258]: media/image20.jpeg
-  [259]: https://web.archive.org/web/https://www.veracrypt.fr/en/Protection%20of%20Hidden%20Volumes.html
-  [260]: https://web.archive.org/web/https://www.whonix.org/wiki/KVM
-  [261]: media/image21.jpg 
-  [262]: media/image22.jpg 
-  [263]: https://web.archive.org/web/https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor
-  [264]: media/image23.jpg 
-  [265]: media/image24.jpg 
-  [266]: Anonymized#_Your_
-  [267]: https://web.archive.org/web/https://www.whonix.org/wiki/Stream_Isolation
-  [268]: https://web.archive.org/web/https://tails.boum.org/contribute/design/stream_isolation/
-  [269]: https://web.archive.org/web/https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table
-  [270]: https://web.archive.org/web/https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor
-  [271]: https://web.archive.org/web/https://www.whonix.org/wiki/Comparison_Of_Tor_with_CGI_Proxies,_Proxy_Chains,_and_VPN_Services
-  [272]: https://web.archive.org/web/https://www.whonix.org/wiki/Why_does_Whonix_use_Tor
-  [273]: https://web.archive.org/web/https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study
-  [274]: https://web.archive.org/web/https://gist.github.com/joepie91/5a9909939e6ce7d09e29
-  [275]: https://web.archive.org/web/https://schub.wtf/blog/2019/04/08/very-precarious-narrative.html
-  [276]: https://web.archive.org/web/https://gitlab.torproject.org/legacy/trac/-/wikis/doc/TorPlusVPN
-  [277]: https://web.archive.org/web/https://gitlab.tails.boum.org/tails/blueprints/-/wikis/vpn_support/
-  [278]: https://web.archive.org/web/https://tails.boum.org/support/faq/index.en.html
-  [279]: https://web.archive.org/web/https://www.whonix.org/wiki/Tunnels/Introduction
-  [280]: https://web.archive.org/web/https://www.whonix.org/wiki/Tunnels/Connecting_to_Tor_before_a_VPN
-  [281]: media/image25.jpg 
-  [282]: media/image26.jpg 
-  [283]: https://web.archive.org/web/https://www.virtualbox.org/wiki/Downloads
-  [284]: https://web.archive.org/web/https://www.whonix.org/wiki/Download
-  [285]: https://web.archive.org/web/https://www.whonix.org/wiki/Virtualization_Platform_Security
-  [286]: https://web.archive.org/web/https://www.whonix.org/wiki/Network_Time_Synchronization
-  [287]: https://web.archive.org/web/https://www.virtualbox.org/manual/ch13.html
-  [288]: https://web.archive.org/web/https://www.whonix.org/wiki/Bridges
-  [289]: https://web.archive.org/web/https://www.whonix.org/wiki/Operating_System_Software_and_Updates
-  [290]: https://web.archive.org/web/https://www.whonix.org/wiki/DoNot
-  [291]: https://web.archive.org/web/https://www.whonix.org/wiki/Documentation
-  [292]: https://web.archive.org/web/https://www.whonix.org/wiki/Install_Software
-  [293]: https://web.archive.org/web/https://www.whonix.org/wiki/Anti-Forensics_Precautions
-  [294]: https://web.archive.org/web/https://www.whonix.org/wiki/VM_Fingerprinting
-  [295]: https://web.archive.org/web/https://www.whonix.org/wiki/Other_Operating_Systems
-  [296]: https://web.archive.org/web/https://ameliorated.info/
-  [297]: https://web.archive.org/web/https://brave.com/download/
-  [298]: https://web.archive.org/web/https://www.android-x86.org/documentation/virtualbox.html
-  [299]: https://web.archive.org/web/https://www.wikigain.com/install-macos-catalina-on-virtualbox-on-windows/
-  [300]: https://web.archive.org/web/https://www.wikigain.com/how-to-install-macos-big-sur-on-virtualbox-on-windows-pc/
-  [301]: https://web.archive.org/web/https://github.com/myspaghetti/macos-virtualbox
+  [55]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Radio-frequency_identification
+  [56]: https://web.archive.org/web/http://rfpose.csail.mit.edu/
+  [57]: https://yewtu.be/watch?v=HgDdaMy8KNE
+  [58]: media/image5.jpeg 
+  [59]: https://yewtu.be/watch?v=7v3JR4Wlw4Q
+  [60]: media/image6.jpeg 
+  [61]: media/image7.jpeg 
+  [62]: media/image8.jpeg 
+  [63]: https://web.archive.org/web/https://github.com/Attacks-on-Tor/Attacks-on-Tor
+  [64]: https://web.archive.org/web/https://www.researchgate.net/publication/323627387_Shedding_Light_on_the_Dark_Corners_of_the_Internet_A_Survey_of_Tor_Research
+  [65]: https://web.archive.org/web/https://svn-archive.torproject.org/svn/projects/design-paper/tor-design.pdf
+  [66]: https://yewtu.be/watch?v=siCk4pGGcqA
+  [67]: https://yewtu.be/watch?v=mYsTBPqbya8
+  [68]: https://yewtu.be/watch?v=bKH5nGLgi08&t=2834s
+  [69]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Transient_execution_CPU_vulnerability
+  [70]: https://web.archive.org/web/https://github.com/speed47/spectre-meltdown-checker
+  [71]: https://web.archive.org/web/https://www.grc.com/inspectre.htm
+  [72]: https://web.archive.org/web/https://www.whonix.org/wiki/Spectre_Meltdown
+  [73]: https://web.archive.org/web/https://policies.google.com/privacy
+  [74]: https://web.archive.org/web/https://www.scss.tcd.ie/doug.leith/apple_google.pdf
+  [75]: https://web.archive.org/web/https://www.apple.com/legal/privacy/en-ww/
+  [76]: https://web.archive.org/web/https://support.apple.com/en-us/HT202100
+  [77]: https://web.archive.org/web/https://docs.microsoft.com/en-us/windows/privacy/required-windows-diagnostic-data-events-and-fields-2004
+  [78]: https://web.archive.org/web/https://docs.microsoft.com/en-us/windows/privacy/windows-diagnostic-data
+  [79]: https://web.archive.org/web/https://support.apple.com/guide/mac-help/share-analytics-information-mac-apple-mh27990/mac
+  [80]: https://web.archive.org/web/https://ubuntu.com/desktop/statistics
+  [81]: https://web.archive.org/web/https://www.shodan.io/
+  [82]: https://web.archive.org/web/https://twitter.com/idf/status/1125066395010699264
+  [83]: https://web.archive.org/web/https://link.springer.com/10.1007/978-1-4614-7163-9_110198-1
+  [84]: https://web.archive.org/web/https://www.sciencedirect.com/science/article/pii/S1877042811013747/pdf?md5=253d8f1bb615d5dee195d353dc077d46&pid=1-s2.0-S1877042811013747-main.pdf
+  [85]: https://web.archive.org/web/https://www.researchgate.net/publication/300562034_Using_Social_Networks_Data_for_Behavior_and_Sentiment_Analysis
+  [86]: https://web.archive.org/web/https://www.academia.edu/30936118/A_Survey_on_User_Behaviour_Analysis_in_Social_Networks
+  [87]: https://web.archive.org/web/https://sci-hub.do/10.1007/978-3-030-02592-2
+  [88]: https://web.archive.org/web/https://docs.google.com/spreadsheets/d/18rtqh8EG2q1xBo2cLNyhIDuK9jrPGwYr9DI2UncoqJQ/edit
+  [89]: https://web.archive.org/web/https://github.com/jivoi/awesome-osint
+  [90]: https://web.archive.org/web/https://jakecreps.com/tag/osint-tools/
+  [91]: https://yewtu.be/playlist?list=PLrFPX1Vfqk3ehZKSFeb9pVIHqxqrNW8Sy
+  [92]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2019/12/26/guide-to-using-reverse-image-search-for-investigations/
+  [93]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2019/02/19/using-the-new-russian-facial-recognition-site-searchface-ru/
+  [94]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2018/10/24/dali-warhol-boshirov-determining-time-alleged-photograph-skripal-suspect-chepiga/
+  [95]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2017/06/30/advanced-guide-verifying-video-content/
+  [96]: https://web.archive.org/web/https://www.bellingcat.com/resources/2020/12/03/using-the-sun-and-the-shadows-for-geolocation/
+  [97]: https://web.archive.org/web/https://www.bellingcat.com/news/uk-and-europe/2021/01/27/navalny-poison-squad-implicated-in-murders-of-three-russian-activists/
+  [98]: https://web.archive.org/web/https://www.bellingcat.com/news/2021/03/19/berlin-assassination-new-evidence-on-suspected-fsb-hitman-passed-to-german-investigators/
+  [99]: media/image9.jpg 
+  [100]: https://web.archive.org/web/https://media.ccc.de/v/rc3-11406-spot_the_surveillance
+  [101]: https://web.archive.org/web/https://www.eff.org/sls
+  [102]: https://web.archive.org/web/https://www.respeecher.com/
+  [103]: https://web.archive.org/web/https://www.descript.com/overdub
+  [104]: https://yewtu.be/watch?v=t5yw5cR79VA
+  [105]: https://web.archive.org/web/https://www.reflectacles.com/
+  [106]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Advance-fee_scam
+  [107]: https://yewtu.be/watch?v=Z20XNp-luNA
+  [108]: https://yewtu.be/watch?v=VVdmmN0su6E
+  [109]: https://yewtu.be/watch?v=hdCs6bPM4is
+  [110]: https://web.archive.org/web/https://shop.hak5.org/products/usb-rubber-ducky-deluxe
+  [111]: https://yewtu.be/watch?v=V5mBJHotZv0
+  [112]: https://web.archive.org/web/https://www.keelog.com/
+  [113]: https://web.archive.org/web/https://www.aliexpress.com/i/4000710369016.html
+  [114]: media/image10.jpeg 
+  [115]: https://web.archive.org/web/https://mattw.io/youtube-geofind/location
+  [116]: https://web.archive.org/web/https://theintercept.com/2021/01/18/leak-zoom-meeting/
+  [117]: https://web.archive.org/web/https://www.eff.org/issues/printers
+  [118]: https://yewtu.be/watch?v=izMGMsIZK4U
+  [119]: https://web.archive.org/web/https://www.eff.org/pages/list-printers-which-do-or-do-not-display-tracking-dots
+  [120]: https://web.archive.org/web/https://www.whonix.org/wiki/Printing_and_Scanning
+  [121]: https://web.archive.org/web/https://github.com/beurtschipper/Depix
+  [122]: media/image11.jpeg
+  [123]: https://web.archive.org/web/https://medium.com/@somdevsangwan/unblurring-images-for-osint-and-more-part-1-5ee36db6a70b
+  [124]: https://web.archive.org/web/https://medium.com/@somdevsangwan/deblurring-images-for-osint-part-2-ba564af8eb5d
+  [125]: media/image12.jpeg 
+  [126]: https://web.archive.org/web/https://github.com/subeeshvasu/Awesome-Deblurring
+  [127]: https://web.archive.org/web/https://www.myheritage.com/photo-enhancer
+  [128]: media/image13.jpg 
+  [129]: https://web.archive.org/web/https://bitcoin.org/en/you-need-to-know
+  [130]: https://web.archive.org/web/https://bitcoin.org/en/protect-your-privacy
+  [131]: https://web.archive.org/web/https://support.apple.com/en-us/HT202303
+  [132]: https://web.archive.org/web/https://faq.whatsapp.com/android/chats/about-google-drive-backups/
+  [133]: https://web.archive.org/web/https://www.dropbox.com/privacy
+  [134]: https://web.archive.org/web/https://privacy.microsoft.com/en-us/privacystatement
+  [135]: https://web.archive.org/web/https://amiunique.org/links
+  [136]: https://web.archive.org/web/https://brave.com/brave-fingerprinting-and-privacy-budgets/
+  [137]: https://web.archive.org/web/https://palant.info/2020/12/10/how-anti-fingerprinting-extensions-tend-to-make-fingerprinting-easier/
+  [138]: https://web.archive.org/web/https://www.upturn.org/reports/2020/mass-extraction/
+  [139]: https://web.archive.org/web/https://www.nytimes.com/2020/10/21/technology/iphone-encryption-police.html
+  [140]: https://web.archive.org/web/https://www.vice.com/en/article/vbxxxd/unlock-iphone-ios11-graykey-grayshift-police
+  [141]: https://web.archive.org/web/http://encase-docs.opentext.com/documentation/encase/forensic/8.07/Content/Resources/External%20Files/EnCase%20Forensic%20v8.07%20User%20Guide.pdf
+  [142]: https://web.archive.org/web/https://accessdata.com/products-services/forensic-toolkit-ftk
+  [143]: https://web.archive.org/web/https://latacora.micro.blog/2018/04/03/cryptographic-right-answers.html
+  [144]: https://web.archive.org/web/https://buttondown.email/cryptography-dispatches/archive/cryptography-dispatches-the-most-backdoor-looking/
+  [145]: https://web.archive.org/web/https://www.cryptofails.com/
+  [146]: media/image14.jpeg 
+  [147]: https://web.archive.org/web/https://cyber.bgu.ac.il/advanced-cyber/airgap
+  [148]: https://yewtu.be/watch?v=mSNt4h7EDKo
+  [149]: https://yewtu.be/watch?v=1kBGDHVr7x0
+  [150]: https://yewtu.be/watch?v=om5fNqKjj2M
+  [151]: https://yewtu.be/watch?v=auoYKSzdOj4
+  [152]: https://yewtu.be/watch?v=v2_sZIfZkDQ
+  [153]: https://yewtu.be/watch?v=4vIu8ld68fc
+  [154]: https://yewtu.be/watch?v=E28V1t-k8Hk
+  [155]: https://yewtu.be/watch?v=H7lQXmSLiP8
+  [156]: https://yewtu.be/watch?v=RChj7Mg3rC4
+  [157]: https://yewtu.be/watch?v=2OzTWiGl1rM&t=20s
+  [158]: https://yewtu.be/watch?v=yz8E5n1Tzlo
+  [159]: https://yewtu.be/watch?v=2WtiHZNeveY
+  [160]: https://yewtu.be/watch?v=ZrkZUO2g4DE
+  [161]: https://yewtu.be/watch?v=XGD343nq1dg
+  [162]: https://yewtu.be/watch?v=vhNnc0ln63c
+  [163]: https://web.archive.org/web/https://arxiv.org/abs/1804.04014
+  [164]: https://yewtu.be/watch?v=t32QvpfOHqw
+  [165]: https://yewtu.be/watch?v=YKRtFgunyj4
+  [166]: https://web.archive.org/web/https://www.whonix.org/wiki/Data_Collection_Techniques
+  [167]: https://web.archive.org/web/https://tosdr.org/
+  [168]: https://web.archive.org/web/https://www.eff.org/issues/privacy
+  [169]: https://web.archive.org/web/https://en.wikipedia.org/wiki/List_of_government_mass_surveillance_projects
+  [170]: https://web.archive.org/web/https://www.gwern.net/Death-Note-Anonymity
+  [171]: https://web.archive.org/web/https://www.freehaven.net/anonbib/date.html
+  [172]: https://web.archive.org/web/https://transparencyreport.google.com/user-data/overview
+  [173]: https://web.archive.org/web/https://transparency.facebook.com/
+  [174]: https://web.archive.org/web/https://www.apple.com/legal/transparency/
+  [175]: https://web.archive.org/web/https://www.cloudflare.com/transparency/
+  [176]: https://web.archive.org/web/https://www.snap.com/en-US/privacy/transparency
+  [177]: https://web.archive.org/web/https://t.me/transparency
+  [178]: https://web.archive.org/web/https://www.microsoft.com/en-us/corporate-responsibility/law-enforcement-requests-report
+  [179]: https://web.archive.org/web/https://www.amazon.com/gp/help/customer/display.html?nodeId=GYSDRGWQ2C2CRYEF
+  [180]: https://web.archive.org/web/https://www.dropbox.com/transparency
+  [181]: https://web.archive.org/web/https://blog.discord.com/discord-transparency-report-jan-june-2020-2ef4a3ee346d
+  [182]: https://web.archive.org/web/https://github.blog/2021-02-25-2020-transparency-report/
+  [183]: https://web.archive.org/web/https://www.snap.com/en-US/privacy/transparency/
+  [184]: https://web.archive.org/web/https://www.tiktok.com/safety/resources/transparency-report?lang=en
+  [185]: https://web.archive.org/web/https://www.reddit.com/wiki/transparency
+  [186]: https://web.archive.org/web/https://transparency.twitter.com/
+  [187]: https://yewtu.be/watch?v=euSsqXO53GY
+  [188]: https://web.archive.org/web/https://media.defense.gov/2021/Feb/25/2002588479/-1/-1/0/CSI_EMBRACING_ZT_SECURITY_MODEL_UOO115131-21.PDF
+  [189]: media/image15.jpg 
+  [190]: https://web.archive.org/web/https://www.whonix.org/wiki/Warning
+  [191]: https://web.archive.org/web/https://www.whonix.org/wiki/Dev/Threat_Model
+  [192]: https://web.archive.org/web/https://www.whonix.org/wiki/Comparison_with_Others
+  [193]: https://web.archive.org/web/https://ssd.eff.org/en/module/understanding-and-circumventing-network-censorship
+  [194]: https://web.archive.org/web/https://explorer.ooni.org/
+  [195]: https://web.archive.org/web/https://censoredplanet.org/
+  [196]: media/image16.jpeg
+  [197]: https://web.archive.org/web/https://prepaid-data-sim-card.fandom.com/wiki/Registration_Policies_Per_Country
+  [198]: https://web.archive.org/web/https://dtmf.io/
+  [199]: https://web.archive.org/web/https://virtualsim.net/
+  [200]: https://web.archive.org/web/https://www.sms77.io/
+  [201]: https://web.archive.org/web/https://onlinesim.ru/
+  [202]: https://web.archive.org/web/https://cryptwerk.com/companies/sms/xmr/
+  [203]: https://web.archive.org/web/https://syscall.eu/blog/2018/03/12/aigo_part1/
+  [204]: https://web.archive.org/web/https://tails.boum.org/doc/about/warning/index.en.html
+  [205]: https://web.archive.org/web/https://tails.boum.org/install/index.en.html
+  [206]: https://web.archive.org/web/https://tails.boum.org/doc/first_steps/welcome_screen/bridge_mode/index.en.html
+  [207]: https://web.archive.org/web/https://2019.www.torproject.org/docs/bridges
+  [208]: https://web.archive.org/web/https://github.com/aforensics/HiddenVM
+  [209]: media/image17.jpg 
+  [210]: #tor-over-vpn
+  [211]: https://web.archive.org/web/https://www.whonix.org/wiki/Whonix-Host
+  [212]: https://web.archive.org/web/https://defuse.ca/truecrypt-plausible-deniability-useless-by-game-theory.htm
+  [213]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis
+  [214]: https://web.archive.org/web/https://github.com/aforensics/HiddenVM/releases
+  [215]: https://web.archive.org/web/https://www.whonix.org/wiki/VirtualBox/XFCE
+  [216]: https://web.archive.org/web/https://puri.sm/
+  [217]: https://web.archive.org/web/https://system76.com/
+  [218]: https://web.archive.org/web/https://freundschafter.com/research/system-alternatives-without-intel-me-iamt-and-amd-psp-secure-technology/
+  [219]: https://web.archive.org/web/https://libreboot.org/docs/hardware/
+  [220]: https://web.archive.org/web/https://coreboot.org/status/board-status.html
+  [221]: https://web.archive.org/web/https://store.hp.com/us/en/tech-takes/how-to-enter-bios-setup-windows-pcs
+  [222]: https://yewtu.be/watch?v=QDSlWa9xQuA
+  [223]: https://yewtu.be/watch?v=0fZdL3ufVOI
+  [224]: https://web.archive.org/web/https://support.apple.com/en-au/HT204455
+  [225]: https://web.archive.org/web/https://support.apple.com/en-gb/guide/security/sec28382c9ca/web
+  [226]: https://web.archive.org/web/https://mullvad.net/en/help/how-tamper-protect-laptop/
+  [227]: media/image18.jpeg
+  [228]: media/image19.jpeg
+  [229]: https://web.archive.org/web/https://www.whonix.org/wiki/Cold_Boot_Attack_Defense
+  [230]: https://web.archive.org/web/https://www.whonix.org/wiki/Protection_Against_Physical_Attacks
+  [231]: https://web.archive.org/web/https://github.com/0xPoly/Centry
+  [232]: https://web.archive.org/web/https://github.com/AnonymousPlanet/Centry
+  [233]: https://web.archive.org/web/https://github.com/hephaest0s/usbkill
+  [234]: https://web.archive.org/web/https://github.com/Lvl4Sword/Killer
+  [235]: https://web.archive.org/web/https://askubuntu.com/questions/153245/how-to-wipe-ram-on-shutdown-prevent-cold-boot-attacks
+  [236]: https://web.archive.org/web/https://github.com/QubesOS/qubes-antievilmaid
+  [237]: https://web.archive.org/web/https://www.sans.org/security-resources/posters/windows-forensic-analysis/170/download
+  [238]: https://web.archive.org/web/https://www.whonix.org/wiki/Full_Disk_Encryption
+  [239]: https://web.archive.org/web/https://madaidans-insecurities.github.io/linux.html
+  [240]: https://web.archive.org/web/https://ubuntu.com/tutorials/install-ubuntu-desktop
+  [241]: https://web.archive.org/web/https://help.ubuntu.com/community/ManualFullSystemEncryption
+  [242]: https://web.archive.org/web/https://vitux.com/how-to-force-ubuntu-to-stop-collecting-your-data-from-your-pc/
+  [243]: https://web.archive.org/web/https://www.addictivetips.com/ubuntu-linux-tips/disable-bluetooth-in-ubuntu/
+  [244]: https://web.archive.org/web/https://www.linuxuprising.com/2019/07/how-to-completely-disable-tracker.html
+  [245]: https://web.archive.org/web/https://help.ubuntu.com/16.04/ubuntu-help/power-hibernate.html
+  [246]: https://web.archive.org/web/http://ubuntuhandbook.org/index.php/2020/05/lid-close-behavior-ubuntu-20-04/
+  [247]: https://web.archive.org/web/https://tipsonubuntu.com/2018/04/28/change-lid-close-action-ubuntu-18-04-lts/
+  [248]: https://web.archive.org/web/https://help.ubuntu.com/community/EnableHibernateWithEncryptedSwap
+  [249]: https://web.archive.org/web/https://help.ubuntu.com/community/AnonymizingNetworkMACAddresses
+  [250]: https://web.archive.org/web/https://josh.works/shell-script-basics-change-mac-address
+  [251]: https://web.archive.org/web/https://madaidans-insecurities.github.io/guides/linux-hardening.html
+  [252]: https://web.archive.org/web/https://github.com/drduh/macOS-Security-and-Privacy-Guide
+  [253]: https://web.archive.org/web/https://support.apple.com/en-us/HT204455
+  [254]: https://web.archive.org/web/https://sneak.berlin/20201112/your-computer-isnt-yours/
+  [255]: https://web.archive.org/web/https://blog.jacopo.io/en/post/apple-ocsp/
+  [256]: https://web.archive.org/web/https://technitium.com/tmac/
+  [257]: https://web.archive.org/web/https://www.veracrypt.fr/en/Downloads.html
+  [258]: https://web.archive.org/web/https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/disable-and-re-enable-hibernation
+  [259]: https://web.archive.org/web/https://www.veracrypt.fr/en/VeraCrypt%20Hidden%20Operating%20System.html
+  [260]: https://web.archive.org/web/https://www.veracrypt.fr/en/Security%20Requirements%20for%20Hidden%20Volumes.html
+  [261]: media/image20.jpeg
+  [262]: https://web.archive.org/web/https://www.veracrypt.fr/en/Protection%20of%20Hidden%20Volumes.html
+  [263]: https://web.archive.org/web/https://www.whonix.org/wiki/KVM
+  [264]: media/image21.jpg 
+  [265]: media/image22.jpg 
+  [266]: https://web.archive.org/web/https://gitlab.torproject.org/legacy/trac/-/wikis/org/doc/ListOfServicesBlockingTor
+  [267]: media/image23.jpg 
+  [268]: media/image24.jpg 
+  [269]: https://web.archive.org/web/https://stakey.club/en/decred-via-tor-network/
+  [270]: https://web.archive.org/web/https://www.whonix.org/wiki/Stream_Isolation
+  [271]: https://web.archive.org/web/https://tails.boum.org/contribute/design/stream_isolation/
+  [272]: https://web.archive.org/web/https://www.whonix.org/wiki/Tunnels/Introduction#Comparison_Table
+  [273]: https://web.archive.org/web/https://www.whonix.org/wiki/Tunnels/Connecting_to_a_VPN_before_Tor
+  [274]: https://web.archive.org/web/https://www.whonix.org/wiki/Comparison_Of_Tor_with_CGI_Proxies,_Proxy_Chains,_and_VPN_Services
+  [275]: https://web.archive.org/web/https://www.whonix.org/wiki/Why_does_Whonix_use_Tor
+  [276]: https://web.archive.org/web/https://www.researchgate.net/publication/324251041_Anonymity_communication_VPN_and_Tor_a_comparative_study
+  [277]: https://web.archive.org/web/https://gist.github.com/joepie91/5a9909939e6ce7d09e29
+  [278]: https://web.archive.org/web/https://schub.wtf/blog/2019/04/08/very-precarious-narrative.html
+  [279]: https://web.archive.org/web/https://gitlab.torproject.org/legacy/trac/-/wikis/doc/TorPlusVPN
+  [280]: https://web.archive.org/web/https://gitlab.tails.boum.org/tails/blueprints/-/wikis/vpn_support/
+  [281]: https://web.archive.org/web/https://tails.boum.org/support/faq/index.en.html
+  [282]: https://web.archive.org/web/https://www.whonix.org/wiki/Tunnels/Introduction
+  [283]: https://web.archive.org/web/https://www.whonix.org/wiki/Tunnels/Connecting_to_Tor_before_a_VPN
+  [284]: media/image25.jpg 
+  [285]: media/image26.jpg 
+  [286]: https://web.archive.org/web/https://www.virtualbox.org/wiki/Downloads
+  [287]: https://web.archive.org/web/https://www.whonix.org/wiki/Download
+  [288]: https://web.archive.org/web/https://www.whonix.org/wiki/Virtualization_Platform_Security
+  [289]: https://web.archive.org/web/https://www.whonix.org/wiki/Network_Time_Synchronization
+  [290]: https://web.archive.org/web/https://www.virtualbox.org/manual/ch13.html
+  [291]: https://web.archive.org/web/https://www.whonix.org/wiki/Bridges
+  [292]: https://web.archive.org/web/https://www.whonix.org/wiki/Operating_System_Software_and_Updates
+  [293]: https://web.archive.org/web/https://www.whonix.org/wiki/DoNot
+  [294]: https://web.archive.org/web/https://www.whonix.org/wiki/Documentation
+  [295]: https://web.archive.org/web/https://www.whonix.org/wiki/Install_Software
+  [296]: https://web.archive.org/web/https://www.whonix.org/wiki/Anti-Forensics_Precautions
+  [297]: https://web.archive.org/web/https://www.whonix.org/wiki/VM_Fingerprinting
+  [298]: https://web.archive.org/web/https://www.whonix.org/wiki/Other_Operating_Systems
+  [299]: https://web.archive.org/web/https://ameliorated.info/
+  [300]: https://web.archive.org/web/https://brave.com/download/
+  [301]: https://web.archive.org/web/https://www.android-x86.org/documentation/virtualbox.html
+  [302]: https://web.archive.org/web/https://www.wikigain.com/install-macos-catalina-on-virtualbox-on-windows/
+  [303]: https://web.archive.org/web/https://www.wikigain.com/how-to-install-macos-big-sur-on-virtualbox-on-windows-pc/
+  [304]: https://web.archive.org/web/https://github.com/myspaghetti/macos-virtualbox
   [https://www.whonix.org/wiki/KeePassXC]: https://www.whonix.org/wiki/Keepassxc
-  [302]: https://web.archive.org/web/https://www.whonix.org/wiki/Keepassxc
-  [303]: https://web.archive.org/web/https://keepassxc.org/download/
-  [304]: https://web.archive.org/web/https://keepassxc.org/docs/KeePassXC_GettingStarted.html
+  [305]: https://web.archive.org/web/https://www.whonix.org/wiki/Keepassxc
+  [306]: https://web.archive.org/web/https://keepassxc.org/download/
+  [307]: https://web.archive.org/web/https://keepassxc.org/docs/KeePassXC_GettingStarted.html
   [https://KeePassXC.org/docs/KeePassXC_GettingStarted.html#_microsoft_windows]: https://keepassxc.org/docs/KeePassXC_GettingStarted.html#_microsoft_windows
-  [305]: https://web.archive.org/web/https://www.qubes-os.org/intro/
-  [306]: https://web.archive.org/web/https://www.qubes-os.org/video-tours/
-  [307]: https://web.archive.org/web/https://www.qubes-os.org/doc/getting-started/
-  [308]: https://yewtu.be/watch?v=8cU4hQg6GvU
-  [309]: https://yewtu.be/watch?v=sbN5Bz3v-uA
-  [310]: https://yewtu.be/watch?v=YPAvoFsvSbg
-  [311]: https://web.archive.org/web/https://www.qubes-os.org/hcl/
-  [312]: media/image27.jpg 
-  [313]: media/image28.jpeg
-  [314]: \l
-  [315]: https://web.archive.org/web/https://www.qubes-os.org/doc/installation-guide/
-  [316]: https://web.archive.org/web/https://www.qubes-os.org/faq/
-  [317]: https://web.archive.org/web/https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/vpn.md
-  [318]: https://web.archive.org/web/https://check.torproject.org/
-  [319]: https://web.archive.org/web/https://linuxconfig.org/how-to-create-a-vpn-killswitch-using-iptables-on-linux
-  [320]: https://web.archive.org/web/https://mullvad.net/en/check/
-  [321]: https://web.archive.org/web/https://www.ivpn.net/
-  [322]: https://web.archive.org/web/https://protonvpn.com/support/vpn-ip-change/
-  [323]: https://web.archive.org/web/https://www.whonix.org/wiki/Qubes/DisposableVM
-  [324]: https://web.archive.org/web/https://brave.com/linux/
-  [325]: https://web.archive.org/web/https://github.com/anbox/anbox-modules
-  [326]: https://web.archive.org/web/https://github.com/anbox/anbox/blob/master/docs/install.md
-  [327]: media/image29.jpeg
-  [328]: https://web.archive.org/web/https://github.com/dessant/buster
-  [329]: https://web.archive.org/web/https://www.hcaptcha.com/accessibility
-  [330]: https://web.archive.org/web/https://privacypass.github.io/
-  [331]: media/image30.jpeg
-  [332]: media/image31.jpeg
-  [333]: media/image32.jpeg
-  [334]: https://web.archive.org/web/https://github.com/deepfakes/faceswap
+  [308]: https://web.archive.org/web/https://www.qubes-os.org/intro/
+  [309]: https://web.archive.org/web/https://www.qubes-os.org/video-tours/
+  [310]: https://web.archive.org/web/https://www.qubes-os.org/doc/getting-started/
+  [311]: https://yewtu.be/watch?v=8cU4hQg6GvU
+  [312]: https://yewtu.be/watch?v=sbN5Bz3v-uA
+  [313]: https://yewtu.be/watch?v=YPAvoFsvSbg
+  [314]: https://web.archive.org/web/https://www.qubes-os.org/hcl/
+  [315]: media/image27.jpg 
+  [316]: media/image28.jpeg
+  [317]: https://web.archive.org/web/https://www.qubes-os.org/doc/installation-guide/
+  [318]: https://web.archive.org/web/https://www.qubes-os.org/faq/
+  [319]: https://web.archive.org/web/https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/vpn.md
+  [320]: https://web.archive.org/web/https://check.torproject.org/
+  [321]: https://web.archive.org/web/https://linuxconfig.org/how-to-create-a-vpn-killswitch-using-iptables-on-linux
+  [322]: https://web.archive.org/web/https://mullvad.net/en/check/
+  [323]: https://web.archive.org/web/https://www.ivpn.net/
+  [324]: https://web.archive.org/web/https://protonvpn.com/support/vpn-ip-change/
+  [325]: https://web.archive.org/web/https://www.whonix.org/wiki/Qubes/DisposableVM
+  [326]: https://web.archive.org/web/https://brave.com/linux/
+  [327]: https://web.archive.org/web/https://github.com/anbox/anbox-modules
+  [328]: https://web.archive.org/web/https://github.com/anbox/anbox/blob/master/docs/install.md
+  [329]: media/image29.jpeg
+  [330]: https://web.archive.org/web/https://github.com/dessant/buster
+  [331]: https://web.archive.org/web/https://www.hcaptcha.com/accessibility
+  [332]: https://web.archive.org/web/https://privacypass.github.io/
+  [333]: media/image30.jpeg
+  [334]: media/image31.jpeg
+  [335]: media/image32.jpeg
+  [336]: https://web.archive.org/web/https://github.com/deepfakes/faceswap
   [Online Phone Number (less recommended):]: #online-phone-number-less-recommended
-  [335]: https://web.archive.org/web/https://thispersondoesnotexist.com/
-  [336]: https://web.archive.org/web/https://github.com/NVlabs/stylegan2
-  [337]: https://web.archive.org/web/https://www.myheritage.com/deep-nostalgia
-  [338]: media/image33.jpg 
-  [339]: https://web.archive.org/web/https://github.com/AliaksandrSiarohin/first-order-model
-  [340]: https://web.archive.org/web/https://gendersec.tacticaltech.org/wiki/index.php/Complete_manual
-  [341]: https://web.archive.org/web/https://www.bigdatacloud.com/insights/tor-exit-nodes
-  [342]: https://web.archive.org/web/https://b3rn3d.herokuapp.com/blog/2014/03/05/tor-country-codes/
-  [343]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Facebook_real-name_policy_controversy
-  [344]: https://web.archive.org/web/https://slate.com/technology/2018/02/why-some-americans-are-cheering-germany-for-taking-on-facebooks-real-name-policy.html
-  [345]: https://web.archive.org/web/https://www.theverge.com/2018/2/12/17005746/facebook-real-name-policy-illegal-german-court-rules
-  [346]: https://web.archive.org/web/https://www.pcmag.com/news/german-court-rules-facebooks-real-name-policy-is-illegal
-  [347]: https://web.archive.org/web/https://www.vzbv.de/sites/default/files/downloads/2018/02/14/18-02-12_vzbv_pm_facebook-urteil_en.pdf
-  [348]: https://web.archive.org/web/https://www.reuters.com/article/us-germany-facebook/german-court-rules-facebook-use-of-personal-data-illegal-idUSKBN1FW1FI
-  [349]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Real-name_system
-  [350]: https://web.archive.org/web/https://privacytools.io/
-  [351]: https://web.archive.org/web/https://www.whonix.org/wiki/E-Mail#Anonymity_Friendly_Email_Provider_List
-  [352]: https://web.archive.org/web/https://www.amazon.com/gp/help/customer/display.html?nodeId=202140280
-  [353]: https://web.archive.org/web/https://www.apple.com/legal/internet-services/icloud/en/terms.html
-  [354]: https://web.archive.org/web/https://briarproject.org/privacy-policy/
-  [355]: https://web.archive.org/web/https://discord.com/terms
-  [356]: https://web.archive.org/web/https://element.io/terms-of-service
-  [357]: https://web.archive.org/web/https://www.facebook.com/terms.php
-  [358]: https://web.archive.org/web/https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-terms-of-service
-  [359]: https://web.archive.org/web/https://about.gitlab.com/handbook/legal/subscription-agreement/
-  [360]: https://web.archive.org/web/https://policies.google.com/terms
-  [361]: https://web.archive.org/web/https://www.ycombinator.com/legal/
-  [362]: https://web.archive.org/web/https://help.instagram.com/581066165581870?ref=dp
-  [363]: https://web.archive.org/web/https://jami.net/privacy-policy/
-  [364]: https://web.archive.org/web/https://www.ivpn.net/tos/
-  [365]: https://web.archive.org/web/https://www.linkedin.com/legal/user-agreement
-  [366]: https://web.archive.org/web/https://policy.medium.com/medium-terms-of-service-9db0094a1e0f
-  [367]: https://web.archive.org/web/https://www.microsoft.com/en/servicesagreement/
-  [368]: https://web.archive.org/web/https://mullvad.net/en/help/terms-service/
-  [369]: https://web.archive.org/web/https://njal.la/tos/
-  [370]: https://web.archive.org/web/https://protonmail.com/terms-and-conditions
-  [371]: https://web.archive.org/web/https://protonvpn.com/terms-and-conditions
-  [372]: https://web.archive.org/web/https://www.redditinc.com/policies
-  [373]: https://web.archive.org/web/https://slashdotmedia.com/terms-of-use/
-  [374]: https://web.archive.org/web/https://telegram.org/tos
-  [375]: https://web.archive.org/web/mailto:recover@telegram.org
-  [376]: https://web.archive.org/web/https://tutanota.com/terms/
-  [377]: https://web.archive.org/web/https://www.twitch.tv/p/en/legal/terms-of-service/
-  [378]: https://web.archive.org/web/https://www.whatsapp.com/legal/updates/terms-of-service-eea
-  [379]: media/image34.jpeg
-  [380]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2018/08/23/creating-android-open-source-research-device-pc/
-  [381]: https://yewtu.be/watch?v=zSQtyW_ywZc
-  [382]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Comparison_of_instant_messaging_protocols
-  [383]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Comparison_of_cross-platform_instant_messaging_clients
-  [384]: https://web.archive.org/web/https://www.securemessagingapps.com/
-  [385]: https://web.archive.org/web/https://protonmail.com/blog/whatsapp-alternatives/
-  [386]: https://web.archive.org/web/https://www.whonix.org/wiki/Chat
-  [387]: https://web.archive.org/web/https://briarproject.org/
-  [388]: https://web.archive.org/web/https://onionshare.org/
-  [389]: https://web.archive.org/web/https://jami.net/
-  [390]: https://web.archive.org/web/https://element.io/
-  [391]: https://web.archive.org/web/https://securedrop.org/
-  [392]: https://web.archive.org/web/https://github.com/alecmuffett/real-world-onion-sites
-  [393]: https://web.archive.org/web/https://haveibeenpwned.com/
-  [394]: https://web.archive.org/web/https://www.veracrypt.fr/en/Beginner%27s%20Tutorial.html
-  [395]: https://web.archive.org/web/https://www.qubes-os.org/doc/backup-restore/
-  [396]: https://web.archive.org/web/https://support.apple.com/en-ie/guide/mac-help/mh21241/mac
-  [397]: https://web.archive.org/web/https://support.apple.com/en-ie/guide/mac-help/mh11421/11.0/mac/11.0
-  [398]: https://web.archive.org/web/https://support.apple.com/en-ie/guide/disk-utility/dskutl1010/mac
-  [399]: https://web.archive.org/web/https://www.getmonero.org/community/merchants/
-  [400]: https://web.archive.org/web/https://privacytools.io/providers/hosting/
-  [401]: https://web.archive.org/web/https://njal.la/
-  [402]: https://web.archive.org/web/https://syncthing.net/
-  [403]: media/image35.jpeg
-  [404]: media/image36.jpeg
-  [405]: media/image37.jpeg
-  [406]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Trim_(computing)
-  [407]: media/image38.jpeg
-  [408]: https://web.archive.org/web/https://wiki.archlinux.org/index.php/Solid_state_drive
-  [409]: https://web.archive.org/web/https://www.bleachbit.org/download/linux
-  [410]: https://web.archive.org/web/https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux
-  [411]: https://web.archive.org/web/https://linuxhint.com/completely_wipe_hard_drive_ubuntu/
-  [412]: https://web.archive.org/web/https://linoxide.com/linux-command/commands-wipe-disk-linux/
-  [413]: https://web.archive.org/web/https://wiki.archlinux.org/index.php/Securely_wipe_disk
-  [414]: https://web.archive.org/web/https://ssd.eff.org/en/module/how-delete-your-data-securely-linux
+  [337]: https://web.archive.org/web/https://thispersondoesnotexist.com/
+  [338]: https://web.archive.org/web/https://github.com/NVlabs/stylegan2
+  [339]: https://web.archive.org/web/https://www.myheritage.com/deep-nostalgia
+  [340]: media/image33.jpg 
+  [341]: https://web.archive.org/web/https://github.com/AliaksandrSiarohin/first-order-model
+  [342]: https://web.archive.org/web/https://gendersec.tacticaltech.org/wiki/index.php/Complete_manual
+  [343]: https://web.archive.org/web/https://www.bigdatacloud.com/insights/tor-exit-nodes
+  [344]: https://web.archive.org/web/https://b3rn3d.herokuapp.com/blog/2014/03/05/tor-country-codes/
+  [345]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Facebook_real-name_policy_controversy
+  [346]: https://web.archive.org/web/https://slate.com/technology/2018/02/why-some-americans-are-cheering-germany-for-taking-on-facebooks-real-name-policy.html
+  [347]: https://web.archive.org/web/https://www.theverge.com/2018/2/12/17005746/facebook-real-name-policy-illegal-german-court-rules
+  [348]: https://web.archive.org/web/https://www.pcmag.com/news/german-court-rules-facebooks-real-name-policy-is-illegal
+  [349]: https://web.archive.org/web/https://www.vzbv.de/sites/default/files/downloads/2018/02/14/18-02-12_vzbv_pm_facebook-urteil_en.pdf
+  [350]: https://web.archive.org/web/https://www.reuters.com/article/us-germany-facebook/german-court-rules-facebook-use-of-personal-data-illegal-idUSKBN1FW1FI
+  [351]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Real-name_system
+  [352]: https://web.archive.org/web/https://privacytools.io/
+  [353]: https://web.archive.org/web/https://www.whonix.org/wiki/E-Mail#Anonymity_Friendly_Email_Provider_List
+  [354]: https://web.archive.org/web/https://www.amazon.com/gp/help/customer/display.html?nodeId=202140280
+  [355]: https://web.archive.org/web/https://www.apple.com/legal/internet-services/icloud/en/terms.html
+  [356]: https://web.archive.org/web/https://briarproject.org/privacy-policy/
+  [357]: https://web.archive.org/web/https://discord.com/terms
+  [358]: https://web.archive.org/web/https://element.io/terms-of-service
+  [359]: https://web.archive.org/web/https://www.facebook.com/terms.php
+  [360]: https://web.archive.org/web/https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-terms-of-service
+  [361]: https://web.archive.org/web/https://about.gitlab.com/handbook/legal/subscription-agreement/
+  [362]: https://web.archive.org/web/https://policies.google.com/terms
+  [363]: https://web.archive.org/web/https://www.ycombinator.com/legal/
+  [364]: https://web.archive.org/web/https://help.instagram.com/581066165581870?ref=dp
+  [365]: https://web.archive.org/web/https://jami.net/privacy-policy/
+  [366]: https://web.archive.org/web/https://www.ivpn.net/tos/
+  [367]: https://web.archive.org/web/https://www.linkedin.com/legal/user-agreement
+  [368]: https://web.archive.org/web/https://policy.medium.com/medium-terms-of-service-9db0094a1e0f
+  [369]: https://web.archive.org/web/https://www.microsoft.com/en/servicesagreement/
+  [370]: https://web.archive.org/web/https://mullvad.net/en/help/terms-service/
+  [371]: https://web.archive.org/web/https://njal.la/tos/
+  [372]: https://web.archive.org/web/https://protonmail.com/terms-and-conditions
+  [373]: https://web.archive.org/web/https://protonvpn.com/terms-and-conditions
+  [374]: https://web.archive.org/web/https://www.redditinc.com/policies
+  [375]: https://web.archive.org/web/https://slashdotmedia.com/terms-of-use/
+  [376]: https://web.archive.org/web/https://telegram.org/tos
+  [377]: https://web.archive.org/web/mailto:recover@telegram.org
+  [378]: https://web.archive.org/web/https://tutanota.com/terms/
+  [379]: https://web.archive.org/web/https://www.twitch.tv/p/en/legal/terms-of-service/
+  [380]: https://web.archive.org/web/https://www.whatsapp.com/legal/updates/terms-of-service-eea
+  [381]: media/image34.jpeg
+  [382]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2018/08/23/creating-android-open-source-research-device-pc/
+  [383]: https://yewtu.be/watch?v=zSQtyW_ywZc
+  [384]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Comparison_of_instant_messaging_protocols
+  [385]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Comparison_of_cross-platform_instant_messaging_clients
+  [386]: https://web.archive.org/web/https://www.securemessagingapps.com/
+  [387]: https://web.archive.org/web/https://protonmail.com/blog/whatsapp-alternatives/
+  [388]: https://web.archive.org/web/https://www.whonix.org/wiki/Chat
+  [389]: https://web.archive.org/web/https://briarproject.org/
+  [390]: https://web.archive.org/web/https://onionshare.org/
+  [391]: https://web.archive.org/web/https://jami.net/
+  [392]: https://web.archive.org/web/https://element.io/
+  [393]: https://web.archive.org/web/https://securedrop.org/
+  [394]: https://web.archive.org/web/https://github.com/alecmuffett/real-world-onion-sites
+  [395]: https://web.archive.org/web/https://haveibeenpwned.com/
+  [396]: https://web.archive.org/web/https://www.veracrypt.fr/en/Beginner%27s%20Tutorial.html
+  [397]: https://web.archive.org/web/https://www.qubes-os.org/doc/backup-restore/
+  [398]: https://web.archive.org/web/https://support.apple.com/en-ie/guide/mac-help/mh21241/mac
+  [399]: https://web.archive.org/web/https://support.apple.com/en-ie/guide/mac-help/mh11421/11.0/mac/11.0
+  [400]: https://web.archive.org/web/https://support.apple.com/en-ie/guide/disk-utility/dskutl1010/mac
+  [401]: https://web.archive.org/web/https://www.getmonero.org/community/merchants/
+  [402]: https://web.archive.org/web/https://privacytools.io/providers/hosting/
+  [403]: https://web.archive.org/web/https://njal.la/
+  [404]: https://web.archive.org/web/https://syncthing.net/
+  [405]: media/image35.jpeg
+  [406]: media/image36.jpeg
+  [407]: media/image37.jpeg
+  [408]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Trim_(computing)
+  [409]: media/image38.jpeg
+  [410]: https://web.archive.org/web/https://wiki.archlinux.org/index.php/Solid_state_drive
+  [411]: https://web.archive.org/web/https://www.bleachbit.org/download/linux
+  [412]: https://web.archive.org/web/https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux
+  [413]: https://web.archive.org/web/https://linuxhint.com/completely_wipe_hard_drive_ubuntu/
+  [414]: https://web.archive.org/web/https://linoxide.com/linux-command/commands-wipe-disk-linux/
+  [415]: https://web.archive.org/web/https://wiki.archlinux.org/index.php/Securely_wipe_disk
+  [416]: https://web.archive.org/web/https://ssd.eff.org/en/module/how-delete-your-data-securely-linux
   [Extra Tools Cleaning:]: #extra-tools-cleaning
-  [415]: https://web.archive.org/web/https://eraser.heidi.ie/download/
-  [416]: https://web.archive.org/web/http://killdisk.com/killdisk-freeware.htm
-  [417]: https://web.archive.org/web/https://support.apple.com/en-gb/guide/disk-utility/dskutl14079/mac
-  [418]: https://web.archive.org/web/https://support.apple.com/guide/disk-utility/erase-and-reformat-a-storage-device-dskutl14079/mac
-  [419]: https://web.archive.org/web/https://support.apple.com/guide/disk-utility/encrypt-protect-a-storage-device-password-dskutl35612/mac
-  [420]: media/image39.jpeg
-  [421]: https://web.archive.org/web/https://ssd.eff.org/en/module/how-delete-your-data-securely-windows
-  [422]: https://web.archive.org/web/https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption
-  [423]: https://web.archive.org/web/https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/disk-trim.md
-  [424]: https://web.archive.org/web/https://support.apple.com/en-us/HT210898
-  [425]: media/image40.jpeg
-  [426]: https://web.archive.org/web/http://www.edenwaith.com/products/permanent%20eraser/
-  [427]: https://web.archive.org/web/https://ssd.eff.org/en/module/how-delete-your-data-securely-macos
-  [428]: https://web.archive.org/web/https://www.whonix.org/wiki/System_Hardening_Checklist
-  [429]: https://web.archive.org/web/https://exiftool.org/
-  [430]: https://web.archive.org/web/https://exifcleaner.com/
-  [431]: https://web.archive.org/web/https://www.purevpn.com/internet-privacy/how-to-remove-metadata-from-photos
-  [432]: https://web.archive.org/web/https://sandlab.cs.uchicago.edu/fawkes/
-  [433]: https://web.archive.org/web/https://github.com/Shawn-Shan/fawkes
-  [434]: https://web.archive.org/web/https://lowkey.umiacs.umd.edu/
-  [435]: https://web.archive.org/web/https://adversarial.io/
-  [436]: https://web.archive.org/web/https://github.com/kanzure/pdfparanoia
-  [437]: https://web.archive.org/web/https://support.microsoft.com/en-us/office/remove-hidden-data-and-personal-information-by-inspecting-documents-presentations-or-workbooks-356b7b5d-77af-44fe-a07f-9aa4d085966f
-  [438]: https://web.archive.org/web/https://0xacab.org/jvoisin/mat2
-  [439]: media/image41.JPG 
-  [440]: https://web.archive.org/web/https://www.whonix.org/wiki/VM_Live_Mode
-  [441]: https://web.archive.org/web/https://www.titanium-software.fr/en/onyx.html
-  [442]: https://web.archive.org/web/https://github.com/Qubes-Community/Contents/blob/master/docs/security/security-guidelines.md
-  [443]: https://web.archive.org/web/https://www.whonix.org/wiki/Qubes/AppArmor
-  [444]: https://web.archive.org/web/https://www.whonix.org/wiki/Linux_Kernel_Runtime_Guard_LKRG
-  [445]: https://web.archive.org/web/https://github.com/sundowndev/go-covermyass
-  [446]: https://web.archive.org/web/https://support.microsoft.com/en-us/windows/how-to-open-registry-editor-in-windows-10-deab38e6-91d6-e0aa-4b7c-8878d9e07b11
-  [447]: https://web.archive.org/web/https://privazer.com/en/download-shellbag-analyzer-shellbag-cleaner.php
-  [448]: https://web.archive.org/web/https://privazer.com/en/download.php
-  [449]: https://web.archive.org/web/https://www.bleachbit.org/download
-  [450]: https://web.archive.org/web/https://justdeleteme.xyz/
-  [451]: https://web.archive.org/web/https://justgetmydata.com/
-  [452]: https://web.archive.org/web/https://search.google.com/search-console/remove-outdated-content
-  [453]: https://web.archive.org/web/https://www.bing.com/webmasters/tools/contentremoval
-  [454]: https://web.archive.org/web/https://webmaster.yandex.com/
-  [455]: https://web.archive.org/web/https://webmaster.yandex.com/tools/del-url/
-  [456]: https://web.archive.org/web/https://help.yahoo.com/kb/SLN4530.html
-  [457]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Wikipedia:Courtesy_vanishing
-  [458]: https://web.archive.org/web/https://guardianproject.github.io/haven/
-  [459]: https://web.archive.org/web/https://www.google.com/alerts
-  [460]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Ross_Ulbricht
-  [461]: https://yewtu.be/watch?v=d-7o9xYp7eE
-  [462]: https://yewtu.be/watch?v=eQ2OZKitRwc
+  [417]: https://web.archive.org/web/https://eraser.heidi.ie/download/
+  [418]: https://web.archive.org/web/http://killdisk.com/killdisk-freeware.htm
+  [419]: https://web.archive.org/web/https://support.apple.com/en-gb/guide/disk-utility/dskutl14079/mac
+  [420]: https://web.archive.org/web/https://support.apple.com/guide/disk-utility/erase-and-reformat-a-storage-device-dskutl14079/mac
+  [421]: https://web.archive.org/web/https://support.apple.com/guide/disk-utility/encrypt-protect-a-storage-device-password-dskutl35612/mac
+  [422]: media/image39.jpeg
+  [423]: https://web.archive.org/web/https://ssd.eff.org/en/module/how-delete-your-data-securely-windows
+  [424]: https://web.archive.org/web/https://wiki.archlinux.org/index.php/dm-crypt/Device_encryption
+  [425]: https://web.archive.org/web/https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/disk-trim.md
+  [426]: https://web.archive.org/web/https://support.apple.com/en-us/HT210898
+  [427]: media/image40.jpeg
+  [428]: https://web.archive.org/web/http://www.edenwaith.com/products/permanent%20eraser/
+  [429]: https://web.archive.org/web/https://ssd.eff.org/en/module/how-delete-your-data-securely-macos
+  [430]: https://web.archive.org/web/https://www.whonix.org/wiki/System_Hardening_Checklist
+  [431]: https://web.archive.org/web/https://exiftool.org/
+  [432]: https://web.archive.org/web/https://exifcleaner.com/
+  [433]: https://web.archive.org/web/https://www.purevpn.com/internet-privacy/how-to-remove-metadata-from-photos
+  [434]: https://web.archive.org/web/https://sandlab.cs.uchicago.edu/fawkes/
+  [435]: https://web.archive.org/web/https://github.com/Shawn-Shan/fawkes
+  [436]: https://web.archive.org/web/https://lowkey.umiacs.umd.edu/
+  [437]: https://web.archive.org/web/https://adversarial.io/
+  [438]: https://web.archive.org/web/https://github.com/kanzure/pdfparanoia
+  [439]: https://web.archive.org/web/https://support.microsoft.com/en-us/office/remove-hidden-data-and-personal-information-by-inspecting-documents-presentations-or-workbooks-356b7b5d-77af-44fe-a07f-9aa4d085966f
+  [440]: https://web.archive.org/web/https://0xacab.org/jvoisin/mat2
+  [441]: media/image41.JPG 
+  [442]: https://web.archive.org/web/https://www.whonix.org/wiki/VM_Live_Mode
+  [443]: https://web.archive.org/web/https://www.titanium-software.fr/en/onyx.html
+  [444]: https://web.archive.org/web/https://github.com/Qubes-Community/Contents/blob/master/docs/security/security-guidelines.md
+  [445]: https://web.archive.org/web/https://www.whonix.org/wiki/Qubes/AppArmor
+  [446]: https://web.archive.org/web/https://www.whonix.org/wiki/Linux_Kernel_Runtime_Guard_LKRG
+  [447]: https://web.archive.org/web/https://github.com/sundowndev/go-covermyass
+  [448]: https://web.archive.org/web/https://support.microsoft.com/en-us/windows/how-to-open-registry-editor-in-windows-10-deab38e6-91d6-e0aa-4b7c-8878d9e07b11
+  [449]: https://web.archive.org/web/https://privazer.com/en/download-shellbag-analyzer-shellbag-cleaner.php
+  [450]: https://web.archive.org/web/https://privazer.com/en/download.php
+  [451]: https://web.archive.org/web/https://www.bleachbit.org/download
+  [452]: https://web.archive.org/web/https://justdeleteme.xyz/
+  [453]: https://web.archive.org/web/https://justgetmydata.com/
+  [454]: https://web.archive.org/web/https://search.google.com/search-console/remove-outdated-content
+  [455]: https://web.archive.org/web/https://www.bing.com/webmasters/tools/contentremoval
+  [456]: https://web.archive.org/web/https://webmaster.yandex.com/
+  [457]: https://web.archive.org/web/https://webmaster.yandex.com/tools/del-url/
+  [458]: https://web.archive.org/web/https://help.yahoo.com/kb/SLN4530.html
+  [459]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Wikipedia:Courtesy_vanishing
+  [460]: https://web.archive.org/web/https://guardianproject.github.io/haven/
+  [461]: https://web.archive.org/web/https://www.google.com/alerts
+  [462]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Ross_Ulbricht
+  [463]: https://yewtu.be/watch?v=d-7o9xYp7eE
+  [464]: https://yewtu.be/watch?v=eQ2OZKitRwc
   [Slides]: https://www.defcon.org/images/defcon-22/dc-22-presentations/Crenshaw/DEFCON-22-Adrian-Crenshaw-Dropping-Docs-on-Darknets-How-People-Got-Caught-UPDATED.pdf
-  [463]: https://web.archive.org/web/https://www.defcon.org/images/defcon-22/dc-22-presentations/Crenshaw/DEFCON-22-Adrian-Crenshaw-Dropping-Docs-on-Darknets-How-People-Got-Caught-UPDATED.pdf
-  [464]: https://yewtu.be/watch?v=GR_U0G-QGA0
-  [465]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Key_disclosure_law
-  [466]: https://web.archive.org/web/https://www.gp-digital.org/world-map-of-encryption/
-  [467]: https://web.archive.org/web/https://addons.mozilla.org/en-US/firefox/addon/torproject-snowflake/
-  [468]: https://mirror.anonymousplanet.org/donations.html
-  [469]: https://web.archive.org/web/https://anonymousplanet.org/donations.html
-  [470]: http://thgtoa7imksbg7rit4grgijl2ef6kc7b56bp56pmtta4g354lydlzkqd.onion/donations.html
-  [471]: media/image42.jpg 
-  [472]: media/image43.jpeg 
-  [473]: media/image44.jpeg 
-  [474]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Permanent_Record_(autobiography)
-  [475]: https://web.archive.org/web/https://www.w10privacy.de/english-home/
-  [476]: https://web.archive.org/web/https://crazymax.dev/WindowsSpyBlocker/download/
-  [477]: https://web.archive.org/web/https://www.microsoft.com/en-us/software-download/windows10
-  [478]: https://web.archive.org/web/https://www.system-rescue.org/Installing-SystemRescue-on-a-USB-memory-stick/
-  [479]: https://web.archive.org/web/https://wiki.archlinux.org/index.php/Solid_state_drive/Memory_cell_clearing
-  [480]: https://web.archive.org/web/https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase
-  [481]: https://web.archive.org/web/https://tinyapps.org/docs/wipe_drives_hdparm.html
-  [482]: https://web.archive.org/web/https://tinyapps.org/docs/ata_sanitize_hdparm.html
-  [483]: https://web.archive.org/web/https://tinyapps.org/docs/nvme-secure-erase.html
-  [484]: https://web.archive.org/web/https://tinyapps.org/docs/nvme-sanitize.html
-  [485]: https://web.archive.org/web/https://clonezilla.org/liveusb.php
-  [486]: https://web.archive.org/web/https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/01_Save_disk_image
-  [487]: https://web.archive.org/web/https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/02_Restore_disk_image
-  [488]: https://web.archive.org/web/https://www.torproject.org/download/
-  [489]: https://web.archive.org/web/https://tb-manual.torproject.org/security-settings/
-  [490]: https://web.archive.org/web/https://bridges.torproject.org/
-  [491]: https://web.archive.org/web/https://support.microsoft.com/en-us/windows/disk-cleanup-in-windows-10-8a96ff42-5751-39ad-23d6-434b4d5b9a68
-  [492]: https://web.archive.org/web/https://support.microsoft.com/en-us/windows/defragment-your-windows-10-pc-048aefac-7f1f-4632-d48a-9700c4ec702a
-  [493]: https://web.archive.org/web/https://www.bleachbit.org/
-  [494]: https://web.archive.org/web/https://privazer.com/
-  [495]: https://web.archive.org/web/https://www.system-rescue.org/
-  [496]: https://web.archive.org/web/https://www.lifewire.com/how-to-erase-a-hard-drive-using-dban-2619148
-  [497]: https://web.archive.org/web/https://github.com/PartialVolume/shredos.2020.02
-  [498]: https://web.archive.org/web/https://rufus.ie/
-  [499]: https://web.archive.org/web/https://kb.sandisk.com/app/answers/detail/a_id/15108/~/dashboard-support-information
-  [500]: https://web.archive.org/web/https://www.seagate.com/support/downloads/seatools/
-  [501]: https://web.archive.org/web/https://www.samsung.com/semiconductor/minisite/ssd/download/tools/
-  [502]: https://web.archive.org/web/https://www.kingston.com/unitedstates/en/support/technical/ssdmanager
-  [503]: https://web.archive.org/web/https://support.lenovo.com/us/en/downloads/ds019026-thinkpad-drive-erase-utility-for-resetting-the-cryptographic-key-and-erasing-the-solid-state-drive-thinkpad
-  [504]: https://web.archive.org/web/https://www.crucial.com/support/storage-executive
-  [505]: https://web.archive.org/web/https://support.wdc.com/downloads.aspx?p=279
-  [506]: https://web.archive.org/web/https://store.hp.com/us/en/tech-takes/how-to-secure-erase-ssd
-  [507]: https://web.archive.org/web/https://www.transcend-info.com/Support/Software-10/
-  [508]: https://web.archive.org/web/https://www.dell.com/support/kbdoc/en-us/000134997/using-the-dell-bios-data-wipe-function-for-optiplex-precision-and-latitude-systems-built-after-november-2015?lwp=rt
-  [509]: https://web.archive.org/web/https://www.toshiba-storage.com/downloads/
-  [510]: https://web.archive.org/web/https://www.glump.net/howto/desktop/enable-trim-on-an-external-ssd-on-linux
-  [511]: https://web.archive.org/web/https://code.mendhak.com/securely-wipe-ssd/
-  [512]: https://web.archive.org/web/https://www.lifewire.com/enable-trim-for-ssd-in-os-x-yosemite-2260789
-  [513]: https://web.archive.org/web/https://cindori.org/trimenabler/
-  [514]: https://web.archive.org/web/https://www.debian.org/CD/netinst/
-  [515]: https://web.archive.org/web/https://support.lenovo.com/be/en/solutions/migr-68369
-  [516]: https://web.archive.org/web/https://support.hp.com/gb-en/document/c06204100
-  [517]: https://web.archive.org/web/https://www.dell.com/support/kbdoc/en-us/000146892/dell-data-wipe
-  [518]: https://web.archive.org/web/https://us.answers.acer.com/app/answers/detail/a_id/41567/~/how-to-use-disk-sanitizer-on-acer-travelmate-notebooks
-  [519]: https://web.archive.org/web/https://en.wikipedia.org/wiki/EncroChat
-  [520]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Sky_ECC
-  [521]: https://web.archive.org/web/https://privacytools.io/providers/vpn/
-  [522]: https://web.archive.org/web/https://evolution-host.com/vps-hosting.php
-  [523]: https://web.archive.org/web/https://proprivacy.com/vpn/guides/create-your-own-vpn-server
-  [524]: https://web.archive.org/web/https://linuxize.com/post/how-to-setup-ssh-socks-tunnel-for-private-browsing/
-  [525]: https://web.archive.org/web/https://www.digitalocean.com/community/tutorials/how-to-route-web-traffic-securely-without-a-vpn-using-a-socks-tunnel
-  [526]: https://web.archive.org/web/https://www.forwardproxy.com/2018/12/using-putty-to-setup-a-quick-socks-proxy/
-  [527]: https://web.archive.org/web/https://ma.ttias.be/socks-proxy-linux-ssh-bypass-content-filters/
-  [528]: https://web.archive.org/web/https://www.putty.org/
-  [529]: media/image45.jpeg 
-  [530]: https://web.archive.org/web/https://tails.boum.org/contribute/design/Unsafe_Browser/
-  [531]: https://web.archive.org/web/https://archive.flossmanuals.net/bypassing-censorship/index.html
-  [532]: media/image46.jpg 
-  [533]: https://web.archive.org/web/https://www.alfa.com.tw/
-  [534]: https://web.archive.org/web/https://www.tp-link.com/us/home-networking/usb-adapter/tl-wn722n/
-  [535]: https://web.archive.org/web/https://www.wirelesshack.org/best-kali-linux-compatible-usb-adapter-dongles.html
-  [536]: https://yewtu.be/watch?v=8FV2QZ1BPnw
-  [537]: https://web.archive.org/web/https://www.netally.com/products/
-  [538]: https://web.archive.org/web/https://mullvad.net/en/help/install-mullvad-app-windows/
-  [539]: https://web.archive.org/web/https://www.ivpn.net/apps-windows
-  [540]: https://web.archive.org/web/https://protonvpn.com/support/protonvpn-windows-vpn-application/
-  [541]: https://web.archive.org/web/https://mullvad.net/en/help/install-and-use-mullvad-app-macos/
-  [542]: https://web.archive.org/web/https://www.ivpn.net/apps-macos/
-  [543]: https://web.archive.org/web/https://protonvpn.com/support/protonvpn-mac-vpn-application/
-  [544]: https://web.archive.org/web/https://mullvad.net/en/help/install-mullvad-app-linux/
-  [545]: https://web.archive.org/web/https://www.ivpn.net/apps-linux/
-  [546]: https://web.archive.org/web/https://protonvpn.com/support/linux-vpn-setup/
-  [547]: https://web.archive.org/web/https://www.ivpn.net/knowledgebase/general/do-you-offer-a-kill-switch-or-vpn-firewall/
-  [548]: https://web.archive.org/web/https://protonvpn.com/support/what-is-kill-switch/
-  [549]: https://web.archive.org/web/https://mullvad.net/en/help/using-mullvad-vpn-app/
-  [550]: https://web.archive.org/web/https://protonvpn.com/blog/macos-vpn-kill-switch/
-  [551]: https://web.archive.org/web/https://mullvad.net/en/help/wireguard-and-mullvad-vpn/
-  [552]: https://web.archive.org/web/https://mullvad.net/en/help/linux-openvpn-installation/
-  [553]: https://web.archive.org/web/https://github.com/ProtonVPN/linux-cli/blob/master/USAGE.md
-  [554]: https://web.archive.org/web/https://www.ivpn.net/knowledgebase/linux/linux-wireguard-kill-switch/
-  [555]: https://web.archive.org/web/https://www.ivpn.net/knowledgebase/linux/linux-kill-switch-using-the-uncomplicated-firewall-ufw/
-  [556]: https://web.archive.org/web/https://ooni.org/install/
-  [557]: https://web.archive.org/web/https://www.gpg4win.org/
-  [558]: https://web.archive.org/web/https://gpgtools.org/
-  [559]: https://web.archive.org/web/https://support.torproject.org/tbb/how-to-verify-signature/
-  [560]: https://web.archive.org/web/https://tails.boum.org/install/vm-download/index.en.html
-  [561]: https://web.archive.org/web/https://www.whonix.org/wiki/Verify_the_Whonix_images
-  [562]: https://web.archive.org/web/https://www.clamav.net/
-  [563]: https://web.archive.org/web/https://github.com/rfxn/linux-malware-detect
-  [564]: https://web.archive.org/web/http://www.chkrootkit.org/
-  [565]: https://web.archive.org/web/https://developers.virustotal.com/v3.0/docs/search-by-hash
-  [566]: https://web.archive.org/web/https://github.com/rshipp/awesome-malware-analysis
-  [567]: https://web.archive.org/web/https://support.virustotal.com/hc/en-us/articles/115002168385-Privacy-Policy
-  [568]: https://web.archive.org/web/https://blog.didierstevens.com/programs/pdf-tools/
-  [569]: https://web.archive.org/web/https://github.com/QubesOS/qubes-app-linux-pdf-converter
-  [570]: https://web.archive.org/web/https://github.com/firstlookmedia/pdf-redact-tools
-  [571]: https://web.archive.org/web/https://github.com/firstlookmedia/dangerzone
-  [572]: https://web.archive.org/web/https://digital-forensics.sans.org/media/analyzing-malicious-document-files.pdf
-  [573]: https://web.archive.org/web/https://www.winitor.com/pdf/Malware-Analysis-Fundamentals-Files-Tools.pdf
-  [574]: media/image47.jpg 
-  [575]: media/image48.jpeg 
-  [576]: https://yewtu.be/watch?v=nwkiU6GG-YU
-  [577]: https://web.archive.org/web/https://telegra.ph/AME-Download-Guide-09-07
-  [578]: https://web.archive.org/web/https://wiki.ameliorated.info/doku.php?id=documentation_20H2
-  [579]: https://web.archive.org/web/https://www.huntonprivacyblog.com/wp-content/uploads/sites/28/2016/02/Telemedia_Act__TMA_.pdf
-  [580]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Don%27t_be_evil
-  [581]: https://yewtu.be/watch?v=6DGNZnfKYnU
-  [582]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Open-source_intelligence
-  [583]: https://yewtu.be/playlist?list=PLna1KTNJu3y09Tu70U6yPn28sekaNhOMY
-  [584]: https://web.archive.org/web/https://en.wikipedia.org/wiki/4chan
-  [585]: https://web.archive.org/web/https://www.privateinternetaccess.com/blog/how-does-privacy-differ-from-anonymity-and-why-are-both-important/
-  [586]: https://web.archive.org/web/https://scholar.harvard.edu/files/mickens/files/thisworldofours.pdf
-  [587]: https://web.archive.org/web/https://xkcd.com/538/
-  [588]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Threat_model
-  [589]: https://web.archive.org/web/https://www.bellingcat.com/
-  [590]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Doxing
-  [591]: https://yewtu.be/watch?v=muoR8Td44UE
-  [592]: https://web.archive.org/web/https://www.bbc.com/news/technology-50150981
-  [593]: https://web.archive.org/web/https://2019.www.torproject.org/about/torusers.html.en
-  [594]: https://web.archive.org/web/https://www.whonix.org/wiki/Anonymity
-  [595]: https://web.archive.org/web/https://geekfeminism.wikia.org/wiki/Who_is_harmed_by_a_%22Real_Names%22_policy%3F
-  [596]: https://web.archive.org/web/https://www.cyberghostvpn.com/privacyhub/internet-privacy-surveillance/
-  [597]: https://web.archive.org/web/https://en.wikipedia.org/wiki/IANAL
-  [598]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Trust,_but_verify
-  [599]: https://web.archive.org/web/https://en.wikipedia.org/wiki/IP_address
-  [600]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Data_retention
-  [601]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Tor_(anonymity_network)
-  [602]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Virtual_private_network
-  [603]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Domain_Name_System
-  [604]: https://web.archive.org/web/https://en.wikipedia.org/wiki/DNS_blocking
-  [605]: https://web.archive.org/web/https://arxiv.org/pdf/2001.08288.pdf
-  [606]: https://web.archive.org/web/https://labzilla.io/blog/force-dns-pihole
-  [607]: https://web.archive.org/web/https://en.wikipedia.org/wiki/DNS_over_HTTPS
-  [608]: https://web.archive.org/web/https://en.wikipedia.org/wiki/DNS_over_TLS
-  [609]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Pi-hole
-  [610]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Server_Name_Indication
-  [611]: https://web.archive.org/web/https://blog.mozilla.org/security/2021/01/07/encrypted-client-hello-the-future-of-esni-in-firefox/
-  [612]: https://web.archive.org/web/https://www.usenix.org/system/files/foci19-paper_chai_0.pdf
-  [613]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Content_delivery_network
-  [614]: https://web.archive.org/web/https://blog.cloudflare.com/encrypted-client-hello/
-  [615]: https://web.archive.org/web/https://www.zdnet.com/article/russia-wants-to-ban-the-use-of-secure-protocols-such-as-tls-1-3-doh-dot-esni/
-  [616]: https://web.archive.org/web/https://www.zdnet.com/article/china-is-now-blocking-all-encrypted-https-traffic-using-tls-1-3-and-esni/
-  [617]: https://web.archive.org/web/https://www.esat.kuleuven.be/cosic/publications/article-3153.pdf
-  [618]: https://web.archive.org/web/https://www.researchgate.net/publication/332893422_Oblivious_DNS_Practical_Privacy_for_DNS_Queries
-  [619]: https://web.archive.org/web/https://nymity.ch/tor-dns/
-  [620]: https://web.archive.org/web/https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity
-  [621]: https://web.archive.org/web/https://en.wikipedia.org/wiki/International_mobile_subscriber_identity
-  [622]: https://web.archive.org/web/https://source.android.com/devices/tech/config/device-identifiers
-  [623]: https://web.archive.org/web/https://policies.google.com/privacy/embedded?hl=en-US
-  [624]: https://web.archive.org/web/https://www.bellingcat.com/news/uk-and-europe/2019/06/28/the-gru-globetrotters-mission-london/
-  [625]: https://web.archive.org/web/https://www.bellingcat.com/news/uk-and-europe/2020/02/17/v-like-vympel-fsbs-secretive-department-v-behind-assassination-of-zelimkhan-khangoshvili/
-  [626]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Closed-circuit_television
-  [627]: https://web.archive.org/web/https://www.apple.com/legal/transparency/device-requests.html
-  [628]: https://web.archive.org/web/https://theintercept.com/2020/07/31/protests-surveillance-stingrays-dirtboxes-phone-tracking/
-  [629]: https://web.archive.org/web/https://en.wikipedia.org/wiki/IMSI-catcher
-  [630]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Stingray_phone_tracker
-  [631]: https://web.archive.org/web/https://gizmodo.com/american-cops-turns-to-canadian-phone-tracking-firm-aft-1845442778
-  [632]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Man-in-the-middle_attack
-  [633]: https://web.archive.org/web/https://shop.puri.sm/shop/librem-5/
-  [634]: https://web.archive.org/web/https://en.wikipedia.org/wiki/MAC_address
-  [635]: https://web.archive.org/web/https://amsignalinc.com/data-sheets/Acyclica/Acyclica-RoadTrend-Product-Sheet.pdf
-  [636]: https://web.archive.org/web/https://www.researchgate.net/publication/334590931_Tracking_Anonymized_Bluetooth_Devices/fulltext/5d3308db92851cd04675a469/Tracking-Anonymized-Bluetooth-Devices.pdf
-  [637]: https://web.archive.org/web/https://www.apple.com/privacy/docs/Differential_Privacy_Overview.pdf
-  [638]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Differential_privacy
-  [639]: https://web.archive.org/web/https://support.google.com/accounts/answer/3467281?hl=en
-  [640]: https://web.archive.org/web/https://support.apple.com/en-us/HT207056
-  [641]: https://web.archive.org/web/https://cse.buffalo.edu/~lusu/papers/MobiCom2020.pdf
-  [642]: https://web.archive.org/web/https://kieranhealy.org/blog/archives/2013/06/09/using-metadata-to-find-paul-revere/
-  [643]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Sensorvault
-  [644]: https://web.archive.org/web/https://nrkbeta.no/2020/12/03/my-phone-was-spying-on-me-so-i-tracked-down-the-surveillants/
-  [645]: https://web.archive.org/web/https://www.nytimes.com/interactive/2019/12/19/opinion/location-tracking-cell-phone.html
-  [646]: https://web.archive.org/web/https://nakedsecurity.sophos.com/2020/03/10/google-data-puts-innocent-man-at-the-scene-of-a-crime/
-  [647]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Geo-fence_warrant
-  [648]: https://web.archive.org/web/https://www.vice.com/en/article/y3g97x/location-data-apps-drone-strikes-iowa-national-guard
-  [649]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Room_641A
-  [650]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Edward_Snowden
-  [651]: https://web.archive.org/web/https://en.wikipedia.org/wiki/XKeyscore
-  [652]: https://web.archive.org/web/https://www.electrospaces.net/2020/10/danish-military-intelligence-uses.html
-  [653]: https://web.archive.org/web/https://en.m.wikipedia.org/wiki/MUSCULAR_(surveillance_program)
-  [654]: https://web.archive.org/web/https://en.wikipedia.org/wiki/PRISM_(surveillance_program)
-  [655]: https://web.archive.org/web/https://www.justsecurity.org/10318/video-clip-director-nsa-cia-we-kill-people-based-metadata/
-  [656]: https://web.archive.org/web/https://www.reuters.com/article/us-apple-fbi-icloud-exclusive-idUSKBN1ZK1CT
-  [657]: https://web.archive.org/web/https://www.zdnet.com/article/apple-data-collection-stored-request/
-  [658]: https://web.archive.org/web/https://decorrespondent.nl/8481/heres-how-we-found-the-names-and-addresses-of-soldiers-and-secret-agents-using-a-simple-fitness-app/412999257-6756ba27
-  [659]: https://web.archive.org/web/https://www.wired.com/story/strava-heat-map-military-bases-fitness-trackers-privacy/
-  [660]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2018/01/29/strava-interpretation-guide/
-  [661]: https://web.archive.org/web/https://www.theguardian.com/world/2018/jan/28/fitness-tracking-app-gives-away-location-of-secret-us-army-bases
-  [662]: https://web.archive.org/web/https://www.telegraph.co.uk/technology/2018/07/08/running-app-exposes-mi6-gchq-workers-whereabouts/
-  [663]: https://web.archive.org/web/https://www.washingtonpost.com/technology/2019/05/06/alexa-has-been-eavesdropping-you-this-whole-time/?utm_term=.8514f3a17b1c&itid=lk_interstitial_manual_59
-  [664]: https://web.archive.org/web/https://blog.cryptographyengineering.com/2019/06/05/how-does-apple-privately-find-your-offline-devices/
-  [665]: https://web.archive.org/web/https://support.apple.com/en-us/HT210515
-  [666]: https://web.archive.org/web/https://www.xda-developers.com/samsung-find-my-mobile-app-locate-galaxy-devices-offline/
-  [667]: https://web.archive.org/web/https://support.apple.com/en-us/HT204756
-  [668]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Bluetooth_Low_Energy
-  [669]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Near-field_communication
-  [670]: https://web.archive.org/web/https://shop.samsonite.com/accessories/rfid-accessories/
-  [671]: https://web.archive.org/web/https://www.bellingcat.com/news/americas/2018/10/26/joseph-mifsud-rush-exif/
-  [672]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Exploit_(computer_security)
-  [673]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Freedom_Hosting
-  [674]: https://web.archive.org/web/https://www.wired.com/2013/09/freedom-hosting-fbi/
-  [675]: https://web.archive.org/web/https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach
-  [676]: https://web.archive.org/web/https://www.bbc.com/news/blogs-china-blog-48552907
-  [677]: https://web.archive.org/web/https://theintercept.com/2021/01/29/china-uyghur-muslim-surveillance-police/
-  [678]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Sandbox_(computer_security)
-  [679]: https://web.archive.org/web/https://support.zoom.us/hc/en-us/articles/209605273-Adding-a-Watermark
-  [680]: https://web.archive.org/web/https://support.zoom.us/hc/en-us/articles/360021839031-Audio-Watermark
-  [681]: https://web.archive.org/web/https://exchange.adobe.com/creativecloud.details.101789.imatag-invisible-watermark-and-image-monitoring.html
-  [682]: https://web.archive.org/web/https://dtv.nagra.com/nexguard-forensic-watermarking
-  [683]: https://web.archive.org/web/https://www.vobilegroup.com/solutions
-  [684]: https://web.archive.org/web/https://www.cinavia.com/languages/english/pages/technology.html
-  [685]: https://web.archive.org/web/https://www.imatag.com/
-  [686]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Steganography
-  [687]: https://web.archive.org/web/https://ieeexplore.ieee.org/document/4428921
-  [688]: https://web.archive.org/web/https://www.sciencedirect.com/science/article/abs/pii/S0165168498000140
-  [689]: https://web.archive.org/web/https://ieeexplore.ieee.org/abstract/document/1188746
-  [690]: https://web.archive.org/web/https://scholar.google.com/scholar?q=source+camera+identification
-  [691]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Machine_Identification_Code
-  [692]: https://web.archive.org/web/http://seeingyellow.com/
-  [693]: https://web.archive.org/web/https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html
-  [694]: https://web.archive.org/web/https://distrinet.cs.kuleuven.be/software/tor-wf-dl/
-  [695]: https://web.archive.org/web/https://www.dailydot.com/unclick/tor-harvard-bomb-suspect/
-  [696]: https://web.archive.org/web/https://arstechnica.com/information-technology/2015/10/how-the-nsa-can-break-trillions-of-encrypted-web-and-vpn-connections/
-  [697]: https://web.archive.org/web/https://arstechnica.com/gadgets/2020/11/does-tor-provide-more-benefit-or-harm-new-paper-says-it-depends/
-  [698]: https://web.archive.org/web/https://www.pnas.org/content/early/2020/11/24/2011893117
-  [699]: https://web.archive.org/web/https://arxiv.org/abs/1107.4524
-  [700]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2019/03/26/how-to-track-illegal-funding-campaigns-via-cryptocurrency/
-  [701]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Know_your_customer
-  [702]: https://web.archive.org/web/https://arxiv.org/pdf/1906.05754.pdf
-  [703]: https://yewtu.be/playlist?list=PLsSYUeVwrHBnAUre2G_LYDsdo-tD0ov-y
-  [704]: https://web.archive.org/web/https://monero.org/monero-vs-princeton-researchers/
-  [705]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Cryptocurrency_tumbler
-  [706]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Security_through_obscurity
-  [707]: https://web.archive.org/web/https://arxiv.org/abs/2009.14007
-  [708]: https://web.archive.org/web/https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3080361
-  [709]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Central_processing_unit
-  [710]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Intel_Management_Engine
-  [711]: https://web.archive.org/web/https://en.wikipedia.org/wiki/AMD_Platform_Security_Processor
-  [712]: https://web.archive.org/web/https://libreboot.org/
-  [713]: https://web.archive.org/web/https://digi.ninja/jasager/
-  [714]: https://web.archive.org/web/https://shop.hak5.org/products/wifi-pineapple
-  [715]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Wi-Fi_deauthentication_attack
-  [716]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Captive_portal
-  [717]: https://web.archive.org/web/https://www.wired.com/2014/07/usb-security/
-  [718]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Stuxnet
-  [719]: https://web.archive.org/web/https://superuser.com/questions/1206321/how-do-i-safely-investigate-a-usb-stick-found-in-the-parking-lot-at-work
-  [720]: https://web.archive.org/web/https://www.magnetforensics.com/products/magnet-axiom/cloud/
-  [721]: https://web.archive.org/web/https://www.cellebrite.com/en/ufed-cloud/
-  [722]: https://web.archive.org/web/https://www.imdb.com/title/tt11464826/
-  [723]: https://web.archive.org/web/https://arstechnica.com/information-technology/2015/07/how-the-way-you-type-can-shatter-anonymity-even-on-tor/
-  [724]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Stylometry
-  [725]: https://web.archive.org/web/https://paul.reviews/behavioral-profiling-the-password-you-cant-change/
-  [726]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Sentiment_analysis
-  [727]: https://web.archive.org/web/https://coveryourtracks.eff.org/
-  [728]: https://web.archive.org/web/https://people.eecs.berkeley.edu/~dawnsong/papers/2012%20On%20the%20Feasibility%20of%20Internet-Scale%20Author%20Identification.pdf
-  [729]: https://web.archive.org/web/https://blog.securedtouch.com/behavioral-biometrics-101-an-in-depth-look-at-behavioral-biometrics-vs-behavioral-analytics
-  [730]: https://web.archive.org/web/https://arstechnica.com/tech-policy/2012/03/stakeout-how-the-fbi-tracked-and-busted-a-chicago-anon/
-  [731]: https://web.archive.org/web/https://www.bellingcat.com/news/uk-and-europe/2018/05/25/mh17-russian-gru-commander-orion-identified-oleg-ivannikov/
-  [732]: https://web.archive.org/web/https://research.fb.com/publications/deepface-closing-the-gap-to-human-level-performance-in-face-verification/
-  [733]: https://web.archive.org/web/https://www.privateinternetaccess.com/blog/putting-face-facebook-mark-zuckerberg-building-world-without-public-anonymity/
-  [734]: https://web.archive.org/web/https://www.cnbc.com/2017/09/01/facebook-has-mapped-human-population-building-internet-in-space.html
-  [735]: https://web.archive.org/web/https://www.technologyreview.com/2021/02/05/1017388/ai-deep-learning-facial-recognition-data-history/
-  [736]: https://web.archive.org/web/https://www.bellingcat.com/resources/case-studies/2015/08/07/shadow-of-a-doubt/
-  [737]: https://web.archive.org/web/https://brown.columbia.edu/open-source-investigation/
-  [738]: https://web.archive.org/web/https://www.newscientist.com/article/dn27761-facebook-can-recognise-you-in-photos-even-if-youre-not-looking/
-  [739]: https://web.archive.org/web/https://patents.google.com/patent/US20150242679
-  [740]: https://web.archive.org/web/https://apnews.com/article/bf75dd1c26c947b7826d270a16e2658a
-  [741]: https://web.archive.org/web/https://techcrunch.com/2021/01/13/facial-recognition-reveals-political-party-in-troubling-new-research/
-  [742]: https://web.archive.org/web/https://www.nature.com/articles/s41598-020-79310-1
-  [743]: https://web.archive.org/web/https://slate.com/technology/2018/04/facebook-collects-data-on-non-facebook-users-if-they-want-to-delete-it-they-have-to-sign-up.html
-  [744]: https://web.archive.org/web/https://theconversation.com/shadow-profiles-facebook-knows-about-you-even-if-youre-not-on-facebook-94804
-  [745]: https://web.archive.org/web/https://www.theverge.com/2018/4/11/17225482/facebook-shadow-profiles-zuckerberg-congress-data-privacy
-  [746]: https://web.archive.org/web/https://www.zdnet.com/article/anger-mounts-after-facebooks-shadow-profiles-leak-in-bug/
-  [747]: https://web.archive.org/web/https://www.cnet.com/news/shadow-profiles-facebook-has-information-you-didnt-hand-over/
-  [748]: https://web.archive.org/web/https://www.anyvision.co/
-  [749]: https://web.archive.org/web/https://www.buzzfeednews.com/article/ryanmac/clearview-ai-local-police-facial-recognition
-  [750]: https://web.archive.org/web/https://www.nec.com/en/global/solutions/biometrics/face/neofacewatch.html
-  [751]: https://web.archive.org/web/https://www.theguardian.com/uk-news/2020/feb/11/met-police-deploy-live-facial-recognition-technology
-  [752]: https://yewtu.be/watch?v=lH2gMNrUuEY
-  [753]: https://web.archive.org/web/https://www.washingtonpost.com/technology/2020/12/08/huawei-tested-ai-software-that-could-recognize-uighur-minorities-alert-police-report-says/
-  [754]: https://web.archive.org/web/https://theintercept.com/2016/10/13/how-a-facial-recognition-mismatch-can-ruin-your-life/
-  [755]: https://web.archive.org/web/https://www.bbc.com/news/uk-wales-43711477
-  [756]: https://web.archive.org/web/https://patents.justia.com/patent/10891948
-  [757]: https://web.archive.org/web/https://www.imdb.com/title/tt0119177/
-  [758]: https://web.archive.org/web/https://www.imdb.com/title/tt1839578
-  [759]: https://web.archive.org/web/https://www.imdb.com/title/tt0181689
-  [760]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Deepfake
-  [761]: https://web.archive.org/web/https://www.econotimes.com/Deepfake-Voice-Technology-The-Good-The-Bad-The-Future-1601278
-  [762]: https://web.archive.org/web/https://www.forbes.com/sites/jessedamiani/2019/09/03/a-voice-deepfake-was-used-to-scam-a-ceo-out-of-243000/
-  [763]: https://web.archive.org/web/https://josephsteinberg.com/how-to-prevent-facial-recognition-technology-from-identifying-you/
-  [764]: https://web.archive.org/web/https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8311.pdf
-  [765]: https://web.archive.org/web/https://www.bbc.com/news/technology-55573802
-  [766]: https://web.archive.org/web/http://diglib.uwgb.edu/digital/api/collection/p17003coll4/id/71/download
-  [767]: https://web.archive.org/web/https://sites.google.com/a/chromium.org/dev/Home/chromium-security/client-identification-mechanisms
-  [768]: https://web.archive.org/web/https://wiki.mozilla.org/Fingerprinting
-  [769]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Phishing
-  [770]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Social_engineering_(security)
-  [771]: https://web.archive.org/web/https://www.grayshift.com/
-  [772]: https://web.archive.org/web/https://securephones.io/main.pdf
-  [773]: https://web.archive.org/web/https://loup-vaillant.fr/articles/rolling-your-own-crypto
-  [774]: https://web.archive.org/web/https://soatok.blog/2021/02/09/crackpot-cryptography-and-security-theater/
-  [775]: https://web.archive.org/web/https://www.vice.com/en/article/wnx8nq/why-you-dont-roll-your-own-crypto
-  [776]: https://yewtu.be/watch?v=loy84K3AJ5Q
-  [777]: https://web.archive.org/web/https://citizenlab.ca/2020/04/move-fast-roll-your-own-crypto-a-quick-look-at-the-confidentiality-of-zoom-meetings/
-  [778]: https://web.archive.org/web/https://medium.com/@atcipher/the-myth-of-military-grade-encryption-292313ae6369
-  [779]: https://web.archive.org/web/https://blog.congruentlabs.co/military-grade-encryption/
-  [780]: https://web.archive.org/web/https://blog.ironcorelabs.com/military-grade-encryption-69aae0145588
-  [781]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Gag_order
-  [782]: https://web.archive.org/web/https://en.wikipedia.org/wiki/National_security_letter
-  [783]: https://web.archive.org/web/https://www.heise.de/news/Gericht-zwingt-Mailprovider-Tutanota-zu-Ueberwachungsfunktion-4972460.html
-  [784]: https://web.archive.org/web/https://www.pcmag.com/opinions/did-purevpn-cross-a-line-when-it-disclosed-user-information
-  [785]: https://web.archive.org/web/https://archive.is/XNuVw
-  [786]: https://web.archive.org/web/https://archive.is/ag9w4
-  [787]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Lavabit
-  [788]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Warrant_canary
-  [789]: https://web.archive.org/web/https://www.washingtonpost.com/graphics/2020/world/national-security/cia-crypto-encryption-machines-espionage/
-  [790]: https://web.archive.org/web/https://www.swissinfo.ch/eng/second-swiss-firm-allegedly-sold-encrypted-spying-devices/46186432
-  [791]: https://web.archive.org/web/https://en.wikipedia.org/wiki/The_Lives_of_Others
-  [792]: https://web.archive.org/web/https://www.wired.com/story/air-gap-researcher-mordechai-guri/
-  [793]: https://web.archive.org/web/https://www.nassiben.com/lamphone
-  [794]: https://web.archive.org/web/https://en.wikipedia.org/wiki/OONI
-  [795]: https://web.archive.org/web/https://privacyinternational.org/long-read/3018/timeline-sim-card-registration-laws
-  [796]: https://web.archive.org/web/https://www.nytimes.com/2021/01/12/technology/bitcoin-passwords-wallets-fortunes.html
-  [797]: https://web.archive.org/web/https://www.usenix.org/system/files/conference/woot17/woot17-paper-obermaier.pdf
-  [798]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Tails_(operating_system)
-  [799]: https://web.archive.org/web/https://www.veracrypt.fr/en/Trim%20Operation.html
-  [800]: https://web.archive.org/web/https://www.coreboot.org/
-  [801]: https://web.archive.org/web/https://xkcd.com/936/
-  [802]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
-  [803]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Booting
-  [804]: https://web.archive.org/web/https://www.wired.com/2013/12/better-data-security-nail-polish/
-  [805]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Virtual_machine
-  [806]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Plausible_deniability
-  [807]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Deniable_encryption
-  [808]: https://web.archive.org/web/https://privacytools.io/operating-systems/
-  [809]: https://web.archive.org/web/https://en.wikipedia.org/wiki/BitLocker
-  [810]: https://web.archive.org/web/https://wiki.alpinelinux.org/wiki/Setting_up_a_laptop
-  [811]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Evil_maid_attack
-  [812]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Cold_boot_attack
-  [813]: https://yewtu.be/watch?v=JDaicPIgn9U
-  [814]: https://web.archive.org/web/https://www.researchgate.net/publication/318155607_Defeating_Plausible_Deniability_of_VeraCrypt_Hidden_Operating_Systems
-  [815]: https://web.archive.org/web/https://www.sans.org/reading-room/whitepapers/forensics/mission-implausible-defeating-plausible-deniability-digital-forensics-39500
-  [816]: https://web.archive.org/web/https://sourceforge.net/p/veracrypt/discussion/technical/thread/53f33faf/
-  [817]: https://web.archive.org/web/https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-countermeasures
-  [818]: https://web.archive.org/web/https://www.sans.org/reading-room/whitepapers/forensics/windows-shellbag-forensics-in-depth-34545
-  [819]: https://web.archive.org/web/https://eprints.whiterose.ac.uk/75046/1/Forensic_Data_Recovery_From_The_Windows_Search_Database_preprint_DIIN328.pdf
-  [820]: https://web.archive.org/web/https://cyberforensicator.com/wp-content/uploads/2017/01/1-s2.0-S1742287616300202-main.2-14.pdf
-  [821]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Gatekeeper_(macOS)
-  [822]: https://web.archive.org/web/https://en.wikipedia.org/wiki/VeraCrypt
-  [823]: https://web.archive.org/web/https://ostif.org/the-veracrypt-audit-results/
-  [824]: https://web.archive.org/web/https://www.veracrypt.fr/en/Unencrypted%20Data%20in%20RAM.html
-  [825]: https://web.archive.org/web/https://www.veracrypt.fr/code/VeraCrypt/plain/doc/html/Data%20Leaks.html
-  [826]: https://web.archive.org/web/https://www.veracrypt.fr/en/VeraCrypt%20Rescue%20Disk.html
-  [827]: https://web.archive.org/web/https://repository.stcloudstate.edu/cgi/viewcontent.cgi?article=1141&context=msia_etds
-  [828]: https://web.archive.org/web/https://www.windowscentral.com/how-ensure-trim-enabled-windows-10-speed-ssd-performance
-  [829]: https://web.archive.org/web/https://veracrypt.eu/en/docs/trim-operation/
-  [830]: https://web.archive.org/web/https://i.blackhat.com/eu-18/Thu-Dec-6/eu-18-Schaub-Perfectly-Deniable-Steganographic-Disk-Encryption.pdf
-  [831]: https://web.archive.org/web/http://asalor.blogspot.com/2011/08/trim-dm-crypt-problems.html
-  [832]: https://web.archive.org/web/https://en.wikipedia.org/wiki/VirtualBox
-  [833]: https://web.archive.org/web/https://www.virtualbox.org/ticket/17987
-  [834]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Whonix
-  [835]: https://web.archive.org/web/https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/snapshots.html
-  [836]: https://web.archive.org/web/https://programs.online.utica.edu/sites/default/files/Neal_6_Gonnella_Forensic_Recovery_of_Evidence_from_Deleted_Oracle_VirtualBox_Virtual_Machine.pdf
-  [837]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)
-  [838]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)
-  [839]: https://web.archive.org/web/https://www.whonix.org/wiki/Stream_Isolation#By_Settings
-  [840]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm
-  [841]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Multi-factor_authentication
-  [842]: https://web.archive.org/web/https://www.qubes-os.org/doc/system-requirements/
-  [843]: https://web.archive.org/web/https://github.com/QubesOS/qubes-issues/issues/2414
-  [844]: https://web.archive.org/web/https://en.wikipedia.org/wiki/CAPTCHA
-  [845]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Turing_test
-  [846]: https://web.archive.org/web/https://www.google.com/recaptcha/about/
-  [847]: https://web.archive.org/web/https://www.hcaptcha.com/
-  [848]: https://web.archive.org/web/https://www.hcaptcha.com/post/hcaptcha-now-the-largest-independent-captcha-service
-  [849]: https://web.archive.org/web/https://nearcyan.com/you-probably-dont-need-recaptcha/
-  [850]: https://web.archive.org/web/https://arstechnica.com/gadgets/2017/03/googles-recaptcha-announces-invisible-background-captchas/
-  [851]: https://web.archive.org/web/https://www.blackhat.com/docs/asia-16/materials/asia-16-Sivakorn-Im-Not-a-Human-Breaking-the-Google-reCAPTCHA-wp.pdf
-  [852]: https://web.archive.org/web/https://security.googleblog.com/2014/12/are-you-robot-introducing-no-captcha.html
-  [853]: https://web.archive.org/web/https://community.torproject.org/gsoc/cloudflare-captcha-monitoring/
-  [854]: https://web.archive.org/web/https://blog.cloudflare.com/cloudflare-supports-privacy-pass/
-  [855]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Device_fingerprint
-  [856]: https://web.archive.org/web/https://developers.googleblog.com/2020/08/guidance-for-our-effort-to-block-less-secure-browser-and-apps.html
-  [857]: https://web.archive.org/web/https://support.google.com/accounts/answer/10071085
-  [858]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Dark_pattern
-  [859]: https://web.archive.org/web/https://www.theverge.com/2020/1/23/21077423/tinder-photo-verification-blue-checkmark-safety-center-launch-noonlight
-  [860]: https://web.archive.org/web/https://www.digitalinformationworld.com/2020/03/facebook-is-now-demanding-some-users-to-create-a-video-selfie-for-identity-verification.html
-  [861]: https://web.archive.org/web/https://www.vice.com/en/article/m7a4eq/pornhub-new-verification-policy-biometric-id
-  [862]: https://web.archive.org/web/https://variety.com/2021/digital/news/china-censorship-hotline-historical-nihilism-1234950554/
-  [863]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Zero_trust_security_model
-  [864]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Espionage
-  [865]: https://web.archive.org/web/https://en.wikipedia.org/wiki/SIM_swap_scam
-  [866]: https://web.archive.org/web/https://www.whonix.org/wiki/Tor
-  [867]: https://web.archive.org/web/https://support.torproject.org/tbb/tbb-editing-torrc/
-  [868]: https://web.archive.org/web/https://support.google.com/accounts/answer/114129?hl=en
-  [869]: https://web.archive.org/web/https://support.google.com/google-ads/answer/7474263?hl=en
-  [870]: https://web.archive.org/web/https://support.google.com/accounts/answer/40695
-  [871]: https://web.archive.org/web/https://support.google.com/accounts/contact/disabled2
-  [872]: https://web.archive.org/web/https://support.google.com/accounts/answer/1333913?hl=en
-  [873]: https://web.archive.org/web/https://www.jumio.com/features/
-  [874]: https://web.archive.org/web/https://privacytools.io/providers/email/
+  [465]: https://web.archive.org/web/https://www.defcon.org/images/defcon-22/dc-22-presentations/Crenshaw/DEFCON-22-Adrian-Crenshaw-Dropping-Docs-on-Darknets-How-People-Got-Caught-UPDATED.pdf
+  [466]: https://yewtu.be/watch?v=GR_U0G-QGA0
+  [467]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Key_disclosure_law
+  [468]: https://web.archive.org/web/https://www.gp-digital.org/world-map-of-encryption/
+  [469]: https://web.archive.org/web/https://addons.mozilla.org/en-US/firefox/addon/torproject-snowflake/
+  [470]: https://mirror.anonymousplanet.org/donations.html
+  [471]: https://web.archive.org/web/https://anonymousplanet.org/donations.html
+  [472]: http://thgtoa7imksbg7rit4grgijl2ef6kc7b56bp56pmtta4g354lydlzkqd.onion/donations.html
+  [473]: media/image42.jpg 
+  [474]: media/image43.jpeg 
+  [475]: media/image44.jpeg 
+  [476]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Permanent_Record_(autobiography)
+  [477]: https://web.archive.org/web/https://www.w10privacy.de/english-home/
+  [478]: https://web.archive.org/web/https://crazymax.dev/WindowsSpyBlocker/download/
+  [479]: https://web.archive.org/web/https://www.microsoft.com/en-us/software-download/windows10
+  [480]: https://web.archive.org/web/https://www.system-rescue.org/Installing-SystemRescue-on-a-USB-memory-stick/
+  [481]: https://web.archive.org/web/https://wiki.archlinux.org/index.php/Solid_state_drive/Memory_cell_clearing
+  [482]: https://web.archive.org/web/https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase
+  [483]: https://web.archive.org/web/https://tinyapps.org/docs/wipe_drives_hdparm.html
+  [484]: https://web.archive.org/web/https://tinyapps.org/docs/ata_sanitize_hdparm.html
+  [485]: https://web.archive.org/web/https://tinyapps.org/docs/nvme-secure-erase.html
+  [486]: https://web.archive.org/web/https://tinyapps.org/docs/nvme-sanitize.html
+  [487]: https://web.archive.org/web/https://clonezilla.org/liveusb.php
+  [488]: https://web.archive.org/web/https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/01_Save_disk_image
+  [489]: https://web.archive.org/web/https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/02_Restore_disk_image
+  [490]: https://web.archive.org/web/https://www.torproject.org/download/
+  [491]: https://web.archive.org/web/https://tb-manual.torproject.org/security-settings/
+  [492]: https://web.archive.org/web/https://bridges.torproject.org/
+  [493]: https://web.archive.org/web/https://support.microsoft.com/en-us/windows/disk-cleanup-in-windows-10-8a96ff42-5751-39ad-23d6-434b4d5b9a68
+  [494]: https://web.archive.org/web/https://support.microsoft.com/en-us/windows/defragment-your-windows-10-pc-048aefac-7f1f-4632-d48a-9700c4ec702a
+  [495]: https://web.archive.org/web/https://www.bleachbit.org/
+  [496]: https://web.archive.org/web/https://privazer.com/
+  [497]: https://web.archive.org/web/https://www.system-rescue.org/
+  [498]: https://web.archive.org/web/https://www.lifewire.com/how-to-erase-a-hard-drive-using-dban-2619148
+  [499]: https://web.archive.org/web/https://github.com/PartialVolume/shredos.2020.02
+  [500]: https://web.archive.org/web/https://rufus.ie/
+  [501]: https://web.archive.org/web/https://kb.sandisk.com/app/answers/detail/a_id/15108/~/dashboard-support-information
+  [502]: https://web.archive.org/web/https://www.seagate.com/support/downloads/seatools/
+  [503]: https://web.archive.org/web/https://www.samsung.com/semiconductor/minisite/ssd/download/tools/
+  [504]: https://web.archive.org/web/https://www.kingston.com/unitedstates/en/support/technical/ssdmanager
+  [505]: https://web.archive.org/web/https://support.lenovo.com/us/en/downloads/ds019026-thinkpad-drive-erase-utility-for-resetting-the-cryptographic-key-and-erasing-the-solid-state-drive-thinkpad
+  [506]: https://web.archive.org/web/https://www.crucial.com/support/storage-executive
+  [507]: https://web.archive.org/web/https://support.wdc.com/downloads.aspx?p=279
+  [508]: https://web.archive.org/web/https://store.hp.com/us/en/tech-takes/how-to-secure-erase-ssd
+  [509]: https://web.archive.org/web/https://www.transcend-info.com/Support/Software-10/
+  [510]: https://web.archive.org/web/https://www.dell.com/support/kbdoc/en-us/000134997/using-the-dell-bios-data-wipe-function-for-optiplex-precision-and-latitude-systems-built-after-november-2015?lwp=rt
+  [511]: https://web.archive.org/web/https://www.toshiba-storage.com/downloads/
+  [512]: https://web.archive.org/web/https://www.glump.net/howto/desktop/enable-trim-on-an-external-ssd-on-linux
+  [513]: https://web.archive.org/web/https://code.mendhak.com/securely-wipe-ssd/
+  [514]: https://web.archive.org/web/https://www.lifewire.com/enable-trim-for-ssd-in-os-x-yosemite-2260789
+  [515]: https://web.archive.org/web/https://cindori.org/trimenabler/
+  [516]: https://web.archive.org/web/https://www.debian.org/CD/netinst/
+  [517]: https://web.archive.org/web/https://support.lenovo.com/be/en/solutions/migr-68369
+  [518]: https://web.archive.org/web/https://support.hp.com/gb-en/document/c06204100
+  [519]: https://web.archive.org/web/https://www.dell.com/support/kbdoc/en-us/000146892/dell-data-wipe
+  [520]: https://web.archive.org/web/https://us.answers.acer.com/app/answers/detail/a_id/41567/~/how-to-use-disk-sanitizer-on-acer-travelmate-notebooks
+  [521]: https://web.archive.org/web/https://en.wikipedia.org/wiki/EncroChat
+  [522]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Sky_ECC
+  [523]: https://web.archive.org/web/https://privacytools.io/providers/vpn/
+  [Printing Watermarking:]: #printing-watermarking
+  [524]: https://web.archive.org/web/https://evolution-host.com/vps-hosting.php
+  [525]: https://web.archive.org/web/https://proprivacy.com/vpn/guides/create-your-own-vpn-server
+  [526]: https://web.archive.org/web/https://linuxize.com/post/how-to-setup-ssh-socks-tunnel-for-private-browsing/
+  [527]: https://web.archive.org/web/https://www.digitalocean.com/community/tutorials/how-to-route-web-traffic-securely-without-a-vpn-using-a-socks-tunnel
+  [528]: https://web.archive.org/web/https://www.forwardproxy.com/2018/12/using-putty-to-setup-a-quick-socks-proxy/
+  [529]: https://web.archive.org/web/https://ma.ttias.be/socks-proxy-linux-ssh-bypass-content-filters/
+  [530]: https://web.archive.org/web/https://www.putty.org/
+  [531]: media/image45.jpeg 
+  [532]: https://web.archive.org/web/https://tails.boum.org/contribute/design/Unsafe_Browser/
+  [533]: https://web.archive.org/web/https://archive.flossmanuals.net/bypassing-censorship/index.html
+  [534]: media/image46.jpg 
+  [535]: https://web.archive.org/web/https://www.alfa.com.tw/
+  [536]: https://web.archive.org/web/https://www.tp-link.com/us/home-networking/usb-adapter/tl-wn722n/
+  [537]: https://web.archive.org/web/https://www.wirelesshack.org/best-kali-linux-compatible-usb-adapter-dongles.html
+  [538]: https://yewtu.be/watch?v=8FV2QZ1BPnw
+  [539]: https://web.archive.org/web/https://www.netally.com/products/
+  [540]: https://web.archive.org/web/https://mullvad.net/en/help/install-mullvad-app-windows/
+  [541]: https://web.archive.org/web/https://www.ivpn.net/apps-windows
+  [542]: https://web.archive.org/web/https://protonvpn.com/support/protonvpn-windows-vpn-application/
+  [543]: https://web.archive.org/web/https://mullvad.net/en/help/install-and-use-mullvad-app-macos/
+  [544]: https://web.archive.org/web/https://www.ivpn.net/apps-macos/
+  [545]: https://web.archive.org/web/https://protonvpn.com/support/protonvpn-mac-vpn-application/
+  [546]: https://web.archive.org/web/https://mullvad.net/en/help/install-mullvad-app-linux/
+  [547]: https://web.archive.org/web/https://www.ivpn.net/apps-linux/
+  [548]: https://web.archive.org/web/https://protonvpn.com/support/linux-vpn-setup/
+  [549]: https://web.archive.org/web/https://www.ivpn.net/knowledgebase/general/do-you-offer-a-kill-switch-or-vpn-firewall/
+  [550]: https://web.archive.org/web/https://protonvpn.com/support/what-is-kill-switch/
+  [551]: https://web.archive.org/web/https://mullvad.net/en/help/using-mullvad-vpn-app/
+  [552]: https://web.archive.org/web/https://protonvpn.com/blog/macos-vpn-kill-switch/
+  [553]: https://web.archive.org/web/https://mullvad.net/en/help/wireguard-and-mullvad-vpn/
+  [554]: https://web.archive.org/web/https://mullvad.net/en/help/linux-openvpn-installation/
+  [555]: https://web.archive.org/web/https://github.com/ProtonVPN/linux-cli/blob/master/USAGE.md
+  [556]: https://web.archive.org/web/https://www.ivpn.net/knowledgebase/linux/linux-wireguard-kill-switch/
+  [557]: https://web.archive.org/web/https://www.ivpn.net/knowledgebase/linux/linux-kill-switch-using-the-uncomplicated-firewall-ufw/
+  [558]: https://web.archive.org/web/https://ooni.org/install/
+  [559]: https://web.archive.org/web/https://www.gpg4win.org/
+  [560]: https://web.archive.org/web/https://gpgtools.org/
+  [561]: https://web.archive.org/web/https://support.torproject.org/tbb/how-to-verify-signature/
+  [562]: https://web.archive.org/web/https://tails.boum.org/install/vm-download/index.en.html
+  [563]: https://web.archive.org/web/https://www.whonix.org/wiki/Verify_the_Whonix_images
+  [564]: https://web.archive.org/web/https://www.clamav.net/
+  [565]: https://web.archive.org/web/https://github.com/rfxn/linux-malware-detect
+  [566]: https://web.archive.org/web/http://www.chkrootkit.org/
+  [567]: https://web.archive.org/web/https://developers.virustotal.com/v3.0/docs/search-by-hash
+  [568]: https://web.archive.org/web/https://github.com/rshipp/awesome-malware-analysis
+  [569]: https://web.archive.org/web/https://support.virustotal.com/hc/en-us/articles/115002168385-Privacy-Policy
+  [570]: https://web.archive.org/web/https://blog.didierstevens.com/programs/pdf-tools/
+  [571]: https://web.archive.org/web/https://github.com/QubesOS/qubes-app-linux-pdf-converter
+  [572]: https://web.archive.org/web/https://github.com/firstlookmedia/pdf-redact-tools
+  [573]: https://web.archive.org/web/https://github.com/firstlookmedia/dangerzone
+  [574]: https://web.archive.org/web/https://digital-forensics.sans.org/media/analyzing-malicious-document-files.pdf
+  [575]: https://web.archive.org/web/https://www.winitor.com/pdf/Malware-Analysis-Fundamentals-Files-Tools.pdf
+  [576]: media/image47.jpg 
+  [577]: media/image48.jpeg 
+  [578]: https://yewtu.be/watch?v=nwkiU6GG-YU
+  [579]: https://web.archive.org/web/https://telegra.ph/AME-Download-Guide-09-07
+  [580]: https://web.archive.org/web/https://wiki.ameliorated.info/doku.php?id=documentation_20H2
+  [581]: https://web.archive.org/web/https://www.huntonprivacyblog.com/wp-content/uploads/sites/28/2016/02/Telemedia_Act__TMA_.pdf
+  [582]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Don%27t_be_evil
+  [583]: https://yewtu.be/watch?v=6DGNZnfKYnU
+  [584]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Open-source_intelligence
+  [585]: https://yewtu.be/playlist?list=PLna1KTNJu3y09Tu70U6yPn28sekaNhOMY
+  [586]: https://web.archive.org/web/https://en.wikipedia.org/wiki/4chan
+  [587]: https://web.archive.org/web/https://www.privateinternetaccess.com/blog/how-does-privacy-differ-from-anonymity-and-why-are-both-important/
+  [588]: https://web.archive.org/web/https://scholar.harvard.edu/files/mickens/files/thisworldofours.pdf
+  [589]: https://web.archive.org/web/https://xkcd.com/538/
+  [590]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Threat_model
+  [591]: https://web.archive.org/web/https://www.bellingcat.com/
+  [592]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Doxing
+  [593]: https://yewtu.be/watch?v=muoR8Td44UE
+  [594]: https://web.archive.org/web/https://www.bbc.com/news/technology-50150981
+  [595]: https://web.archive.org/web/https://2019.www.torproject.org/about/torusers.html.en
+  [596]: https://web.archive.org/web/https://www.whonix.org/wiki/Anonymity
+  [597]: https://web.archive.org/web/https://geekfeminism.wikia.org/wiki/Who_is_harmed_by_a_%22Real_Names%22_policy%3F
+  [598]: https://web.archive.org/web/https://www.cyberghostvpn.com/privacyhub/internet-privacy-surveillance/
+  [599]: https://web.archive.org/web/https://en.wikipedia.org/wiki/IANAL
+  [600]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Trust,_but_verify
+  [601]: https://web.archive.org/web/https://en.wikipedia.org/wiki/IP_address
+  [602]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Data_retention
+  [603]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Tor_(anonymity_network)
+  [604]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Virtual_private_network
+  [605]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Domain_Name_System
+  [606]: https://web.archive.org/web/https://en.wikipedia.org/wiki/DNS_blocking
+  [607]: https://web.archive.org/web/https://arxiv.org/pdf/2001.08288.pdf
+  [608]: https://web.archive.org/web/https://labzilla.io/blog/force-dns-pihole
+  [609]: https://web.archive.org/web/https://en.wikipedia.org/wiki/DNS_over_HTTPS
+  [610]: https://web.archive.org/web/https://en.wikipedia.org/wiki/DNS_over_TLS
+  [611]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Pi-hole
+  [612]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Server_Name_Indication
+  [613]: https://web.archive.org/web/https://blog.mozilla.org/security/2021/01/07/encrypted-client-hello-the-future-of-esni-in-firefox/
+  [614]: https://web.archive.org/web/https://www.usenix.org/system/files/foci19-paper_chai_0.pdf
+  [615]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Content_delivery_network
+  [616]: https://web.archive.org/web/https://blog.cloudflare.com/encrypted-client-hello/
+  [617]: https://web.archive.org/web/https://www.zdnet.com/article/russia-wants-to-ban-the-use-of-secure-protocols-such-as-tls-1-3-doh-dot-esni/
+  [618]: https://web.archive.org/web/https://www.zdnet.com/article/china-is-now-blocking-all-encrypted-https-traffic-using-tls-1-3-and-esni/
+  [619]: https://web.archive.org/web/https://www.esat.kuleuven.be/cosic/publications/article-3153.pdf
+  [620]: https://web.archive.org/web/https://www.researchgate.net/publication/332893422_Oblivious_DNS_Practical_Privacy_for_DNS_Queries
+  [621]: https://web.archive.org/web/https://nymity.ch/tor-dns/
+  [622]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Near-field_communication
+  [623]: https://web.archive.org/web/https://shop.samsonite.com/accessories/rfid-accessories/
+  [624]: https://web.archive.org/web/https://support.google.com/accounts/answer/3467281?hl=en
+  [625]: https://web.archive.org/web/https://support.apple.com/en-us/HT207056
+  [626]: https://web.archive.org/web/https://cse.buffalo.edu/~lusu/papers/MobiCom2020.pdf
+  [627]: https://web.archive.org/web/https://digi.ninja/jasager/
+  [628]: https://web.archive.org/web/https://shop.hak5.org/products/wifi-pineapple
+  [629]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Wi-Fi_deauthentication_attack
+  [630]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Captive_portal
+  [631]: https://web.archive.org/web/https://www.hackerfactor.com/blog/index.php?/archives/868-Deanonymizing-Tor-Circuits.html
+  [632]: https://web.archive.org/web/https://distrinet.cs.kuleuven.be/software/tor-wf-dl/
+  [633]: https://web.archive.org/web/https://www.dailydot.com/unclick/tor-harvard-bomb-suspect/
+  [634]: https://web.archive.org/web/https://arstechnica.com/information-technology/2015/10/how-the-nsa-can-break-trillions-of-encrypted-web-and-vpn-connections/
+  [635]: https://web.archive.org/web/https://arstechnica.com/gadgets/2020/11/does-tor-provide-more-benefit-or-harm-new-paper-says-it-depends/
+  [636]: https://web.archive.org/web/https://www.pnas.org/content/early/2020/11/24/2011893117
+  [637]: https://web.archive.org/web/https://blog.cryptographyengineering.com/2019/06/05/how-does-apple-privately-find-your-offline-devices/
+  [638]: https://web.archive.org/web/https://support.apple.com/en-us/HT210515
+  [639]: https://web.archive.org/web/https://www.xda-developers.com/samsung-find-my-mobile-app-locate-galaxy-devices-offline/
+  [640]: https://web.archive.org/web/https://support.apple.com/en-us/HT204756
+  [641]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Bluetooth_Low_Energy
+  [642]: https://web.archive.org/web/https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity
+  [643]: https://web.archive.org/web/https://en.wikipedia.org/wiki/International_mobile_subscriber_identity
+  [644]: https://web.archive.org/web/https://source.android.com/devices/tech/config/device-identifiers
+  [645]: https://web.archive.org/web/https://policies.google.com/privacy/embedded?hl=en-US
+  [646]: https://web.archive.org/web/https://www.bellingcat.com/news/uk-and-europe/2019/06/28/the-gru-globetrotters-mission-london/
+  [647]: https://web.archive.org/web/https://www.bellingcat.com/news/uk-and-europe/2020/02/17/v-like-vympel-fsbs-secretive-department-v-behind-assassination-of-zelimkhan-khangoshvili/
+  [648]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Closed-circuit_television
+  [649]: https://web.archive.org/web/https://www.apple.com/legal/transparency/device-requests.html
+  [650]: https://web.archive.org/web/https://theintercept.com/2020/07/31/protests-surveillance-stingrays-dirtboxes-phone-tracking/
+  [651]: https://web.archive.org/web/https://en.wikipedia.org/wiki/IMSI-catcher
+  [652]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Stingray_phone_tracker
+  [653]: https://web.archive.org/web/https://gizmodo.com/american-cops-turns-to-canadian-phone-tracking-firm-aft-1845442778
+  [654]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Man-in-the-middle_attack
+  [655]: https://web.archive.org/web/https://shop.puri.sm/shop/librem-5/
+  [656]: https://web.archive.org/web/https://en.wikipedia.org/wiki/MAC_address
+  [657]: https://web.archive.org/web/https://amsignalinc.com/data-sheets/Acyclica/Acyclica-RoadTrend-Product-Sheet.pdf
+  [658]: https://web.archive.org/web/https://www.researchgate.net/publication/334590931_Tracking_Anonymized_Bluetooth_Devices/fulltext/5d3308db92851cd04675a469/Tracking-Anonymized-Bluetooth-Devices.pdf
+  [659]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Central_processing_unit
+  [660]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Intel_Management_Engine
+  [661]: https://web.archive.org/web/https://en.wikipedia.org/wiki/AMD_Platform_Security_Processor
+  [662]: https://web.archive.org/web/https://libreboot.org/
+  [663]: https://web.archive.org/web/https://www.apple.com/privacy/docs/Differential_Privacy_Overview.pdf
+  [664]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Differential_privacy
+  [665]: https://web.archive.org/web/https://www.reuters.com/article/us-apple-fbi-icloud-exclusive-idUSKBN1ZK1CT
+  [666]: https://web.archive.org/web/https://www.zdnet.com/article/apple-data-collection-stored-request/
+  [667]: https://web.archive.org/web/https://decorrespondent.nl/8481/heres-how-we-found-the-names-and-addresses-of-soldiers-and-secret-agents-using-a-simple-fitness-app/412999257-6756ba27
+  [668]: https://web.archive.org/web/https://www.wired.com/story/strava-heat-map-military-bases-fitness-trackers-privacy/
+  [669]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2018/01/29/strava-interpretation-guide/
+  [670]: https://web.archive.org/web/https://www.theguardian.com/world/2018/jan/28/fitness-tracking-app-gives-away-location-of-secret-us-army-bases
+  [671]: https://web.archive.org/web/https://www.telegraph.co.uk/technology/2018/07/08/running-app-exposes-mi6-gchq-workers-whereabouts/
+  [672]: https://web.archive.org/web/https://www.washingtonpost.com/technology/2019/05/06/alexa-has-been-eavesdropping-you-this-whole-time/?utm_term=.8514f3a17b1c&itid=lk_interstitial_manual_59
+  [673]: https://web.archive.org/web/https://kieranhealy.org/blog/archives/2013/06/09/using-metadata-to-find-paul-revere/
+  [674]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Sensorvault
+  [675]: https://web.archive.org/web/https://nrkbeta.no/2020/12/03/my-phone-was-spying-on-me-so-i-tracked-down-the-surveillants/
+  [676]: https://web.archive.org/web/https://www.nytimes.com/interactive/2019/12/19/opinion/location-tracking-cell-phone.html
+  [677]: https://web.archive.org/web/https://nakedsecurity.sophos.com/2020/03/10/google-data-puts-innocent-man-at-the-scene-of-a-crime/
+  [678]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Geo-fence_warrant
+  [679]: https://web.archive.org/web/https://www.vice.com/en/article/y3g97x/location-data-apps-drone-strikes-iowa-national-guard
+  [680]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Room_641A
+  [681]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Edward_Snowden
+  [682]: https://web.archive.org/web/https://en.wikipedia.org/wiki/XKeyscore
+  [683]: https://web.archive.org/web/https://www.electrospaces.net/2020/10/danish-military-intelligence-uses.html
+  [684]: https://web.archive.org/web/https://en.m.wikipedia.org/wiki/MUSCULAR_(surveillance_program)
+  [685]: https://web.archive.org/web/https://en.wikipedia.org/wiki/PRISM_(surveillance_program)
+  [686]: https://web.archive.org/web/https://www.justsecurity.org/10318/video-clip-director-nsa-cia-we-kill-people-based-metadata/
+  [687]: https://web.archive.org/web/https://www.imdb.com/title/tt11464826/
+  [688]: https://web.archive.org/web/https://arstechnica.com/information-technology/2015/07/how-the-way-you-type-can-shatter-anonymity-even-on-tor/
+  [689]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Stylometry
+  [690]: https://web.archive.org/web/https://paul.reviews/behavioral-profiling-the-password-you-cant-change/
+  [691]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Sentiment_analysis
+  [692]: https://web.archive.org/web/https://coveryourtracks.eff.org/
+  [693]: https://web.archive.org/web/https://people.eecs.berkeley.edu/~dawnsong/papers/2012%20On%20the%20Feasibility%20of%20Internet-Scale%20Author%20Identification.pdf
+  [694]: https://web.archive.org/web/https://blog.securedtouch.com/behavioral-biometrics-101-an-in-depth-look-at-behavioral-biometrics-vs-behavioral-analytics
+  [695]: https://web.archive.org/web/https://arstechnica.com/tech-policy/2012/03/stakeout-how-the-fbi-tracked-and-busted-a-chicago-anon/
+  [696]: https://web.archive.org/web/https://www.bellingcat.com/news/uk-and-europe/2018/05/25/mh17-russian-gru-commander-orion-identified-oleg-ivannikov/
+  [697]: https://web.archive.org/web/https://research.fb.com/publications/deepface-closing-the-gap-to-human-level-performance-in-face-verification/
+  [698]: https://web.archive.org/web/https://www.privateinternetaccess.com/blog/putting-face-facebook-mark-zuckerberg-building-world-without-public-anonymity/
+  [699]: https://web.archive.org/web/https://www.cnbc.com/2017/09/01/facebook-has-mapped-human-population-building-internet-in-space.html
+  [700]: https://web.archive.org/web/https://www.technologyreview.com/2021/02/05/1017388/ai-deep-learning-facial-recognition-data-history/
+  [701]: https://web.archive.org/web/https://www.bellingcat.com/resources/case-studies/2015/08/07/shadow-of-a-doubt/
+  [702]: https://web.archive.org/web/https://brown.columbia.edu/open-source-investigation/
+  [703]: https://web.archive.org/web/https://www.newscientist.com/article/dn27761-facebook-can-recognise-you-in-photos-even-if-youre-not-looking/
+  [704]: https://web.archive.org/web/https://patents.google.com/patent/US20150242679
+  [705]: https://web.archive.org/web/https://apnews.com/article/bf75dd1c26c947b7826d270a16e2658a
+  [706]: https://web.archive.org/web/https://techcrunch.com/2021/01/13/facial-recognition-reveals-political-party-in-troubling-new-research/
+  [707]: https://web.archive.org/web/https://www.nature.com/articles/s41598-020-79310-1
+  [708]: https://web.archive.org/web/https://slate.com/technology/2018/04/facebook-collects-data-on-non-facebook-users-if-they-want-to-delete-it-they-have-to-sign-up.html
+  [709]: https://web.archive.org/web/https://theconversation.com/shadow-profiles-facebook-knows-about-you-even-if-youre-not-on-facebook-94804
+  [710]: https://web.archive.org/web/https://www.theverge.com/2018/4/11/17225482/facebook-shadow-profiles-zuckerberg-congress-data-privacy
+  [711]: https://web.archive.org/web/https://www.zdnet.com/article/anger-mounts-after-facebooks-shadow-profiles-leak-in-bug/
+  [712]: https://web.archive.org/web/https://www.cnet.com/news/shadow-profiles-facebook-has-information-you-didnt-hand-over/
+  [713]: https://web.archive.org/web/https://www.anyvision.co/
+  [714]: https://web.archive.org/web/https://www.buzzfeednews.com/article/ryanmac/clearview-ai-local-police-facial-recognition
+  [715]: https://web.archive.org/web/https://www.nec.com/en/global/solutions/biometrics/face/neofacewatch.html
+  [716]: https://web.archive.org/web/https://www.theguardian.com/uk-news/2020/feb/11/met-police-deploy-live-facial-recognition-technology
+  [717]: https://yewtu.be/watch?v=lH2gMNrUuEY
+  [718]: https://web.archive.org/web/https://www.washingtonpost.com/technology/2020/12/08/huawei-tested-ai-software-that-could-recognize-uighur-minorities-alert-police-report-says/
+  [719]: https://web.archive.org/web/https://theintercept.com/2016/10/13/how-a-facial-recognition-mismatch-can-ruin-your-life/
+  [720]: https://web.archive.org/web/https://www.bbc.com/news/uk-wales-43711477
+  [721]: https://web.archive.org/web/https://patents.justia.com/patent/10891948
+  [722]: https://web.archive.org/web/https://www.imdb.com/title/tt0119177/
+  [723]: https://web.archive.org/web/https://www.imdb.com/title/tt1839578
+  [724]: https://web.archive.org/web/https://www.imdb.com/title/tt0181689
+  [725]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Deepfake
+  [726]: https://web.archive.org/web/https://www.econotimes.com/Deepfake-Voice-Technology-The-Good-The-Bad-The-Future-1601278
+  [727]: https://web.archive.org/web/https://www.forbes.com/sites/jessedamiani/2019/09/03/a-voice-deepfake-was-used-to-scam-a-ceo-out-of-243000/
+  [728]: https://web.archive.org/web/https://josephsteinberg.com/how-to-prevent-facial-recognition-technology-from-identifying-you/
+  [729]: https://web.archive.org/web/https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8311.pdf
+  [730]: https://web.archive.org/web/https://www.bbc.com/news/technology-55573802
+  [731]: https://web.archive.org/web/http://diglib.uwgb.edu/digital/api/collection/p17003coll4/id/71/download
+  [732]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Phishing
+  [733]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Social_engineering_(security)
+  [734]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Exploit_(computer_security)
+  [735]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Freedom_Hosting
+  [736]: https://web.archive.org/web/https://www.wired.com/2013/09/freedom-hosting-fbi/
+  [737]: https://web.archive.org/web/https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach
+  [738]: https://web.archive.org/web/https://www.bbc.com/news/blogs-china-blog-48552907
+  [739]: https://web.archive.org/web/https://theintercept.com/2021/01/29/china-uyghur-muslim-surveillance-police/
+  [740]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Sandbox_(computer_security)
+  [741]: https://web.archive.org/web/https://www.wired.com/2014/07/usb-security/
+  [742]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Stuxnet
+  [743]: https://web.archive.org/web/https://superuser.com/questions/1206321/how-do-i-safely-investigate-a-usb-stick-found-in-the-parking-lot-at-work
+  [744]: https://web.archive.org/web/https://www.bellingcat.com/news/americas/2018/10/26/joseph-mifsud-rush-exif/
+  [745]: https://web.archive.org/web/https://support.zoom.us/hc/en-us/articles/209605273-Adding-a-Watermark
+  [746]: https://web.archive.org/web/https://support.zoom.us/hc/en-us/articles/360021839031-Audio-Watermark
+  [747]: https://web.archive.org/web/https://exchange.adobe.com/creativecloud.details.101789.imatag-invisible-watermark-and-image-monitoring.html
+  [748]: https://web.archive.org/web/https://dtv.nagra.com/nexguard-forensic-watermarking
+  [749]: https://web.archive.org/web/https://www.vobilegroup.com/solutions
+  [750]: https://web.archive.org/web/https://www.cinavia.com/languages/english/pages/technology.html
+  [751]: https://web.archive.org/web/https://www.imatag.com/
+  [752]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Steganography
+  [753]: https://web.archive.org/web/https://ieeexplore.ieee.org/document/4428921
+  [754]: https://web.archive.org/web/https://www.sciencedirect.com/science/article/abs/pii/S0165168498000140
+  [755]: https://web.archive.org/web/https://ieeexplore.ieee.org/abstract/document/1188746
+  [756]: https://web.archive.org/web/https://scholar.google.com/scholar?q=source+camera+identification
+  [757]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Machine_Identification_Code
+  [758]: https://web.archive.org/web/http://seeingyellow.com/
+  [759]: https://web.archive.org/web/https://arxiv.org/abs/1107.4524
+  [760]: https://web.archive.org/web/https://www.bellingcat.com/resources/how-tos/2019/03/26/how-to-track-illegal-funding-campaigns-via-cryptocurrency/
+  [761]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Know_your_customer
+  [762]: https://web.archive.org/web/https://arxiv.org/pdf/1906.05754.pdf
+  [763]: https://yewtu.be/playlist?list=PLsSYUeVwrHBnAUre2G_LYDsdo-tD0ov-y
+  [764]: https://web.archive.org/web/https://monero.org/monero-vs-princeton-researchers/
+  [765]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Cryptocurrency_tumbler
+  [766]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Security_through_obscurity
+  [767]: https://web.archive.org/web/https://arxiv.org/abs/2009.14007
+  [768]: https://web.archive.org/web/https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3080361
+  [769]: https://web.archive.org/web/https://www.magnetforensics.com/products/magnet-axiom/cloud/
+  [770]: https://web.archive.org/web/https://www.cellebrite.com/en/ufed-cloud/
+  [771]: https://web.archive.org/web/https://sites.google.com/a/chromium.org/dev/Home/chromium-security/client-identification-mechanisms
+  [772]: https://web.archive.org/web/https://wiki.mozilla.org/Fingerprinting
+  [773]: https://web.archive.org/web/https://www.grayshift.com/
+  [774]: https://web.archive.org/web/https://securephones.io/main.pdf
+  [775]: https://web.archive.org/web/https://loup-vaillant.fr/articles/rolling-your-own-crypto
+  [776]: https://web.archive.org/web/https://soatok.blog/2021/02/09/crackpot-cryptography-and-security-theater/
+  [777]: https://web.archive.org/web/https://www.vice.com/en/article/wnx8nq/why-you-dont-roll-your-own-crypto
+  [778]: https://yewtu.be/watch?v=loy84K3AJ5Q
+  [779]: https://web.archive.org/web/https://citizenlab.ca/2020/04/move-fast-roll-your-own-crypto-a-quick-look-at-the-confidentiality-of-zoom-meetings/
+  [780]: https://web.archive.org/web/https://medium.com/@atcipher/the-myth-of-military-grade-encryption-292313ae6369
+  [781]: https://web.archive.org/web/https://blog.congruentlabs.co/military-grade-encryption/
+  [782]: https://web.archive.org/web/https://blog.ironcorelabs.com/military-grade-encryption-69aae0145588
+  [783]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Gag_order
+  [784]: https://web.archive.org/web/https://en.wikipedia.org/wiki/National_security_letter
+  [785]: https://web.archive.org/web/https://www.heise.de/news/Gericht-zwingt-Mailprovider-Tutanota-zu-Ueberwachungsfunktion-4972460.html
+  [786]: https://web.archive.org/web/https://www.pcmag.com/opinions/did-purevpn-cross-a-line-when-it-disclosed-user-information
+  [787]: https://web.archive.org/web/https://archive.is/XNuVw
+  [788]: https://web.archive.org/web/https://archive.is/ag9w4
+  [789]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Lavabit
+  [790]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Warrant_canary
+  [791]: https://web.archive.org/web/https://www.washingtonpost.com/graphics/2020/world/national-security/cia-crypto-encryption-machines-espionage/
+  [792]: https://web.archive.org/web/https://www.swissinfo.ch/eng/second-swiss-firm-allegedly-sold-encrypted-spying-devices/46186432
+  [793]: https://web.archive.org/web/https://en.wikipedia.org/wiki/The_Lives_of_Others
+  [794]: https://web.archive.org/web/https://www.wired.com/story/air-gap-researcher-mordechai-guri/
+  [795]: https://web.archive.org/web/https://www.nassiben.com/lamphone
+  [796]: https://web.archive.org/web/https://en.wikipedia.org/wiki/OONI
+  [797]: https://web.archive.org/web/https://privacyinternational.org/long-read/3018/timeline-sim-card-registration-laws
+  [798]: https://web.archive.org/web/https://www.nytimes.com/2021/01/12/technology/bitcoin-passwords-wallets-fortunes.html
+  [799]: https://web.archive.org/web/https://www.usenix.org/system/files/conference/woot17/woot17-paper-obermaier.pdf
+  [800]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Tails_(operating_system)
+  [801]: https://web.archive.org/web/https://www.veracrypt.fr/en/Trim%20Operation.html
+  [802]: https://web.archive.org/web/https://www.coreboot.org/
+  [803]: https://web.archive.org/web/https://xkcd.com/936/
+  [804]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
+  [805]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Booting
+  [806]: https://web.archive.org/web/https://www.wired.com/2013/12/better-data-security-nail-polish/
+  [807]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Virtual_machine
+  [808]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Plausible_deniability
+  [809]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Deniable_encryption
+  [810]: https://web.archive.org/web/https://privacytools.io/operating-systems/
+  [811]: https://web.archive.org/web/https://en.wikipedia.org/wiki/BitLocker
+  [812]: https://web.archive.org/web/https://wiki.alpinelinux.org/wiki/Setting_up_a_laptop
+  [813]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Evil_maid_attack
+  [814]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Cold_boot_attack
+  [815]: https://yewtu.be/watch?v=JDaicPIgn9U
+  [816]: https://web.archive.org/web/https://www.researchgate.net/publication/318155607_Defeating_Plausible_Deniability_of_VeraCrypt_Hidden_Operating_Systems
+  [817]: https://web.archive.org/web/https://www.sans.org/reading-room/whitepapers/forensics/mission-implausible-defeating-plausible-deniability-digital-forensics-39500
+  [818]: https://web.archive.org/web/https://sourceforge.net/p/veracrypt/discussion/technical/thread/53f33faf/
+  [819]: https://web.archive.org/web/https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-countermeasures
+  [820]: https://web.archive.org/web/https://www.sans.org/reading-room/whitepapers/forensics/windows-shellbag-forensics-in-depth-34545
+  [821]: https://web.archive.org/web/https://eprints.whiterose.ac.uk/75046/1/Forensic_Data_Recovery_From_The_Windows_Search_Database_preprint_DIIN328.pdf
+  [822]: https://web.archive.org/web/https://cyberforensicator.com/wp-content/uploads/2017/01/1-s2.0-S1742287616300202-main.2-14.pdf
+  [823]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Gatekeeper_(macOS)
+  [824]: https://web.archive.org/web/https://en.wikipedia.org/wiki/VeraCrypt
+  [825]: https://web.archive.org/web/https://ostif.org/the-veracrypt-audit-results/
+  [826]: https://web.archive.org/web/https://www.veracrypt.fr/en/Unencrypted%20Data%20in%20RAM.html
+  [827]: https://web.archive.org/web/https://www.veracrypt.fr/code/VeraCrypt/plain/doc/html/Data%20Leaks.html
+  [828]: https://web.archive.org/web/https://www.veracrypt.fr/en/VeraCrypt%20Rescue%20Disk.html
+  [829]: https://web.archive.org/web/https://repository.stcloudstate.edu/cgi/viewcontent.cgi?article=1141&context=msia_etds
+  [830]: https://web.archive.org/web/https://www.windowscentral.com/how-ensure-trim-enabled-windows-10-speed-ssd-performance
+  [831]: https://web.archive.org/web/https://veracrypt.eu/en/docs/trim-operation/
+  [832]: https://web.archive.org/web/https://i.blackhat.com/eu-18/Thu-Dec-6/eu-18-Schaub-Perfectly-Deniable-Steganographic-Disk-Encryption.pdf
+  [833]: https://web.archive.org/web/http://asalor.blogspot.com/2011/08/trim-dm-crypt-problems.html
+  [834]: https://web.archive.org/web/https://en.wikipedia.org/wiki/VirtualBox
+  [835]: https://web.archive.org/web/https://www.virtualbox.org/ticket/17987
+  [836]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Whonix
+  [837]: https://web.archive.org/web/https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/snapshots.html
+  [838]: https://web.archive.org/web/https://programs.online.utica.edu/sites/default/files/Neal_6_Gonnella_Forensic_Recovery_of_Evidence_from_Deleted_Oracle_VirtualBox_Virtual_Machine.pdf
+  [839]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)
+  [840]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)
+  [841]: https://web.archive.org/web/https://www.whonix.org/wiki/Stream_Isolation#By_Settings
+  [842]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm
+  [843]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Multi-factor_authentication
+  [844]: https://web.archive.org/web/https://www.qubes-os.org/doc/system-requirements/
+  [845]: https://web.archive.org/web/https://github.com/QubesOS/qubes-issues/issues/2414
+  [846]: https://web.archive.org/web/https://en.wikipedia.org/wiki/CAPTCHA
+  [847]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Turing_test
+  [848]: https://web.archive.org/web/https://www.google.com/recaptcha/about/
+  [849]: https://web.archive.org/web/https://www.hcaptcha.com/
+  [850]: https://web.archive.org/web/https://www.hcaptcha.com/post/hcaptcha-now-the-largest-independent-captcha-service
+  [851]: https://web.archive.org/web/https://nearcyan.com/you-probably-dont-need-recaptcha/
+  [852]: https://web.archive.org/web/https://arstechnica.com/gadgets/2017/03/googles-recaptcha-announces-invisible-background-captchas/
+  [853]: https://web.archive.org/web/https://www.blackhat.com/docs/asia-16/materials/asia-16-Sivakorn-Im-Not-a-Human-Breaking-the-Google-reCAPTCHA-wp.pdf
+  [854]: https://web.archive.org/web/https://security.googleblog.com/2014/12/are-you-robot-introducing-no-captcha.html
+  [855]: https://web.archive.org/web/https://community.torproject.org/gsoc/cloudflare-captcha-monitoring/
+  [856]: https://web.archive.org/web/https://blog.cloudflare.com/cloudflare-supports-privacy-pass/
+  [857]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Device_fingerprint
+  [858]: https://web.archive.org/web/https://developers.googleblog.com/2020/08/guidance-for-our-effort-to-block-less-secure-browser-and-apps.html
+  [859]: https://web.archive.org/web/https://support.google.com/accounts/answer/10071085
+  [860]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Dark_pattern
+  [861]: https://web.archive.org/web/https://www.theverge.com/2020/1/23/21077423/tinder-photo-verification-blue-checkmark-safety-center-launch-noonlight
+  [862]: https://web.archive.org/web/https://www.digitalinformationworld.com/2020/03/facebook-is-now-demanding-some-users-to-create-a-video-selfie-for-identity-verification.html
+  [863]: https://web.archive.org/web/https://www.vice.com/en/article/m7a4eq/pornhub-new-verification-policy-biometric-id
+  [864]: https://web.archive.org/web/https://variety.com/2021/digital/news/china-censorship-hotline-historical-nihilism-1234950554/
+  [865]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Zero_trust_security_model
+  [866]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Espionage
+  [867]: https://web.archive.org/web/https://en.wikipedia.org/wiki/SIM_swap_scam
+  [868]: https://web.archive.org/web/https://www.whonix.org/wiki/Tor
+  [869]: https://web.archive.org/web/https://support.torproject.org/tbb/tbb-editing-torrc/
+  [870]: https://web.archive.org/web/https://support.google.com/accounts/answer/114129?hl=en
+  [871]: https://web.archive.org/web/https://support.google.com/google-ads/answer/7474263?hl=en
+  [872]: https://web.archive.org/web/https://support.google.com/accounts/answer/40695
+  [873]: https://web.archive.org/web/https://support.google.com/accounts/contact/disabled2
+  [874]: https://web.archive.org/web/https://support.google.com/accounts/answer/1333913?hl=en
+  [875]: https://web.archive.org/web/https://www.jumio.com/features/
+  [876]: https://web.archive.org/web/https://privacytools.io/providers/email/
   [https://ProtonMail.com/support/knowledge-base/human-verification/]: https://protonmail.com/support/knowledge-base/human-verification/
-  [875]: https://web.archive.org/web/https://protonmail.com/support/knowledge-base/human-verification/
-  [876]: https://web.archive.org/web/https://knowyourmeme.com/memes/good-luck-im-behind-7-proxies
-  [877]: https://web.archive.org/web/https://en.wikipedia.org/wiki/End-to-end_encryption
-  [878]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Forward_secrecy
-  [879]: https://web.archive.org/web/https://protonmail.com/blog/zero-access-encryption/
-  [880]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Facebook%E2%80%93Cambridge_Analytica_data_scandal
-  [881]: https://web.archive.org/web/https://signal.org/blog/sealed-sender/
-  [882]: https://web.archive.org/web/https://signal.org/blog/private-contact-discovery/
-  [883]: https://web.archive.org/web/https://signal.org/blog/signal-private-group-system/
-  [884]: https://web.archive.org/web/https://privacytools.io/software/file-sharing/
-  [885]: https://web.archive.org/web/https://privacytools.io/software/real-time-communication/
-  [886]: https://web.archive.org/web/https://www.praxisfilms.org/open-letter-from-laura-poitras/
-  [887]: https://web.archive.org/web/https://en.wikipedia.org/wiki/SecureDrop
-  [888]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Trusted_Platform_Module
-  [889]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Wear_leveling
-  [890]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Write_amplification
-  [891]: https://web.archive.org/web/https://techgage.com/article/too_trim_when_ssd_data_recovery_is_impossible/
-  [892]: https://web.archive.org/web/https://www.researchgate.net/publication/341761017_Live_forensics_method_for_acquisition_on_the_Solid_State_Drive_SSD_NVMe_TRIM_function
-  [893]: https://web.archive.org/web/https://blog.elcomsoft.com/2019/01/life-after-trim-using-factory-access-mode-for-imaging-ssd-drives/
-  [894]: https://web.archive.org/web/https://www.forensicfocus.com/articles/forensic-acquisition-of-solid-state-drives-with-open-source-tools/
-  [895]: https://web.archive.org/web/https://www.researchgate.net/publication/325976653_Solid_State_Drive_Forensics_Where_Do_We_Stand
-  [896]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Parted_Magic
-  [897]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Hdparm
-  [898]: https://web.archive.org/web/https://github.com/linux-nvme/nvme-cli
-  [899]: https://web.archive.org/web/https://partedmagic.com/secure-erase/
-  [900]: https://web.archive.org/web/https://partedmagic.com/nvme-secure-erase/
-  [901]: https://web.archive.org/web/https://www.ufsexplorer.com/solutions/data-recovery-on-encrypted-storage.php
-  [902]: https://web.archive.org/web/https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/APFS_Guide/FAQ/FAQ.html
-  [903]: https://web.archive.org/web/https://www.privacytools.io/software/productivity/
-  [904]: https://web.archive.org/web/https://www.whonix.org/wiki/Metadata
-  [905]: https://web.archive.org/web/https://gitlab.tails.boum.org/tails/blueprints/-/wikis/doc/mat/
-  [906]: https://web.archive.org/web/https://help.duckduckgo.com/duckduckgo-help-pages/features/cache/
-  [907]: https://web.archive.org/web/https://help.duckduckgo.com/duckduckgo-help-pages/results/sources/
-  [908]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Dead_drop
-  [909]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Obfuscation
-  [910]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Kleptography
-  [911]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Koalang
-  [912]: https://web.archive.org/web/https://gitlab.torproject.org/legacy/trac/-/wikis/doc/Snowflake/
-  [913]: https://web.archive.org/web/https://support.brave.com/hc/en-us/articles/360018121491-What-is-a-Private-Window-with-Tor-
-  [914]: https://web.archive.org/web/https://medium.com/velociraptor-ir/the-windows-usn-journal-f0c55c9010e
-  [915]: https://web.archive.org/web/https://medium.com/velociraptor-ir/digging-into-the-system-resource-usage-monitor-srum-afbadb1a375
-  [916]: https://web.archive.org/web/https://www.sans.org/blog/timestamped-registry-ntfs-artifacts-from-unallocated-space/
-  [917]: https://web.archive.org/web/https://dban.org/
-  [918]: https://web.archive.org/web/https://crystalmark.info/en/software/crystaldiskinfo/
-  [919]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Faraday_cage
-  [920]: https://web.archive.org/web/https://ro.ecu.edu.au/cgi/viewcontent.cgi?article=1165&context=adf
-  [921]: https://web.archive.org/web/https://arxiv.org/abs/1512.05616
-  [922]: https://yewtu.be/watch?v=sO98kDLkh-M
-  [923]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Touch_DNA
-  [924]: https://web.archive.org/web/https://www.yourdnaguide.com/ydgblog/dna-hair-samples-postage-stamps
-  [925]: https://web.archive.org/web/https://github.com/mhinkie/ooni-detection
-  [926]: https://web.archive.org/web/https://en.wikipedia.org/wiki/File_verification
-  [927]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Cyclic_redundancy_check
-  [928]: https://web.archive.org/web/https://en.wikipedia.org/wiki/MD5
-  [929]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Collision_(computer_science)
-  [930]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Secure_Hash_Algorithms
-  [931]: https://web.archive.org/web/https://en.wikipedia.org/wiki/SHA-2
-  [932]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Collision_resistance
-  [933]: https://web.archive.org/web/https://wiki.gnupg.org/Gpg4win/CheckIntegrity
-  [934]: https://web.archive.org/web/https://medium.com/@EvgeniIvanov/how-to-verify-checksum-on-mac-988f166b0c4f
-  [935]: https://web.archive.org/web/https://en.wikipedia.org/wiki/GNU_Privacy_Guard
-  [936]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Public-key_cryptography
-  [937]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Polymorphic_code
-  [938]: https://web.archive.org/web/https://www.whonix.org/wiki/Malware_and_Firmware_Trojans
-  [939]: https://web.archive.org/web/https://forums.whonix.org/t/installation-of-antivirus-scanners-by-default/9755/8
-  [940]: https://web.archive.org/web/https://www.av-test.org/fileadmin/pdf/security_report/AV-TEST_Security_Report_2018-2019.pdf
-  [941]: https://web.archive.org/web/https://www.zdnet.com/article/eset-discovers-21-new-linux-malware-families/
-  [942]: https://web.archive.org/web/https://nakedsecurity.sophos.com/2019/07/25/evilgnome-linux-malware-aimed-at-your-laptop-not-your-servers/
-  [943]: https://web.archive.org/web/https://blog.imunify360.com/hiddenwasp-how-to-detect-malware-hidden-on-linux-iot
-  [944]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Linux_malware
-  [945]: https://web.archive.org/web/https://en.wikipedia.org/wiki/MacOS_malware
-  [946]: https://web.archive.org/web/https://www.macworld.co.uk/feature/mac-viruses-list-3668354/
-  [947]: https://web.archive.org/web/https://resources.jamf.com/documents/macmalware-2020.pdf
-  [948]: https://web.archive.org/web/https://imagetragick.com/
-  [949]: https://web.archive.org/web/https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/hyperv-support.html
-  [950]: https://web.archive.org/web/https://zeltser.com/analyzing-malicious-documents/
-  [951]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Portable_application
-  [952]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Virtualization
-  [953]: https://web.archive.org/web/https://snowflake.torproject.org/
-  [954]: https://web.archive.org/web/https://github.com/Yawning/obfs4/
-  [955]: https://web.archive.org/web/https://tb-manual.torproject.org/circumvention/
+  [877]: https://web.archive.org/web/https://protonmail.com/support/knowledge-base/human-verification/
+  [878]: https://web.archive.org/web/https://knowyourmeme.com/memes/good-luck-im-behind-7-proxies
+  [879]: https://web.archive.org/web/https://en.wikipedia.org/wiki/End-to-end_encryption
+  [880]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Forward_secrecy
+  [881]: https://web.archive.org/web/https://protonmail.com/blog/zero-access-encryption/
+  [882]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Facebook%E2%80%93Cambridge_Analytica_data_scandal
+  [883]: https://web.archive.org/web/https://signal.org/blog/sealed-sender/
+  [884]: https://web.archive.org/web/https://signal.org/blog/private-contact-discovery/
+  [885]: https://web.archive.org/web/https://signal.org/blog/signal-private-group-system/
+  [886]: https://web.archive.org/web/https://privacytools.io/software/file-sharing/
+  [887]: https://web.archive.org/web/https://privacytools.io/software/real-time-communication/
+  [888]: https://web.archive.org/web/https://www.praxisfilms.org/open-letter-from-laura-poitras/
+  [889]: https://web.archive.org/web/https://en.wikipedia.org/wiki/SecureDrop
+  [890]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Trusted_Platform_Module
+  [891]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Wear_leveling
+  [892]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Write_amplification
+  [893]: https://web.archive.org/web/https://techgage.com/article/too_trim_when_ssd_data_recovery_is_impossible/
+  [894]: https://web.archive.org/web/https://www.researchgate.net/publication/341761017_Live_forensics_method_for_acquisition_on_the_Solid_State_Drive_SSD_NVMe_TRIM_function
+  [895]: https://web.archive.org/web/https://blog.elcomsoft.com/2019/01/life-after-trim-using-factory-access-mode-for-imaging-ssd-drives/
+  [896]: https://web.archive.org/web/https://www.forensicfocus.com/articles/forensic-acquisition-of-solid-state-drives-with-open-source-tools/
+  [897]: https://web.archive.org/web/https://www.researchgate.net/publication/325976653_Solid_State_Drive_Forensics_Where_Do_We_Stand
+  [898]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Parted_Magic
+  [899]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Hdparm
+  [900]: https://web.archive.org/web/https://github.com/linux-nvme/nvme-cli
+  [901]: https://web.archive.org/web/https://partedmagic.com/secure-erase/
+  [902]: https://web.archive.org/web/https://partedmagic.com/nvme-secure-erase/
+  [903]: https://web.archive.org/web/https://www.ufsexplorer.com/solutions/data-recovery-on-encrypted-storage.php
+  [904]: https://web.archive.org/web/https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/APFS_Guide/FAQ/FAQ.html
+  [905]: https://web.archive.org/web/https://www.privacytools.io/software/productivity/
+  [906]: https://web.archive.org/web/https://www.whonix.org/wiki/Metadata
+  [907]: https://web.archive.org/web/https://gitlab.tails.boum.org/tails/blueprints/-/wikis/doc/mat/
+  [908]: https://web.archive.org/web/https://help.duckduckgo.com/duckduckgo-help-pages/features/cache/
+  [909]: https://web.archive.org/web/https://help.duckduckgo.com/duckduckgo-help-pages/results/sources/
+  [910]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Dead_drop
+  [911]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Obfuscation
+  [912]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Kleptography
+  [913]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Koalang
+  [914]: https://web.archive.org/web/https://gitlab.torproject.org/legacy/trac/-/wikis/doc/Snowflake/
+  [915]: https://web.archive.org/web/https://support.brave.com/hc/en-us/articles/360018121491-What-is-a-Private-Window-with-Tor-
+  [916]: https://web.archive.org/web/https://medium.com/velociraptor-ir/the-windows-usn-journal-f0c55c9010e
+  [917]: https://web.archive.org/web/https://medium.com/velociraptor-ir/digging-into-the-system-resource-usage-monitor-srum-afbadb1a375
+  [918]: https://web.archive.org/web/https://www.sans.org/blog/timestamped-registry-ntfs-artifacts-from-unallocated-space/
+  [919]: https://web.archive.org/web/https://dban.org/
+  [920]: https://web.archive.org/web/https://crystalmark.info/en/software/crystaldiskinfo/
+  [921]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Faraday_cage
+  [922]: https://web.archive.org/web/https://ro.ecu.edu.au/cgi/viewcontent.cgi?article=1165&context=adf
+  [923]: https://web.archive.org/web/https://arxiv.org/abs/1512.05616
+  [924]: https://yewtu.be/watch?v=sO98kDLkh-M
+  [925]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Touch_DNA
+  [926]: https://web.archive.org/web/https://www.yourdnaguide.com/ydgblog/dna-hair-samples-postage-stamps
+  [927]: https://web.archive.org/web/https://github.com/mhinkie/ooni-detection
+  [928]: https://web.archive.org/web/https://en.wikipedia.org/wiki/File_verification
+  [929]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Cyclic_redundancy_check
+  [930]: https://web.archive.org/web/https://en.wikipedia.org/wiki/MD5
+  [931]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Collision_(computer_science)
+  [932]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Secure_Hash_Algorithms
+  [933]: https://web.archive.org/web/https://en.wikipedia.org/wiki/SHA-2
+  [934]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Collision_resistance
+  [935]: https://web.archive.org/web/https://wiki.gnupg.org/Gpg4win/CheckIntegrity
+  [936]: https://web.archive.org/web/https://medium.com/@EvgeniIvanov/how-to-verify-checksum-on-mac-988f166b0c4f
+  [937]: https://web.archive.org/web/https://en.wikipedia.org/wiki/GNU_Privacy_Guard
+  [938]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Public-key_cryptography
+  [939]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Polymorphic_code
+  [940]: https://web.archive.org/web/https://www.whonix.org/wiki/Malware_and_Firmware_Trojans
+  [941]: https://web.archive.org/web/https://forums.whonix.org/t/installation-of-antivirus-scanners-by-default/9755/8
+  [942]: https://web.archive.org/web/https://www.av-test.org/fileadmin/pdf/security_report/AV-TEST_Security_Report_2018-2019.pdf
+  [943]: https://web.archive.org/web/https://www.zdnet.com/article/eset-discovers-21-new-linux-malware-families/
+  [944]: https://web.archive.org/web/https://nakedsecurity.sophos.com/2019/07/25/evilgnome-linux-malware-aimed-at-your-laptop-not-your-servers/
+  [945]: https://web.archive.org/web/https://blog.imunify360.com/hiddenwasp-how-to-detect-malware-hidden-on-linux-iot
+  [946]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Linux_malware
+  [947]: https://web.archive.org/web/https://en.wikipedia.org/wiki/MacOS_malware
+  [948]: https://web.archive.org/web/https://www.macworld.co.uk/feature/mac-viruses-list-3668354/
+  [949]: https://web.archive.org/web/https://resources.jamf.com/documents/macmalware-2020.pdf
+  [950]: https://web.archive.org/web/https://imagetragick.com/
+  [951]: https://web.archive.org/web/https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/hyperv-support.html
+  [952]: https://web.archive.org/web/https://zeltser.com/analyzing-malicious-documents/
+  [953]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Portable_application
+  [954]: https://web.archive.org/web/https://en.wikipedia.org/wiki/Virtualization
+  [955]: https://web.archive.org/web/https://snowflake.torproject.org/
+  [956]: https://web.archive.org/web/https://github.com/Yawning/obfs4/
+  [957]: https://web.archive.org/web/https://tb-manual.torproject.org/circumvention/

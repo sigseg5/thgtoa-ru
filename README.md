@@ -4,7 +4,7 @@
 
 Данное руководство является некоммерческой инициативой, [licensed] <sup>[[Mirror]][8]</sup> <sup>[[Archive.org]][9]</sup> под Creative Commons Attribution 4.0 International ([cc-by-4.0]) и не спонсируется какими-либо коммерческими/государственными организациями.
 
-Версия перевода синхронизированная с оригинальным руководством версии **0.9.1**, Список изменений перевода: <https://sigseg5.github.io/thgtoa-ru/CHANGELOG.html>, оригинальный список изменений: <https://anonymousplanet.org/CHANGELOG.html> <sup>[[Mirror]][10]</sup> <sup>[[Tor Mirror]][15]</sup>
+Версия перевода синхронизированная с оригинальным руководством версии **0.9.2**, Список изменений перевода: <https://sigseg5.github.io/thgtoa-ru/CHANGELOG.html>, оригинальный список изменений: <https://anonymousplanet.org/CHANGELOG.html> <sup>[[Mirror]][10]</sup> <sup>[[Tor Mirror]][15]</sup>
 
 Актуальная онлайн-версия перевода:
 - `RU` HTML версия на русском: <https://sigseg5.github.io/thgtoa-ru/guide.htmll>
