@@ -31,7 +31,7 @@ PDF версии на английском:
 
 -   Тёмная тема: <https://anonymousplanet.org/guide-dark.pdf> <sup>[[Mirror]][31]</sup> <sup>[[Archive.org]][32]</sup> <sup>[[Tor Mirror]][33]</sup>
 
--   BОбе версии на CryptPad.fr <https://cryptpad.fr/drive/#/2/drive/view/Ughm9CjQJCwB8BIppdtvj5zy4PyE-8Gxn11x9zaqJLI/>
+-   Обе версии на CryptPad.fr <https://cryptpad.fr/drive/#/2/drive/view/Ughm9CjQJCwB8BIppdtvj5zy4PyE-8Gxn11x9zaqJLI/>
 
 Есть предложение или исправление оригинального руководства? Откройте Issues на GitHub автора: <https://github.com/AnonymousPlanet/thgtoa/issues>
 
@@ -51,9 +51,9 @@ PDF версии на английском:
 
 Контакты автора:
 
--   Twitter at <https://twitter.com/AnonyPla> (Возможно этот аккаунт скоро будет удалён)
+-   Twitter <https://twitter.com/AnonyPla> (Возможно этот аккаунт скоро будет удалён)
 
--   Mastodon at <https://mastodon.online/@anonypla>.
+-   Mastodon <https://mastodon.online/@anonypla>.
 
 Контакты переводчика:
 -   Telegram: <https://t.me/kirill_nk>
