@@ -1,34 +1,37 @@
-'s Guide to Online Anonymity
+Автостопом по анонимности в Интернете
 
 (Или "Как я начал беспокоится и полюбил приватность.")
 
 Версия руководства и перевода 0.9.2 (draft), April 2021 by AnonymousPlanet. Перевод by sigseg5.
+<!-- Версия руководства 0.9.2 (draft), April 2021 by AnonymousPlanet. -->
 
 Это черновая версия руководства. Несмотря на постоянные обновления и улучшения, руководство, вероятно, никогда не будет полностью закончено, некоторые части могут быть неполными на данный момент.
 
-**Не забудьте регулярно проверять новые версии руководства и перевода.**
+**Не забывайте регулярно проверять новые версии руководства и перевода.**
+<!-- Не забывайте регулярно проверять новые версии руководства. -->
 
-Данное руководство является окрытой некоммерческой инициативой, лицензировнной под Creative Commons Attribution 4.0 International ([cc-by-4.0][] <sup>[[Archive.org]][23]</sup>).
+Данное руководство является открытой некоммерческой инициативой, лицензированной под Creative Commons Attribution 4.0 International ([cc-by-4.0][] <sup>[[Archive.org]][23]</sup>).
 
 Онлайн версии:
 
 -   `RU` HTML версия на русском: <https://sigseg5.github.io/thgtoa-ru/>
 
--   Original: [https://anonymousplanet.org][] <sup>[[Archive.org]][24]</sup> <sup>[[Archive.today]][25]</sup>
+-   Оригинал: [https://anonymousplanet.org][] <sup>[[Archive.org]][24]</sup> <sup>[[Archive.today]][25]</sup>
 
--   Mirror: <https://mirror.anonymousplanet.org> <sup>[[Archive.org]][26]</sup> <sup>[[Archive.today]][27]</sup>
+-   Зеркало: <https://mirror.anonymousplanet.org> <sup>[[Archive.org]][26]</sup> <sup>[[Archive.today]][27]</sup>
 
--   Tor Mirror: <http://thgtoa7imksbg7rit4grgijl2ef6kc7b56bp56pmtta4g354lydlzkqd.onion>
+-   Зеркало в сети Tor:: <http://thgtoa7imksbg7rit4grgijl2ef6kc7b56bp56pmtta4g354lydlzkqd.onion>
 
--   Archive.today over Tor: <http://archivecaslytosk.onion/anonymousplanet.org/guide.html>
+-   Archive.today в сети Tor: <http://archivecaslytosk.onion/anonymousplanet.org/guide.html>
 
 PDF версии на английском:
+<!-- PDF версии (удобнее всего для чтения) руководства: -->
 
--   Light Theme: <https://anonymousplanet.org/guide.pdf> <sup>[[Mirror]][28]</sup> <sup>[[Archive.org]][29]</sup> <sup>[[Tor Mirror]][30]</sup>
+-   Светлая тема: <https://anonymousplanet.org/guide.pdf> <sup>[[Mirror]][28]</sup> <sup>[[Archive.org]][29]</sup> <sup>[[Tor Mirror]][30]</sup>
 
--   Dark Theme: <https://anonymousplanet.org/guide-dark.pdf> <sup>[[Mirror]][31]</sup> <sup>[[Archive.org]][32]</sup> <sup>[[Tor Mirror]][33]</sup>
+-   Тёмная тема: <https://anonymousplanet.org/guide-dark.pdf> <sup>[[Mirror]][31]</sup> <sup>[[Archive.org]][32]</sup> <sup>[[Tor Mirror]][33]</sup>
 
--   Both at CryptPad.fr <https://cryptpad.fr/drive/#/2/drive/view/Ughm9CjQJCwB8BIppdtvj5zy4PyE-8Gxn11x9zaqJLI/>
+-   BОбе версии на CryptPad.fr <https://cryptpad.fr/drive/#/2/drive/view/Ughm9CjQJCwB8BIppdtvj5zy4PyE-8Gxn11x9zaqJLI/>
 
 Есть предложение или исправление оригинального руководства? Откройте Issues на GitHub автора: <https://github.com/AnonymousPlanet/thgtoa/issues>
 
@@ -48,16 +51,16 @@ PDF версии на английском:
 
 Контакты автора:
 
--   Twitter at <https://twitter.com/AnonyPla> (Возможно этот аккаунт скоро будет удален)
+-   Twitter at <https://twitter.com/AnonyPla> (Возможно этот аккаунт скоро будет удалён)
 
 -   Mastodon at <https://mastodon.online/@anonypla>.
 
 Контакты переводчика:
 -   Telegram: <https://t.me/kirill_nk>
 
-Есть несколько способов изучения этого материала:
+Есть несколько подходов к изучению этого материала:
 
--   Вы хотите понять текущее состояние конфиденциальности и анонимности в сети, не слишком беспокоясь о технических аспектах: Взгляните на [Введение:][Introduction:], [Подготовления:][Requirements:], [Основы понимания того, как некоторая информация может привести к вам и как смягчить последствия:][Understanding some basics of how some information can lead back to you and how to mitigate some:] и [Заключение автора:][A small final editorial note:].
+-   Вы хотите понять текущее состояние конфиденциальности и анонимности в сети, не слишком беспокоясь о технических аспектах: Взгляните на [Введение:][Introduction:], [Подготовления][Requirements:], [Основы понимания того, как некоторая информация может привести к вам и как смягчить последствия][Understanding some basics of how some information can lead back to you and how to mitigate some:] и [Заключение автора][A small final editorial note:].
 
 -   Вы хотите сделать то же самое, но также узнать, как удалить некоторую информацию о вас в Интернете: Прочитайте вышеперечисленное и добавьте [Удаление некоторых следов вашей личности в поисковых системах и на различных платформах.:][Removing some traces of your identities on search engines and various platforms:]
 
