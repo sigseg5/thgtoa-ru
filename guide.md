@@ -64,7 +64,7 @@ PDF версии на английском:
 
 -   Вы хотите сделать то же самое, но также узнать, как удалить некоторую информацию о вас в Интернете: Прочитайте вышеперечисленное и добавьте [Удаление некоторых следов вашей личности в поисковых системах и на различных платформах.:][Removing some traces of your identities on search engines and various platforms:]
 
--   Вы хотите сделать всё вышеперечисленное и создать анонимные идентификационные данные безопасно и надежно: Прочитайте всё руководство.
+-   Вы хотите сделать всё вышеперечисленное и создать анонимную личность безопасно и надежно: Прочитайте всё руководство.
 
 Обратите внимание:
 
@@ -74,43 +74,45 @@ PDF версии на английском:
 
 -   Рядом со всеми ссылками на YouTube есть ссылка \[Invidious\] для доступа к контенту через Invidious Instance (в данном случае yewtu.be хостинг в NL) для повышения уровня конфиденциальности. Подробнее см. на <https://github.com/iv-org/invidious> <sup>[[Archive.org]][34]</sup>.
 
--   **Если вы читаете это в PDF версии, вы увидите много таких симовлов \`\`\` вместо двойных кавычек (""). Символы \`\`\` должны быть проигнорированы и существуют только для того, чтобы облегчить преобразование в Markdown/HTML.**
+-   **Если вы читаете это в PDF версии, вы увидите много таких символов \`\`\` вместо двойных кавычек (""). Символы \`\`\` должны быть проигнорированы и существуют только для того, чтобы облегчить преобразование в Markdown/HTML.**
 
 # Оглавление
 
 -   [Подготовления:][Requirements:]
 -   [Введение:][Introduction:]
 -   [Основы понимания того, как некоторая информация может привести к вам и как смягчить последствия:][Understanding some basics of how some information can lead back to you and how to mitigate some:]
-    -   [IP адрес:][Your IP address:]
-    -   [DNS запросы:][Your DNS requests:]
-    -   [Your IMEI and IMSI (and by extension, your phone number):]
-    -   [Your Wi-Fi or Ethernet MAC address:]
-    -   [Your Bluetooth MAC address:]
+    -   [Ваша сеть:]
+        -   [IP адрес:][Your IP address:]
+        -   [DNS запросы:][Your DNS requests:]
+        -   [Your RFID enabled devices:]
+        -   [The Wi-Fis and Bluetooth devices around you:]
+        -   [Malicious/Rogue Wi-Fi Access Points:]
+        -   [Your Anonymized Tor/VPN traffic:]
+        -   [Some Devices can be tracked even when offline:]
+    -   [Your Hardware Identifiers:]
+        -   [Your IMEI and IMSI (and by extension, your phone number):]
+        -   [Your Wi-Fi or Ethernet MAC address:]
+        -   [Your Bluetooth MAC address:]
+    -   [Your CPU:]
     -   [Your Operating Systems and Apps telemetry services:]
-    -   [The Wi-Fis and Bluetooth devices around you:]
-    -   [Your Metadata including your Geo-Location:]
     -   [Your Smart devices in general:]
-    -   [Your Devices can be tracked even when offline:]
-    -   [Your RFID enabled devices:]
-    -   [Your Files Properties/Metadata:]
-    -   [Malware:]
+    -   [Yourself:]
+        -   [Your Metadata including your Geo-Location:]
+        -   [Your Digital Fingerprint, Footprint, and Online Behavior:]
+        -   [Your Clues about your Real Life and OSINT:]
+        -   [Your Face, Voice, Biometrics and Pictures:]
+        -   [Phishing and Social Engineering:]
+    -   [Malware, exploit, and viruses:]
         -   [Malware in your files/documents:]
         -   [Malware and Exploits in your apps and services:]
-    -   [Watermarking:]
-        -   [Pictures/Videos/Audio:]
-        -   [Printing Watermarking:]
-    -   [Your Pixelized/Blurred Information:]
-    -   [Your Anonymized Tor/VPN traffic:]
+        -   [Malicious USB devices:]
+    -   [Your files, documents, pictures, and videos:]
+        -   [Your Files Properties/Metadata:]
+        -   [Watermarking:]
+        -   [Your Pixelized/Blurred Information:]
     -   [Your Crypto currencies transactions:]
-    -   [Your CPU:]
-    -   [Malicious/Rogue Wi-Fi Access Points:]
-    -   [Malicious USB devices:]
     -   [Your Cloud backups/sync services:]
-    -   [Your Digital Fingerprint, Footprint, and Online Behavior:]
-    -   [Your Clues about your Real Life and OSINT:]
-    -   [Your Face, Voice, Biometrics and Pictures:]
     -   [Your Browser and Device Fingerprints:]
-    -   [Phishing and Social Engineering:]
     -   [Local Data Leaks and Forensics:]
     -   [Bad Cryptography:]
     -   [No logging but logging anyway policies:]
